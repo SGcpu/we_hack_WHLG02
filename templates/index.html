@@ -6,6 +6,7 @@
     <title>LegalPathshala - Know Your Rights</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="search.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script>
@@ -336,31 +337,35 @@
 </head>
 <body>
     <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="flex justify-between items-center mb-8">
-            <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
-            <button id="closeMobileMenu" class="text-white text-2xl">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <nav class="flex flex-col space-y-6">
-            <a href="index.html" class="font-extrabold text-indigo-300 py-2">Home</a>
-            <a href="legalguides.html" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2">Legal Guides</a>
-            <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2">Quizzes & Tests</a>
-            <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2">Ask a Lawyer</a>
-            <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2">Emergency Contacts</a>
-            <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2">About Us</a>
-        </nav>
-        <div class="mt-8">
-            <div class="relative">
-                <input type="text" placeholder="Search legal topics..." 
-                       class="w-full px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
-                <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
-                    <i class="fas fa-search"></i>
+    <nav class="navbar px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="font-extrabold text-gray-400 animated-border">Home</a>
+                <a href="legalguides.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-indigo-300 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search legal topics..." 
+                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>   
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
                 </button>
             </div>
         </div>
-    </div>
+    </nav>
 
     <!-- Navigation Bar -->
     <nav class="navbar px-4 sm:px-6 py-4">
@@ -751,10 +756,7 @@
                         </span>
                     </button>
                     
-                    <button class="border border-indigo-500 text-indigo-400 hover:bg-indigo-900/30 font-medium py-3 px-8 rounded-lg transition duration-300 hover:border-indigo-400">
-                        <i class="fas fa-comment mr-2"></i>
-                        <a href="#" id="openChatbot">Chat with Legal Bot</a>
-                    </button>
+                    
                 </div>
             </div>
         </div>
@@ -841,12 +843,7 @@
     </div>
 </footer>
 
-<!-- Chatbot Bubble -->
-<div class="chatbot-bubble">
-    <button id="chatBubble" class="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center text-white shadow-lg">
-        <i class="fas fa-robot text-2xl"></i>
-    </button>
-</div>
+
 <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
@@ -1042,5 +1039,6 @@
         });
     }
 </script>
+<script src="search.js"></script>
 </body>
 </html>

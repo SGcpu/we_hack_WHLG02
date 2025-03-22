@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="search.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap');
         
@@ -576,7 +577,7 @@
         }
 
         .custom-input, .custom-textarea, .custom-select {
-            background-color: var(--darker-bg);
+            background-color: #a1a1a1;
             border: 1px solid var(--border-color);
             color: var(--text-primary);
             transition: all 0.3s ease;
@@ -854,7 +855,7 @@
     </section>
 
     <!-- Question Submission Form -->
-    <section id="questionForm" class="py-16 px-6 bg-gray-800 relative">
+    <section id="questionForm" class="py-16 px-6 bg-gray-900 ">
         <div class="container mx-auto max-w-4xl">
             <div class="form-card rounded-xl overflow-hidden bg-slate-400">
                 <div class="p-8">
@@ -877,15 +878,15 @@
                         </div>
                         
                         <div class="bg-slate-400">
-                            <label for="title" class="block text-gray-300 bg-slate-400 font-medium mb-2">Question Title</label>
+                            <label for="title" class="block text-gray-600 bg-slate-400 font-medium mb-2">Question Title</label>
                             <input type="text" id="title" placeholder="E.g., Can my landlord increase rent without notice?" 
                                    class="custom-input w-full px-4 py-3 rounded-lg border focus:outline-none">
                         </div>
                         
                         <div>
-                            <label for="details" class="block text-gray-300 font-medium mb-2">Question Details</label>
+                            <label for="details" class="block text-gray-600 font-medium mb-2">Question Details</label>
                             <textarea id="details" rows="5" placeholder="Provide context and specific details about your situation..." 
-                                      class="custom-textarea w-full px-4 py-3 rounded-lg border focus:outline-none"></textarea>
+                                      class="custom-textarea w-full bg-slate-400 px-4 py-3 rounded-lg border focus:outline-none"></textarea>
                         </div>
                         
                         <div>
@@ -895,21 +896,21 @@
                                 <label for="attachment" class="cursor-pointer">
                                     <i class="fas fa-upload text-indigo-400 text-2xl mb-3"></i>
                                     <p class="text-gray-300">Drop files here or click to upload</p>
-                                    <p class="text-xs text-gray-400 mt-2">You can upload contracts, documents, or images (PDF, DOC, JPG)</p>
+                                    <p class="text-xs text-gray-600 mt-2">You can upload contracts, documents, or images (PDF, DOC, JPG)</p>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="flex items-center">
                             <input type="checkbox" id="anonymous" class="mr-3 h-5 w-5 rounded border-gray-600 text-indigo-500 focus:ring-indigo-500 focus:ring-opacity-25">
-                            <label for="anonymous" class="text-gray-300">Post as Anonymous</label>
+                            <label for="anonymous" class="text-gray-200">Post as Anonymous</label>
                         </div>
                         
                         <div>
                             <label for="email" class="block text-gray-300 font-medium mb-2">Email for Follow-up (Optional)</label>
                             <input type="email" id="email" placeholder="Your email to receive notifications" 
                                    class="custom-input w-full px-4 py-3 rounded-lg border focus:outline-none">
-                            <p class="text-xs text-gray-400 mt-1">We'll notify you when your question is answered.</p>
+                            <p class="text-xs text-gray-600 mt-1">We'll notify you when your question is answered.</p>
                         </div>
                         
                         <div class="pt-4">
@@ -1523,5 +1524,6 @@
             });
         });
     </script>
+<script src="search.js"></script>
 </body>
 </html>

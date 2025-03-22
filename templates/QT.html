@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="search.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap');
         /* Custom Scrollbar */
@@ -668,19 +669,19 @@
         
         .quiz-option.selected {
             background-color: var(--primary);
-            color: white;
+            color: rgb(32, 31, 31);
             border-color: var(--primary);
         }
         
         .quiz-option.correct {
             background-color: var(--secondary);
-            color: white;
+            color: rgb(0, 0, 0);
             border-color: var(--secondary);
         }
         
         .quiz-option.incorrect {
             background-color: #EF4444;
-            color: white;
+            color: rgb(0, 0, 0);
             border-color: #DC2626;
         }
         
@@ -868,73 +869,10 @@
         </div>
     </section>
 
-    <section id="quiz-container" class="py-16 px-6">
-        <div class="container mx-auto max-w-4xl">
-            <!-- Quiz Header -->
-            <div class="mb-8 text-center">
-                <h2 class="text-3xl font-bold mb-4">Housing & Tenant Legal Rights Quiz</h2>
-                <p class="text-gray-300 mb-8">Test your knowledge on tenant laws and landlord obligations.</p>
-                
-                <!-- Quiz Progress -->
-                <div class="max-w-xl mx-auto mb-8">
-                    <div class="flex justify-between text-sm text-gray-400 mb-2">
-                        <span>Question <span id="current-question">1</span> of <span id="total-questions">10</span></span>
-                        <span id="timer">Time: 00:00</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div id="progress-fill" class="progress-fill" style="width: 10%;"></div>
-                    </div>
-                </div>
-            </div>
+   
+        
             
-            <!-- Quiz Content -->
-            <div id="quiz-content" class="fade-in">
-                <!-- Questions will be dynamically inserted here -->
-            </div>
-            
-            <!-- Quiz Controls -->
-            <div class="mt-8 flex justify-between">
-                <button id="prev-btn" class="bg-gray-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 opacity-50 cursor-not-allowed">
-                    <i class="fas fa-arrow-left mr-2"></i> Previous
-                </button>
-                <button id="next-btn" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300">
-                    Next <i class="fas fa-arrow-right ml-2"></i>
-                </button>
-            </div>
-            
-            <!-- Quiz Results (Initially Hidden) -->
-            <div id="quiz-results" class="mt-12 fade-in hidden">
-                <div class="quiz-card p-8 text-center">
-                    <div class="text-6xl mb-4">🏆</div>
-                    <h3 class="text-2xl font-bold mb-2">Quiz Complete!</h3>
-                    <p class="text-xl mb-4">You scored: <span id="final-score" class="font-bold text-purple-400">0/10</span></p>
-                    <div class="w-full bg-gray-700 rounded-full h-6 mb-6">
-                        <div id="score-bar" class="bg-gradient-to-r from-purple-600 to-indigo-600 h-6 rounded-full text-xs flex items-center justify-center" style="width: 0%">0%</div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                        <div class="bg-gray-800 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-1">Time Taken</h4>
-                            <p id="time-taken" class="text-lg">00:00</p>
-                        </div>
-                        <div class="bg-gray-800 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-1">Correct Answers</h4>
-                            <p id="correct-answers" class="text-lg">0/10</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col md:flex-row justify-center gap-4">
-                        <button id="review-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
-                            <i class="fas fa-search mr-2"></i> Review Answers
-                        </button>
-                        <button id="restart-btn" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300">
-                            <i class="fas fa-redo mr-2"></i> Try Again
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+       
 
     <!-- How it Works Section -->
     <section class="py-16 px-6 bg-gray-800">
@@ -1016,45 +954,152 @@
     </section>
 
     <!-- Featured Quiz -->
-    <section class="py-16 px-6 bg-gray-800 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute transform -rotate-12 -left-10 -top-10 w-64 h-64 rounded-full bg-purple-600 filter blur-3xl"></div>
-            <div class="absolute transform rotate-12 -right-10 -bottom-10 w-64 h-64 rounded-full bg-blue-600 filter blur-3xl"></div>
-        </div>
-        
-        <div class="container mx-auto relative z-10">
-            <div class="flex flex-col md:flex-row items-center justify-between glass rounded-2xl p-8 border border-purple-500/20">
-                <div class="md:w-2/3 mb-8 md:mb-0 md:pr-8">
-                    <div class="inline-block px-3 py-1 rounded-full bg-purple-900 text-purple-200 text-xs font-medium mb-4">Featured Quiz</div>
-                    <h2 class="text-3xl font-bold text-white mb-4">Know Your Digital Privacy Rights</h2>
-                    <p class="text-gray-300 mb-6">In today's digital world, everyone should understand their privacy rights. This comprehensive quiz covers data protection laws, your rights with online services, and how to protect your personal information.</p>
-                    
-                    <div class="flex flex-wrap gap-4 mb-6">
-                        <div class="flex items-center text-gray-300 text-sm">
-                            <i class="far fa-clock mr-2 text-purple-400"></i>
-                            <span>12 minutes</span>
-                        </div>
-                        <div class="flex items-center text-gray-300 text-sm">
-                            <i class="far fa-question-circle mr-2 text-purple-400"></i>
-                            <span>25 questions</span>
-                        </div>
-                        <div class="flex items-center text-gray-300 text-sm">
-                            <i class="fas fa-chart-bar mr-2 text-purple-400"></i>
-                            <span>Updated monthly</span>
-                        </div>
+    <div class="container mx-auto px-4 py-8">
+        <div id="main-screen" class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-indigo-200 mb-2">Indian Law Knowledge Quiz</h1>
+                <p class="text-gray-400 text-lg ">Test your knowledge of Indian laws across different categories</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Tenant Rights Quiz Card -->
+                <div class="quiz-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-24 bg-yellow-500 flex items-center justify-center">
+                        <span class="text-5xl">🏠</span>
                     </div>
-                    
-                    <button class="take-quiz-btn btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md" data-quiz="privacy">
-                        Start Featured Quiz <i class="fas fa-arrow-right ml-1"></i>
-                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Tenant Rights Quiz</h2>
+                        <p class="text-gray-400 mb-4">Test your knowledge about rental laws, eviction process, and tenant protections in India.</p>
+                        <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200" data-category="tenant">Start Quiz</button>
+                    </div>
                 </div>
                 
-                <div class="md:w-1/3">
-                    <img src="https://media.licdn.com/dms/image/v2/D5612AQHnrOxV5AV5XA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1721182567770?e=2147483647&v=beta&t=0Tx0kcZrZkMHQK98Br8ak676KhH_CtZDReKik7fUze4" alt="Digital Privacy" class="rounded-xl shadow-2xl hover-float">
+                <!-- Workplace Laws Quiz Card -->
+                <div class="quiz-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-24 bg-blue-500 flex items-center justify-center">
+                        <span class="text-5xl">💼</span>
+                    </div>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Workplace Laws Quiz</h2>
+                        <p class="text-gray-400 mb-4">Test your knowledge on employee rights, working hours, and labor laws in India.</p>
+                        <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200 mt-6" data-category="workplace">Start Quiz</button>
+                    </div>
+                </div>
+                
+                <!-- Consumer Protection Quiz Card -->
+                <div class="quiz-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-24 bg-green-500 flex items-center justify-center">
+                        <span class="text-5xl">💳</span>
+                    </div>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-800 py-0">Consumer Protection Quiz</h2>
+                        <p class="text-gray-400">Test your knowledge about consumer rights, complaint processes, and protections under Indian law.</p>
+                        <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200" data-category="consumer">Start Quiz</button>
+                    </div>
+                </div>
+                
+                <!-- Cybersecurity & Privacy Quiz Card -->
+                <div class="quiz-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-24 bg-purple-500 flex items-center justify-center">
+                        <span class="text-5xl">🔗</span>
+                    </div>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Cybersecurity & Privacy Quiz</h2>
+                        <p class="text-gray-600 mb-4">Test your knowledge about data protection, cybercrimes, and digital privacy laws in India.</p>
+                        <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200 " data-category="cyber">Start Quiz</button>
+                    </div>
+                </div>
+                
+                <!-- Criminal Law Quiz Card -->
+                <div class="quiz-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-24 bg-red-500 flex items-center justify-center">
+                        <span class="text-5xl">⚖️</span>
+                    </div>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Criminal Law Quiz</h2>
+                        <p class="text-gray-600 mb-12">Test your knowledge about legal rights, offenses, and court procedures in Indian criminal law.</p>
+                        <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200 " data-category="criminal">Start Quiz</button>
+                    </div>
+                </div>
+                
+                <!-- Human Rights Quiz Card -->
+                <div class="quiz-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-24 bg-orange-500 flex items-center justify-center">
+                        <span class="text-5xl">👥</span>
+                    </div>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Human Rights Quiz</h2>
+                        <p class="text-gray-600 mb-9">Test your knowledge about fundamental rights, equality laws, and human rights protections in India.</p>
+                        <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200 mt-4" data-category="human">Start Quiz</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+        
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="max-w-3xl mx-auto hidden">
+            <div class="bg-gray-800 rounded-lg shadow-lg p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="quiz-title" class="text-2xl font-bold text-indigo-200"></h2>
+                    <div class="flex items-center">
+                        <span id="current-question-num" class="text-lg font-medium text-gray-200">1</span>
+                        <span class="text-lg font-medium text-gray-200">/</span>
+                        <span id="total-questions" class="text-lg font-medium text-gray-200">10</span>
+                    </div>
+                </div>
+                
+                <div class="w-full bg-gray-200 rounded-full mb-8">
+                    <div id="progress-bar" class="progress-bar bg-indigo-100 rounded-full" style="width: 10%;"></div>
+                </div>
+                
+                <div id="question-container" class="mb-8">
+                    <h3 id="question-text" class="text-xl font-medium text-gray-200 mb-6"></h3>
+                    <div id="options-container" class="space-y-3">
+                        <!-- Options will be populated here -->
+                    </div>
+                </div>
+                
+                <div id="explanation-container" class="mb-8 hidden p-4 bg-blue-500 rounded-xl">
+                    <h4 class="font-bold text-slate-400 mb-2">Explanation:</h4>
+                    <p id="explanation-text" class="text-gray-300"></p>
+                </div>
+                
+                <div class="flex justify-between">
+                    <button id="back-btn" class="bg-gray-300 text-gray-700 py-2 px-6 rounded-lg hover:bg-gray-400 transition duration-200">Back to Categories</button>
+                    <button id="next-btn" class="bg-indigo-600 text-white py-2 px-6 rounded-lg hover:bg-indigo-700 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Screen -->
+        <div id="results-screen" class="max-w-3xl mx-auto hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-indigo-800 mb-2">Quiz Results</h2>
+                    <p id="result-category" class="text-gray-600 text-lg"></p>
+                </div>
+                
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-lg font-medium text-gray-700">Your Score:</span>
+                        <span id="score-display" class="text-xl font-bold text-indigo-800"></span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-6">
+                        <div id="score-bar" class="h-6 bg-indigo-600 rounded-full" style="width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <div id="performance-message" class="mb-8 p-4 bg-indigo-50 rounded-lg">
+                    <p class="text-gray-700"></p>
+                </div>
+                
+                <div class="flex justify-between">
+                    <button id="back-to-categories-btn" class="bg-gray-300 text-gray-700 py-2 px-6 rounded-lg hover:bg-gray-400 transition duration-200">Back to Categories</button>
+                    <button id="retry-quiz-btn" class="bg-indigo-600 text-white py-2 px-6 rounded-lg hover:bg-indigo-700 transition duration-200">Retry Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
      <!-- Chatbot Bubble -->
      <div >
@@ -1149,7 +1194,7 @@
             <p class="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">Our quizzes are designed to help you understand the laws that affect your everyday life. Start learning about your rights today.</p>
             
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#quiz-categories" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                <a href="#QT.html" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
                     <i class="fas fa-trophy mr-1"></i> Take a Quiz Now
                 </a>
                 <a href="legalguides.html" class="bg-white text-purple-900 hover:bg-gray-100 font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
@@ -1260,333 +1305,7 @@
 
     <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Quiz data
-            const quizData = [
-                {
-                    question: "What is the legal term for the written agreement between a landlord and tenant?",
-                    options: ["Deed", "Lease", "Mortgage", "Covenant"],
-                    correctAnswer: 1,
-                    explanation: "A lease is a legally binding contract that defines the relationship between landlord and tenant, including rights and responsibilities of both parties."
-                },
-                {
-                    question: "In most jurisdictions, how much notice must a landlord give before entering a tenant's unit for non-emergency reasons?",
-                    options: ["No notice required", "24 hours", "48 hours", "7 days"],
-                    correctAnswer: 1,
-                    explanation: "Most states require landlords to provide at least 24 hours notice before entering a rental unit for non-emergency reasons, though laws vary by location."
-                },
-                {
-                    question: "What is 'security deposit' primarily used for?",
-                    options: ["First month's rent", "Last month's rent", "Potential damages to the property", "Landlord's income"],
-                    correctAnswer: 2,
-                    explanation: "A security deposit is held by the landlord to cover potential damages beyond normal wear and tear that may occur during tenancy."
-                },
-                {
-                    question: "What is 'constructive eviction'?",
-                    options: ["Legal removal of a tenant", "When a tenant is forced to leave due to uninhabitable conditions", "Building a wall to separate tenants", "Extending a lease agreement"],
-                    correctAnswer: 1,
-                    explanation: "Constructive eviction occurs when a landlord fails to provide essential services or maintain habitable conditions, effectively forcing the tenant to move out."
-                },
-                {
-                    question: "Which of the following is NOT generally considered a tenant's responsibility?",
-                    options: ["Keeping the unit clean", "Minor maintenance like changing light bulbs", "Major structural repairs", "Proper disposal of trash"],
-                    correctAnswer: 2,
-                    explanation: "Major structural repairs are typically the landlord's responsibility, while tenants are responsible for cleanliness, minor maintenance, and proper use of the property."
-                },
-                {
-                    question: "Under the Fair Housing Act, landlords cannot discriminate based on which of the following?",
-                    options: ["Income level", "Credit score", "Race", "Criminal history"],
-                    correctAnswer: 2,
-                    explanation: "The Fair Housing Act prohibits discrimination based on race, color, national origin, religion, sex, familial status, and disability. Income, credit score, and criminal history are not explicitly protected."
-                },
-                {
-                    question: "What is a 'warranty of habitability'?",
-                    options: ["A guarantee that all appliances will work", "An implied promise that rental property is suitable for human habitation", "Insurance for tenant's belongings", "A written statement about the property's age"],
-                    correctAnswer: 1,
-                    explanation: "The warranty of habitability is an implied (and sometimes statutory) guarantee that rental properties meet basic living and safety standards."
-                },
-                {
-                    question: "In most jurisdictions, who is responsible for ensuring smoke detectors are installed?",
-                    options: ["Tenant", "Landlord", "Building inspector", "Fire department"],
-                    correctAnswer: 1,
-                    explanation: "Landlords are typically responsible for installing working smoke detectors, while tenants are usually responsible for testing them and replacing batteries."
-                },
-                {
-                    question: "What is 'normal wear and tear' in rental property terms?",
-                    options: ["Any damage to the property", "Deterioration that occurs naturally with age and regular use", "Modifications made by the tenant", "Damage caused by pets"],
-                    correctAnswer: 1,
-                    explanation: "Normal wear and tear refers to the expected deterioration that happens over time with normal use, such as minor scuffs on walls or slight carpet wear."
-                },
-                {
-                    question: "What is a 'month-to-month' tenancy?",
-                    options: ["Paying rent in monthly installments", "A lease that automatically renews each month until terminated by either party", "A 30-day trial period", "A lease that expires after one month"],
-                    correctAnswer: 1,
-                    explanation: "A month-to-month tenancy is a rental agreement that continues each month until either the landlord or tenant gives proper notice to terminate, providing flexibility for both parties."
-                }
-            ];
-            
-            // Variables
-            let currentQuestion = 0;
-            let score = 0;
-            let selectedAnswers = Array(quizData.length).fill(-1);
-            let quizStartTime;
-            let timerInterval;
-            let seconds = 0;
-            
-            const quizContentEl = document.getElementById('quiz-content');
-            const progressFillEl = document.getElementById('progress-fill');
-            const currentQuestionEl = document.getElementById('current-question');
-            const totalQuestionsEl = document.getElementById('total-questions');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const timerEl = document.getElementById('timer');
-            const quizResultsEl = document.getElementById('quiz-results');
-            const finalScoreEl = document.getElementById('final-score');
-            const scoreBarEl = document.getElementById('score-bar');
-            const timeTakenEl = document.getElementById('time-taken');
-            const correctAnswersEl = document.getElementById('correct-answers');
-            const reviewBtn = document.getElementById('review-btn');
-            const restartBtn = document.getElementById('restart-btn');
-            
-            // Initialize the quiz
-            function initQuiz() {
-                totalQuestionsEl.textContent = quizData.length;
-                renderQuestion();
-                startTimer();
-                
-                // Set up button listeners
-                prevBtn.addEventListener('click', goToPreviousQuestion);
-                nextBtn.addEventListener('click', goToNextQuestion);
-                reviewBtn.addEventListener('click', reviewAnswers);
-                restartBtn.addEventListener('click', restartQuiz);
-            }
-            
-            // Render the current question
-            function renderQuestion() {
-                const questionData = quizData[currentQuestion];
-                currentQuestionEl.textContent = currentQuestion + 1;
-                progressFillEl.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
-                
-                // Update button states
-                prevBtn.classList.toggle('opacity-50', currentQuestion === 0);
-                prevBtn.classList.toggle('cursor-not-allowed', currentQuestion === 0);
-                prevBtn.disabled = currentQuestion === 0;
-                
-                if (currentQuestion === quizData.length - 1) {
-                    nextBtn.innerHTML = 'Finish <i class="fas fa-check ml-2"></i>';
-                } else {
-                    nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right ml-2"></i>';
-                }
-                
-                // Create question HTML
-                let html = `
-                    <div class="quiz-card p-8 fade-in">
-                        <h3 class="text-xl font-semibold mb-6">
-                            <span class="bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full mr-3">Question ${currentQuestion + 1}</span>
-                            ${questionData.question}
-                        </h3>
-                        <div class="space-y-4">
-                `;
-                
-                // Create options
-                questionData.options.forEach((option, index) => {
-                    const isSelected = selectedAnswers[currentQuestion] === index;
-                    const optionClass = isSelected ? 'selected' : '';
-                    
-                    html += `
-                        <div class="option-card ${optionClass} p-4 rounded-lg bg-gray-800 cursor-pointer" data-index="${index}">
-                            <div class="flex items-start">
-                                <div class="option-marker w-6 h-6 rounded-full flex items-center justify-center mr-3 ${isSelected ? 'bg-purple-600' : 'bg-gray-700'}">
-                                    ${isSelected ? '<i class="fas fa-check text-xs"></i>' : (index + 1)}
-                                </div>
-                                <div class="option-text">${option}</div>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                html += `
-                        </div>
-                    </div>
-                `;
-                
-                quizContentEl.innerHTML = html;
-                
-                // Add click event listeners to options
-                const optionCards = document.querySelectorAll('.option-card');
-                optionCards.forEach(card => {
-                    card.addEventListener('click', function() {
-                        selectOption(parseInt(this.dataset.index));
-                    });
-                });
-            }
-            
-            // Select an option
-            function selectOption(index) {
-                selectedAnswers[currentQuestion] = index;
-                renderQuestion();
-            }
-            
-            // Go to the previous question
-            function goToPreviousQuestion() {
-                if (currentQuestion > 0) {
-                    currentQuestion--;
-                    renderQuestion();
-                }
-            }
-            
-            // Go to the next question or finish the quiz
-            function goToNextQuestion() {
-                if (currentQuestion < quizData.length - 1) {
-                    currentQuestion++;
-                    renderQuestion();
-                } else {
-                    finishQuiz();
-                }
-            }
-            
-            // Start the timer
-            function startTimer() {
-                quizStartTime = new Date();
-                timerInterval = setInterval(updateTimer, 1000);
-            }
-            
-            // Update the timer display
-            function updateTimer() {
-                seconds++;
-                const minutes = Math.floor(seconds / 60);
-                const remainingSeconds = seconds % 60;
-                timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-            }
-            
-            // Format time string from seconds
-            function formatTime(totalSeconds) {
-                const minutes = Math.floor(totalSeconds / 60);
-                const seconds = totalSeconds % 60;
-                return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }
-            
-            // Finish the quiz and show results
-            function finishQuiz() {
-                clearInterval(timerInterval);
-                
-                // Calculate score
-                score = 0;
-                selectedAnswers.forEach((selected, index) => {
-                    if (selected === quizData[index].correctAnswer) {
-                        score++;
-                    }
-                });
-                
-                // Update results
-                finalScoreEl.textContent = `${score}/${quizData.length}`;
-                scoreBarEl.style.width = `${(score / quizData.length) * 100}%`;
-                scoreBarEl.textContent = `${Math.round((score / quizData.length) * 100)}%`;
-                timeTakenEl.textContent = formatTime(seconds);
-                correctAnswersEl.textContent = `${score}/${quizData.length}`;
-                
-                // Hide quiz, show results
-                document.getElementById('quiz-content').classList.add('hidden');
-                document.getElementById('prev-btn').classList.add('hidden');
-                document.getElementById('next-btn').classList.add('hidden');
-                quizResultsEl.classList.remove('hidden');
-            }
-            
-            // Review answers
-            function reviewAnswers() {
-                let reviewHTML = `
-                    <div class="quiz-card p-8 fade-in">
-                        <h3 class="text-2xl font-bold mb-6 text-center">Review Your Answers</h3>
-                        <div class="space-y-8">
-                `;
-                
-                quizData.forEach((question, qIndex) => {
-                    const userAnswer = selectedAnswers[qIndex];
-                    const isCorrect = userAnswer === question.correctAnswer;
-                    
-                    reviewHTML += `
-                        <div class="bg-gray-800 p-6 rounded-lg">
-                            <h4 class="font-semibold mb-4">
-                                <span class="bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full mr-3">Question ${qIndex + 1}</span>
-                                ${question.question}
-                            </h4>
-                            <div class="space-y-3 mb-4">
-                    `;
-                    
-                    question.options.forEach((option, oIndex) => {
-                        let optionClass = "bg-gray-700";
-                        let iconHTML = "";
-                        
-                        if (oIndex === question.correctAnswer) {
-                            optionClass = "correct";
-                            iconHTML = '<i class="fas fa-check text-green-400 ml-2"></i>';
-                        } else if (userAnswer === oIndex) {
-                            optionClass = "incorrect";
-                            iconHTML = '<i class="fas fa-times text-red-400 ml-2"></i>';
-                        }
-                        
-                        reviewHTML += `
-                            <div class="option-card ${optionClass} p-3 rounded-lg">
-                                <div class="flex items-start">
-                                    <div class="option-marker w-6 h-6 rounded-full flex items-center justify-center mr-3 bg-gray-600">
-                                        ${oIndex + 1}
-                                    </div>
-                                    <div class="option-text flex-1">${option} ${iconHTML}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    
-                    reviewHTML += `
-                            </div>
-                            <div class="bg-gray-700 p-4 rounded-lg mt-4">
-                                <p class="text-sm text-gray-300"><span class="font-semibold text-white">Explanation:</span> ${question.explanation}</p>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                reviewHTML += `
-                        </div>
-                        <div class="mt-8 text-center">
-                            <button id="back-to-results" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300">
-                                <i class="fas fa-arrow-left mr-2"></i> Back to Results
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                quizContentEl.innerHTML = reviewHTML;
-                quizContentEl.classList.remove('hidden');
-                quizResultsEl.classList.add('hidden');
-                
-                document.getElementById('back-to-results').addEventListener('click', function() {
-                    quizContentEl.classList.add('hidden');
-                    quizResultsEl.classList.remove('hidden');
-                });
-            }
-            
-            // Restart the quiz
-            function restartQuiz() {
-                currentQuestion = 0;
-                score = 0;
-                seconds = 0;
-                selectedAnswers = Array(quizData.length).fill(-1);
-                
-                // Reset UI
-                quizResultsEl.classList.add('hidden');
-                document.getElementById('prev-btn').classList.remove('hidden');
-                document.getElementById('next-btn').classList.remove('hidden');
-                quizContentEl.classList.remove('hidden');
-                
-                // Start again
-                renderQuestion();
-                startTimer();
-            }
-            
-            // Initialize the quiz
-            initQuiz();
-        });
+        
         // Initialize GSAP ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
         
@@ -1611,135 +1330,968 @@
             }
         });
         
-        // Quiz Card Animations
-        gsap.utils.toArray(".quiz-card").forEach(card => {
-            gsap.from(card, {
+         // Quiz Data
+         const quizData = {
+            tenant: {
+                title: "Tenant Rights Quiz",
+                questions: [
+                    {
+                        question: "A landlord asks a tenant to vacate within 3 days without notice. Is this legal?",
+                        options: [
+                            "Yes, landlords can evict tenants anytime",
+                            "No, a minimum 1-month notice is required",
+                            "Only if the tenant agrees",
+                            "Depends on the rent amount"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under most state Rent Control Acts in India, landlords must provide a minimum notice period of at least 1 month (30 days) before asking tenants to vacate the property. Immediate eviction within 3 days is illegal except in rare cases involving illegal activities or severe property damage."
+                    },
+                    {
+                        question: "What is the standard security deposit limit in most Indian states?",
+                        options: [
+                            "1 month's rent",
+                            "2-3 months' rent",
+                            "6 months' rent",
+                            "There is no legal limit"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "While there is no uniform national law specifying security deposit limits, most states follow the standard practice of 2-3 months' rent as security deposit. States like Karnataka have explicit provisions limiting security deposits to 3 months' rent for residential properties."
+                    },
+                    {
+                        question: "Who is responsible for major repairs in a rented property?",
+                        options: [
+                            "Always the tenant",
+                            "Always the landlord",
+                            "Whoever caused the damage",
+                            "Depends on what's mentioned in the rental agreement"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under the Transfer of Property Act and various Rent Control Acts, landlords are legally responsible for all major structural repairs and maintenance of the property. This includes plumbing, electrical systems, walls, roofs, and other structural elements unless specifically agreed otherwise in the rental agreement."
+                    },
+                    {
+                        question: "Can a landlord increase the rent during the lease period if it's not mentioned in the agreement?",
+                        options: [
+                            "Yes, anytime",
+                            "Yes, with 3 months' notice",
+                            "No, not without tenant's consent",
+                            "Yes, once every 6 months"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "A landlord cannot increase the rent during an ongoing lease period if the rental agreement does not mention rent escalation clauses. Any changes to rent require mutual consent and typically must be documented as an amendment to the existing agreement or in a new agreement."
+                    },
+                    {
+                        question: "What is the minimum period for which a leave and license agreement is typically valid?",
+                        options: [
+                            "3 months",
+                            "6 months",
+                            "11 months",
+                            "There is no minimum period"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "There is no statutory minimum period for a leave and license agreement in India. However, most such agreements are typically made for 11 months to avoid registration requirements that apply to longer leases under the Registration Act."
+                    },
+                    {
+                        question: "Under which circumstances can a landlord legally enter a tenant's premises without permission?",
+                        options: [
+                            "Anytime during business hours",
+                            "In case of emergency like fire or water leakage",
+                            "To check if property is being maintained",
+                            "If rent is delayed by even one day"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "A landlord can legally enter a tenant's premises without prior permission only in genuine emergencies such as fire, major water leakage, or similar situations that pose immediate risk to life or property. In all other cases, reasonable notice must be provided to the tenant."
+                    },
+                    {
+                        question: "Which document is legally essential for a valid rental agreement in India?",
+                        options: [
+                            "Tenant's Aadhaar card copy",
+                            "Property tax receipt",
+                            "Landlord's PAN card details",
+                            "Rent agreement on stamp paper"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "A rental agreement executed on appropriately valued stamp paper is legally essential for a valid rental contract in India. While other documents like ID proofs are commonly collected, the rent agreement on proper stamp paper (as per state stamp duty requirements) is the primary legal document recognized by courts."
+                    },
+                    {
+                        question: "What is the legal requirement for registering a rental agreement in India?",
+                        options: [
+                            "All rental agreements must be registered regardless of duration",
+                            "Registration is mandatory if the lease period is 12 months or more",
+                            "Registration is only required for commercial properties",
+                            "Registration is optional in all cases"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "According to the Registration Act, 1908, registration of rental agreements is mandatory when the lease period is 12 months or more. For agreements less than 12 months, registration is recommended but not legally mandatory, which is why many landlords prefer 11-month agreements."
+                    },
+                    {
+                        question: "What legal action can a tenant take if a landlord cuts off essential services like water or electricity?",
+                        options: [
+                            "Stop paying rent until services are restored",
+                            "File a complaint with the Rent Control Authority",
+                            "Immediately vacate without notice",
+                            "No legal action is possible"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under various Rent Control Acts and tenant protection provisions, a tenant can file a complaint with the local Rent Control Authority or Housing Tribunal if a landlord cuts off essential services. Deliberately cutting off water, electricity, or other essential services is considered 'constructive eviction' and is illegal."
+                    },
+                    {
+                        question: "In most Indian states, what happens if a tenant continues to occupy the property after the lease expires?",
+                        options: [
+                            "They become illegal occupants immediately",
+                            "The lease is automatically renewed for the same period",
+                            "It becomes a month-to-month tenancy by default",
+                            "The landlord can charge double rent immediately"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "In most Indian states, if a tenant continues to occupy the property after the lease expires and the landlord continues to accept rent without objection, the arrangement automatically converts to a month-to-month periodic tenancy under the same terms as the original lease, but terminable with proper notice by either party."
+                    }
+                ]
+            },
+            workplace: {
+                title: "Workplace Laws Quiz",
+                questions: [
+                    {
+                        question: "How many weeks of paid maternity leave are Indian women entitled to under the Maternity Benefit Act?",
+                        options: [
+                            "6 weeks",
+                            "12 weeks",
+                            "26 weeks",
+                            "52 weeks"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Under the amended Maternity Benefit Act, 1961 (amended in 2017), women employees are entitled to 26 weeks of paid maternity leave. This applies to women working in establishments with 10 or more employees. For women who already have two or more children, the entitlement is 12 weeks."
+                    },
+                    {
+                        question: "What is the maximum number of working hours permitted per day under the Factories Act?",
+                        options: [
+                            "8 hours",
+                            "9 hours",
+                            "10 hours",
+                            "12 hours"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under the Factories Act, 1948, an adult worker cannot be required or allowed to work in a factory for more than 9 hours in any day. However, the total working hours including overtime should not exceed 48 hours per week."
+                    },
+                    {
+                        question: "What is the minimum number of employees required for the Employees' Provident Fund (EPF) scheme to be mandatory?",
+                        options: [
+                            "10 employees",
+                            "15 employees",
+                            "20 employees",
+                            "50 employees"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Under the Employees' Provident Funds and Miscellaneous Provisions Act, 1952, the EPF scheme becomes mandatory for establishments that employ 20 or more persons. Establishments with fewer employees can voluntarily opt to be covered under the EPF scheme."
+                    },
+                    {
+                        question: "Under Indian labor laws, what is the minimum notice period an employer must give before terminating an employee who has worked for over a year?",
+                        options: [
+                            "No notice required",
+                            "15 days",
+                            "30 days",
+                            "90 days"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Under the Industrial Disputes Act, workmen (as defined in the Act) who have completed at least one year of continuous service must be given at least one month's (30 days) notice or wages in lieu of notice before termination. This applies to establishments covered under the Act, typically those with 100+ workers."
+                    },
+                    {
+                        question: "What is the minimum age for employment in any factory or mine according to Indian law?",
+                        options: [
+                            "12 years",
+                            "14 years",
+                            "16 years",
+                            "18 years"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "According to the Child and Adolescent Labour (Prohibition and Regulation) Act and the Factories Act, the minimum age for employment in factories, mines, and other hazardous occupations is 18 years. Children below 14 years cannot be employed in any occupation, while adolescents (14-18 years) can work only in non-hazardous occupations."
+                    },
+                    {
+                        question: "Under the Payment of Wages Act, by which date must wages normally be paid to employees if the establishment employs less than 1000 workers?",
+                        options: [
+                            "Same day of every month",
+                            "7th day of every month",
+                            "10th day of every month",
+                            "15th day of every month"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under the Payment of Wages Act, 1936, wages must be paid before the 7th day of the following month if the establishment employs less than 1000 workers. For establishments with 1000 or more workers, wages must be paid before the 10th day of the following month."
+                    },
+                    {
+                        question: "What is the maximum period of probation legally permitted under Indian labor laws?",
+                        options: [
+                            "3 months",
+                            "6 months",
+                            "1 year",
+                            "There is no specified limit"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "There is no specific provision in central labor laws that limits the maximum period of probation. However, industrial tribunals and courts have generally held that probation periods extending beyond 6 months to 1 year without justification may be unreasonable. Some state-specific laws may have specific provisions."
+                    },
+                    {
+                        question: "Under the Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013, what is mandatory for every workplace with 10 or more employees?",
+                        options: [
+                            "A women's cell",
+                            "An Internal Complaints Committee (ICC)",
+                            "A separate working area for women",
+                            "A female supervisor for female employees"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013 mandates that every workplace with 10 or more employees must constitute an Internal Complaints Committee (ICC) to address complaints of sexual harassment. The ICC must be headed by a senior woman employee."
+                    },
+                    {
+                        question: "What is the employer's contribution rate to the Employees' Provident Fund (EPF)?",
+                        options: [
+                            "8.33% of basic salary",
+                            "10% of basic salary",
+                            "12% of basic salary",
+                            "15% of basic salary"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Under the EPF scheme, the employer contributes 12% of the employee's basic salary plus dearness allowance. Out of this 12%, 8.33% goes to the Employees' Pension Scheme (EPS) (subject to a wage ceiling) and the balance goes to the EPF account."
+                    },
+                    {
+                        question: "Under the Minimum Wages Act, how often should minimum wage rates be revised?",
+                        options: [
+                            "Every 6 months",
+                            "Every year",
+                            "Every 3 years",
+                            "Every 5 years"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "Under the Minimum Wages Act, 1948, the appropriate government (Central or State) should revise minimum wage rates at intervals not exceeding 5 years. However, many states revise these rates more frequently, sometimes annually or biannually."
+                    }
+                ]
+            },
+            consumer: {
+                title: "Consumer Protection Quiz",
+                questions: [
+                    {
+                        question: "You bought a product online, but it was defective. What is the first step you should take?",
+                        options: [
+                            "Ignore it; no action can be taken",
+                            "Complain directly to the seller",
+                            "Go to court immediately",
+                            "Contact the police"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under the Consumer Protection Act, 2019, the first step should be to contact the seller or service provider directly with your complaint. Most legitimate businesses have grievance redressal mechanisms. Only if the seller doesn't respond satisfactorily should you escalate to consumer forums or other authorities."
+                    },
+                    {
+                        question: "What is the time limit for filing a complaint in a Consumer Commission under the Consumer Protection Act, 2019?",
+                        options: [
+                            "15 days from purchase",
+                            "30 days from purchase",
+                            "1 year from purchase",
+                            "2 years from the date of cause of action"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "Under the Consumer Protection Act, 2019, a complaint must be filed within 2 years from the date on which the cause of action arose. However, the Commission may entertain complaints filed beyond this period if there was sufficient cause for the delay."
+                    },
+                    {
+                        question: "Up to what monetary value can the District Consumer Disputes Redressal Commission entertain complaints?",
+                        options: [
+                            "Up to ₹20 lakhs",
+                            "Up to ₹50 lakhs",
+                            "Up to ₹1 crore",
+                            "There is no limit"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under the Consumer Protection Act, 2019, the District Commission can entertain complaints where the value of goods or services paid as consideration does not exceed ₹1 crore (10 million rupees). This is an increase from the previous limit of ₹20 lakhs under the 1986 Act."
+                    },
+                    {
+                        question: "Which of the following is NOT considered a 'consumer' under the Consumer Protection Act?",
+                        options: [
+                            "A person who buys goods for personal use",
+                            "A person who uses services with permission of the buyer",
+                            "A person who buys goods for resale",
+                            "A person who hires services for personal use"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Under the Consumer Protection Act, a person who purchases goods for commercial purposes or resale is not considered a 'consumer.' The Act specifically excludes those who obtain goods or services for resale or commercial purposes from the definition of 'consumer.'"
+                    },
+                    {
+                        question: "What is the penalty for misleading advertisements under the Consumer Protection Act, 2019?",
+                        options: [
+                            "No specific penalty",
+                            "Up to ₹10 lakhs",
+                            "Up to ₹50 lakhs",
+                            "Up to ₹1 crore"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under the Consumer Protection Act, 2019, the Central Consumer Protection Authority can impose a penalty of up to ₹10 lakhs on manufacturers or endorsers for misleading advertisements. For subsequent offenses, the penalty can go up to ₹50 lakhs."
+                    },
+                    {
+                        question: "Under E-commerce rules in India, what is the maximum time within which an e-commerce entity must acknowledge receipt of a consumer complaint?",
+                        options: [
+                            "24 hours",
+                            "48 hours",
+                            "72 hours",
+                            "7 days"
+                        ],
+                        correctAnswer: 0,
+                        explanation: "As per the Consumer Protection (E-Commerce) Rules, 2020, every e-commerce entity must acknowledge receipt of any consumer complaint within 24 hours and redress the complaint within a reasonable time frame, not exceeding one month from the date of receipt of the complaint."
+                    },
+                    {
+                        question: "Can a service provider charge a cancellation fee if the service was not as advertised?",
+                        options: [
+                            "Yes, as long as it's mentioned in their terms",
+                            "Yes, but only up to 10% of the service cost",
+                            "No, it would be considered an unfair trade practice",
+                            "It depends on the industry standards"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "If a service was not as advertised or there was misrepresentation about the service quality, charging a cancellation fee would generally be considered an unfair trade practice under the Consumer Protection Act. Consumers have the right to expect services to be delivered as represented."
+                    },
+                    {
+                        question: "What is 'product liability' under the Consumer Protection Act, 2019?",
+                        options: [
+                            "The manufacturer's responsibility to provide warranty",
+                            "The responsibility of product quality lies with the consumer",
+                            "The responsibility of a product manufacturer to compensate for any harm caused by defective products",
+                            "The responsibility of sellers to take back products within 30 days"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Product liability under the Consumer Protection Act, 2019 refers to the responsibility of a product manufacturer, service provider, or seller to compensate consumers for any harm or injury caused by defective products or deficient services. It allows consumers to claim compensation for damage caused by defective products."
+                    },
+                    {
+                        question: "Which of the following practices is legal under Indian consumer law?",
+                        options: [
+                            "Refusing to take back defective goods within warranty period",
+                            "'No return, No exchange' policy for defective products",
+                            "Charging for warranty services that were advertised as free",
+                            "Charging GST separately after displaying all-inclusive prices"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "Displaying GST separately after showing all-inclusive prices is legal if the final price charged matches the total amount. The other options represent unfair trade practices: refusing returns for defective products within warranty, implementing a 'no return' policy for defective items, and charging for advertised free services are all prohibited under consumer protection laws."
+                    },
+                    {
+                        question: "What is the maximum compensation that can be awarded by the National Consumer Disputes Redressal Commission?",
+                        options: [
+                            "₹1 crore",
+                            "₹5 crores",
+                            "₹10 crores",
+                            "There is no upper limit"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "There is no statutory upper limit on the compensation that can be awarded by the National Consumer Disputes Redressal Commission. The National Commission can entertain complaints where the value exceeds ₹10 crores and can award compensation as it deems appropriate based on the facts and circumstances of each case."
+                    }
+                ]
+            },
+            cyber: {
+                title: "Cybersecurity & Privacy Quiz",
+                questions: [
+                    {
+                        question: "Under the Information Technology Act, what is the punishment for hacking or unauthorized access to a computer system?",
+                        options: [
+                            "Only a fine up to ₹5 lakhs",
+                            "Imprisonment up to 3 years or fine up to ₹5 lakhs or both",
+                            "Only a warning for first-time offenders",
+                            "No specific punishment is defined"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Section 66 of the IT Act, 2000 (as amended in 2008) prescribes punishment for computer-related offenses including hacking. Anyone who gains unauthorized access can be punished with imprisonment up to 3 years or a fine up to ₹5 lakhs, or both."
+                    },
+                    {
+                        question: "Which of the following is NOT protected as 'sensitive personal data' under Indian data protection rules?",
+                        options: [
+                            "Passwords",
+                            "Financial information",
+                            "Public social media posts",
+                            "Biometric information"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Public social media posts are not classified as 'sensitive personal data' under the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011. Sensitive personal data includes passwords, financial information, health information, biometric information, and sexual orientation, among others."
+                    },
+                    {
+                        question: "What action can you take if you discover unauthorized transactions on your credit card?",
+                        options: [
+                            "You must bear the loss as digital transactions are not protected",
+                            "Report to the bank within 3 days for zero liability",
+                            "No action is possible after the transaction is complete",
+                            "Only file a police complaint"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "As per RBI guidelines, if you report unauthorized electronic banking transactions to your bank within 3 working days, you have zero liability. The bank is obligated to credit the amount back to your account within 10 working days from the date of notification."
+                    },
+                    {
+                        question: "What is the legal status of cryptocurrencies in India as of 2023?",
+                        options: [
+                            "Completely banned",
+                            "Fully legal tender",
+                            "Legal but taxable as virtual digital assets",
+                            "Only government-issued cryptocurrencies are legal"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Cryptocurrencies in India are not banned, but they're not recognized as legal tender either. They are classified as 'Virtual Digital Assets' and are subject to taxation (30% tax on profits plus 1% TDS on transactions) as per the Finance Act, 2022."
+                    },
+                    {
+                        question: "Under Indian law, who is responsible for protecting customer data collected by a company?",
+                        options: [
+                            "The government",
+                            "The customer themselves",
+                            "The company collecting the data",
+                            "The IT department"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Under the IT Act and its Rules, particularly the SPDI Rules 2011, the body corporate (company) that collects personal data is responsible for implementing and maintaining reasonable security practices to protect the data from unauthorized access, damage, use, or disclosure."
+                    },
+                    {
+                        question: "What is 'doxxing' under Indian cyber laws?",
+                        options: [
+                            "Hacking a government website",
+                            "Publishing private information about someone online without consent",
+                            "Creating fake social media profiles",
+                            "Not defined in Indian law"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "While 'doxxing' (publishing someone's private information online without consent) can be prosecuted under various sections of the IT Act and IPC, the term 'doxxing' itself is not specifically defined in Indian cyber laws. Such acts could be prosecuted under provisions related to privacy violations, defamation, or harassment."
+                    },
+                    {
+                        question: "What is the time limit for intermediaries (like social media platforms) to remove content upon receiving a court order?",
+                        options: [
+                            "24 hours",
+                            "36 hours",
+                            "72 hours",
+                            "7 days"
+                        ],
+                        correctAnswer: 0,
+                        explanation: "As per the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, upon receiving an order from a court or government agency, intermediaries must remove or disable access to unlawful content within 24 hours."
+                    },
+                    {
+                        question: "What constitutes 'revenge porn' under Indian law?",
+                        options: [
+                            "Sending unwanted messages",
+                            "Sharing intimate images without consent",
+                            "Creating fake profiles",
+                            "Not specifically defined"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "While 'revenge porn' is not explicitly mentioned by that term, Section 66E of the IT Act criminalizes the capturing, publishing or transmitting of images of private areas of any person without their consent. Additionally, Section 67A punishes publishing or transmitting sexually explicit material in electronic form."
+                    },
+                    {
+                        question: "Under which section of the IT Act is sending offensive messages through communication services punishable?",
+                        options: [
+                            "Section 66A",
+                            "Section 67",
+                            "Section 69",
+                            "Section 72"
+                        ],
+                        correctAnswer: 0,
+                        explanation: "Section 66A of the IT Act dealt with punishment for sending offensive messages through communication services. However, it's important to note that this section was struck down by the Supreme Court in 2015 in the Shreya Singhal case as it violated freedom of speech. Such offenses may now be prosecuted under other provisions of IPC or IT Act."
+                    },
+                    {
+                        question: "What rights do you have regarding your personal data under Indian data protection rules?",
+                        options: [
+                            "No specific rights, as there's no comprehensive law yet",
+                            "Right to access, correct, and withdraw consent",
+                            "Right to be completely anonymous online",
+                            "Right to compensation only"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under the IT (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011, individuals have the right to access their personal data, correct inaccuracies, and withdraw consent given earlier. Organizations must provide mechanisms for users to review and correct their information and opt out of providing data."
+                    }
+                ]
+            },
+            criminal: {
+                title: "Criminal Law Quiz",
+                questions: [
+                    {
+                        question: "What is the maximum period for which a person can be detained in police custody for investigation?",
+                        options: [
+                            "24 hours",
+                            "15 days",
+                            "30 days",
+                            "90 days"
+                        ],
+                        correctAnswer: 0,
+                        explanation: "Under Article 22 of the Indian Constitution and Section 57 of the Criminal Procedure Code (CrPC), a person cannot be detained in police custody for more than 24 hours without being produced before a magistrate. This is a fundamental right against arbitrary detention."
+                    },
+                    {
+                        question: "What happens if you are arrested but not informed about the grounds of arrest?",
+                        options: [
+                            "The arrest remains valid",
+                            "The arrest becomes illegal",
+                            "You get automatic bail",
+                            "You can be detained for 48 hours instead of 24"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under Article 22(1) of the Constitution and Section 50 of the CrPC, every arrested person has the right to be informed of the grounds of arrest. Failure to inform the grounds makes the arrest illegal and can be challenged through a habeas corpus petition."
+                    },
+                    {
+                        question: "Under which section of the CrPC can a person apply for anticipatory bail?",
+                        options: [
+                            "Section 436",
+                            "Section 437",
+                            "Section 438",
+                            "Section 439"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Section 438 of the Criminal Procedure Code provides for 'anticipatory bail,' which allows a person who anticipates arrest for a non-bailable offense to apply to the High Court or Sessions Court for a direction that in the event of such arrest, they shall be released on bail."
+                    },
+                    {
+                        question: "What is the legal age of criminal responsibility in India?",
+                        options: [
+                            "7 years",
+                            "12 years",
+                            "16 years",
+                            "18 years"
+                        ],
+                        correctAnswer: 0,
+                        explanation: "Under Section 82 of the Indian Penal Code, nothing is an offense which is done by a child under 7 years of age. This establishes the minimum age of criminal responsibility in India. Children between 7-12 years can be held responsible only if they had sufficient maturity to understand the nature and consequences of their act."
+                    },
+                    {
+                        question: "Which of the following statements about the right to self-defense is correct?",
+                        options: [
+                            "You can use any amount of force in self-defense",
+                            "The right to self-defense arises only after being attacked",
+                            "The right extends to defending yourself, others, and property",
+                            "Self-defense cannot be claimed if you could have escaped"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Under Sections 96-106 of the IPC, the right of private defense extends to defending one's own body, the body of any other person, one's own property, and the property of others against certain offenses. However, the force used must be proportionate to the threat and not exceed what is reasonably necessary."
+                    },
+                    {
+                        question: "What is the maximum punishment for the offense of theft under the Indian Penal Code?",
+                        options: [
+                            "1 year imprisonment",
+                            "3 years imprisonment",
+                            "5 years imprisonment",
+                            "7 years imprisonment"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Under Section 379 of the Indian Penal Code, whoever commits theft shall be punished with imprisonment of either description for a term which may extend to 3 years, or with fine, or with both."
+                    },
+                    {
+                        question: "What is the punishment for giving false evidence under oath in a court proceeding?",
+                        options: [
+                            "Only a fine",
+                            "Imprisonment up to 3 years",
+                            "Imprisonment up to 7 years",
+                            "Only community service"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Under Section 193 of the Indian Penal Code, giving false evidence (perjury) in a judicial proceeding is punishable with imprisonment up to 7 years and fine. If given in any other case, the imprisonment may extend to 3 years and fine."
+                    },
+                    {
+                        question: "What is 'cognizable offense' under Indian criminal law?",
+                        options: [
+                            "An offense where police cannot arrest without warrant",
+                            "An offense where police can arrest without warrant",
+                            "An offense that can only be tried by High Courts",
+                            "An offense that requires special permission from the magistrate to investigate"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "A cognizable offense is one where a police officer can arrest a person without a warrant. According to the first schedule of the Criminal Procedure Code, these are generally more serious offenses. In non-cognizable offenses, police cannot arrest without a warrant from a magistrate."
+                    },
+                    {
+                        question: "What is the legal principle of 'bail is the rule, jail is the exception'?",
+                        options: [
+                            "All accused persons must be granted bail",
+                            "Bail should be granted unless there are reasonable grounds to deny it",
+                            "Only first-time offenders get bail",
+                            "Bail is mandatory for all non-violent crimes"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The principle 'bail is the rule, jail is the exception' means that liberty of an individual is the norm and detention should be an exception. Unless there are reasonable grounds to believe that the accused will abscond, tamper with evidence, or influence witnesses, bail should generally be granted."
+                    },
+                    {
+                        question: "What is a 'Zero FIR' in the Indian criminal justice system?",
+                        options: [
+                            "An FIR with no named suspects",
+                            "An FIR that can be filed at any police station regardless of jurisdiction",
+                            "An FIR for minor offenses",
+                            "An FIR with no witnesses"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "A 'Zero FIR' can be filed at any police station regardless of the jurisdiction in which the crime occurred. After registration, it is transferred to the appropriate police station. This concept was introduced to prevent delays in filing FIRs due to jurisdictional issues, especially in urgent cases."
+                    }
+                ]
+            },
+            human: {
+                title: "Human Rights Quiz",
+                questions: [
+                    {
+                        question: "Which part of the Indian Constitution contains Fundamental Rights?",
+                        options: [
+                            "Part II",
+                            "Part III",
+                            "Part IV",
+                            "Part V"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Part III of the Indian Constitution (Articles 12-35) contains the Fundamental Rights. These rights are enforceable in courts and include rights like equality before law, freedom of speech and expression, right to life and personal liberty, and protection against exploitation."
+                    },
+                    {
+                        question: "Which constitutional remedy allows citizens to approach the Supreme Court directly for violation of Fundamental Rights?",
+                        options: [
+                            "Mandamus",
+                            "Quo Warranto",
+                            "Habeas Corpus",
+                            "Article 32 (Right to Constitutional Remedies)"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "Article 32 of the Constitution guarantees the right to move the Supreme Court directly for enforcement of Fundamental Rights. Dr. B.R. Ambedkar referred to it as the 'heart and soul' of the Constitution. Under Article 32, the Supreme Court can issue writs like habeas corpus, mandamus, prohibition, certiorari, and quo warranto."
+                    },
+                    {
+                        question: "Which of the following is NOT a Fundamental Right in the Indian Constitution?",
+                        options: [
+                            "Right to Equality",
+                            "Right to Freedom",
+                            "Right to Privacy",
+                            "Right to Property"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "Right to Property was originally a Fundamental Right under Article 31 of the Constitution. However, it was removed from Part III by the 44th Constitutional Amendment in 1978 and made a legal right under Article 300A. The Supreme Court has recognized the Right to Privacy as a fundamental right under Article 21 in the Puttaswamy judgment (2017)."
+                    },
+                    {
+                        question: "Under which article of the Indian Constitution is the right to free and compulsory education guaranteed?",
+                        options: [
+                            "Article 14",
+                            "Article 19",
+                            "Article 21A",
+                            "Article 32"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Article 21A, inserted by the 86th Constitutional Amendment Act, 2002, guarantees the right to free and compulsory education to all children aged 6-14 years. This right was subsequently implemented through the Right of Children to Free and Compulsory Education (RTE) Act, 2009."
+                    },
+                    {
+                        question: "What is the maximum period for which a person can be detained under preventive detention laws without advisory board approval?",
+                        options: [
+                            "1 month",
+                            "2 months",
+                            "3 months",
+                            "6 months"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Under Article 22(4) of the Constitution, no law providing for preventive detention can authorize detention for a period longer than 3 months unless an Advisory Board has reported before the expiration of that period that there is sufficient cause for such detention."
+                    },
+                    {
+                        question: "Which of the following writs is issued to secure the release of a person who has been illegally detained?",
+                        options: [
+                            "Mandamus",
+                            "Certiorari",
+                            "Habeas Corpus",
+                            "Quo Warranto"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "The writ of Habeas Corpus (Latin for 'you shall have the body') is issued to secure the release of a person who has been illegally detained, whether in prison or private custody. It is a powerful instrument to safeguard individual freedom against arbitrary state action."
+                    },
+                    {
+                        question: "Under Indian law, which of the following groups has special protection against atrocities?",
+                        options: [
+                            "Religious minorities only",
+                            "Scheduled Castes and Scheduled Tribes",
+                            "Women and children only",
+                            "Senior citizens"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The Scheduled Castes and Scheduled Tribes (Prevention of Atrocities) Act, 1989 provides special protection to members of SC/ST communities. The Act prescribes harsh penalties for offenses committed against members of these communities and establishes Special Courts for trial of such offenses."
+                    },
+                    {
+                        question: "What is the 'public interest litigation' (PIL) in the Indian legal context?",
+                        options: [
+                            "A case filed by the government",
+                            "A case that affects public revenue",
+                            "A legal action initiated for the protection of public interest",
+                            "A case involving public property disputes"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Public Interest Litigation (PIL) is a legal action initiated in a court of law for the protection of public interest, such as pollution, terrorism, road safety, etc. It relaxes the traditional rule of 'locus standi' (only aggrieved person can approach court) and allows any public-spirited person to file a case on behalf of the aggrieved."
+                    },
+                    {
+                        question: "Which of the following rights cannot be suspended even during a national emergency?",
+                        options: [
+                            "Right to freedom of speech",
+                            "Right to freedom of assembly",
+                            "Right to life and personal liberty (Articles 20 and 21)",
+                            "Right to freedom of movement"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "After the 44th Constitutional Amendment, Articles 20 (protection against double jeopardy and self-incrimination) and 21 (right to life and personal liberty) cannot be suspended even during a national emergency declared under Article 352. These rights are considered too fundamental to be suspended under any circumstances."
+                    },
+                    {
+                        question: "Under which law was the National Human Rights Commission established?",
+                        options: [
+                            "The Constitution of India",
+                            "The Protection of Human Rights Act, 1993",
+                            "The Civil Rights Act, 1955",
+                            "The Human Rights Enforcement Act, 2000"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The National Human Rights Commission (NHRC) was established under the Protection of Human Rights Act, 1993. It is a statutory body (not constitutional) designed to protect and promote human rights, defined by the Act as rights relating to life, liberty, equality, and dignity guaranteed by the Constitution or embodied in international covenants."
+                    }
+                ]
+            }
+        };
+        
+        // Variables
+        let currentCategory = '';
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        
+        // DOM Elements
+        const mainScreen = document.getElementById('main-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        
+        const quizTitle = document.getElementById('quiz-title');
+        const currentQuestionNum = document.getElementById('current-question-num');
+        const totalQuestions = document.getElementById('total-questions');
+        const progressBar = document.getElementById('progress-bar');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        
+        const resultCategory = document.getElementById('result-category');
+        const scoreDisplay = document.getElementById('score-display');
+        const scoreBar = document.getElementById('score-bar');
+        const performanceMessage = document.getElementById('performance-message').querySelector('p');
+        
+        // Event Listeners
+        document.querySelectorAll('.start-quiz-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                currentCategory = this.dataset.category;
+                startQuiz(currentCategory);
+            });
+        });
+        
+        document.getElementById('back-btn').addEventListener('click', function() {
+            showScreen(mainScreen);
+            resetQuiz();
+        });
+        
+        document.getElementById('next-btn').addEventListener('click', function() {
+            moveToNextQuestion();
+        });
+        
+        document.getElementById('back-to-categories-btn').addEventListener('click', function() {
+            showScreen(mainScreen);
+            resetQuiz();
+        });
+        
+        document.getElementById('retry-quiz-btn').addEventListener('click', function() {
+            startQuiz(currentCategory);
+        });
+        
+        // Functions
+        function startQuiz(category) {
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            
+            quizTitle.textContent = quizData[category].title;
+            totalQuestions.textContent = quizData[category].questions.length;
+            
+            loadQuestion();
+            showScreen(quizScreen);
+            
+            // Animate entrance
+            gsap.from("#quiz-screen", {
+                duration: 0.6,
                 opacity: 0,
                 y: 30,
-                duration: 0.8,
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 85%"
-                }
+                ease: "power2.out"
             });
-        });
+        }
         
-        // Modal functionality
-        const quizModal = document.getElementById('quizModal');
-        const modalContent = document.getElementById('modalContent');
-        const quizButtons = document.querySelectorAll('.take-quiz-btn');
-        
-        quizButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const quizType = button.getAttribute('data-quiz');
-                loadQuiz(quizType);
-                quizModal.style.display = 'flex';
-            });
-        });
-        
-        // Close modal when clicking outside
-        quizModal.addEventListener('click', function(e) {
-            if (e.target === quizModal) {
-                quizModal.style.display = 'none';
-            }
-        });
-        
-        // Sample function to load quiz content
-        function loadQuiz(quizType) {
-            // This would normally fetch quiz data from a server
-            // For demo purposes, we'll just show some sample content
-            modalContent.innerHTML = `
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-white">${getQuizTitle(quizType)} Quiz</h2>
-                        <button id="closeModal" class="text-gray-400 hover:text-white">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <div class="w-full bg-gray-700 rounded-full h-2 mb-2">
-                            <div class="progress-bar w-20"></div>
-                        </div>
-                        <div class="flex justify-between text-sm text-gray-400">
-                            <span>Question 2 of 10</span>
-                            <span>20% Complete</span>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-8">
-                        <h3 class="text-xl text-white mb-4">${getSampleQuestion(quizType)}</h3>
-                        
-                        <div class="space-y-3">
-                            <div class="quiz-option p-3 rounded-lg">
-                                A. The landlord can enter whenever they want if they own the property
-                            </div>
-                            <div class="quiz-option p-3 rounded-lg">
-                                B. The landlord must provide at least 24 hours written notice
-                            </div>
-                            <div class="quiz-option p-3 rounded-lg">
-                                C. The landlord can only enter in emergencies
-                            </div>
-                            <div class="quiz-option p-3 rounded-lg">
-                                D. The landlord needs to get a court order to enter
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex justify-between">
-                        <button class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition">
-                            <i class="fas fa-arrow-left mr-1"></i> Previous
-                        </button>
-                        <button class="btn-primary hover-glow font-medium py-2 px-4 rounded-lg transition">
-                            Next <i class="fas fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
+        function loadQuestion() {
+            const question = quizData[currentCategory].questions[currentQuestionIndex];
+            const questionsTotal = quizData[currentCategory].questions.length;
             
-            // Add event listener to close button
-            document.getElementById('closeModal').addEventListener('click', function() {
-                quizModal.style.display = 'none';
-            });
+            // Update question number and progress bar
+            currentQuestionNum.textContent = currentQuestionIndex + 1;
+            progressBar.style.width = `${((currentQuestionIndex + 1) / questionsTotal) * 100}%`;
             
-            // Add event listeners to quiz options
-            const options = document.querySelectorAll('.quiz-option');
-            options.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove selected class from all options
-                    options.forEach(opt => opt.classList.remove('selected'));
-                    // Add selected class to clicked option
-                    option.classList.add('selected');
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Add options
+            question.options.forEach((option, index) => {
+                const optionButton = document.createElement('button');
+                optionButton.className = 'option-btn w-full text-left py-3 px-4 rounded-lg border border-gray-300 mb-2 flex items-center';
+                optionButton.dataset.index = index;
+                
+                // Create option letter block
+                const optionLetter = document.createElement('span');
+                optionLetter.className = 'option-letter w-8 h-8 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center font-semibold mr-3 flex-shrink-0';
+                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
+                
+                // Create option text
+                const optionTextSpan = document.createElement('span');
+                optionTextSpan.textContent = option;
+                
+                optionButton.appendChild(optionLetter);
+                optionButton.appendChild(optionTextSpan);
+                
+                optionButton.addEventListener('click', function() {
+                    selectOption(this);
                 });
+                
+                optionsContainer.appendChild(optionButton);
+            });
+            
+            // Hide explanation
+            explanationContainer.classList.add('hidden');
+            
+            // Disable next button until an option is selected
+            document.getElementById('next-btn').disabled = true;
+            
+            // Animate question entrance
+            gsap.from("#question-text", {
+                duration: 0.5,
+                opacity: 0,
+                y: 10,
+                ease: "power2.out"
+            });
+            
+            gsap.from(".option-btn", {
+                duration: 0.5,
+                opacity: 0,
+                y: 10,
+                stagger: 0.1,
+                ease: "power2.out"
             });
         }
         
-        // Helper functions to get quiz content
-        function getQuizTitle(quizType) {
-            const titles = {
-                'housing': 'Housing & Tenant Legal Rights',
-                'workplace': 'Workplace & Employment Laws',
-                'consumer': 'Consumer Protection Law',
-                'cyber': 'Cybersecurity & Privacy Laws',
-                'criminal': 'Criminal Law & Civil Rights',
-                'government': 'Government & Citizen Rights',
-                'privacy': 'Digital Privacy Rights'
-            };
-            return titles[quizType] || 'Legal Knowledge';
+        function selectOption(selectedOption) {
+            // Disable all options
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            // Get correct answer
+            const correctAnswerIndex = quizData[currentCategory].questions[currentQuestionIndex].correctAnswer;
+            
+            // Mark selected option
+            selectedOption.classList.add('selected');
+            
+            // Save user's answer
+            userAnswers[currentQuestionIndex] = parseInt(selectedOption.dataset.index);
+            
+            // Check if correct
+            if (parseInt(selectedOption.dataset.index) === correctAnswerIndex) {
+                selectedOption.classList.add('correct');
+                score++;
+                
+                // Play correct animation
+                gsap.to(selectedOption, {
+                    duration: 0.3,
+                    backgroundColor: "#48bb78",
+                    color: "white",
+                    ease: "power2.out"
+                });
+            } else {
+                selectedOption.classList.add('incorrect');
+                
+                // Highlight correct answer
+                document.querySelectorAll('.option-btn').forEach(btn => {
+                    if (parseInt(btn.dataset.index) === correctAnswerIndex) {
+                        btn.classList.add('correct');
+                        
+                        // Play correct animation for the right answer
+                        gsap.to(btn, {
+                            duration: 0.3,
+                            backgroundColor: "#48bb78",
+                            color: "white",
+                            ease: "power2.out"
+                        });
+                    }
+                });
+                
+                // Play incorrect animation
+                gsap.to(selectedOption, {
+                    duration: 0.3,
+                    backgroundColor: "#f56565",
+                    color: "white",
+                    ease: "power2.out"
+                });
+            }
+            
+            // Show explanation
+            explanationText.textContent = quizData[currentCategory].questions[currentQuestionIndex].explanation;
+            explanationContainer.classList.remove('hidden');
+            
+            // Animate explanation
+            gsap.from(explanationContainer, {
+                duration: 0.5,
+                opacity: 0,
+                y: 10,
+                ease: "power2.out"
+            });
+            
+            // Enable next button
+            document.getElementById('next-btn').disabled = false;
         }
         
-        function getSampleQuestion(quizType) {
-            const questions = {
-                'housing': 'In most states, how much notice must a landlord provide before entering a tenant\'s unit for non-emergency repairs?',
-                'workplace': 'What is the minimum federal overtime pay rate for eligible employees working more than 40 hours in a workweek?',
-                'consumer': 'Under the Fair Credit Billing Act, how long do you have to dispute a billing error on your credit card statement?',
-                'cyber': 'Which of the following is NOT typically protected under data privacy laws?',
-                'criminal': 'What are your rights when stopped by police while driving?',
-                'government': 'Which Amendment to the U.S. Constitution protects against unreasonable searches and seizures?',
-                'privacy': 'Who owns the personal data you share on social media platforms?'
-            };
-            return questions[quizType] || 'Sample legal question';
+        function moveToNextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < quizData[currentCategory].questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            const totalQuestions = quizData[currentCategory].questions.length;
+            const percentage = (score / totalQuestions) * 100;
+            
+            resultCategory.textContent = quizData[currentCategory].title;
+            scoreDisplay.textContent = `${score}/${totalQuestions} (${percentage.toFixed(0)}%)`;
+            scoreBar.style.width = `${percentage}%`;
+            
+            // Set performance message
+            if (percentage >= 90) {
+                performanceMessage.textContent = "Excellent! You have an outstanding knowledge of Indian law in this category.";
+            } else if (percentage >= 70) {
+                performanceMessage.textContent = "Great job! You have a solid understanding of Indian law in this category.";
+            } else if (percentage >= 50) {
+                performanceMessage.textContent = "Good effort! You have a basic grasp of Indian law in this category, but there's room to learn more.";
+            } else {
+                performanceMessage.textContent = "Keep learning! This quiz reveals areas where you can improve your knowledge of Indian law.";
+            }
+            
+            showScreen(resultsScreen);
+            
+            // Animate entrance
+            gsap.from("#results-screen", {
+                duration: 0.6,
+                opacity: 0,
+                y: 30,
+                ease: "power2.out"
+            });
+            
+            // Animate score bar
+            gsap.from("#score-bar", {
+                duration: 1,
+                width: 0,
+                ease: "power2.out"
+            });
+        }
+        
+        function showScreen(screen) {
+            // Hide all screens
+            mainScreen.classList.add('hidden');
+            quizScreen.classList.add('hidden');
+            resultsScreen.classList.add('hidden');
+            
+            // Show requested screen
+            screen.classList.remove('hidden');
+        }
+        
+        function resetQuiz() {
+            currentCategory = '';
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
         }
     </script>
+<script src="search.js"></script>
 </body>
 </html>
