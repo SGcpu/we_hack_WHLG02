@@ -109,20 +109,9 @@
             z-index: 0;
         }
         
-        .chatbot-bubble {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 25px rgba(99, 102, 241, 0.5);
-        }
         
-        .chatbot-bubble:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 35px rgba(99, 102, 241, 0.7);
-        }
+        
+        
         
         .feature-card {
             background: var(--card-bg);
@@ -403,6 +392,12 @@
             </div>
         </div>
     </nav>
+
+    <!-- Chatbot Bubble -->
+    <div >
+        <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>    
+    </div>
 
     <!-- Hero Section -->
     <section class="hero-container pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 relative">
@@ -852,7 +847,29 @@
         <i class="fas fa-robot text-2xl"></i>
     </button>
 </div>
-
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyB27XAakIGwqLuUwhQ3B2uUUz0gfn_JaLg",
+      authDomain: "legalpathshala-d0ece.firebaseapp.com",
+      projectId: "legalpathshala-d0ece",
+      storageBucket: "legalpathshala-d0ece.firebasestorage.app",
+      messagingSenderId: "16024881233",
+      appId: "1:16024881233:web:290d1bd4f12704cd2bd070",
+      measurementId: "G-MF57ZHCRMG"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 <!-- JavaScript -->
 <script>
     // Mobile Menu Toggle

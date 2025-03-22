@@ -868,162 +868,70 @@
         </div>
     </section>
 
-    <!-- Quiz Categories Section -->
-    <section id="quiz-categories" class="py-16 px-6 bg-gray-900">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-white mb-4">Quiz Categories</h2>
-            <p class="text-center text-gray-300 mb-12 max-w-3xl mx-auto">Test your knowledge across different legal topics. Each quiz is designed to help you understand your rights better.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Housing Quiz Card -->
-                <div class="quiz-card hover-float mt-1">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="category-icon text-4xl mr-4">🏠</div>
-                            <h3 class="text-xl font-semibold text-white">Housing & Tenant Legal Rights Quiz</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">Test your knowledge on tenant laws and landlord obligations.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full">Beginner</span>
-                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 5 minutes, 10 questions</span>
-                        </div>
-                        <button class="take-quiz-btn w-full btn-primary font-medium py-3 rounded-lg transition duration-300" data-quiz="housing">
-                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                    <div class="bg-gradient-to-r from-purple-700 to-indigo-700 px-6 py-3 text-white text-sm">
-                        <div class="flex justify-between">
-                            <span><i class="fas fa-users"></i> 2,540 people took this quiz</span>
-                            <span><i class="fas fa-star"></i> 4.8/5</span>
-                        </div>
-                    </div>
-                </div>
+    <section id="quiz-container" class="py-16 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <!-- Quiz Header -->
+            <div class="mb-8 text-center">
+                <h2 class="text-3xl font-bold mb-4">Housing & Tenant Legal Rights Quiz</h2>
+                <p class="text-gray-300 mb-8">Test your knowledge on tenant laws and landlord obligations.</p>
                 
-                <!-- Workplace Quiz Card -->
-                <div class="quiz-card hover-float mt-1">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="category-icon text-4xl mr-4">💼</div>
-                            <h3 class="text-xl font-semibold text-white">Workplace & Employment Laws Quiz</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">Find out if you know your employee rights and workplace protections.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-green-900 text-green-200 text-xs px-3 py-1 rounded-full">Intermediate</span>
-                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 8 minutes, 15 questions</span>
-                        </div>
-                        <button class="take-quiz-btn w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="workplace">
-                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
-                        </button>
+                <!-- Quiz Progress -->
+                <div class="max-w-xl mx-auto mb-8">
+                    <div class="flex justify-between text-sm text-gray-400 mb-2">
+                        <span>Question <span id="current-question">1</span> of <span id="total-questions">10</span></span>
+                        <span id="timer">Time: 00:00</span>
                     </div>
-                    <div class="bg-gradient-to-r from-green-700 to-teal-700 px-6 py-3 text-white text-sm">
-                        <div class="flex justify-between">
-                            <span><i class="fas fa-users"></i> 3,120 people took this quiz</span>
-                            <span><i class="fas fa-star"></i> 4.7/5</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Consumer Protection Quiz Card -->
-                <div class="quiz-card hover-float mt-1">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="category-icon text-4xl mr-4">💳</div>
-                            <h3 class="text-xl font-semibold text-white">Consumer Protection Law Quiz</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">What are your rights when buying products and services? Test your knowledge!</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full">Beginner</span>
-                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 6 minutes, 12 questions</span>
-                        </div>
-                        <button class="take-quiz-btn w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="consumer">
-                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                    <div class="bg-gradient-to-r from-purple-700 to-pink-700 px-6 py-3 text-white text-sm">
-                        <div class="flex justify-between">
-                            <span><i class="fas fa-users"></i> 1,975 people took this quiz</span>
-                            <span><i class="fas fa-star"></i> 4.9/5</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Cybersecurity Quiz Card -->
-                <div class="quiz-card hover-float">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="category-icon text-4xl mr-4">🔗</div>
-                            <h3 class="text-xl font-semibold text-white">Cybersecurity & Privacy Laws Quiz</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">Learn how to stay safe online and understand your digital privacy rights.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-indigo-900 text-indigo-200 text-xs px-3 py-1 rounded-full">Advanced</span>
-                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 10 minutes, 20 questions</span>
-                        </div>
-                        <button class="take-quiz-btn w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="cyber">
-                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                    <div class="bg-gradient-to-r from-indigo-700 to-blue-700 px-6 py-3 text-white text-sm">
-                        <div class="flex justify-between">
-                            <span><i class="fas fa-users"></i> 1,340 people took this quiz</span>
-                            <span><i class="fas fa-star"></i> 4.6/5</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Criminal Rights Quiz Card -->
-                <div class="quiz-card hover-float">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="category-icon text-4xl mr-4">⚖</div>
-                            <h3 class="text-xl font-semibold text-white">Criminal Law & Civil Rights Quiz</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">Understand legal procedures and your rights in criminal and civil situations.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-red-900 text-red-200 text-xs px-3 py-1 rounded-full">Intermediate</span>
-                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 7 minutes, 15 questions</span>
-                        </div>
-                        <button class="take-quiz-btn w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="criminal">
-                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                    <div class="bg-gradient-to-r from-red-700 to-pink-700 px-6 py-3 text-white text-sm">
-                        <div class="flex justify-between">
-                            <span><i class="fas fa-users"></i> 2,105 people took this quiz</span>
-                            <span><i class="fas fa-star"></i> 4.8/5</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Government Quiz Card -->
-                <div class="quiz-card hover-float">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="category-icon text-4xl mr-4">🏛</div>
-                            <h3 class="text-xl font-semibold text-white">Government & Citizen Rights Quiz</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">Do you know your rights as a citizen? Test your knowledge of constitutional rights.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-yellow-900 text-yellow-200 text-xs px-3 py-1 rounded-full">Beginner</span>
-                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 5 minutes, 10 questions</span>
-                        </div>
-                        <button class="take-quiz-btn w-full bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-700 hover:to-amber-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="government">
-                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                    <div class="bg-gradient-to-r from-yellow-700 to-amber-700 px-6 py-3 text-white text-sm">
-                        <div class="flex justify-between">
-                            <span><i class="fas fa-users"></i> 1,820 people took this quiz</span>
-                            <span><i class="fas fa-star"></i> 4.7/5</span>
-                        </div>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill" style="width: 10%;"></div>
                     </div>
                 </div>
             </div>
             
-            <div class="text-center mt-16">
-                <button class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
-                    View All Quizzes <i class="fas fa-th ml-1"></i>
+            <!-- Quiz Content -->
+            <div id="quiz-content" class="fade-in">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+            
+            <!-- Quiz Controls -->
+            <div class="mt-8 flex justify-between">
+                <button id="prev-btn" class="bg-gray-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 opacity-50 cursor-not-allowed">
+                    <i class="fas fa-arrow-left mr-2"></i> Previous
                 </button>
+                <button id="next-btn" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300">
+                    Next <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+            
+            <!-- Quiz Results (Initially Hidden) -->
+            <div id="quiz-results" class="mt-12 fade-in hidden">
+                <div class="quiz-card p-8 text-center">
+                    <div class="text-6xl mb-4">🏆</div>
+                    <h3 class="text-2xl font-bold mb-2">Quiz Complete!</h3>
+                    <p class="text-xl mb-4">You scored: <span id="final-score" class="font-bold text-purple-400">0/10</span></p>
+                    <div class="w-full bg-gray-700 rounded-full h-6 mb-6">
+                        <div id="score-bar" class="bg-gradient-to-r from-purple-600 to-indigo-600 h-6 rounded-full text-xs flex items-center justify-center" style="width: 0%">0%</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-1">Time Taken</h4>
+                            <p id="time-taken" class="text-lg">00:00</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-1">Correct Answers</h4>
+                            <p id="correct-answers" class="text-lg">0/10</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row justify-center gap-4">
+                        <button id="review-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
+                            <i class="fas fa-search mr-2"></i> Review Answers
+                        </button>
+                        <button id="restart-btn" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300">
+                            <i class="fas fa-redo mr-2"></i> Try Again
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1352,6 +1260,333 @@
 
     <!-- JavaScript -->
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quiz data
+            const quizData = [
+                {
+                    question: "What is the legal term for the written agreement between a landlord and tenant?",
+                    options: ["Deed", "Lease", "Mortgage", "Covenant"],
+                    correctAnswer: 1,
+                    explanation: "A lease is a legally binding contract that defines the relationship between landlord and tenant, including rights and responsibilities of both parties."
+                },
+                {
+                    question: "In most jurisdictions, how much notice must a landlord give before entering a tenant's unit for non-emergency reasons?",
+                    options: ["No notice required", "24 hours", "48 hours", "7 days"],
+                    correctAnswer: 1,
+                    explanation: "Most states require landlords to provide at least 24 hours notice before entering a rental unit for non-emergency reasons, though laws vary by location."
+                },
+                {
+                    question: "What is 'security deposit' primarily used for?",
+                    options: ["First month's rent", "Last month's rent", "Potential damages to the property", "Landlord's income"],
+                    correctAnswer: 2,
+                    explanation: "A security deposit is held by the landlord to cover potential damages beyond normal wear and tear that may occur during tenancy."
+                },
+                {
+                    question: "What is 'constructive eviction'?",
+                    options: ["Legal removal of a tenant", "When a tenant is forced to leave due to uninhabitable conditions", "Building a wall to separate tenants", "Extending a lease agreement"],
+                    correctAnswer: 1,
+                    explanation: "Constructive eviction occurs when a landlord fails to provide essential services or maintain habitable conditions, effectively forcing the tenant to move out."
+                },
+                {
+                    question: "Which of the following is NOT generally considered a tenant's responsibility?",
+                    options: ["Keeping the unit clean", "Minor maintenance like changing light bulbs", "Major structural repairs", "Proper disposal of trash"],
+                    correctAnswer: 2,
+                    explanation: "Major structural repairs are typically the landlord's responsibility, while tenants are responsible for cleanliness, minor maintenance, and proper use of the property."
+                },
+                {
+                    question: "Under the Fair Housing Act, landlords cannot discriminate based on which of the following?",
+                    options: ["Income level", "Credit score", "Race", "Criminal history"],
+                    correctAnswer: 2,
+                    explanation: "The Fair Housing Act prohibits discrimination based on race, color, national origin, religion, sex, familial status, and disability. Income, credit score, and criminal history are not explicitly protected."
+                },
+                {
+                    question: "What is a 'warranty of habitability'?",
+                    options: ["A guarantee that all appliances will work", "An implied promise that rental property is suitable for human habitation", "Insurance for tenant's belongings", "A written statement about the property's age"],
+                    correctAnswer: 1,
+                    explanation: "The warranty of habitability is an implied (and sometimes statutory) guarantee that rental properties meet basic living and safety standards."
+                },
+                {
+                    question: "In most jurisdictions, who is responsible for ensuring smoke detectors are installed?",
+                    options: ["Tenant", "Landlord", "Building inspector", "Fire department"],
+                    correctAnswer: 1,
+                    explanation: "Landlords are typically responsible for installing working smoke detectors, while tenants are usually responsible for testing them and replacing batteries."
+                },
+                {
+                    question: "What is 'normal wear and tear' in rental property terms?",
+                    options: ["Any damage to the property", "Deterioration that occurs naturally with age and regular use", "Modifications made by the tenant", "Damage caused by pets"],
+                    correctAnswer: 1,
+                    explanation: "Normal wear and tear refers to the expected deterioration that happens over time with normal use, such as minor scuffs on walls or slight carpet wear."
+                },
+                {
+                    question: "What is a 'month-to-month' tenancy?",
+                    options: ["Paying rent in monthly installments", "A lease that automatically renews each month until terminated by either party", "A 30-day trial period", "A lease that expires after one month"],
+                    correctAnswer: 1,
+                    explanation: "A month-to-month tenancy is a rental agreement that continues each month until either the landlord or tenant gives proper notice to terminate, providing flexibility for both parties."
+                }
+            ];
+            
+            // Variables
+            let currentQuestion = 0;
+            let score = 0;
+            let selectedAnswers = Array(quizData.length).fill(-1);
+            let quizStartTime;
+            let timerInterval;
+            let seconds = 0;
+            
+            const quizContentEl = document.getElementById('quiz-content');
+            const progressFillEl = document.getElementById('progress-fill');
+            const currentQuestionEl = document.getElementById('current-question');
+            const totalQuestionsEl = document.getElementById('total-questions');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const timerEl = document.getElementById('timer');
+            const quizResultsEl = document.getElementById('quiz-results');
+            const finalScoreEl = document.getElementById('final-score');
+            const scoreBarEl = document.getElementById('score-bar');
+            const timeTakenEl = document.getElementById('time-taken');
+            const correctAnswersEl = document.getElementById('correct-answers');
+            const reviewBtn = document.getElementById('review-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            
+            // Initialize the quiz
+            function initQuiz() {
+                totalQuestionsEl.textContent = quizData.length;
+                renderQuestion();
+                startTimer();
+                
+                // Set up button listeners
+                prevBtn.addEventListener('click', goToPreviousQuestion);
+                nextBtn.addEventListener('click', goToNextQuestion);
+                reviewBtn.addEventListener('click', reviewAnswers);
+                restartBtn.addEventListener('click', restartQuiz);
+            }
+            
+            // Render the current question
+            function renderQuestion() {
+                const questionData = quizData[currentQuestion];
+                currentQuestionEl.textContent = currentQuestion + 1;
+                progressFillEl.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+                
+                // Update button states
+                prevBtn.classList.toggle('opacity-50', currentQuestion === 0);
+                prevBtn.classList.toggle('cursor-not-allowed', currentQuestion === 0);
+                prevBtn.disabled = currentQuestion === 0;
+                
+                if (currentQuestion === quizData.length - 1) {
+                    nextBtn.innerHTML = 'Finish <i class="fas fa-check ml-2"></i>';
+                } else {
+                    nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right ml-2"></i>';
+                }
+                
+                // Create question HTML
+                let html = `
+                    <div class="quiz-card p-8 fade-in">
+                        <h3 class="text-xl font-semibold mb-6">
+                            <span class="bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full mr-3">Question ${currentQuestion + 1}</span>
+                            ${questionData.question}
+                        </h3>
+                        <div class="space-y-4">
+                `;
+                
+                // Create options
+                questionData.options.forEach((option, index) => {
+                    const isSelected = selectedAnswers[currentQuestion] === index;
+                    const optionClass = isSelected ? 'selected' : '';
+                    
+                    html += `
+                        <div class="option-card ${optionClass} p-4 rounded-lg bg-gray-800 cursor-pointer" data-index="${index}">
+                            <div class="flex items-start">
+                                <div class="option-marker w-6 h-6 rounded-full flex items-center justify-center mr-3 ${isSelected ? 'bg-purple-600' : 'bg-gray-700'}">
+                                    ${isSelected ? '<i class="fas fa-check text-xs"></i>' : (index + 1)}
+                                </div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+                
+                quizContentEl.innerHTML = html;
+                
+                // Add click event listeners to options
+                const optionCards = document.querySelectorAll('.option-card');
+                optionCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        selectOption(parseInt(this.dataset.index));
+                    });
+                });
+            }
+            
+            // Select an option
+            function selectOption(index) {
+                selectedAnswers[currentQuestion] = index;
+                renderQuestion();
+            }
+            
+            // Go to the previous question
+            function goToPreviousQuestion() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    renderQuestion();
+                }
+            }
+            
+            // Go to the next question or finish the quiz
+            function goToNextQuestion() {
+                if (currentQuestion < quizData.length - 1) {
+                    currentQuestion++;
+                    renderQuestion();
+                } else {
+                    finishQuiz();
+                }
+            }
+            
+            // Start the timer
+            function startTimer() {
+                quizStartTime = new Date();
+                timerInterval = setInterval(updateTimer, 1000);
+            }
+            
+            // Update the timer display
+            function updateTimer() {
+                seconds++;
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                timerEl.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }
+            
+            // Format time string from seconds
+            function formatTime(totalSeconds) {
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+                return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            // Finish the quiz and show results
+            function finishQuiz() {
+                clearInterval(timerInterval);
+                
+                // Calculate score
+                score = 0;
+                selectedAnswers.forEach((selected, index) => {
+                    if (selected === quizData[index].correctAnswer) {
+                        score++;
+                    }
+                });
+                
+                // Update results
+                finalScoreEl.textContent = `${score}/${quizData.length}`;
+                scoreBarEl.style.width = `${(score / quizData.length) * 100}%`;
+                scoreBarEl.textContent = `${Math.round((score / quizData.length) * 100)}%`;
+                timeTakenEl.textContent = formatTime(seconds);
+                correctAnswersEl.textContent = `${score}/${quizData.length}`;
+                
+                // Hide quiz, show results
+                document.getElementById('quiz-content').classList.add('hidden');
+                document.getElementById('prev-btn').classList.add('hidden');
+                document.getElementById('next-btn').classList.add('hidden');
+                quizResultsEl.classList.remove('hidden');
+            }
+            
+            // Review answers
+            function reviewAnswers() {
+                let reviewHTML = `
+                    <div class="quiz-card p-8 fade-in">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Review Your Answers</h3>
+                        <div class="space-y-8">
+                `;
+                
+                quizData.forEach((question, qIndex) => {
+                    const userAnswer = selectedAnswers[qIndex];
+                    const isCorrect = userAnswer === question.correctAnswer;
+                    
+                    reviewHTML += `
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <h4 class="font-semibold mb-4">
+                                <span class="bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full mr-3">Question ${qIndex + 1}</span>
+                                ${question.question}
+                            </h4>
+                            <div class="space-y-3 mb-4">
+                    `;
+                    
+                    question.options.forEach((option, oIndex) => {
+                        let optionClass = "bg-gray-700";
+                        let iconHTML = "";
+                        
+                        if (oIndex === question.correctAnswer) {
+                            optionClass = "correct";
+                            iconHTML = '<i class="fas fa-check text-green-400 ml-2"></i>';
+                        } else if (userAnswer === oIndex) {
+                            optionClass = "incorrect";
+                            iconHTML = '<i class="fas fa-times text-red-400 ml-2"></i>';
+                        }
+                        
+                        reviewHTML += `
+                            <div class="option-card ${optionClass} p-3 rounded-lg">
+                                <div class="flex items-start">
+                                    <div class="option-marker w-6 h-6 rounded-full flex items-center justify-center mr-3 bg-gray-600">
+                                        ${oIndex + 1}
+                                    </div>
+                                    <div class="option-text flex-1">${option} ${iconHTML}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    reviewHTML += `
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded-lg mt-4">
+                                <p class="text-sm text-gray-300"><span class="font-semibold text-white">Explanation:</span> ${question.explanation}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                reviewHTML += `
+                        </div>
+                        <div class="mt-8 text-center">
+                            <button id="back-to-results" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300">
+                                <i class="fas fa-arrow-left mr-2"></i> Back to Results
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                quizContentEl.innerHTML = reviewHTML;
+                quizContentEl.classList.remove('hidden');
+                quizResultsEl.classList.add('hidden');
+                
+                document.getElementById('back-to-results').addEventListener('click', function() {
+                    quizContentEl.classList.add('hidden');
+                    quizResultsEl.classList.remove('hidden');
+                });
+            }
+            
+            // Restart the quiz
+            function restartQuiz() {
+                currentQuestion = 0;
+                score = 0;
+                seconds = 0;
+                selectedAnswers = Array(quizData.length).fill(-1);
+                
+                // Reset UI
+                quizResultsEl.classList.add('hidden');
+                document.getElementById('prev-btn').classList.remove('hidden');
+                document.getElementById('next-btn').classList.remove('hidden');
+                quizContentEl.classList.remove('hidden');
+                
+                // Start again
+                renderQuestion();
+                startTimer();
+            }
+            
+            // Initialize the quiz
+            initQuiz();
+        });
         // Initialize GSAP ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
         
