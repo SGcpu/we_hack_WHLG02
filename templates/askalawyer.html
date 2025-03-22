@@ -571,7 +571,7 @@
         }
 
         .form-card {
-            background-color: var(--card-bg);
+            background-color: #171733;
             border: 1px solid var(--border-color);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
@@ -877,14 +877,13 @@
                             </select>
                         </div>
                         
-                        <div class="bg-slate-400">
-                            <label for="title" class="block text-gray-600 bg-slate-400 font-medium mb-2">Question Title</label>
-                            <input type="text" id="title" placeholder="E.g., Can my landlord increase rent without notice?" 
-                                   class="custom-input w-full px-4 py-3 rounded-lg border focus:outline-none">
+                        <div class="bg-slate-300">
+                            <label for="title" class="block text-gray-300 bg-slate-400 font-medium mb-2">Question Title</label>
+                            <input type="text" id="title" placeholder="E.g., Can my landlord increase rent without notice?" class="custom-input w-full px-4 py-3 text-gray-800 rounded-lg border focus:outline-none">
                         </div>
                         
                         <div>
-                            <label for="details" class="block text-gray-600 font-medium mb-2">Question Details</label>
+                            <label for="details" class="block text-gray-300 font-medium mb-2">Question Details</label>
                             <textarea id="details" rows="5" placeholder="Provide context and specific details about your situation..." 
                                       class="custom-textarea w-full bg-slate-400 px-4 py-3 rounded-lg border focus:outline-none"></textarea>
                         </div>
@@ -929,150 +928,147 @@
         </div>
     </section>
 
-    <!-- Featured Legal Questions -->
-    <section id="featuredQuestions" class="py-16 px-6 bg-gray-900">
+     <!-- Featured Legal Questions -->
+    <section class="py-16 px-6 bg-gray-900">
         <div class="container mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-                <h2 class="text-3xl font-bold text-white mb-6 md:mb-0">Featured Legal Questions</h2>
-                
-                
-            
-            <div class="space-y-8 max-w-5xl mx-auto">
-                <!-- Question 1 -->
-                <div class="question-card rounded-xl overflow-hidden">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Employment Law</span>
-                                <h3 class="text-xl font-semibold text-white mb-3">Can I get fired without a warning?</h3>
-                            </div>
-                            <div class="flex space-x-4 text-sm text-gray-400">
-                                <span><i class="fas fa-eye mr-1"></i> 156</span>
-                                <span><i class="fas fa-comment mr-1"></i> 8</span>
-                                <span><i class="fas fa-star mr-1"></i> 12</span>
-                            </div>
-                        </div>
-                        
-                        <p class="text-gray-300 mb-4">I've been at my current job for 8 months. Yesterday, my manager called me into his office and informed me I was being terminated due to "performance issues." However, I've never received any formal warnings or negative performance reviews. Is this legal? What are my options?</p>
-                        
-                        <div class="p-4 rounded-lg bg-gray-800 mb-4">
-                            <div class="flex items-center mb-3">
-                                <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
+            <div class="flex  justify-between items-center mb-12">
+                <div class="mx-auto">
+                    <h1 class="text-5xl p-10 text-center font-bold">Featured Legal Questions</h1>
+                    <!-- Question 1 -->
+                    <div class="question-card space-y-8 rounded-xl overflow-hidden">
+                        <div class="py-10">
+                            <div class="flex justify-between items-start ml-8">
                                 <div>
-                                    <h4 class="font-medium text-white">Sarah Johnson, Esq.</h4>
-                                    <p class="text-xs text-gray-400">Employment Law Specialist • 2 days ago</p>
+                                    <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Employment Law</span>
+                                    <h3 class="text-xl font-semibold text-white mb-3">Can I get fired without a warning?</h3>
+                                </div>
+                                <div class="flex space-x-4 text-sm text-gray-400">
+                                    <span><i class="fas fa-eye mr-1"></i> 156</span>
+                                    <span><i class="fas fa-comment mr-1"></i> 8</span>
+                                    <span><i class="fas fa-star mr-1"></i> 12</span>
                                 </div>
                             </div>
-                            <p class="text-gray-300">In most states, employment is considered "at-will," meaning employers can terminate employees for any reason (except illegal discrimination) without notice. However, if you have an employment contract or if company policy requires progressive discipline, you may have a case. I recommend checking your employee handbook and gathering documentation of your work performance. You could also file for unemployment benefits while you seek new employment.</p>
-                        </div>
-                        
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 8 answers <i class="fas fa-arrow-right ml-1"></i></a>
                             
-                            <div class="flex space-x-2">
-                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
-                                    <i class="fas fa-thumbs-up mr-1"></i> Helpful (24)
-                                </button>
-                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
+                            <p class="text-gray-300 mb-4 ml-8">I've been at my current job for 8 months. Yesterday, my manager called me into his office and informed me I was being terminated due to "performance issues." However, I've never received any formal warnings or negative performance reviews. Is this legal? What are my options?</p>
+                            
+                            <div class="p-4 rounded-lg bg-gray-800 py-8">
+                                <div class="flex items-center mb-3">
+                                    <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-medium text-white">Sarah Johnson, Esq.</h4>
+                                        <p class="text-xs text-gray-400">Employment Law Specialist • 2 days ago</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300">In most states, employment is considered "at-will," meaning employers can terminate employees for any reason (except illegal discrimination) without notice. However, if you have an employment contract or if company policy requires progressive discipline, you may have a case. I recommend checking your employee handbook and gathering documentation of your work performance. You could also file for unemployment benefits while you seek new employment.</p>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors ml-8">Read all 8 answers <i class="fas fa-arrow-right ml-1"></i></a>
+                                
+                                <div class="flex space-x-2">
+                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
+                                        <i class="fas fa-thumbs-up mr-1"></i> Helpful (24)
+                                    </button>
+                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Question 2 -->
-                <div class="question-card rounded-xl overflow-hidden">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Housing Law</span>
-                                <h3 class="text-xl font-semibold text-white mb-3">Landlord entered without notice</h3>
-                            </div>
-                            <div class="flex space-x-4 text-sm text-gray-400">
-                                <span><i class="fas fa-eye mr-1"></i> 243</span>
-                                <span><i class="fas fa-comment mr-1"></i> 12</span>
-                                <span><i class="fas fa-star mr-1"></i> 18</span>
-                            </div>
-                        </div>
-                        
-                        <p class="text-gray-300 mb-4">I came home from work yesterday to find that my landlord had been in my apartment to "check the plumbing." He didn't give any advance notice. I feel like my privacy was violated. Is this legal? What rights do I have as a tenant?</p>
-                        
-                        <div class="p-4 rounded-lg bg-gray-800 mb-4">
-                            <div class="flex items-center mb-3">
-                                <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
+                    
+                    <!-- Question 2 -->
+                    <div class="question-card rounded-xl overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start">
                                 <div>
-                                    <h4 class="font-medium text-white">Michael Chen, Esq.</h4>
-                                    <p class="text-xs text-gray-400">Real Estate Attorney • 1 day ago</p>
+                                    <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Housing Law</span>
+                                    <h3 class="text-xl font-semibold text-white mb-3">Landlord entered without notice</h3>
+                                </div>
+                                <div class="flex space-x-4 text-sm text-gray-400">
+                                    <span><i class="fas fa-eye mr-1"></i> 243</span>
+                                    <span><i class="fas fa-comment mr-1"></i> 12</span>
+                                    <span><i class="fas fa-star mr-1"></i> 18</span>
                                 </div>
                             </div>
-                            <p class="text-gray-300">Most states require landlords to provide at least 24-48 hours notice before entering a tenant's unit, except in genuine emergencies (like an active water leak). If there was no emergency, your landlord likely violated your right to quiet enjoyment. I recommend: 1) Document the incident in writing, 2) Send a formal letter reminding your landlord of notice requirements, 3) Check your lease and local tenant laws for specific protections. If this is a recurring issue, you may have grounds for legal action.</p>
-                        </div>
-                        
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 12 answers <i class="fas fa-arrow-right ml-1"></i></a>
                             
-                            <div class="flex space-x-2">
-                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
-                                    <i class="fas fa-thumbs-up mr-1"></i> Helpful (31)
-                                </button>
-                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
+                            <p class="text-gray-300 mb-4">I came home from work yesterday to find that my landlord had been in my apartment to "check the plumbing." He didn't give any advance notice. I feel like my privacy was violated. Is this legal? What rights do I have as a tenant?</p>
+                            
+                            <div class="p-4 rounded-lg bg-gray-800 mb-4">
+                                <div class="flex items-center mb-3">
+                                    <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-medium text-white">Michael Chen, Esq.</h4>
+                                        <p class="text-xs text-gray-400">Real Estate Attorney • 1 day ago</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300">Most states require landlords to provide at least 24-48 hours notice before entering a tenant's unit, except in genuine emergencies (like an active water leak). If there was no emergency, your landlord likely violated your right to quiet enjoyment. I recommend: 1) Document the incident in writing, 2) Send a formal letter reminding your landlord of notice requirements, 3) Check your lease and local tenant laws for specific protections. If this is a recurring issue, you may have grounds for legal action.</p>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 12 answers <i class="fas fa-arrow-right ml-1"></i></a>
+                                
+                                <div class="flex space-x-2">
+                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
+                                        <i class="fas fa-thumbs-up mr-1"></i> Helpful (31)
+                                    </button>
+                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Question 3 -->
-                <div class="question-card rounded-xl overflow-hidden">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Family Law</span>
-                                <h3 class="text-xl font-semibold text-white mb-3">Child custody after relocation</h3>
-                            </div>
-                            <div class="flex space-x-4 text-sm text-gray-400">
-                                <span><i class="fas fa-eye mr-1"></i> 187</span>
-                                <span><i class="fas fa-comment mr-1"></i> 6</span>
-                                <span><i class="fas fa-star mr-1"></i> 9</span>
-                            </div>
-                        </div>
-                        
-                        <p class="text-gray-300 mb-4">I have primary custody of my children and need to relocate for a job opportunity that's about 200 miles away. My ex-spouse is threatening to take me to court to prevent this move. What do I need to know about relocating with children after divorce?</p>
-                        
-                        <div class="p-4 rounded-lg bg-gray-800 mb-4">
-                            <div class="flex items-center mb-3">
-                                <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
+                    
+                    <!-- Question 3 -->
+                    <div class="question-card rounded-xl overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start">
                                 <div>
-                                    <h4 class="font-medium text-white">Rebecca Martinez, Esq.</h4>
-                                    <p class="text-xs text-gray-400">Family Law Attorney • 3 days ago</p>
+                                    <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Family Law</span>
+                                    <h3 class="text-xl font-semibold text-white mb-3">Child custody after relocation</h3>
+                                </div>
+                                <div class="flex space-x-4 text-sm text-gray-400">
+                                    <span><i class="fas fa-eye mr-1"></i> 187</span>
+                                    <span><i class="fas fa-comment mr-1"></i> 6</span>
+                                    <span><i class="fas fa-star mr-1"></i> 9</span>
                                 </div>
                             </div>
-                            <p class="text-gray-300">Relocation cases can be complex. Courts typically consider whether the move is in the child's best interest. You'll need to demonstrate: 1) Legitimate reason for the move (better job, education, family support), 2) How you'll maintain the relationship between the children and the other parent, 3) How the move benefits the children. I recommend filing a petition for relocation before moving and proposing a modified visitation schedule. Each state has different notification requirements, so check your local laws. Consider mediation before court proceedings to reach an agreement.</p>
-                        </div>
-                        
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 6 answers <i class="fas fa-arrow-right ml-1"></i></a>
                             
-                            <div class="flex space-x-2">
-                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
-                                    <i class="fas fa-thumbs-up mr-1"></i> Helpful (17)
-                                </button>
-                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
+                            <p class="text-gray-300 mb-4">I have primary custody of my children and need to relocate for a job opportunity that's about 200 miles away. My ex-spouse is threatening to take me to court to prevent this move. What do I need to know about relocating with children after divorce?</p>
+                            
+                            <div class="p-4 rounded-lg bg-gray-800 mb-4">
+                                <div class="flex items-center mb-3">
+                                    <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-medium text-white">Rebecca Martinez, Esq.</h4>
+                                        <p class="text-xs text-gray-400">Family Law Attorney • 3 days ago</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300">Relocation cases can be complex. Courts typically consider whether the move is in the child's best interest. You'll need to demonstrate: 1) Legitimate reason for the move (better job, education, family support), 2) How you'll maintain the relationship between the children and the other parent, 3) How the move benefits the children. I recommend filing a petition for relocation before moving and proposing a modified visitation schedule. Each state has different notification requirements, so check your local laws. Consider mediation before court proceedings to reach an agreement.</p>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 6 answers <i class="fas fa-arrow-right ml-1"></i></a>
+                                
+                                <div class="flex space-x-2">
+                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
+                                        <i class="fas fa-thumbs-up mr-1"></i> Helpful (17)
+                                    </button>
+                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="text-center pt-6">
+                        <a href="#" class="outline-button inline-block py-3 px-8 rounded-lg">
+                            View More Questions <i class="fas fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
                 </div>
-                
-                <div class="text-center pt-6">
-                    <a href="#" class="outline-button inline-block py-3 px-8 rounded-lg">
-                        View More Questions <i class="fas fa-angle-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 

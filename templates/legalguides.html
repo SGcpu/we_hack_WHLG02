@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="search.css">
-   
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap');
-        
+
         :root {
             --primary: #6366f1;
             --primary-dark: #4f46e5;
@@ -26,7 +27,7 @@
             --text-muted: #94a3b8;
             --accent: #f59e0b;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--dark-bg);
@@ -36,25 +37,25 @@
             margin-left: 1rem;
             margin-right: 1rem;
         }
-        
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: #1e293b;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: #4f46e5;
             border-radius: 10px;
         }
-        
+
         ::-webkit-scrollbar-thumb:hover {
             background: #818cf8;
         }
-        
+
         /* Glassmorphism */
         .glass {
             background: rgba(30, 41, 59, 0.7);
@@ -62,7 +63,7 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
         .navbar {
             position: fixed;
             top: 0;
@@ -74,22 +75,22 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
-        
+
         .navbar.scrolled {
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
         }
-        
+
         .hero-text-animation {
             overflow: hidden;
             white-space: nowrap;
         }
-        
+
         .hero-container {
             position: relative;
             overflow: hidden;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         }
-        
+
         .hero-glow {
             position: absolute;
             top: -150px;
@@ -100,31 +101,31 @@
             border-radius: 50%;
             z-index: 0;
         }
-        
-       
-        
+
+
+
         .feature-card {
             background: var(--card-bg);
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
             background: var(--card-hover);
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
         }
-        
+
         .topic-icon {
             transition: all 0.3s ease;
             color: var(--primary);
         }
-        
+
         .topic-link:hover .topic-icon {
             transform: scale(1.2);
             color: var(--primary-light);
         }
-        
+
         .news-ticker {
             overflow: hidden;
             position: relative;
@@ -132,13 +133,13 @@
             background: rgba(79, 70, 229, 0.2);
             border-radius: 10px;
         }
-        
+
         .ticker-content {
             position: absolute;
             white-space: nowrap;
             will-change: transform;
         }
-        
+
         /* Neon effect for primary buttons */
         .btn-neon {
             position: relative;
@@ -147,11 +148,11 @@
             z-index: 1;
             box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
         }
-        
+
         .btn-neon:hover {
             box-shadow: 0 0 30px rgba(99, 102, 241, 0.8);
         }
-        
+
         .btn-neon:before {
             content: '';
             position: absolute;
@@ -163,21 +164,21 @@
             transition: all 0.5s;
             z-index: -1;
         }
-        
+
         .btn-neon:hover:before {
             left: 100%;
         }
-        
+
         /* Card hover effects */
         .hover-lift {
             transition: all 0.3s ease;
         }
-        
+
         .hover-lift:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
         }
-        
+
         /* Gradient text */
         .gradient-text {
             background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
@@ -185,7 +186,7 @@
             background-clip: text;
             color: transparent;
         }
-        
+
         /* Particle background for sections */
         .particles {
             position: absolute;
@@ -195,28 +196,42 @@
             height: 100%;
             z-index: 0;
         }
-        
+
         .particle {
             position: absolute;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             animation: float 15s infinite;
         }
-        
+
         @keyframes float {
-            0% { transform: translateY(0) translateX(0); }
-            25% { transform: translateY(-20px) translateX(10px); }
-            50% { transform: translateY(0) translateX(20px); }
-            75% { transform: translateY(20px) translateX(10px); }
-            100% { transform: translateY(0) translateX(0); }
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+
+            50% {
+                transform: translateY(0) translateX(20px);
+            }
+
+            75% {
+                transform: translateY(20px) translateX(10px);
+            }
+
+            100% {
+                transform: translateY(0) translateX(0);
+            }
         }
-        
+
         /* Animated borders */
         .animated-border {
             position: relative;
             overflow: hidden;
         }
-        
+
         .animated-border:after {
             content: '';
             position: absolute;
@@ -227,11 +242,11 @@
             background: var(--primary);
             transition: width 0.3s ease;
         }
-        
+
         .animated-border:hover:after {
             width: 100%;
         }
-        
+
         /* Custom switch */
         .switch {
             position: relative;
@@ -239,13 +254,13 @@
             width: 60px;
             height: 30px;
         }
-        
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -257,7 +272,7 @@
             transition: .4s;
             border-radius: 34px;
         }
-        
+
         .slider:before {
             position: absolute;
             content: "";
@@ -269,16 +284,16 @@
             transition: .4s;
             border-radius: 50%;
         }
-        
-        input:checked + .slider {
+
+        input:checked+.slider {
             background-color: var(--primary);
         }
-        
-        input:checked + .slider:before {
+
+        input:checked+.slider:before {
             transform: translateX(30px);
         }
-        
-        
+
+
         h2 {
             font-size: 2.5rem;
             font-weight: 700;
@@ -289,43 +304,43 @@
             color: transparent;
             text-align: center;
         }
-        
+
         p {
             margin-bottom: 1.5rem;
         }
-        
+
         a {
             color: var(--primary-light);
             text-decoration: none;
             transition: all 0.3s ease;
         }
-        
+
         a:hover {
             color: var(--primary);
         }
-        
+
         .section-intro {
             text-align: center;
             max-width: 800px;
             margin: 0 auto 3rem;
             color: var(--text-secondary);
         }
-        
+
         .grid {
             display: grid;
             gap: 1.5rem;
         }
-        
+
         @media (min-width: 768px) {
             .grid-cols-2 {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .grid-cols-3 {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
-        
+
         .card {
             background: var(--card-bg);
             border-radius: 1rem;
@@ -336,24 +351,24 @@
             height: 100%;
             position: relative;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             border-color: var(--primary-dark);
         }
-        
+
         .card-content {
             padding: 1.5rem;
         }
-        
+
         .card-title {
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
             color: var(--primary-light);
         }
-        
+
         .badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -363,12 +378,12 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        
+
         .badge-primary {
             background-color: rgba(99, 102, 241, 0.2);
             color: var(--primary-light);
         }
-        
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -381,39 +396,39 @@
             border: none;
             outline: none;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
-        
+
         .btn-primary:hover {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
             transform: translateY(-2px);
             color: white;
         }
-        
+
         .btn-outline {
             background: transparent;
             color: var(--primary-light);
             border: 2px solid var(--primary-light);
         }
-        
+
         .btn-outline:hover {
             background-color: rgba(99, 102, 241, 0.1);
             color: var(--primary);
             border-color: var(--primary);
         }
-        
+
         .icon-box {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 1rem;
         }
-        
+
         .icon-circle {
             width: 3rem;
             height: 3rem;
@@ -425,14 +440,87 @@
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(79, 70, 229, 0.2));
             color: var(--primary-light);
         }
-        
+
         /* Glossary Term Styling */
+        /* Glossary Container */
+        /* Glossary Container Layout */
+        .glossary-container {
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* Letter Navigation Sidebar */
+        .glossary-nav {
+            min-width: 50px;
+            border-right: 1px solid var(--text-muted);
+            padding-right: 1rem;
+        }
+
+        #letter-nav {
+            position: sticky;
+            top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+
+        #letter-nav li {
+            text-align: center;
+        }
+
+        #letter-nav button {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        #letter-nav button:hover {
+            background-color: var(--primary-light);
+        }
+
+        #letter-nav button.active {
+            background-color: var(--primary);
+        }
+
+        #letter-nav button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: var(--card-bg);
+        }
+
+        /* Glossary Term Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
         .glossary-term {
             position: relative;
             z-index: 1;
             overflow: hidden;
+            padding: 1.5rem;
         }
-        
+
+        .glossary-term:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: var(--card-hover);
+        }
+
         .glossary-term::before {
             content: '';
             position: absolute;
@@ -443,7 +531,25 @@
             background: linear-gradient(to bottom, var(--primary), var(--primary-light));
             z-index: 2;
         }
-        
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Text Styles */
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        /* Toggle Button */
         .glossary-toggle {
             display: flex;
             align-items: center;
@@ -452,34 +558,84 @@
             cursor: pointer;
             color: var(--primary-light);
             font-weight: 600;
+            margin-top: 1rem;
+            padding: 0;
         }
-        
+
         .glossary-toggle i {
             margin-left: 0.5rem;
             transition: transform 0.3s ease;
         }
-        
+
         .glossary-toggle.active i {
             transform: rotate(180deg);
         }
-        
+
+        /* Details Section */
         .glossary-details {
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid rgba(203, 213, 225, 0.2);
             padding-top: 1rem;
             margin-top: 1rem;
+            display: none;
         }
-        
+
+        .glossary-details.visible {
+            display: block;
+        }
+
+        /* "View full glossary" link */
+        .show-more {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-light);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .show-more:hover {
+            color: var(--primary);
+        }
+
+        .show-more i {
+            margin-left: 0.5rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .glossary-container {
+                flex-direction: column;
+            }
+
+            .glossary-nav {
+                min-width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--text-muted);
+                padding-right: 0;
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            #letter-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                position: static;
+            }
+        }
+
         /* Resources Styling */
         .resource-card {
             display: flex;
             flex-direction: column;
         }
-        
+
         .resource-badge {
             align-self: flex-start;
             margin-bottom: 0.5rem;
         }
-        
+
         .resource-emoji {
             font-size: 2rem;
             margin-bottom: 1rem;
@@ -488,7 +644,7 @@
             background-clip: text;
             color: transparent;
         }
-        
+
         .resource-meta {
             display: flex;
             justify-content: space-between;
@@ -496,25 +652,25 @@
             margin-top: auto;
             padding-top: 1rem;
         }
-        
+
         /* Video Card Styling */
         .video-card-image {
             position: relative;
             height: 200px;
             overflow: hidden;
         }
-        
+
         .video-card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        
+
         .video-card:hover .video-card-image img {
             transform: scale(1.05);
         }
-        
+
         .play-btn {
             position: absolute;
             top: 50%;
@@ -532,19 +688,19 @@
             transition: all 0.3s ease;
             z-index: 2;
         }
-        
+
         .video-card:hover .play-btn {
             transform: translate(-50%, -50%) scale(1.1);
             box-shadow: 0 0 0 15px rgba(99, 102, 241, 0.3);
         }
-        
+
         /* Ask a Lawyer Section */
         .gradient-section {
             background: linear-gradient(135deg, #1e293b, #0f172a);
             position: relative;
             overflow: hidden;
         }
-        
+
         .gradient-section::before {
             content: '';
             position: absolute;
@@ -554,20 +710,20 @@
             height: 6px;
             background: linear-gradient(to right, var(--primary), var(--accent), var(--primary-light));
         }
-        
+
         .chatbot-card {
             background-color: #334155;
             border-radius: 1rem;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-        
+
         .chat-bubble {
             display: flex;
             align-items: flex-start;
             margin-bottom: 1rem;
         }
-        
+
         .chat-avatar {
             width: 2.5rem;
             height: 2.5rem;
@@ -579,12 +735,12 @@
             background: rgba(99, 102, 241, 0.2);
             color: var(--primary-light);
         }
-        
+
         .chat-input {
             display: flex;
             margin-top: 1rem;
         }
-        
+
         .chat-input input {
             flex-grow: 1;
             padding: 0.75rem 1rem;
@@ -594,7 +750,7 @@
             color: var(--text-primary);
             outline: none;
         }
-        
+
         .chat-input button {
             padding: 0.75rem 1rem;
             border: none;
@@ -603,7 +759,7 @@
             color: white;
             cursor: pointer;
         }
-        
+
         /* Chatbot Bubble */
         .chatbot-bubble {
             position: fixed;
@@ -622,12 +778,12 @@
             z-index: 999;
             transition: all 0.3s ease;
         }
-        
+
         .chatbot-bubble:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
-        
+
         /* Newsletter Section */
         .newsletter-card {
             display: flex;
@@ -637,18 +793,18 @@
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
-        
+
         @media (min-width: 768px) {
             .newsletter-card {
                 flex-direction: row;
             }
         }
-        
+
         .newsletter-content {
             padding: 2rem;
             flex: 3;
         }
-        
+
         .newsletter-accent {
             flex: 2;
             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
@@ -657,24 +813,24 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .newsletter-accent-content {
             text-align: center;
             color: white;
         }
-        
+
         .newsletter-form {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
-        
+
         @media (min-width: 640px) {
             .newsletter-form {
                 flex-direction: row;
             }
         }
-        
+
         .newsletter-input {
             flex-grow: 1;
             padding: 0.75rem 1rem;
@@ -684,12 +840,12 @@
             color: var(--text-primary);
             outline: none;
         }
-        
+
         /* Community Section */
         .feature-card {
             height: 100%;
         }
-        
+
         /* FAQ Section */
         .faq-item {
             border: 1px solid var(--border-color);
@@ -698,11 +854,11 @@
             transition: all 0.3s ease;
             margin-bottom: 1rem;
         }
-        
+
         .faq-item:hover {
             border-color: var(--primary-dark);
         }
-        
+
         .faq-toggle {
             width: 100%;
             padding: 1.25rem;
@@ -715,20 +871,20 @@
             align-items: center;
             color: var(--text-primary);
         }
-        
+
         .faq-toggle i {
             transition: transform 0.3s ease;
         }
-        
+
         .faq-toggle.active i {
             transform: rotate(45deg);
         }
-        
+
         .faq-content {
             padding: 0 1.25rem 1.25rem;
             color: var(--text-secondary);
         }
-        
+
         /* Animations and Effects */
         .glow {
             position: absolute;
@@ -738,35 +894,51 @@
             border-radius: 100%;
             pointer-events: none;
         }
-        
+
         .glow-1 {
             top: 10%;
             left: -10%;
         }
-        
+
         .glow-2 {
             bottom: 20%;
             right: -5%;
         }
-        
+
         /* Button animations */
         .btn-bounce {
             animation: bounce 3s infinite;
         }
-        
+
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
-        
+
         .center-vertical {
-        display: flex;
-        justify-content: center; /* Centers horizontally */
-        align-items: center; /* Centers vertically */
-        height: 45px; /* Adjust as needed */
+            display: flex;
+            justify-content: center;
+            /* Centers horizontally */
+            align-items: center;
+            /* Centers vertically */
+            height: 45px;
+            /* Adjust as needed */
         }
-        
+
         /* Show more buttons */
         .show-more {
             display: inline-block;
@@ -777,100 +949,109 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
-        
+
         .show-more:hover {
             background-color: rgba(99, 102, 241, 0.2);
             transform: translateY(-2px);
         }
-        
+
         .show-more i {
             margin-left: 0.5rem;
             transition: transform 0.3s ease;
         }
-        
+
         .show-more:hover i {
             transform: translateX(3px);
         }
+
         /* Mobile menu animation */
         .mobile-menu {
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-        
+
         .mobile-menu.hidden {
             transform: translateY(-20px);
             opacity: 0;
         }
     </style>
 </head>
+
 <body>
     <button id="mobile-menu-button" class="md:hidden text-gray-400 hover:text-indigo-300 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+    </div>
+    </div>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="mobile-menu hidden md:hidden mt-4 pb-4">
+        <div class="flex flex-col space-y-4 px-4">
+            <a href="#" class="font-extrabold text-indigo-300 py-2 animated-border active-link">Home</a>
+            <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">Legal Guides</a>
+            <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">Quizzes &
+                Tests</a>
+            <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">Ask a Lawyer</a>
+            <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">Emergency
+                Contacts</a>
+            <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">About Us</a>
+
+            <!-- Search Bar (Mobile) -->
+            <div class="relative mt-2">
+                <input type="text" placeholder="Search legal topics..."
+                    class="w-full px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-sm">
+                <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
+                    <i class="fas fa-search"></i>
                 </button>
             </div>
         </div>
-        
-        <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="mobile-menu hidden md:hidden mt-4 pb-4">
-            <div class="flex flex-col space-y-4 px-4">
-                <a href="#" class="font-extrabold text-indigo-300 py-2 animated-border active-link">Home</a>
-                <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">Legal Guides</a>
-                <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">Quizzes & Tests</a>
-                <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">Ask a Lawyer</a>
-                <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">Emergency Contacts</a>
-                <a href="#" class="font-extrabold text-gray-400 hover:text-indigo-300 py-2 animated-border">About Us</a>
-                
-                <!-- Search Bar (Mobile) -->
-                <div class="relative mt-2">
-                    <input type="text" placeholder="Search legal topics..." 
-                           class="w-full px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-sm">
-                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+    </div>
     </nav>
-    
+
     <!-- Navigation Bar -->
     <nav class="navbar px-4 sm:px-6 py-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
                 <h1 class="text-xl sm:text-2xl font-bold gradient-text">Legal Pathshala</h1>
             </div>
-            
+
             <div class="hidden md:flex space-x-3 lg:space-x-6">
                 <a href="index.html" class="font-extrabold text-gray-400  animated-border">Home</a>
-                <a href="legalguides.html" class="font-extrabold text-indigo-300 hover:text-indigo-300 animated-border">Legal Guides</a>
-                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
-                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
-                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
-                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+                <a href="legalguides.html"
+                    class="font-extrabold text-indigo-300 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes &
+                    Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask
+                    a Lawyer</a>
+                <a href="emergencycontacts.html"
+                    class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About
+                    Us</a>
             </div>
-            
+
             <div class="flex items-center space-x-4">
                 <div class="relative hidden md:block">
-                    <input type="text" placeholder="Search legal topics..." 
-                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <input type="text" placeholder="Search legal topics..."
+                        class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
                     <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
                         <i class="fas fa-search"></i>
                     </button>
-                </div>   
-            
+                </div>
+
             </div>
         </div>
     </nav>
 
-   
 
 
-     <!-- Chatbot Bubble -->
-     <div >
+
+    <!-- Chatbot Bubble -->
+    <div>
         <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>    
+        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>
     </div>
-    
+
     <!-- Hero Section -->
     <section class="hero-container pt-32 pb-20 px-6 relative">
         <div class="hero-glow"></div>
@@ -883,16 +1064,22 @@
         </div>
         <div class="container mx-auto text-center max-w-4xl">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 gradient-text" id="heroTitle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="m18.66 8.286l.368-.368c.342-.343.514-.514.617-.692a1.56 1.56 0 0 0 0-1.562c-.103-.178-.275-.35-.617-.692s-.514-.514-.692-.616a1.56 1.56 0 0 0-1.562 0c-.178.102-.35.274-.692.616l-.368.368m-4.419 10.31l-5.523 5.524c-.343.343-.514.514-.692.617a1.56 1.56 0 0 1-1.562 0c-.179-.103-.35-.274-.692-.617c-.343-.342-.514-.514-.617-.692a1.56 1.56 0 0 1 0-1.562c.103-.178.274-.35.617-.692l5.523-5.523m-.736-.737l4.419 4.42c1.735 1.735 2.603 2.603 3.682 2.603s1.946-.868 3.682-2.604S22 13.783 22 12.705c0-1.079-.868-1.947-2.604-3.682l-4.419-4.42C13.242 2.869 12.374 2 11.295 2s-1.946.868-3.682 2.604s-2.604 2.604-2.604 3.682c0 1.079.868 1.947 2.604 3.682Z"/></svg>
-                Legal Guides: Know Your Rights & Responsibilities</h1>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-width="1.5"
+                        d="m18.66 8.286l.368-.368c.342-.343.514-.514.617-.692a1.56 1.56 0 0 0 0-1.562c-.103-.178-.275-.35-.617-.692s-.514-.514-.692-.616a1.56 1.56 0 0 0-1.562 0c-.178.102-.35.274-.692.616l-.368.368m-4.419 10.31l-5.523 5.524c-.343.343-.514.514-.692.617a1.56 1.56 0 0 1-1.562 0c-.179-.103-.35-.274-.692-.617c-.343-.342-.514-.514-.617-.692a1.56 1.56 0 0 1 0-1.562c.103-.178.274-.35.617-.692l5.523-5.523m-.736-.737l4.419 4.42c1.735 1.735 2.603 2.603 3.682 2.603s1.946-.868 3.682-2.604S22 13.783 22 12.705c0-1.079-.868-1.947-2.604-3.682l-4.419-4.42C13.242 2.869 12.374 2 11.295 2s-1.946.868-3.682 2.604s-2.604 2.604-2.604 3.682c0 1.079.868 1.947 2.604 3.682Z" />
+                </svg>
+                Legal Guides: Know Your Rights & Responsibilities
+            </h1>
             <p class="text-xl text-gray-400 mb-8" id="heroDescription">
-                Understanding the law shouldn't be complicated. Our legal guides break down complex legal topics into simple, easy-to-understand explanations.
+                Understanding the law shouldn't be complicated. Our legal guides break down complex legal topics into
+                simple, easy-to-understand explanations.
             </p>
             <div class="flex flex-wrap justify-center gap-4">
-                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group">
+                <button
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group">
                     <span class="flex items-center">
                         <i class="fas fa-book-open mr-2 group-hover:animate-pulse"></i>
-                        <a href="QT.html">Start with a Quiz</a> 
+                        <a href="QT.html">Start with a Quiz</a>
                     </span>
                 </button>
             </div>
@@ -948,14 +1135,24 @@
     <section class="py-20 bg-gradient-to-b from-gray-800 to-slate-900 relative">
         <div class="container mx-auto">
             <h2 class="text-3xl font-bold text-center text-gray-200 mb-10">Legal Categories</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <!-- Housing & Tenant Rights -->
                 <div class="category-card border rounded-xl overflow-hidden shadow-md hover:shadow-lg">
                     <div class="bg-gray-600 p-6 flex justify-center">
                         <div class="icon-container text-5xl">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M22 22H2m0-11l8.126-6.5a3 3 0 0 1 3.748 0L22 11"/><path stroke-linecap="round" d="M15.5 5.5v-2A.5.5 0 0 1 16 3h2.5a.5.5 0 0 1 .5.5v5" opacity="0.5"/><path stroke-linecap="round" d="M4 22V9.5M20 22V9.5"/><path d="M15 22v-5c0-1.414 0-2.121-.44-2.56C14.122 14 13.415 14 12 14s-2.121 0-2.56.44C9 14.878 9 15.585 9 17v5m5-12.5a2 2 0 1 1-4 0a2 2 0 0 1 4 0Z" opacity="0.5"/></g></svg>
-                    
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
+                                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" d="M22 22H2m0-11l8.126-6.5a3 3 0 0 1 3.748 0L22 11" />
+                                    <path stroke-linecap="round" d="M15.5 5.5v-2A.5.5 0 0 1 16 3h2.5a.5.5 0 0 1 .5.5v5"
+                                        opacity="0.5" />
+                                    <path stroke-linecap="round" d="M4 22V9.5M20 22V9.5" />
+                                    <path
+                                        d="M15 22v-5c0-1.414 0-2.121-.44-2.56C14.122 14 13.415 14 12 14s-2.121 0-2.56.44C9 14.878 9 15.585 9 17v5m5-12.5a2 2 0 1 1-4 0a2 2 0 0 1 4 0Z"
+                                        opacity="0.5" />
+                                </g>
+                            </svg>
+
                         </div>
                     </div>
                     <div class="p-6">
@@ -971,7 +1168,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Workplace & Employment Laws -->
                 <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg">
                     <div class="bg-green-50 p-6 flex justify-center">
@@ -979,7 +1176,8 @@
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Workplace & Employment Laws</h3>
-                        <p class="text-gray-400 mb-4">Understand fair wages, working hours, and wrongful termination.</p>
+                        <p class="text-gray-400 mb-4">Understand fair wages, working hours, and wrongful termination.
+                        </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Wages</span>
                             <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Termination</span>
@@ -990,7 +1188,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Consumer Protection -->
                 <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg">
                     <div class="bg-yellow-50 p-6 flex justify-center">
@@ -1009,7 +1207,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Cybersecurity & Privacy Laws -->
                 <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg">
                     <div class="bg-purple-50 p-6 flex justify-center">
@@ -1028,7 +1226,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Criminal & Civil Rights -->
                 <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg">
                     <div class="bg-red-50 p-6 flex justify-center">
@@ -1046,7 +1244,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Government & Citizen Rights -->
                 <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg bg-slate-600">
                     <div class="bg-indigo-50 p-6 flex justify-center">
@@ -1060,12 +1258,13 @@
                             <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">Free Speech</span>
                             <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">Protests</span>
                         </div>
-                        <a href="citizenrights.html" class="text-blue-600 font-medium hover:underline flex items-center">
+                        <a href="citizenrights.html"
+                            class="text-blue-600 font-medium hover:underline flex items-center">
                             Explore guides <i class="fas fa-chevron-right ml-1 text-sm"></i>
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Family Law & Marriage -->
                 <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg">
                     <div class="bg-pink-50 p-6 flex justify-center">
@@ -1088,718 +1287,664 @@
         </div>
     </section>
 
-    
+
 
     <!-- Interactive Quiz Section -->
     <section id="quiz-section" class="py-12 px-6 bg-gradient-to-b from-gray-800 to-slate-900">
         <div class="container mx-auto">
             <h2 class="text-3xl font-bold text-center text-white mb-8">Test Your Legal Knowledge</h2>
-            
-            <div class="max-w-4xl mx-auto bg-gradient-to-r from-violet-400 to-violet-800 rounded-xl shadow-lg overflow-hidden">
+
+            <div
+                class="max-w-4xl mx-auto bg-gradient-to-r from-violet-400 to-violet-800 rounded-xl shadow-lg overflow-hidden">
                 <div class="flex flex-col md:flex-row">
                     <div class="md:w-1/2 p-8">
                         <div class="text-4xl mb-4">✅</div>
                         <h3 class="text-2xl font-semibold mb-3">Tenant Rights Quiz</h3>
-                        <p class="text-gray-600 mb-5">Think you know your housing rights? Test your knowledge with this quick 5-minute quiz.</p>
+                        <p class="text-gray-600 mb-5">Think you know your housing rights? Test your knowledge with this
+                            quick 5-minute quiz.</p>
                         <ul class="mb-6 text-gray-600">
-                            <li class="flex items-center mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i> 10 questions</li>
-                            <li class="flex items-center mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i> Instant results</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Detailed explanations</li>
+                            <li class="flex items-center mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                10 questions</li>
+                            <li class="flex items-center mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                Instant results</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                Detailed explanations</li>
                         </ul>
-                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group items-center">
+                        <button
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group items-center">
                             <span class="flex items-center">
-                            <i class="fas fa-book-open mr-2 group-hover:animate-pulse"></i>
-                                <a href="QT.html">Start a Quiz</a> 
+                                <i class="fas fa-book-open mr-2 group-hover:animate-pulse"></i>
+                                <a href="QT.html">Start a Quiz</a>
                             </span>
                         </button>
                     </div>
-                    
+
                     <div class="md:w-1/2">
-                        <img src="https://c.stocksy.com/a/P8xA00/z9/2610597.jpg" alt="Quiz illustration" class="h-full w-full object-cover">
+                        <img src="https://c.stocksy.com/a/P8xA00/z9/2610597.jpg" alt="Quiz illustration"
+                            class="h-full w-full object-cover">
                     </div>
                 </div>
             </div>
-            
-            
+
+
         </div>
     </section>
 
     <!-- Key Legal Terms Glossary -->
-<section class="gradient-section py-6 px-4 items-center">
-    <div class="container mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-bold mb-4">Key Legal Terms Glossary</h2>
-        <p class="section-intro mb-6">Understand common legal terminology with our simplified definitions.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="card glossary-term">
-                <div class="card-content">
-                    <h3 class="card-title">Defamation</h3>
-                    <p class="text-secondary">Spreading false information that harms someone's reputation.</p>
-                    <div class="glossary-details hidden">
-                        <p class="text-secondary mb-3">Defamation can be either:</p>
-                        <ul class="list-disc pl-5 text-secondary mb-3">
-                            <li><strong>Libel:</strong> Written false statements</li>
-                            <li><strong>Slander:</strong> Spoken false statements</li>
-                        </ul>
-                        <p class="text-secondary">To win a defamation case, you typically must prove the statement was false, published to others, and caused harm.</p>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="card glossary-term">
-                <div class="card-content">
-                    <h3 class="card-title">Due Process</h3>
-                    <p class="text-secondary">Fair treatment under the law, ensuring all legal rights are respected.</p>
-                    <div class="glossary-details hidden">
-                        <p class="text-secondary mb-3">Due process includes:</p>
-                        <ul class="list-disc pl-5 text-secondary mb-3">
-                            <li>Right to a fair hearing</li>
-                            <li>Notice of legal proceedings</li>
-                            <li>Opportunity to present your side</li>
-                            <li>Decision by an impartial judge</li>
-                        </ul>
-                        <p class="text-secondary">Both the 5th and 14th Amendments to the U.S. Constitution protect due process rights.</p>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="card glossary-term">
-                <div class="card-content">
-                    <h3 class="card-title">Liability</h3>
-                    <p class="text-secondary">Legal responsibility for one's actions or omissions.</p>
-                    <div class="glossary-details hidden">
-                        <p class="text-secondary mb-3">Common types of liability:</p>
-                        <ul class="list-disc pl-5 text-secondary mb-3">
-                            <li><strong>Civil Liability:</strong> Responsibility to compensate for damages</li>
-                            <li><strong>Criminal Liability:</strong> Responsibility for breaking criminal laws</li>
-                            <li><strong>Strict Liability:</strong> Responsibility regardless of fault or intent</li>
-                        </ul>
-                        <p class="text-secondary">Liability insurance exists to protect individuals and businesses from financial losses due to liability claims.</p>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="card glossary-term">
-                <div class="card-content">
-                    <h3 class="card-title">Statute of Limitations</h3>
-                    <p class="text-secondary">Time limit for filing a lawsuit after an injury or violation.</p>
-                    <div class="glossary-details hidden">
-                        <p class="text-secondary mb-3">These time limits vary by:</p>
-                        <ul class="list-disc pl-5 text-secondary mb-3">
-                            <li>Type of case (personal injury, contract, etc.)</li>
-                            <li>State or jurisdiction</li>
-                            <li>When the harm was discovered</li>
-                        </ul>
-                        <p class="text-secondary">Once the statute of limitations expires, you generally lose your right to sue, with some exceptions.</p>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="card glossary-term">
-                <div class="card-content">
-                    <h3 class="card-title">Power of Attorney</h3>
-                    <p class="text-secondary">Legal document giving someone authority to act on your behalf.</p>
-                    <div class="glossary-details hidden">
-                        <p class="text-secondary mb-3">Common types include:</p>
-                        <ul class="list-disc pl-5 text-secondary mb-3">
-                            <li><strong>General:</strong> Broad powers over property and finances</li>
-                            <li><strong>Limited:</strong> Specific powers for defined situations</li>
-                            <li><strong>Medical:</strong> Healthcare decisions only</li>
-                            <li><strong>Durable:</strong> Remains valid if you become incapacitated</li>
-                        </ul>
-                        <p class="text-secondary">Creating a power of attorney requires proper documentation and often notarization.</p>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="card glossary-term">
-                <div class="card-content">
-                    <h3 class="card-title">Negligence</h3>
-                    <p class="text-secondary">Failure to take proper care, resulting in damage or injury to another.</p>
-                    <div class="glossary-details hidden">
-                        <p class="text-secondary mb-3">To prove negligence, you must establish:</p>
-                        <ul class="list-disc pl-5 text-secondary mb-3">
-                            <li>Duty of care was owed</li>
-                            <li>That duty was breached</li>
-                            <li>The breach caused harm</li>
-                            <li>Actual damages occurred</li>
-                        </ul>
-                        <p class="text-secondary">Negligence forms the basis for many personal injury lawsuits, including car accidents and medical malpractice.</p>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-8">
-            <a href="#" class="show-more">
-                View full legal glossary <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-        
-        <div class="glow glow-1"></div>
-        <div class="glow glow-2"></div>
-    </div>
-</section>
+    <section class="gradient-section py-6 px-4 items-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Key Legal Terms Glossary</h2>
+            <p class="section-intro mb-6">Understand common legal terminology with our simplified definitions.</p>
 
-<!-- Downloadable Resources Section -->
-<section>
-    <div class="container mx-auto px-4">
-        <h2 class="py-3 text-2xl md:text-3xl font-bold">Downloadable Resources</h2>
-        <p class="section-intro mb-6">Access our legal guides offline with these downloadable PDF resources.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="card resource-card">
-                <div class="card-content">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="resource-emoji">📋</div>
-                        <span class="badge badge-primary">PDF</span>
-                    </div>
-                    <h3 class="card-title">Constitution of India</h3>
-                    <p class="text-secondary">A comprehensive guide to your rights, laws of our country.</p>
-                    <div class="resource-meta">
-                        <span class="text-muted">402 pages • Updated Mar 2025</span>
-                        <button class="btn btn-primary mt-3">
-                            <i class="fas fa-download mr-2"></i><a href="we_hack_WHLG02/static/Constitution Of India.pdf">Download</a> 
-                        </button>
-                    </div>
+            <div class="glossary-container">
+                <!-- Alphabetical navigation sidebar -->
+                <div class="glossary-nav">
+                    <ul id="letter-nav">
+                        <!-- Letters will be populated by JavaScript -->
+                    </ul>
                 </div>
-            </div>
-            
-            <div class="card resource-card">
-                <div class="card-content">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="resource-emoji">📋</div>
-                        <span class="badge badge-primary">PDF</span>
-                    </div>
-                    <h3 class="card-title">Indian Penal Code</h3>
-                    <p class="text-secondary">It is the Official criminal code in the Republic Of India</p>
-                    <div class="resource-meta">
-                        <span class="text-muted">112 pages • Updated Feb 2025</span>
-                        <button class="btn btn-primary mt-3">
-                            <i class="fas fa-download mr-2"></i><a href="we_hack_WHLG02/static/Indian Penal Code.pdf">Download</a>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card resource-card">
-                <div class="card-content">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="resource-emoji">📋</div>
-                        <span class="badge badge-primary">PDF</span>
-                    </div>
-                    <h3 class="card-title">Consumer Protection Handbook</h3>
-                    <p class="text-secondary">Learn about warranties, refunds, online shopping rights, and how to file consumer complaints.</p>
-                    <div class="resource-meta">
-                        <span class="text-muted">18 pages • Updated Mar 2025</span>
-                        <button class="btn btn-primary mt-3">
-                            <i class="fas fa-download mr-2"></i><a href="we_hack_WHLG02/static/Consumer protection laws.pdf">Download</a>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-8 mb-8">
-            <a href="#" class="show-more">
-                View all downloadable resources <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-    </div>
-</section>
 
-<!-- Video Explainers Section -->
-<section class="gradient-section py-6">
-    <div class="container mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-bold mb-4">Video Explainers & Infographics</h2>
-        <p class="section-intro mb-6">Visual guides to help you understand complex legal concepts.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="card video-card">
-                <div class="video-card-image">
-                    <img src="https://www.shutterstock.com/image-photo/book-about-tenant-rights-model-260nw-2236585253.jpg" alt="Tenants Rights Video" class="w-full">
-                    <div class="play-btn">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Know Your Tenant Rights</h3>
-                    <p class="text-secondary">This 5-minute video explains the basics of tenant rights, including repairs, privacy, and evictions.</p>
-                    <div class="flex items-center text-muted mt-3">
-                        <span><i class="far fa-clock mr-1"></i> 5:23</span>
-                        <span class="ml-3"><i class="far fa-eye mr-1"></i> 4.2k views</span>
-                    </div>
+                <!-- Glossary terms container -->
+                <div id="glossary-terms-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Terms will be populated by JavaScript -->
                 </div>
             </div>
-            
-            <div class="card video-card">
-                <div class="video-card-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLtqL-FV3XqzTTAtJgb6gNEYCQ_NBaxT98A&s" alt="Employment Rights Infographic" class="w-full">
-                    <div class="badge badge-primary" style="position: absolute; top: 1rem; right: 1rem;">
-                        Infographic
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Employment Rights Flowchart</h3>
-                    <p class="text-secondary">This flowchart walks you through what to do if you face workplace discrimination or harassment.</p>
-                    <div class="flex items-center justify-between mt-3 flex-wrap">
-                        <span class="text-muted"><i class="far fa-calendar mr-1"></i> Mar 10, 2025</span>
-                        <button class="text-primary-light flex items-center text-sm mt-2 sm:mt-0">
-                            <i class="fas fa-expand mr-1"></i> View Full Size
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card video-card">
-                <div class="video-card-image">
-                    <img src="https://rslegal.in/images/criminal-law.jpg" alt="Criminal Law Video" class="w-full">
-                    <div class="play-btn">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Police Interactions: Know Your Rights</h3>
-                    <p class="text-secondary">Learn what to do and say if you're stopped by police, including your Miranda rights explained.</p>
-                    <div class="flex items-center text-muted mt-3">
-                        <span><i class="far fa-clock mr-1"></i> 7:15</span>
-                        <span class="ml-3"><i class="far fa-eye mr-1"></i> 6.8k views</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-8 mb-8">
-            <a href="#" class="btn btn-primary">
-                <i class="fas fa-video mr-2"></i> Browse All Videos & Infographics
-            </a>
-        </div>
-        
-        <div class="glow glow-1"></div>
-        <div class="glow glow-2"></div>
-    </div>
-</section>
 
-<!-- Ask a Lawyer Section -->
-<section class="mt-10 mb-10">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto">
-            <div class="md:w-1/2 mb-8 md:mb-0">
-                <h2 class="text-left text-2xl md:text-3xl font-bold mb-4">Need Personalized Legal Advice?</h2>
-                <p class="text-secondary mb-6">Some legal questions require professional guidance. Connect with a legal expert who can help with your specific situation.</p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-user-tie mr-2"></i> Ask a Lawyer
-                    </a>
-                    <a href="#" class="btn btn-outline">
-                        <i class="fas fa-map-marker-alt mr-2"></i> Find Legal Aid Near You
-                    </a>
-                </div>
+            <div class="text-center mt-8">
+                <a href="#" class="show-more">
+                    View full legal glossary <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
-            
-            <div class="md:w-5/12 w-full">
-                <div class="chatbot-card">
+
+            <div class="glow glow-1"></div>
+            <div class="glow glow-2"></div>
+        </div>
+    </section>
+
+
+    <!-- Downloadable Resources Section -->
+    <section>
+        <div class="container mx-auto px-4">
+            <h2 class="py-3 text-2xl md:text-3xl font-bold">Downloadable Resources</h2>
+            <p class="section-intro mb-6">Access our legal guides offline with these downloadable PDF resources.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card resource-card">
                     <div class="card-content">
-                        <h3 class="card-title">Ask Our Legal AI Assistant</h3>
-                        <p class="text-secondary mb-4">Get instant answers to common legal questions with our AI chatbot. Available 24/7.</p>
-                        <div class="bg-card-bg rounded-lg p-4 mb-4">
-                            <div class="chat-bubble">
-                                <div class="chat-avatar">
-                                    <i class="fas fa-robot"></i>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="resource-emoji">📋</div>
+                            <span class="badge badge-primary">PDF</span>
+                        </div>
+                        <h3 class="card-title">Constitution of India</h3>
+                        <p class="text-secondary">A comprehensive guide to your rights, laws of our country.</p>
+                        <div class="resource-meta">
+                            <span class="text-muted">402 pages • Updated Mar 2025</span>
+                            <button class="btn btn-primary mt-3">
+                                <i class="fas fa-download mr-2"></i><a
+                                    href="we_hack_WHLG02/static/Constitution Of India.pdf">Download</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card resource-card">
+                    <div class="card-content">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="resource-emoji">📋</div>
+                            <span class="badge badge-primary">PDF</span>
+                        </div>
+                        <h3 class="card-title">Indian Penal Code</h3>
+                        <p class="text-secondary">It is the Official criminal code in the Republic Of India</p>
+                        <div class="resource-meta">
+                            <span class="text-muted">112 pages • Updated Feb 2025</span>
+                            <button class="btn btn-primary mt-3">
+                                <i class="fas fa-download mr-2"></i><a
+                                    href="we_hack_WHLG02/static/Indian Penal Code.pdf">Download</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card resource-card">
+                    <div class="card-content">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="resource-emoji">📋</div>
+                            <span class="badge badge-primary">PDF</span>
+                        </div>
+                        <h3 class="card-title">Consumer Protection Handbook</h3>
+                        <p class="text-secondary">Learn about warranties, refunds, online shopping rights, and how to
+                            file consumer complaints.</p>
+                        <div class="resource-meta">
+                            <span class="text-muted">18 pages • Updated Mar 2025</span>
+                            <button class="btn btn-primary mt-3">
+                                <i class="fas fa-download mr-2"></i><a
+                                    href="we_hack_WHLG02/static/Consumer protection laws.pdf">Download</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-8">
+                <a href="#" class="show-more">
+                    View all downloadable resources <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Explainers Section -->
+    <section class="gradient-section py-6">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Video Explainers & Infographics</h2>
+            <p class="section-intro mb-6">Visual guides to help you understand complex legal concepts.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card video-card">
+                    <div class="video-card-image">
+                        <img src="https://www.shutterstock.com/image-photo/book-about-tenant-rights-model-260nw-2236585253.jpg"
+                            alt="Tenants Rights Video" class="w-full">
+                        <div class="play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Know Your Tenant Rights</h3>
+                        <p class="text-secondary">This 5-minute video explains the basics of tenant rights, including
+                            repairs, privacy, and evictions.</p>
+                        <div class="flex items-center text-muted mt-3">
+                            <span><i class="far fa-clock mr-1"></i> 5:23</span>
+                            <span class="ml-3"><i class="far fa-eye mr-1"></i> 4.2k views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card video-card">
+                    <div class="video-card-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLtqL-FV3XqzTTAtJgb6gNEYCQ_NBaxT98A&s"
+                            alt="Employment Rights Infographic" class="w-full">
+                        <div class="badge badge-primary" style="position: absolute; top: 1rem; right: 1rem;">
+                            Infographic
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Employment Rights Flowchart</h3>
+                        <p class="text-secondary">This flowchart walks you through what to do if you face workplace
+                            discrimination or harassment.</p>
+                        <div class="flex items-center justify-between mt-3 flex-wrap">
+                            <span class="text-muted"><i class="far fa-calendar mr-1"></i> Mar 10, 2025</span>
+                            <button class="text-primary-light flex items-center text-sm mt-2 sm:mt-0">
+                                <i class="fas fa-expand mr-1"></i> View Full Size
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card video-card">
+                    <div class="video-card-image">
+                        <img src="https://rslegal.in/images/criminal-law.jpg" alt="Criminal Law Video" class="w-full">
+                        <div class="play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Police Interactions: Know Your Rights</h3>
+                        <p class="text-secondary">Learn what to do and say if you're stopped by police, including your
+                            Miranda rights explained.</p>
+                        <div class="flex items-center text-muted mt-3">
+                            <span><i class="far fa-clock mr-1"></i> 7:15</span>
+                            <span class="ml-3"><i class="far fa-eye mr-1"></i> 6.8k views</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-8">
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-video mr-2"></i> Browse All Videos & Infographics
+                </a>
+            </div>
+
+            <div class="glow glow-1"></div>
+            <div class="glow glow-2"></div>
+        </div>
+    </section>
+
+    <!-- Ask a Lawyer Section -->
+    <section class="mt-10 mb-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-left text-2xl md:text-3xl font-bold mb-4">Need Personalized Legal Advice?</h2>
+                    <p class="text-secondary mb-6">Some legal questions require professional guidance. Connect with a
+                        legal expert who can help with your specific situation.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-user-tie mr-2"></i> Ask a Lawyer
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Find Legal Aid Near You
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:w-5/12 w-full">
+                    <div class="chatbot-card">
+                        <div class="card-content">
+                            <h3 class="card-title">Ask Our Legal AI Assistant</h3>
+                            <p class="text-secondary mb-4">Get instant answers to common legal questions with our AI
+                                chatbot. Available 24/7.</p>
+                            <div class="bg-card-bg rounded-lg p-4 mb-4">
+                                <div class="chat-bubble">
+                                    <div class="chat-avatar">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-primary">How can I help with your legal questions today?</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-primary">How can I help with your legal questions today?</p>
+                                <div class="chat-input">
+                                    <input type="text" placeholder="Type your legal question here..."
+                                        class="chat-input-field w-full">
+                                    <button>
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="chat-input">
-                                <input type="text" placeholder="Type your legal question here..." class="chat-input-field w-full">
-                                <button>
-                                    <i class="fas fa-paper-plane"></i>
-                                </button>
+                            <div class="text-xs text-muted text-center">
+                                Note: AI responses are for informational purposes only and not a substitute for
+                                professional legal advice.
                             </div>
                         </div>
-                        <div class="text-xs text-muted text-center">
-                            Note: AI responses are for informational purposes only and not a substitute for professional legal advice.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot Bubble -->
+    <div class="chatbot-bubble fixed bottom-6 right-6 z-50">
+        <i class="fas fa-comment-dots text-2xl"></i>
+    </div>
+
+    <!-- Newsletter Subscription Section -->
+    <section class="gradient-section">
+        <div class="container mx-auto px-4 mt-10 mb-10">
+            <div class="newsletter-card max-w-4xl mx-auto">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="newsletter-content lg:w-2/3 p-6">
+                        <h3 class="text-2xl font-bold text-primary-light mb-3">Stay Updated on Legal Changes</h3>
+                        <p class="text-secondary mb-5">Subscribe to our free newsletter for the latest legal news,
+                            updates to laws, and new guides relevant to you.</p>
+                        <form class="newsletter-form flex flex-col sm:flex-row gap-3">
+                            <input type="email" placeholder="Your email address" class="newsletter-input flex-grow">
+                            <button class="btn btn-primary whitespace-nowrap">
+                                Subscribe <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                        <p class="text-xs text-muted mt-3">We respect your privacy. You can unsubscribe at any time.</p>
+                    </div>
+                    <div class="newsletter-accent lg:w-1/3 p-6 bg-gray-100">
+                        <div class="newsletter-accent-content">
+                            <div class="text-5xl mb-4">📬</div>
+                            <h4 class="text-lg font-semibold mb-2">What You'll Get</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Monthly legal updates</li>
+                                <li>• New guide notifications</li>
+                                <li>• Free legal template downloads</li>
+                                <li>• Community Q&A highlights</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Chatbot Bubble -->
-<div class="chatbot-bubble fixed bottom-6 right-6 z-50">
-    <i class="fas fa-comment-dots text-2xl"></i>
-</div>
+    <!-- Community Section -->
+    <section class="mt-10 mb-10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Join Our Legal Community</h2>
+            <p class="section-intro mb-6">Connect with others, share experiences, and learn from community discussions
+                about everyday legal matters.</p>
 
-<!-- Newsletter Subscription Section -->
-<section class="gradient-section">
-    <div class="container mx-auto px-4 mt-10 mb-10">
-        <div class="newsletter-card max-w-4xl mx-auto">
-            <div class="flex flex-col lg:flex-row">
-                <div class="newsletter-content lg:w-2/3 p-6">
-                    <h3 class="text-2xl font-bold text-primary-light mb-3">Stay Updated on Legal Changes</h3>
-                    <p class="text-secondary mb-5">Subscribe to our free newsletter for the latest legal news, updates to laws, and new guides relevant to you.</p>
-                    <form class="newsletter-form flex flex-col sm:flex-row gap-3">
-                        <input type="email" placeholder="Your email address" class="newsletter-input flex-grow">
-                        <button class="btn btn-primary whitespace-nowrap">
-                            Subscribe <i class="fas fa-paper-plane ml-2"></i>
-                        </button>
-                    </form>
-                    <p class="text-xs text-muted mt-3">We respect your privacy. You can unsubscribe at any time.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card feature-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <div class="icon-circle">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3 class="card-title">Discussion Forums</h3>
+                        </div>
+                        <p class="text-secondary mb-4">Participate in moderated discussions on various legal topics and
+                            get insights from the community.</p>
+                        <a href="#" class="text-primary-light flex items-center">
+                            Join discussions <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="newsletter-accent lg:w-1/3 p-6 bg-gray-100">
-                    <div class="newsletter-accent-content">
-                        <div class="text-5xl mb-4">📬</div>
-                        <h4 class="text-lg font-semibold mb-2">What You'll Get</h4>
-                        <ul class="text-sm space-y-1">
-                            <li>• Monthly legal updates</li>
-                            <li>• New guide notifications</li>
-                            <li>• Free legal template downloads</li>
-                            <li>• Community Q&A highlights</li>
-                        </ul>
+
+                <div class="card feature-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <div class="icon-circle"
+                                style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));">
+                                <i class="fas fa-calendar-alt text-green-500"></i>
+                            </div>
+                            <h3 class="card-title">Free Webinars</h3>
+                        </div>
+                        <p class="text-secondary mb-4">Attend monthly webinars where legal experts discuss common issues
+                            and answer community questions.</p>
+                        <a href="#" class="text-primary-light flex items-center">
+                            View schedule <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card feature-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <div class="icon-circle"
+                                style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));">
+                                <i class="fas fa-user-friends text-amber-500"></i>
+                            </div>
+                            <h3 class="card-title">Peer Support</h3>
+                        </div>
+                        <p class="text-secondary mb-4">Connect with others who have navigated similar legal situations
+                            and learn from their experiences.</p>
+                        <a href="#" class="text-primary-light flex items-center">
+                            Join support groups <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Community Section -->
-<section class="mt-10 mb-10">
-    <div class="container mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-bold mb-4">Join Our Legal Community</h2>
-        <p class="section-intro mb-6">Connect with others, share experiences, and learn from community discussions about everyday legal matters.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="card feature-card">
-                <div class="card-content">
-                    <div class="icon-box">
-                        <div class="icon-circle">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h3 class="card-title">Discussion Forums</h3>
-                    </div>
-                    <p class="text-secondary mb-4">Participate in moderated discussions on various legal topics and get insights from the community.</p>
-                    <a href="#" class="text-primary-light flex items-center">
-                        Join discussions <i class="fas fa-chevron-right ml-1 text-sm"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="card feature-card">
-                <div class="card-content">
-                    <div class="icon-box">
-                        <div class="icon-circle" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));">
-                            <i class="fas fa-calendar-alt text-green-500"></i>
-                        </div>
-                        <h3 class="card-title">Free Webinars</h3>
-                    </div>
-                    <p class="text-secondary mb-4">Attend monthly webinars where legal experts discuss common issues and answer community questions.</p>
-                    <a href="#" class="text-primary-light flex items-center">
-                        View schedule <i class="fas fa-chevron-right ml-1 text-sm"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="card feature-card">
-                <div class="card-content">
-                    <div class="icon-box">
-                        <div class="icon-circle" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));">
-                            <i class="fas fa-user-friends text-amber-500"></i>
-                        </div>
-                        <h3 class="card-title">Peer Support</h3>
-                    </div>
-                    <p class="text-secondary mb-4">Connect with others who have navigated similar legal situations and learn from their experiences.</p>
-                    <a href="#" class="text-primary-light flex items-center">
-                        Join support groups <i class="fas fa-chevron-right ml-1 text-sm"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Footer -->
-<footer class="bg-slate-900 text-white pt-16 pb-8 px-6 border-t border-gray-800">
-    <div class="container mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-            <div>
-                <h3 class="text-xl font-bold gradient-text mb-4">LegalPathshala</h3>
-                <p class="text-gray-400 mb-4">Making legal knowledge accessible to everyone. Empowering you with the information you need to understand and protect your rights.</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
+    <footer class="bg-slate-900 text-white pt-16 pb-8 px-6 border-t border-gray-800">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl font-bold gradient-text mb-4">LegalPathshala</h3>
+                    <p class="text-gray-400 mb-4">Making legal knowledge accessible to everyone. Empowering you with the
+                        information you need to understand and protect your rights.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            
-            <div>
-                <h4 class="text-lg font-medium mb-4">Quick Links</h4>
-                <ul class="space-y-2 text-gray-400">
-                    <li><a href="index.html" class="hover:text-indigo-400 transition duration-300">Home</a></li>
-                    <li><a href="legalguides.html" class="hover:text-indigo-400 transition duration-300">Legal Guides</a></li>
-                    <li><a href="QT.html" class="hover:text-indigo-400 transition duration-300">Quizzes</a></li>
-                    <li><a href="askalawyer.html" class="hover:text-indigo-400 transition duration-300">Ask a Lawyer</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Community Forums</a></li>
-                    <li><a href="aboutus.html" class="hover:text-indigo-400 transition duration-300">About Us</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="text-lg font-medium mb-4">Legal Topics</h4>
-                <ul class="space-y-2 text-gray-400">
-                    <li><a href="tenant.html" class="hover:text-indigo-400 transition duration-300">Tenant Rights</a></li>
-                    <li><a href="workplace.html" class="hover:text-indigo-400 transition duration-300">Employment Law</a></li>
-                    <li><a href="consumer.html" class="hover:text-indigo-400 transition duration-300">Consumer Protection</a></li>
-                    <li><a href="fam.html" class="hover:text-indigo-400 transition duration-300">Family Law</a></li>
-                    <li><a href="criminallaw.html" class="hover:text-indigo-400 transition duration-300">Criminal Law</a></li>
-                    <li><a href="legalguides.html" class="hover:text-indigo-400 transition duration-300">View All Topics</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="text-lg font-medium mb-4">Contact Us</h4>
-                <ul class="space-y-3 text-gray-400">
-                    <li class="flex items-start">
-                        <i class="fas fa-envelope mt-1 mr-3 text-indigo-400"></i>
-                        <span>legal_pathshala_1@gmail.com</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-phone-alt mt-1 mr-3 text-indigo-400"></i>
-                        <span>+91 8850123688</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-indigo-400"></i>
-                        <span>Shop No. 6, Dreamland Building,<br>Shanti Park, Andheri(W), Mumbai-400053</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="border-t border-gray-800 pt-8 pb-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LegalPathshala. All rights reserved.</p>
-                <div class="flex space-x-6 text-sm text-gray-500">
-                    <a href="#" class="hover:text-indigo-400 transition duration-300">Privacy Policy</a>
-                    <a href="#" class="hover:text-indigo-400 transition duration-300">Terms of Service</a>
-                    <a href="#" class="hover:text-indigo-400 transition duration-300">Cookie Policy</a>
-                    <a href="#" class="hover:text-indigo-400 transition duration-300">Accessibility</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-6 text-xs text-gray-500">
-            <p>LegalPathshala provides legal information for educational purposes only. It is not a substitute for professional legal advice.</p>
-        </div>
-    </div>
-</footer>
 
-    
-<!-- JavaScript for interactive elements -->
-<script>
-    // Mobile Menu Toggle
-    const mobileMenuButton = document.getElementById('openMobileMenu');
-    const closeMobileMenuButton = document.getElementById('closeMobileMenu');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    if (mobileMenuButton) {
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-        });
-    }
-    
-    if (closeMobileMenuButton) {
-        closeMobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-        });
-    }
-    
-    // Navbar Scroll Effect
-    window.addEventListener('scroll', () => {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 10) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="index.html" class="hover:text-indigo-400 transition duration-300">Home</a></li>
+                        <li><a href="legalguides.html" class="hover:text-indigo-400 transition duration-300">Legal
+                                Guides</a></li>
+                        <li><a href="QT.html" class="hover:text-indigo-400 transition duration-300">Quizzes</a></li>
+                        <li><a href="askalawyer.html" class="hover:text-indigo-400 transition duration-300">Ask a
+                                Lawyer</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition duration-300">Community Forums</a></li>
+                        <li><a href="aboutus.html" class="hover:text-indigo-400 transition duration-300">About Us</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Legal Topics</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="tenant.html" class="hover:text-indigo-400 transition duration-300">Tenant
+                                Rights</a></li>
+                        <li><a href="workplace.html" class="hover:text-indigo-400 transition duration-300">Employment
+                                Law</a></li>
+                        <li><a href="consumer.html" class="hover:text-indigo-400 transition duration-300">Consumer
+                                Protection</a></li>
+                        <li><a href="fam.html" class="hover:text-indigo-400 transition duration-300">Family Law</a></li>
+                        <li><a href="criminallaw.html" class="hover:text-indigo-400 transition duration-300">Criminal
+                                Law</a></li>
+                        <li><a href="legalguides.html" class="hover:text-indigo-400 transition duration-300">View All
+                                Topics</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-indigo-400"></i>
+                            <span>legal_pathshala_1@gmail.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-indigo-400"></i>
+                            <span>+91 8850123688</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-indigo-400"></i>
+                            <span>Shop No. 6, Dreamland Building,<br>Shanti Park, Andheri(W), Mumbai-400053</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 pb-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LegalPathshala. All rights reserved.</p>
+                    <div class="flex space-x-6 text-sm text-gray-500">
+                        <a href="#" class="hover:text-indigo-400 transition duration-300">Privacy Policy</a>
+                        <a href="#" class="hover:text-indigo-400 transition duration-300">Terms of Service</a>
+                        <a href="#" class="hover:text-indigo-400 transition duration-300">Cookie Policy</a>
+                        <a href="#" class="hover:text-indigo-400 transition duration-300">Accessibility</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-6 text-xs text-gray-500">
+                <p>LegalPathshala provides legal information for educational purposes only. It is not a substitute for
+                    professional legal advice.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript for interactive elements -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('openMobileMenu');
+        const closeMobileMenuButton = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+            });
         }
-    });
 
-    // Carousel functionality
-    const carousel = document.querySelector('.carousel-inner');
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    const carouselDots = document.querySelectorAll('.carousel-dot');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    let currentIndex = 0;
-    
-    function updateCarousel() {
-        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-        carouselDots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
-            dot.classList.toggle('bg-gray-300', index !== currentIndex);
-            dot.classList.toggle('bg-blue-500', index === currentIndex);
+        if (closeMobileMenuButton) {
+            closeMobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         });
-    }
-    
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
-        updateCarousel();
-    });
-    
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
-        updateCarousel();
-    });
-    
-    carouselDots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            currentIndex = index;
+
+        // Carousel functionality
+        const carousel = document.querySelector('.carousel-inner');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const carouselDots = document.querySelectorAll('.carousel-dot');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            carouselDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+                dot.classList.toggle('bg-gray-300', index !== currentIndex);
+                dot.classList.toggle('bg-blue-500', index === currentIndex);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
             updateCarousel();
         });
-    });
-    
-    // Automatic carousel rotation (optional)
-    setInterval(() => {
-        currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
-        updateCarousel();
-    }, 6000);
-    
-    // Filter Tag Selection
-    const filterTags = document.querySelectorAll('.filter-tag');
-    filterTags.forEach(tag => {
-        tag.addEventListener('click', () => {
-            // Find sibling tags and remove active class
-            const siblingTags = tag.parentElement.querySelectorAll('.filter-tag');
-            siblingTags.forEach(sibling => sibling.classList.remove('active'));
-            
-            // Add active class to clicked tag
-            tag.classList.add('active');
-            
-            // Filter functionality would be implemented here
-            // const filter = tag.dataset.filter;
-            // console.log(`Filtering by: ${filter}`);
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+            updateCarousel();
         });
-    });
-    
-    // Glossary term expansion
-    const glossaryToggles = document.querySelectorAll('.glossary-toggle');
-    glossaryToggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const details = toggle.previousElementSibling;
-            details.classList.toggle('hidden');
-            
-            if (details.classList.contains('hidden')) {
-                toggle.innerHTML = 'Show more <i class="fas fa-chevron-down ml-1"></i>';
-            } else {
-                toggle.innerHTML = 'Show less <i class="fas fa-chevron-up ml-1"></i>';
-            }
+
+        carouselDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
         });
-    });
-    
-    // FAQ toggles
-    const faqToggles = document.querySelectorAll('.faq-toggle');
-    faqToggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const content = toggle.nextElementSibling;
-            content.classList.toggle('hidden');
-            
-            const icon = toggle.querySelector('i');
-            if (content.classList.contains('hidden')) {
-                icon.classList.remove('fa-minus');
-                icon.classList.add('fa-plus');
-            } else {
-                icon.classList.remove('fa-plus');
-                icon.classList.add('fa-minus');
-            }
+
+        // Automatic carousel rotation (optional)
+        setInterval(() => {
+            currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+            updateCarousel();
+        }, 6000);
+
+        // Filter Tag Selection
+        const filterTags = document.querySelectorAll('.filter-tag');
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                // Find sibling tags and remove active class
+                const siblingTags = tag.parentElement.querySelectorAll('.filter-tag');
+                siblingTags.forEach(sibling => sibling.classList.remove('active'));
+
+                // Add active class to clicked tag
+                tag.classList.add('active');
+
+                // Filter functionality would be implemented here
+                // const filter = tag.dataset.filter;
+                // console.log(`Filtering by: ${filter}`);
+            });
         });
-    });
-    
-    // GSAP Animations (only if GSAP is loaded)
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        // Animate hero section
-        gsap.from('#heroTitle', {
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            ease: "power3.out"
+
+        // Glossary term expansion
+        const glossaryToggles = document.querySelectorAll('.glossary-toggle');
+        glossaryToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const details = toggle.previousElementSibling;
+                details.classList.toggle('hidden');
+
+                if (details.classList.contains('hidden')) {
+                    toggle.innerHTML = 'Show more <i class="fas fa-chevron-down ml-1"></i>';
+                } else {
+                    toggle.innerHTML = 'Show less <i class="fas fa-chevron-up ml-1"></i>';
+                }
+            });
         });
-        
-        gsap.from('#heroDescription', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            delay: 0.3,
-            ease: "power3.out"
+
+        // FAQ toggles
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                content.classList.toggle('hidden');
+
+                const icon = toggle.querySelector('i');
+                if (content.classList.contains('hidden')) {
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                } else {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                }
+            });
         });
-        
-        // Animate category cards when scrolled into view
-        gsap.registerPlugin(ScrollTrigger);
-        
-        gsap.utils.toArray('.category-card').forEach((card, i) => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top bottom-=100",
-                    toggleActions: "play none none none"
-                },
+
+        // GSAP Animations (only if GSAP is loaded)
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            // Animate hero section
+            gsap.from('#heroTitle', {
                 opacity: 0,
                 y: 50,
-                duration: 0.6,
-                delay: i * 0.1,
+                duration: 1,
                 ease: "power3.out"
             });
-        });
-        
-        // Animate featured cards
-        gsap.utils.toArray('.featured-card').forEach((card, i) => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top bottom-=100",
-                    toggleActions: "play none none none"
-                },
-                opacity: 0,
-                x: i % 2 === 0 ? -50 : 50,
-                duration: 0.8,
-                ease: "power3.out"
-            });
-        });
-    }
-    
-    // Search functionality (basic implementation)
-    const guideSearch = document.getElementById('guideSearch');
-    guideSearch.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') {
-            alert(`Searching for: ${guideSearch.value}\nSearch functionality coming soon!`);
-        }
-    });
-    
-    // Chatbot bubble toggle
-    const chatbotBubble = document.querySelector('.chatbot-bubble');
-    chatbotBubble.addEventListener('click', () => {
-        // Chatbot toggle functionality would be implemented here
-        alert('Legal AI Assistant is coming soon!');
-    });
 
-    // Glossary Toggle Functionality
-    document.querySelectorAll('.glossary-toggle').forEach(button => {
+            gsap.from('#heroDescription', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                delay: 0.3,
+                ease: "power3.out"
+            });
+
+            // Animate category cards when scrolled into view
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.utils.toArray('.category-card').forEach((card, i) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top bottom-=100",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.6,
+                    delay: i * 0.1,
+                    ease: "power3.out"
+                });
+            });
+
+            // Animate featured cards
+            gsap.utils.toArray('.featured-card').forEach((card, i) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top bottom-=100",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    x: i % 2 === 0 ? -50 : 50,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
+            });
+        }
+
+        // Search functionality (basic implementation)
+        const guideSearch = document.getElementById('guideSearch');
+        guideSearch.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                alert(`Searching for: ${guideSearch.value}\nSearch functionality coming soon!`);
+            }
+        });
+
+        // Chatbot bubble toggle
+        const chatbotBubble = document.querySelector('.chatbot-bubble');
+        chatbotBubble.addEventListener('click', () => {
+            // Chatbot toggle functionality would be implemented here
+            alert('Legal AI Assistant is coming soon!');
+        });
+
+        // Glossary Toggle Functionality
+        document.querySelectorAll('.glossary-toggle').forEach(button => {
             button.addEventListener('click', () => {
                 const details = button.previousElementSibling;
                 details.classList.toggle('hidden');
@@ -1811,7 +1956,7 @@
                 }
             });
         });
-        
+
         // FAQ Toggle Functionality
         document.querySelectorAll('.faq-toggle').forEach(button => {
             button.addEventListener('click', () => {
@@ -1820,7 +1965,7 @@
                 button.classList.toggle('active');
             });
         });
-        
+
         // Intersection Observer for animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1831,21 +1976,21 @@
         }, {
             threshold: 0.1
         });
-        
+
         document.querySelectorAll('.card, .chatbot-card, .newsletter-card').forEach(element => {
             observer.observe(element);
         });
-        
+
         // Add hover glow effect to buttons
         document.querySelectorAll('.btn').forEach(button => {
             button.addEventListener('mousemove', (e) => {
                 const rect = button.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 button.style.background = `radial-gradient(circle at ${x}px ${y}px, var(--primary), var(--primary-dark))`;
             });
-            
+
             button.addEventListener('mouseleave', () => {
                 if (button.classList.contains('btn-primary')) {
                     button.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-dark))';
@@ -1854,10 +1999,254 @@
                 }
             });
         });
-</script>
-<script src="search.js"></script>
-</body>
-</html>
+    </script>
+    <script>
+        // Embedded glossary data - no need for external JSON file
+        const glossaryData = {
+            "terms": [
+                {
+                    "letter": "D",
+                    "title": "Defamation",
+                    "description": "Spreading false information that harms someone's reputation.",
+                    "details": {
+                        "text": "Defamation can be either:",
+                        "list": [
+                            "<strong>Libel:</strong> Written false statements",
+                            "<strong>Slander:</strong> Spoken false statements"
+                        ],
+                        "conclusion": "To win a defamation case, you typically must prove the statement was false, published to others, and caused harm."
+                    }
+                },
+                {
+                    "letter": "D",
+                    "title": "Due Process",
+                    "description": "Fair treatment under the law, ensuring all legal rights are respected.",
+                    "details": {
+                        "text": "Due process includes:",
+                        "list": [
+                            "Right to a fair hearing",
+                            "Notice of legal proceedings",
+                            "Opportunity to present your side",
+                            "Decision by an impartial judge"
+                        ],
+                        "conclusion": "Both the 5th and 14th Amendments to the U.S. Constitution protect due process rights."
+                    }
+                },
+                {
+                    "letter": "L",
+                    "title": "Liability",
+                    "description": "Legal responsibility for one's actions or omissions.",
+                    "details": {
+                        "text": "Common types of liability:",
+                        "list": [
+                            "<strong>Civil Liability:</strong> Responsibility to compensate for damages",
+                            "<strong>Criminal Liability:</strong> Responsibility for breaking criminal laws",
+                            "<strong>Strict Liability:</strong> Responsibility regardless of fault or intent"
+                        ],
+                        "conclusion": "Liability insurance exists to protect individuals and businesses from financial losses due to liability claims."
+                    }
+                },
+                {
+                    "letter": "N",
+                    "title": "Negligence",
+                    "description": "Failure to take proper care, resulting in damage or injury to another.",
+                    "details": {
+                        "text": "To prove negligence, you must establish:",
+                        "list": [
+                            "Duty of care was owed",
+                            "That duty was breached",
+                            "The breach caused harm",
+                            "Actual damages occurred"
+                        ],
+                        "conclusion": "Negligence forms the basis for many personal injury lawsuits, including car accidents and medical malpractice."
+                    }
+                },
+                {
+                    "letter": "P",
+                    "title": "Power of Attorney",
+                    "description": "Legal document giving someone authority to act on your behalf.",
+                    "details": {
+                        "text": "Common types include:",
+                        "list": [
+                            "<strong>General:</strong> Broad powers over property and finances",
+                            "<strong>Limited:</strong> Specific powers for defined situations",
+                            "<strong>Medical:</strong> Healthcare decisions only",
+                            "<strong>Durable:</strong> Remains valid if you become incapacitated"
+                        ],
+                        "conclusion": "Creating a power of attorney requires proper documentation and often notarization."
+                    }
+                },
+                {
+                    "letter": "S",
+                    "title": "Statute of Limitations",
+                    "description": "Time limit for filing a lawsuit after an injury or violation.",
+                    "details": {
+                        "text": "These time limits vary by:",
+                        "list": [
+                            "Type of case (personal injury, contract, etc.)",
+                            "State or jurisdiction",
+                            "When the harm was discovered"
+                        ],
+                        "conclusion": "Once the statute of limitations expires, you generally lose your right to sue, with some exceptions."
+                    }
+                },
+                
+                {
+                    "letter": "A",
+                    "title": "Arbitration",
+                    "description": "Process of resolving disputes outside of court with a neutral third party.",
+                    "details": {
+                        "text": "Key features of arbitration:",
+                        "list": [
+                            "Often faster than court litigation",
+                            "Usually less formal than court proceedings",
+                            "Can be binding or non-binding",
+                            "Often required by contract clauses"
+                        ],
+                        "conclusion": "Arbitration decisions are often final and difficult to appeal, unlike court judgments."
+                    }
+                },
+                {
+                    "letter": "C",
+                    "title": "Contract",
+                    "description": "Legally binding agreement between two or more parties.",
+                    "details": {
+                        "text": "Essential elements of a valid contract:",
+                        "list": [
+                            "Offer and acceptance",
+                            "Consideration (something of value exchanged)",
+                            "Legal capacity of parties",
+                            "Lawful purpose"
+                        ],
+                        "conclusion": "Contracts can be written, verbal, or implied by conduct, though some types must be in writing to be enforceable."
+                    }
+                }
+            ]
+        };
 
-    
-                            
+        document.addEventListener('DOMContentLoaded', function () {
+            // Remove loading indicator if present
+            const loadingIndicator = document.querySelector('.loading-indicator');
+            if (loadingIndicator) {
+                loadingIndicator.remove();
+            }
+
+            // Initialize glossary with embedded data
+            initializeGlossary(glossaryData);
+        });
+
+        function initializeGlossary(data) {
+            // Get all unique first letters and sort them alphabetically
+            const uniqueLetters = [...new Set(data.terms.map(term => term.letter))].sort();
+
+            // Populate letter navigation
+            const letterNav = document.getElementById('letter-nav');
+            letterNav.innerHTML = ''; // Clear any existing content
+
+            // Create buttons for all letters A-Z
+            for (let charCode = 65; charCode <= 90; charCode++) {
+                const letter = String.fromCharCode(charCode);
+                const hasTerms = uniqueLetters.includes(letter);
+
+                const listItem = document.createElement('li');
+                const button = document.createElement('button');
+
+                button.textContent = letter;
+                button.setAttribute('data-letter', letter);
+
+                if (!hasTerms) {
+                    button.classList.add('disabled');
+                    button.disabled = true;
+                } else {
+                    button.addEventListener('click', function () {
+                        filterTermsByLetter(letter, data.terms);
+
+                        // Update active state
+                        document.querySelectorAll('#letter-nav button').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    });
+                }
+
+                listItem.appendChild(button);
+                letterNav.appendChild(listItem);
+            }
+
+            // Show terms for the first available letter by default
+            if (uniqueLetters.length > 0) {
+                const firstLetter = uniqueLetters[0];
+                filterTermsByLetter(firstLetter, data.terms);
+
+                // Set active state for the first letter
+                const firstLetterButton = document.querySelector(`#letter-nav button[data-letter="${firstLetter}"]`);
+                if (firstLetterButton) {
+                    firstLetterButton.classList.add('active');
+                }
+            }
+
+            // Add event listeners for term details toggle
+            addToggleEventListeners();
+        }
+
+        function filterTermsByLetter(letter, terms) {
+            const termsContainer = document.getElementById('glossary-terms-container');
+            termsContainer.innerHTML = '';
+
+            const filteredTerms = terms.filter(term => term.letter === letter);
+
+            if (filteredTerms.length === 0) {
+                termsContainer.innerHTML = `<div class="col-span-full text-center">No terms found starting with '${letter}'</div>`;
+                return;
+            }
+
+            filteredTerms.forEach(term => {
+                const termCard = document.createElement('div');
+                termCard.className = 'card glossary-term';
+
+                let listItems = '';
+                if (term.details && term.details.list) {
+                    listItems = term.details.list.map(item => `<li>${item}</li>`).join('');
+                }
+
+                termCard.innerHTML = `
+              <div class="card-content">
+                  <h3 class="card-title">${term.title}</h3>
+                  <p class="text-secondary">${term.description}</p>
+                  
+                  <button class="glossary-toggle">
+                      Learn more <i class="fas fa-chevron-down"></i>
+                  </button>
+                  
+                  <div class="glossary-details">
+                      ${term.details.text ? `<p class="text-secondary mb-3">${term.details.text}</p>` : ''}
+                      ${term.details.list ? `<ul class="list-disc pl-5 text-secondary mb-3">${listItems}</ul>` : ''}
+                      ${term.details.conclusion ? `<p class="text-secondary">${term.details.conclusion}</p>` : ''}
+                  </div>
+              </div>
+          `;
+
+                termsContainer.appendChild(termCard);
+            });
+
+            // Re-add event listeners after populating new content
+            addToggleEventListeners();
+        }
+
+        function addToggleEventListeners() {
+            // Add click event listeners to toggle buttons
+            const toggles = document.querySelectorAll('.glossary-toggle');
+
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    const details = this.nextElementSibling;
+                    details.classList.toggle('visible');
+                });
+            });
+        }
+    </script>
+    <script src="search.js"></script>
+</body>
+
+</html>
