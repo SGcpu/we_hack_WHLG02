@@ -1,0 +1,72 @@
+
+        /* Search results dropdown with solid background */
+        #searchResults {
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: dropdownFade 0.3s ease forwards;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background-color: #1e293b;
+            /* Solid background color matching your card-bg variable */
+        }
+
+        @keyframes dropdownFade {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #searchResults a:first-child {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        #searchResults a:last-child {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        #searchResults a {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #searchResults a:last-child {
+            border-bottom: none;
+        }
+
+        #searchResults a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.2s ease;
+        }
+
+        #searchResults a:hover::before {
+            transform: scaleY(1);
+        }
+
+        /* Ensure no transparency */
+        #searchResults,
+        #searchResults a,
+        #searchResults div {
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        #searchResults a:hover {
+            background-color: #334155;
+            /* Solid hover background matching your card-hover variable */
+        }
