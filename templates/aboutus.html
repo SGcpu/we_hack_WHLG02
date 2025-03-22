@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalEase - About Us</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .dark-mode {
+            background-color: #1a202c;
+            color: #f7fafc;
+        }
+        .dark-mode .navbar {
+            background-color: #2d3748;
+        }
+        .dark-mode .card {
+            background-color: #2d3748;
+            color: #f7fafc;
+        }
+        .dark-mode .footer {
+            background-color: #2d3748;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        .team-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .stat-card {
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+        .chatbot-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .chatbot-bubble:hover {
+            transform: scale(1.1);
+        }
+        .timeline-item {
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #3182ce;
+        }
+        .timeline-item:last-child::before {
+            height: 50%;
+        }
+        .timeline-item:first-child::before {
+            top: 50%;
+            height: 50%;
+        }
+        .timeline-dot {
+            position: relative;
+            z-index: 2;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .accordion-content.active {
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="navbar bg-white shadow-md px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-blue-800">LegalEase</h1>
+                <span class="text-sm text-gray-500 ml-2">⚖️</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="font-medium text-gray-600 hover:text-blue-600">Home</a>
+                <a href="legalguides.html" class="font-medium text-gray-600 hover:text-blue-600">Legal Guides</a>
+                <a href="QT.html" class="font-medium text-gray-600 hover:text-blue-600">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-medium text-gray-600 hover:text-blue-600">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-medium text-gray-600 hover:text-blue-600">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-medium text-blue-600">About Us</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search legal topics..." 
+                           class="px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-300 w-48">
+                    <button class="absolute right-3 top-2 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-600 text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="bg-gray-100 py-3 px-6 mt-16">
+        <div class="container mx-auto">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="index.html" class="hover:text-blue-600">Home</a>
+                <span class="mx-2">/</span>
+                <span class="text-blue-600 font-medium">About Us</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="py-16 px-6 bg-white" id="heroSection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-12">
+                    <h1 class="text-4xl lg:text-5xl font-bold text-gray-800 mb-4" id="heroTitle">🤝 Empowering Citizens Through Legal Awareness</h1>
+                    <p class="text-xl text-gray-600 mb-8" id="heroDescription">We believe that legal knowledge should be accessible to everyone. Our mission is to educate, inform, and support citizens in understanding their rights.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md" id="learnMoreBtn">
+                            📜 Learn More About Our Work
+                        </button>
+                        <a href="contact.html" class="border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition duration-300">
+                            ✉ Contact Us
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <img src="/api/placeholder/600/400" alt="Legal awareness team" class="rounded-lg shadow-xl w-full h-auto" id="heroImage">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="py-16 px-6 bg-gray-50" id="missionSection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Mission & Vision</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-white rounded-xl shadow-md p-8 transform transition-transform hover:scale-105">
+                    <div class="text-5xl mb-6 text-blue-600">🌍</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Mission</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        We aim to bridge the gap between complex legal systems and everyday citizens by providing simplified legal information, interactive resources, and accessible legal assistance.
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-8 transform transition-transform hover:scale-105">
+                    <div class="text-5xl mb-6 text-blue-600">🚀</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Vision</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        A world where every individual, regardless of background, has access to the legal knowledge they need to protect their rights and make informed decisions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-16 px-6 bg-white" id="storySection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Story</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">How we started, where we've been, and where we're going</p>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto mt-16">
+                <div class="space-y-12">
+                    <div class="timeline-item pl-12">
+                        <div class="flex items-center">
+                            <div class="timeline-dot bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 ml-4">The Idea</h3>
+                        </div>
+                        <div class="ml-12 mt-3">
+                            <p class="text-gray-600">
+                                Our founder, a public interest lawyer, witnessed firsthand how many people struggled to navigate the legal system due to its complexity. This sparked the idea for a platform that would make legal information accessible to everyone.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item pl-12">
+                        <div class="flex items-center">
+                            <div class="timeline-dot bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 ml-4">Launch</h3>
+                        </div>
+                        <div class="ml-12 mt-3">
+                            <p class="text-gray-600">
+                                LegalEase was launched in early 2025 with a small team of dedicated legal professionals committed to democratizing legal knowledge and empowering citizens through easy-to-understand resources.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item pl-12">
+                        <div class="flex items-center">
+                            <div class="timeline-dot bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 ml-4">Growing Community</h3>
+                        </div>
+                        <div class="ml-12 mt-3">
+                            <p class="text-gray-600">
+                                Within the first six months, we reached 10,000 users and expanded our team of volunteer legal experts. Our community forums became a trusted space for peer support and knowledge sharing.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item pl-12">
+                        <div class="flex items-center">
+                            <div class="timeline-dot bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 ml-4">Today & Beyond</h3>
+                        </div>
+                        <div class="ml-12 mt-3">
+                            <p class="text-gray-600">
+                                Today, we continue to expand our resources and reach, with ongoing plans to develop mobile applications, translate content into more languages, and partner with legal aid organizations nationwide.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet the Team Section -->
+    <section class="py-16 px-6 bg-gray-50" id="teamSection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet the Team</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">The passionate professionals behind LegalEase</p>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <div class="team-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="/api/placeholder/400/300" alt="Jane Doe" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Jane Doe</h3>
+                        <p class="text-blue-600 font-medium mb-3">Founder & Legal Director</p>
+                        <p class="text-gray-600 mb-4">Expertise in constitutional law and civil rights. Has 15+ years of experience in public interest law.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="/api/placeholder/400/300" alt="John Smith" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">John Smith</h3>
+                        <p class="text-blue-600 font-medium mb-3">Technology Director</p>
+                        <p class="text-gray-600 mb-4">Software engineer with a background in legal tech. Passionate about making technology accessible.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="/api/placeholder/400/300" alt="Maria Garcia" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Maria Garcia</h3>
+                        <p class="text-blue-600 font-medium mb-3">Content & Education Lead</p>
+                        <p class="text-gray-600 mb-4">Former law professor specializing in making complex legal concepts accessible to the public.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="/api/placeholder/400/300" alt="David Kim" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">David Kim</h3>
+                        <p class="text-blue-600 font-medium mb-3">Community Outreach Manager</p>
+                        <p class="text-gray-600 mb-4">Expertise in community organizing and legal aid. Focused on expanding access to underserved communities.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="/api/placeholder/400/300" alt="Priya Patel" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Priya Patel</h3>
+                        <p class="text-blue-600 font-medium mb-3">Legal Content Creator</p>
+                        <p class="text-gray-600 mb-4">Employment law specialist with a talent for explaining complex rights in plain language.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <img src="/api/placeholder/400/300" alt="Marcus Johnson" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Marcus Johnson</h3>
+                        <p class="text-blue-600 font-medium mb-3">Interactive Learning Designer</p>
+                        <p class="text-gray-600 mb-4">Educational technology expert who creates our interactive quizzes and learning modules.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-dribbble"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <img src="/api/placeholder/1000/400" alt="Team photo" class="rounded-xl shadow-lg mx-auto" id="teamPhoto">
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section class="py-16 px-6 bg-white" id="servicesSection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">What We Do</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">Our core services and features designed to make legal knowledge accessible</p>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <div class="service-card flex bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-blue-600 text-white w-24 flex-shrink-0 flex items-center justify-center">
+                        <div class="text-4xl">📚</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Legal Guides</h3>
+                        <p class="text-gray-600">
+                            Easy-to-understand explanations of complex laws written by legal experts. Our guides cover topics from tenant rights to employment law, all in plain language.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="service-card flex bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-blue-600 text-white w-24 flex-shrink-0 flex items-center justify-center">
+                        <div class="text-4xl">✅</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Quizzes & Tests</h3>
+                        <p class="text-gray-600">
+                            Interactive quizzes to test your legal knowledge in engaging ways. Learn by doing and track your progress as you become more legally informed.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="service-card flex bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-blue-600 text-white w-24 flex-shrink-0 flex items-center justify-center">
+                        <div class="text-4xl">👨‍⚖️</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Ask a Lawyer</h3>
+                        <p class="text-gray-600">
+                            Get answers from qualified legal professionals to your specific questions. Our volunteer network of lawyers provides guidance on common legal issues.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="service-card flex bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-blue-600 text-white w-24 flex-shrink-0 flex items-center justify-center">
+                        <div class="text-4xl">📞</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Emergency Contacts</h3>
+                        <p class="text-gray-600">
+                            Find legal aid services & helplines near you when you need immediate assistance. A curated directory of resources for when urgent help is needed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Impact Section -->
+    <section class="py-16 px-6 bg-gray-50" id="impactSection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Impact</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">The difference we're making in legal awareness and access</p>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+                <div class="stat-card bg-white rounded-xl shadow-md p-8 text-center">
+                    <div class="text-4xl text-blue-600 font-bold mb-2">100,000+</div>
+                    <p class="text-gray-600 font-medium">Citizens Educated</p>
+                </div>
+                
+                <div class="stat-card bg-white rounded-xl shadow-md p-8 text-center">
+                    <div class="text-4xl text-blue-600 font-bold mb-2">10,000+</div>
+                    <p class="text-gray-600 font-medium">Legal Questions Answered</p>
+                </div>
+                
+                <div class="stat-card bg-white rounded-xl shadow-md p-8 text-center">
+                    <div class="text-4xl text-blue-600 font-bold mb-2">5+</div>
+                    <p class="text-gray-600 font-medium">Languages Available</p>
+                </div>
+                
+                <div class="stat-card bg-white rounded-xl shadow-md p-8 text-center">
+                    <div class="text-4xl text-blue-600 font-bold mb-2">50+</div>
+                    <p class="text-gray-600 font-medium">Legal Expert Partners</p>
+                </div>
+            </div>
+            
+            <!-- Testimonial Slider -->
+            <div class="mt-16 max-w-4xl mx-auto bg-white rounded-xl shadow-md p-8" id="testimonialContainer">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">What Our Users Say</h3>
+                
+                <div class="relative">
+                    <div class="testimonial-slider">
+                        <div class="testimonial-slide">
+                            <div class="flex flex-col items-center text-center p-4">
+                                <div class="text-4xl text-blue-600 mb-4">❝</div>
+                                <p class="text-gray-600 italic text-lg mb-6">
+                                    Thanks to this platform, I fought an unfair eviction and won! The resources helped me understand my rights as a tenant and gave me the confidence to stand up for myself.
+                                </p>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-gray-500 font-bold">A</span>
+                                    </div>
+                                    <div class="text-left">
+                                        <h4 class="font-bold text-gray-800">Alex</h4>
+                                        <p class="text-gray-600 text-sm">Tenant Rights User</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md text-blue-600 hover:text-blue-800" id="prevTestimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md text-blue-600 hover:text-blue-800" id="nextTestimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="flex justify-center space-x-2 mt-6" id="testimonialDots">
+                    <button class="w-3 h-3 rounded-full bg-blue-600"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Involved Section -->
+    <section class="py-16 px-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white" id="involvedSection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">How You Can Get Involved</h2>
+                <p class="text-blue-100 text-lg max-w-3xl mx-auto">Join our mission to make legal knowledge accessible to everyone</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 backdrop-filter backdrop-blur-sm">
+                    <div class="text-5xl mb-6 text-white">🔄</div>
+                    <h3 class="text-xl font-bold mb-4">Volunteer</h3>
+                    <p class="text-blue-100 leading-relaxed mb-6">
+                        Are you a legal professional, writer, or educator? Share your expertise by contributing to our guides, answering user questions, or helping with outreach.
+                    </p>
+                    <a href="volunteer.html" class="inline-block bg-white text-blue-600 font-medium py-2 px-4 rounded-lg hover:bg-blue-50 transition duration-300">
+                        Learn More
+                    </a>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 backdrop-filter backdrop-blur-sm">
+                    <div class="text-5xl mb-6 text-white">🎓</div>
+                    <h3 class="text-xl font-bold mb-4">Spread the Word</h3>
+                    <p class="text-blue-100 leading-relaxed mb-6">
+                        Help us reach more people by sharing our resources with your community. The more people know about their rights, the stronger our society becomes.
+                    </p>
+                    <a href="share.html" class="inline-block bg-white text-blue-600 font-medium py-2 px-4 rounded-lg hover:bg-blue-50 transition duration-300">
+                        Share Resources
+                    </a>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 backdrop-filter backdrop-blur-sm">
+                    <div class="text-5xl mb-6 text-white">💰</div>
+                    <h3 class="text-xl font-bold mb-4">Donate</h3>
+                    <p class="text-blue-100 leading-relaxed mb-6">
+                        Support our mission financially. Your contributions help us create more resources, translate content, and reach underserved communities.
+                    </p>
+                    <a href="donate.html" class="inline-block bg-white text-blue-600 font-medium py-2 px-4 rounded-lg hover:bg-blue-50 transition duration-300">
+                        Make a Donation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 px-6 bg-white" id="faqSection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">Answers to common questions about our organization</p>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto mt-12 space-y-6">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="accordion-header w-full text-left px-6 py-4 font-medium text-gray-800 flex justify-between items-center focus:outline-none">
+                        <span>Is LegalEase a law firm?</span>
+                        <i class="fas fa-plus text-blue-600 transition-transform"></i>
+                    </button>
+                    <div class="accordion-content px-6 pb-4">
+                        <p class="text-gray-600 mt-4">
+                            No, LegalEase is not a law firm and does not provide legal representation. We are an educational platform that provides general legal information. The resources we offer are meant to increase awareness and understanding but should not be considered legal advice.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <button class="accordion-header w-full text-left px-6 py-4 font-medium text-gray-800 flex justify-between items-center focus:outline-none">
+                        <span>Are your resources free to access?</span>
+                        <i class="fas fa-plus text-blue-600 transition-transform"></i>
+                    </button>
+                    <div class="accordion-content px-6 pb-4 mt-4">
+                        <p class="text-gray-600 mt-4">
+                            Yes, the majority of our resources are completely free to access. We believe legal information should be available to everyone. Some specialized resources or personalized assistance may have associated fees, but we always clearly indicate when this is the case.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="accordion-header w-full text-left px-6 py-4 font-medium text-gray-800 flex justify-between items-center focus:outline-none">
+                        <span>How can I contribute as a legal professional?</span>
+                        <i class="fas fa-plus text-blue-600 transition-transform"></i>
+                    </button>
+                    <div class="accordion-content px-6 pb-4">
+                        <p class="text-gray-600 mt-4">
+                            There are several ways to contribute: you can write or review legal guides, volunteer to answer questions in our "Ask a Lawyer" section, or participate in our community outreach programs. Visit our Volunteer page to learn more about the application process.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="accordion-header w-full text-left px-6 py-4 font-medium text-gray-800 flex justify-between items-center focus:outline-none">
+                        <span>How do you ensure your information is accurate?</span>
+                        <i class="fas fa-plus text-blue-600 transition-transform"></i>
+                    </button>
+                    <div class="accordion-content px-6 pb-4">
+                        <p class="text-gray-600 mt-4">
+                            All of our content is created by qualified legal professionals and undergoes a thorough review process. We regularly update our resources to reflect changes in the law. Additionally, we cite credible sources and include last-update timestamps on all our guides.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="accordion-header w-full text-left px-6 py-4 font-medium text-gray-800 flex justify-between items-center focus:outline-none">
+                        <span>Is LegalEase available in languages other than English?</span>
+                        <i class="fas fa-plus text-blue-600 transition-transform"></i>
+                    </button>
+                    <div class="accordion-content px-6 pb-4">
+                        <p class="text-gray-600 mt-4">
+                            Currently, our resources are available in English, Spanish, Mandarin, French, and Arabic. We are actively working to expand our language offerings to make our content accessible to more communities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners & Supporters Section -->
+    <section class="py-16 px-6 bg-gray-50" id="partnersSection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Partners & Supporters</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">Organizations that help make our work possible</p>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mt-12">
+                <div class="flex items-center justify-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="/api/placeholder/120/60" alt="Partner Logo" class="max-h-12">
+                </div>
+                <div class="flex items-center justify-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="/api/placeholder/120/60" alt="Partner Logo" class="max-h-12">
+                </div>
+                <div class="flex items-center justify-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="/api/placeholder/120/60" alt="Partner Logo" class="max-h-12">
+                </div>
+                <div class="flex items-center justify-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="/api/placeholder/120/60" alt="Partner Logo" class="max-h-12">
+                </div>
+                <div class="flex items-center justify-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="/api/placeholder/120/60" alt="Partner Logo" class="max-h-12">
+                </div>
+                <div class="flex items-center justify-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <img src="/api/placeholder/120/60" alt="Partner Logo" class="max-h-12">
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="partners.html" class="inline-block border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition duration-300">
+                    View All Partners
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16 px-6 bg-white" id="contactSection">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Contact Us</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">Have questions or feedback? We'd love to hear from you.</p>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
+                <div>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md w-full">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Other Ways to Reach Us</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 text-white rounded-full p-3 mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">Office Location</h4>
+                                <p class="text-gray-600">123 Legal Way, Suite 400<br>San Francisco, CA 94103</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 text-white rounded-full p-3 mr-4">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">Phone</h4>
+                                <p class="text-gray-600">(555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 text-white rounded-full p-3 mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                                <p class="text-gray-600">info@legalease.org</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 text-white rounded-full p-3 mr-4">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">Hours</h4>
+                                <p class="text-gray-600">Monday - Friday: 9am - 5pm PST<br>Saturday: 10am - 2pm PST<br>Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold text-gray-800 mb-3">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">LegalEase</h3>
+                    <p class="text-gray-300 mb-4">
+                        Empowering citizens through legal awareness and education.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white">Home</a></li>
+                        <li><a href="legalguides.html" class="text-gray-300 hover:text-white">Legal Guides</a></li>
+                        <li><a href="QT.html" class="text-gray-300 hover:text-white">Quizzes & Tests</a></li>
+                        <li><a href="askalawyer.html" class="text-gray-300 hover:text-white">Ask a Lawyer</a></li>
+                        <li><a href="emergencycontacts.html" class="text-gray-300 hover:text-white">Emergency Contacts</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="blog.html" class="text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="glossary.html" class="text-gray-300 hover:text-white">Legal Glossary</a></li>
+                        <li><a href="volunteer.html" class="text-gray-300 hover:text-white">Volunteer</a></li>
+                        <li><a href="donate.html" class="text-gray-300 hover:text-white">Donate</a></li>
+                        <li><a href="events.html" class="text-gray-300 hover:text-white">Events</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="terms.html" class="text-gray-300 hover:text-white">Terms of Service</a></li>
+                        <li><a href="privacy.html" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="disclaimer.html" class="text-gray-300 hover:text-white">Disclaimer</a></li>
+                        <li><a href="accessibility.html" class="text-gray-300 hover:text-white">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">
+                    &copy; 2025 LegalEase. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Chat Bot -->
+    <div class="chatbot-bubble" id="chatBotButton">
+        <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">
+            <i class="fas fa-comment-alt text-2xl"></i>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        // Language Toggle (Just a placeholder for demonstration)
+        const languageToggle = document.getElementById('languageToggle');
+        languageToggle.addEventListener('click', () => {
+            alert('Language options would appear here');
+        });
+        
+        // FAQ Accordions
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('i');
+                
+                content.classList.toggle('active');
+                
+                if (content.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.classList.add('transform', 'rotate-45');
+                } else {
+                    content.style.maxHeight = 0;
+                    icon.classList.remove('transform', 'rotate-45');
+                }
+            });
+        });
+        
+        // Chatbot (Just a placeholder for demonstration)
+        const chatBotButton = document.getElementById('chatBotButton');
+        if (chatBotButton) {
+            chatBotButton.addEventListener('click', () => {
+                alert('Chat assistant would open here');
+            });
+        }
+        
+        // GSAP Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Register ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Hero Section Animation
+            gsap.from('#heroTitle', {
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('#heroDescription', {
+                duration: 1,
+                y: 30,
+                opacity: 0,
+                ease: 'power3.out',
+                delay: 0.3
+            });
+            
+            gsap.from('#learnMoreBtn', {
+                duration: 1,
+                y: 20,
+                opacity: 0,
+                ease: 'power3.out',
+                delay: 0.6
+            });
+            
+            gsap.from('#heroImage', {
+                duration: 1.2,
+                x: 100,
+                opacity: 0,
+                ease: 'power3.out',
+                delay: 0.2
+            });
+            
+            // Animate sections on scroll
+            gsap.utils.toArray('section').forEach(section => {
+                gsap.from(section, {
+                    opacity: 0,
+                    y: 30,
+                    ease: 'power2.out',
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+            
+            // Team Cards Animation
+            gsap.from('.team-card', {
+                opacity: 0,
+                y: 50,
+                stagger: 0.2,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '#teamSection',
+                    start: 'top 60%'
+                }
+            });
+            
+            // Service Cards Animation
+            gsap.from('.service-card', {
+                opacity: 0,
+                x: -50,
+                stagger: 0.2,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '#servicesSection',
+                    start: 'top 60%'
+                }
+            });
+            
+            // Stats Animation
+            gsap.from('.stat-card', {
+                opacity: 0,
+                scale: 0.8,
+                stagger: 0.1,
+                duration: 0.6,
+                scrollTrigger: {
+                    trigger: '#impactSection',
+                    start: 'top 70%'
+                }
+            });
+            
+            // Timeline Animation
+            gsap.from('.timeline-item', {
+                opacity: 0,
+                y: 30,
+                stagger: 0.3,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '#storySection',
+                    start: 'top 60%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalEase - Test Your Legal Knowledge</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .dark-mode {
+            background-color: #1a202c;
+            color: #f7fafc;
+        }
+        .dark-mode .navbar {
+            background-color: #2d3748;
+        }
+        .dark-mode .card {
+            background-color: #2d3748;
+            color: #f7fafc;
+        }
+        .dark-mode .footer {
+            background-color: #2d3748;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        .quiz-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .category-icon {
+            transition: transform 0.3s ease;
+        }
+        .category-icon:hover {
+            transform: scale(1.1);
+        }
+        .badge-item {
+            transition: transform 0.3s ease;
+        }
+        .badge-item:hover {
+            transform: scale(1.05);
+        }
+        .chatbot-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .chatbot-bubble:hover {
+            transform: scale(1.1);
+        }
+        .quiz-option {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #EBF4FF;
+        }
+        .quiz-option.selected {
+            background-color: #4299E1;
+            color: white;
+        }
+        .quiz-option.correct {
+            background-color: #48BB78;
+            color: white;
+        }
+        .quiz-option.incorrect {
+            background-color: #F56565;
+            color: white;
+        }
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal {
+            background-color: white;
+            border-radius: 10px;
+            max-width: 90%;
+            width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .dark-mode .modal {
+            background-color: #2d3748;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="navbar bg-white shadow-md px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-blue-800">LegalEase</h1>
+                <span class="text-sm text-gray-500 ml-2">⚖️</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="font-medium text-gray-600 hover:text-blue-600">Home</a>
+                <a href="legalguides.html" class="font-medium text-gray-600 hover:text-blue-600">Legal Guides</a>
+                <a href="QT.html" class="font-medium text-blue-600 border-b-2 border-blue-600">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-medium text-gray-600 hover:text-blue-600">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-medium text-gray-600 hover:text-blue-600">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-medium text-gray-600 hover:text-blue-600">About Us</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search quizzes..." 
+                           class="px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-300 w-48">
+                    <button class="absolute right-3 top-2 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <button id="languageToggle" class="p-2 rounded-full hover:bg-gray-100" title="Change Language">
+                    <span>🌍</span>
+                </button>
+                
+                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-100" title="Toggle Dark Mode">
+                    <span>🌙</span>
+                </button>
+                
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-600 text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="bg-gray-100 py-2 px-6 mt-16">
+        <div class="container mx-auto">
+            <div class="text-sm text-gray-600">
+                <a href="index.html" class="hover:text-blue-600">Home</a> 
+                <span class="mx-2">&gt;</span> 
+                <span class="text-blue-600">Quizzes & Tests</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-10 pb-16 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-3/5 mb-10 md:mb-0" id="heroText">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Test Your Legal Knowledge: Quizzes & Interactive Tests</h1>
+                <p class="text-xl mb-8">Do you know your rights? Take our interactive legal quizzes to learn about the laws that protect you. Each quiz provides instant feedback, explanations, and useful resources.</p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#quiz-categories" class="bg-white text-blue-700 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                        🏆 Start a Quiz Now!
+                    </a>
+                    <a href="legalguides.html" class="bg-transparent border border-white text-white hover:bg-blue-600 font-medium py-3 px-6 rounded-lg transition duration-300">
+                        📜 Learn Before You Test
+                    </a>
+                </div>
+            </div>
+            
+            <div class="md:w-2/5 flex justify-center" id="heroImage">
+                <img src="/api/placeholder/500/400" alt="People taking a legal quiz" class="rounded-lg shadow-xl max-w-full h-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Categories Section -->
+    <section id="quiz-categories" class="py-16 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Quiz Categories</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Test your knowledge across different legal topics. Each quiz is designed to help you understand your rights better.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Housing Quiz Card -->
+                <div class="quiz-card bg-blue-50 rounded-xl overflow-hidden shadow-md mt-1">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="category-icon text-4xl mr-4">🏠</div>
+                            <h3 class="text-xl font-semibold text-gray-800">Housing & Tenant Legal Rights Quiz</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Test your knowledge on tenant laws and landlord obligations.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Beginner</span>
+                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 5 minutes, 10 questions</span>
+                        </div>
+                        <button class="take-quiz-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="housing">
+                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="bg-blue-600 px-6 py-3 text-white text-sm">
+                        <div class="flex justify-between">
+                            <span><i class="fas fa-users"></i> 2,540 people took this quiz</span>
+                            <span><i class="fas fa-star"></i> 4.8/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Workplace Quiz Card -->
+                <div class="quiz-card bg-green-50 rounded-xl overflow-hidden shadow-md mt-1">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="category-icon text-4xl mr-4">💼</div>
+                            <h3 class="text-xl font-semibold text-gray-800">Workplace & Employment Laws Quiz</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Find out if you know your employee rights and workplace protections.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Intermediate</span>
+                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 8 minutes, 15 questions</span>
+                        </div>
+                        <button class="take-quiz-btn w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="workplace">
+                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="bg-green-600 px-6 py-3 text-white text-sm">
+                        <div class="flex justify-between">
+                            <span><i class="fas fa-users"></i> 3,120 people took this quiz</span>
+                            <span><i class="fas fa-star"></i> 4.7/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Consumer Protection Quiz Card -->
+                <div class="quiz-card bg-purple-50 rounded-xl overflow-hidden shadow-md mt-1">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="category-icon text-4xl mr-4">💳</div>
+                            <h3 class="text-xl font-semibold text-gray-800">Consumer Protection Law Quiz</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">What are your rights when buying products and services? Test your knowledge!</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">Beginner</span>
+                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 6 minutes, 12 questions</span>
+                        </div>
+                        <button class="take-quiz-btn w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="consumer">
+                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="bg-purple-600 px-6 py-3 text-white text-sm">
+                        <div class="flex justify-between">
+                            <span><i class="fas fa-users"></i> 1,975 people took this quiz</span>
+                            <span><i class="fas fa-star"></i> 4.9/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cybersecurity Quiz Card -->
+                <div class="quiz-card bg-indigo-50 rounded-xl overflow-hidden shadow-md">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="category-icon text-4xl mr-4">🔗</div>
+                            <h3 class="text-xl font-semibold text-gray-800">Cybersecurity & Privacy Laws Quiz</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Learn how to stay safe online and understand your digital privacy rights.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">Advanced</span>
+                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 10 minutes, 20 questions</span>
+                        </div>
+                        <button class="take-quiz-btn w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="cyber">
+                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="bg-indigo-600 px-6 py-3 text-white text-sm">
+                        <div class="flex justify-between">
+                            <span><i class="fas fa-users"></i> 1,340 people took this quiz</span>
+                            <span><i class="fas fa-star"></i> 4.6/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Criminal Rights Quiz Card -->
+                <div class="quiz-card bg-red-50 rounded-xl overflow-hidden shadow-md">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="category-icon text-4xl mr-4">⚖</div>
+                            <h3 class="text-xl font-semibold text-gray-800">Criminal Law & Civil Rights Quiz</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Understand legal procedures and your rights in criminal and civil situations.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Intermediate</span>
+                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 7 minutes, 15 questions</span>
+                        </div>
+                        <button class="take-quiz-btn w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="criminal">
+                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="bg-red-600 px-6 py-3 text-white text-sm">
+                        <div class="flex justify-between">
+                            <span><i class="fas fa-users"></i> 2,105 people took this quiz</span>
+                            <span><i class="fas fa-star"></i> 4.8/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Government Quiz Card -->
+                <div class="quiz-card bg-yellow-50 rounded-xl overflow-hidden shadow-md">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="category-icon text-4xl mr-4">🏛</div>
+                            <h3 class="text-xl font-semibold text-gray-800">Government & Citizen Rights Quiz</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Do you know your rights as a citizen? Test your knowledge of constitutional rights.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Beginner</span>
+                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 5 minutes, 10 questions</span>
+                        </div>
+                        <button class="take-quiz-btn w-full bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="government">
+                            Take Quiz <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="bg-yellow-600 px-6 py-3 text-white text-sm">
+                        <div class="flex justify-between">
+                            <span><i class="fas fa-users"></i> 1,820 people took this quiz</span>
+                            <span><i class="fas fa-star"></i> 4.7/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                    View All Quizzes <i class="fas fa-th ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section class="py-16 px-6 bg-gray-100">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">How the Quizzes Work</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Our interactive quizzes are designed to be educational and engaging. Here's how to get started:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="text-center mb-4">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">1</div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-3">Choose a Quiz</h3>
+                    <p class="text-gray-600 text-center">Select from our range of legal topics that interest you most.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="text-center mb-4">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">2</div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-3">Answer Questions</h3>
+                    <p class="text-gray-600 text-center">Test your knowledge with multiple-choice, true/false, and scenario-based questions.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="text-center mb-4">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">3</div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-3">Get Instant Feedback</h3>
+                    <p class="text-gray-600 text-center">Learn why your answer was right or wrong with detailed explanations.</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-8">
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="text-center mb-4">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">4</div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-3">Earn Badges & Points</h3>
+                    <p class="text-gray-600 text-center">Track your progress and unlock achievements as you improve your legal knowledge.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="text-center mb-4">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">5</div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-3">Share Your Score</h3>
+                    <p class="text-gray-600 text-center">Challenge friends and spread legal awareness by sharing your results on social media.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements & Gamification Section -->
+    <section class="py-16 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Earn Badges & Track Your Progress</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">As you complete quizzes and improve your legal knowledge, you'll earn badges that showcase your expertise.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
+                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
+                    <div class="text-5xl mb-3">🎓</div>
+                    <h3 class="font-semibold text-gray-800 mb-1">Legal Beginner</h3>
+                    <p class="text-sm text-gray-600">Complete your first quiz</p>
+                </div>
+                
+                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
+                    <div class="text-5xl mb-3">🏆</div>
+                    <h3 class="font-semibold text-gray-800 mb-1">Perfect Score</h3>
+                    <p class="text-sm text-gray-600">Score 100% on any quiz</p>
+                </div>
+                
+                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
+                    <div class="text-5xl mb-3">⚖️</div>
+                    <h3 class="font-semibold text-gray-800 mb-1">Rights Champion</h3>
+                    <p class="text-sm text-gray-600">Score 80%+ on 3 quizzes</p>
+                </div>
+                
+                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
+                    <div class="text-5xl mb-3">🔍</div>
+                    <h3 class="font-semibold text-gray-800 mb-1">Legal Explorer</h3>
+                    <p class="text-sm text-gray-600">Try quizzes in 5 categories</p>
+                </div>
+                
+                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
+                    <div class="text-5xl mb-3">📚</div>
+                    <h3 class="font-semibold text-gray-800 mb-1">Legal Expert</h3>
+                    <p class="text-sm text-gray-600">Complete all quizzes</p>
+                </div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto mt-12 bg-blue-50 rounded-lg p-6 shadow-md">
+                <h3 class="text-2xl font-semibold text-center text-gray-800 mb-6">Weekly Leaderboard</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-blue-100">
+                                <th class="py-3 px-4 text-left">Rank</th>
+                                <th class="py-3 px-4 text-left">User</th>
+                                <th class="py-3 px-4 text-left">Quizzes Completed</th>
+                                <th class="py-3 px-4 text-left">Average Score</th>
+                                <th class="py-3 px-4 text-left">Badges</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-blue-100">
+                                <td class="py-3 px-4"><span class="bg-yellow-400 text-white rounded-full w-6 h-6 inline-flex items-center justify-center">1</span></td>
+                                <td class="py-3 px-4">LegalEagle492</td>
+                                <td class="py-3 px-4">15</td>
+                                <td class="py-3 px-4">94%</td>
+                                <td class="py-3 px-4">🎓 🏆 ⚖️ 🔍 📚</td>
+                            </tr>
+                            <tr class="border-b border-blue-100">
+                                <td class="py-3 px-4"><span class="bg-gray-300 text-white rounded-full w-6 h-6 inline-flex items-center justify-center">2</span></td>
+                                <td class="py-3 px-4">JusticeFinder</td>
+                                <td class="py-3 px-4">12</td>
+                                <td class="py-3 px-4">91%</td>
+                                <td class="py-3 px-4">🎓 ⚖️ 🔍 📚</td>
+                            </tr>
+                            <tr class="border-b border-blue-100">
+                                <td class="py-3 px-4"><span class="bg-orange-400 text-white rounded-full w-6 h-6 inline-flex items-center justify-center">3</span></td>
+                                <td class="py-3 px-4">LawStudent2025</td>
+                                <td class="py-3 px-4">10</td>
+                                <td class="py-3 px-4">88%</td>
+                                <td class="py-3 px-4">🎓 🏆 ⚖️</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-6">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition duration-300">
+                        View Full Leaderboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenge Friends Section -->
+    <section class="py-16 px-6 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4">Challenge Your Friends!</h2>
+            <p class="text-center mb-12 max-w-3xl mx-auto">Learning is more fun with friends! Challenge others to test their legal knowledge and see who scores the highest.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                <div class="bg-white bg-opacity-10 rounded-lg p-6 border border-white border-opacity-20 backdrop-filter backdrop-blur-sm">
+                    <div class="flex flex-col items-center">
+                        <div class="text-5xl mb-6">👥</div>
+                        <h3 class="text-xl font-semibold text-center mb-4">Social Challenge</h3>
+                        <p class="text-center mb-6">Share your quiz results on social media and challenge friends to beat your score.</p>
+                        <div class="flex space-x-4">
+                            <button class="bg-blue-500 hover:bg-blue-600 p-3 rounded-full transition">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            <button class="bg-blue-400 hover:bg-blue-500 p-3 rounded-full transition">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            <button class="bg-pink-600 hover:bg-pink-700 p-3 rounded-full transition">
+                                <i class="fab fa-instagram"></i>
+                            </button>
+                            <button class="bg-blue-600 hover:bg-blue-700 p-3 rounded-full transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 rounded-lg p-6 border border-white border-opacity-20 backdrop-filter backdrop-blur-sm">
+                    <div class="flex flex-col items-center">
+                        <div class="text-5xl mb-6">✉️</div>
+                        <h3 class="text-xl font-semibold text-center mb-4">Email Invite</h3>
+                        <p class="text-center mb-6">Send a direct challenge to your friends, colleagues, or classmates via email.</p>
+                        <form class="w-full">
+                            <input type="email" placeholder="Enter your friend's email" class="w-full mb-3 px-4 py-2 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white">
+                            <button type="submit" class="w-full bg-white text-purple-600 hover:bg-opacity-90 font-medium py-2 rounded-lg transition duration-300">
+                                Send Challenge
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Demo/Preview Section -->
+    <section class="py-16 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Try a Sample Question</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">See how our quizzes work with this sample question from our Housing & Tenant Rights quiz.</p>
+            
+            <div class="max-w-3xl mx-auto bg-blue-50 rounded-lg p-8 shadow-md">
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Question: What is generally required for a landlord to enter a tenant's rental unit?</h3>
+                    
+                    <div class="flex flex-col space-y-3 mt-6">
+                        <div class="quiz-option border border-gray-300 rounded-lg p-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="sample-question" class="mr-3">
+                                <span>A landlord can enter at any time without notice</span>
+                            </label>
+                        </div>
+                        
+                        <div class="quiz-option border border-gray-300 rounded-lg p-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="sample-question" class="mr-3">
+                                <span>A landlord must give reasonable notice (typically 24-48 hours)</span>
+                            </label>
+                        </div>
+                        
+                        <div class="quiz-option border border-gray-300 rounded-lg p-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="sample-question" class="mr-3">
+                                <span>A landlord needs a court order to enter</span>
+                            </label>
+                        </div>
+                        
+                        <div class="quiz-option border border-gray-300 rounded-lg p-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="sample-question" class="mr-3">
+                                <span>A landlord can never enter unless the tenant is present</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button id="check-answer" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
+                        Submit Answer
+                    </button>
+                </div>
+                
+                <div id="answer-explanation" class="mt-8 hidden">
+                    <div class="border-l-4 border-green-500 bg-green-50 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-green-700">
+                                    Correct answer: A landlord must give reasonable notice (typically 24-48 hours)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-2">Explanation:</h4>
+                        <p class="text-gray-700">
+                            Most state laws require landlords to provide "reasonable notice" before entering a tenant's rental unit, which is typically defined as 24-48 hours depending on the state. This notice requirement balances the landlord's right to access their property with the tenant's right to privacy and quiet enjoyment. Exceptions may exist for emergencies that threaten safety or property damage.
+                        </p>
+                        <div class="mt-4">
+                            <a href="#" class="text-blue-600 hover:underline font-medium">Learn more about tenant privacy rights →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                    Take the Full Housing Quiz <i class="fas fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 px-6 bg-gray-100">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">What Our Users Say</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Thousands of people have improved their legal knowledge through our interactive quizzes.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="mr-4">
+                            <img src="/api/placeholder/60/60" alt="User avatar" class="rounded-full w-12 h-12">
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Sarah J.</h3>
+                            <p class="text-sm text-gray-500">Law Student</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-2">"These quizzes have been an excellent supplement to my law school studies. The explanations are thorough and help me understand concepts better than just memorizing facts."</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="mr-4">
+                            <img src="/api/placeholder/60/60" alt="User avatar" class="rounded-full w-12 h-12">
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Michael T.</h3>
+                            <p class="text-sm text-gray-500">Small Business Owner</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-600 mb-2">"The employment law quiz helped me understand my obligations as an employer. I feel much more confident in creating workplace policies that are fair and legally compliant."</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="mr-4">
+                            <img src="/api/placeholder/60/60" alt="User avatar" class="rounded-full w-12 h-12">
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Elena R.</h3>
+                            <p class="text-sm text-gray-500">First-time Renter</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-2">"After taking the housing quiz, I understood my rights as a tenant. I was able to address a security deposit issue with my landlord confidently and got a positive outcome!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Modal Overlay -->
+    <div id="quiz-modal" class="overlay">
+        <div class="modal">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 id="quiz-title" class="text-2xl font-bold text-gray-800">Housing & Tenant Rights Quiz</h3>
+                    <button id="close-quiz" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-600">Question <span id="current-question">1</span> of <span id="total-questions">10</span></span>
+                        <span class="text-sm text-gray-600"><i class="far fa-clock mr-1"></i> <span id="quiz-timer">5:00</span> remaining</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div id="progress-bar" class="progress-bar bg-blue-600 h-2.5 rounded-full" style="width: 10%"></div>
+                    </div>
+                </div>
+                
+                <div id="quiz-content">
+                    <h4 id="question-text" class="text-lg font-semibold text-gray-800 mb-4">What is generally required for a landlord to enter a tenant's rental unit?</h4>
+                    
+                    <div id="quiz-options" class="flex flex-col space-y-3 mt-6">
+                        <!-- Options will be added dynamically with JavaScript -->
+                    </div>
+                    
+                    <div id="explanation-box" class="mt-6 hidden">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Explanation:</h4>
+                            <p id="explanation-text" class="text-gray-700"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between mt-8">
+                    <button id="prev-question" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition duration-300">
+                        Previous
+                    </button>
+                    <button id="next-question" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Bubble -->
+    <div class="chatbot-bubble">
+        <button class="bg-blue-600 hover:bg-blue-700 w-16 h-16 rounded-full flex items-center justify-center shadow-lg">
+            <i class="fas fa-comments text-white text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-gray-800 text-white py-12 px-6">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">LegalEase</h3>
+                    <p class="text-gray-300 mb-4">Making legal knowledge accessible to everyone through interactive quizzes and learning tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition">Home</a></li>
+                        <li><a href="legalguides.html" class="text-gray-300 hover:text-white transition">Legal Guides</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Quizzes & Tests</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Ask a Lawyer</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Housing & Tenant Rights</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Employment Law</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Consumer Protection</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Family Law</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">All Categories</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact & Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 LegalEase. All rights reserved. Legal information is not legal advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+
+        // Sample Quiz Functionality
+        const checkAnswerBtn = document.getElementById('check-answer');
+        const answerExplanation = document.getElementById('answer-explanation');
+        const quizOptions = document.querySelectorAll('.quiz-option');
+
+        checkAnswerBtn.addEventListener('click', () => {
+            // Show the correct answer explanation
+            answerExplanation.classList.remove('hidden');
+            
+            // Highlight the correct option
+            quizOptions.forEach((option, index) => {
+                if (index === 1) { // Second option is correct
+                    option.classList.add('correct');
+                } else {
+                    const radio = option.querySelector('input[type="radio"]');
+                    if (radio.checked) {
+                        option.classList.add('incorrect');
+                    }
+                }
+            });
+            
+            // Change the button text
+            checkAnswerBtn.textContent = 'Continue to Next Question';
+            checkAnswerBtn.addEventListener('click', () => {
+                window.location.href = '#quiz-categories';
+            }, { once: true });
+        });
+
+        // Quiz Modal Functionality
+        const takeQuizBtns = document.querySelectorAll('.take-quiz-btn');
+        const quizModal = document.getElementById('quiz-modal');
+        const closeQuizBtn = document.getElementById('close-quiz');
+        
+        takeQuizBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                quizModal.style.display = 'flex';
+                const quizType = btn.getAttribute('data-quiz');
+                
+                // Customize quiz title based on the selected quiz
+                const quizTitle = document.getElementById('quiz-title');
+                if (quizType === 'housing') {
+                    quizTitle.textContent = 'Housing & Tenant Rights Quiz';
+                } else if (quizType === 'workplace') {
+                    quizTitle.textContent = 'Workplace & Employment Laws Quiz';
+                } else if (quizType === 'consumer') {
+                    quizTitle.textContent = 'Consumer Protection Quiz';
+                } else if (quizType === 'cyber') {
+                    quizTitle.textContent = 'Cybersecurity & Privacy Laws Quiz';
+                } else if (quizType === 'criminal') {
+                    quizTitle.textContent = 'Criminal & Civil Rights Quiz';
+                } else if (quizType === 'government') {
+                    quizTitle.textContent = 'Government & Citizen Rights Quiz';
+                }
+                
+                // Reset quiz state
+                document.getElementById('current-question').textContent = '1';
+                document.getElementById('progress-bar').style.width = '10%';
+                document.getElementById('explanation-box').classList.add('hidden');
+                
+                // Add sample quiz options
+                const quizOptions = document.getElementById('quiz-options');
+                quizOptions.innerHTML = `
+                    <div class="quiz-option border border-gray-300 rounded-lg p-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="quiz-question" class="mr-3">
+                            <span>A landlord can enter at any time without notice</span>
+                        </label>
+                    </div>
+                    <div class="quiz-option border border-gray-300 rounded-lg p-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="quiz-question" class="mr-3">
+                            <span>A landlord must give reasonable notice (typically 24-48 hours)</span>
+                        </label>
+                    </div>
+                    <div class="quiz-option border border-gray-300 rounded-lg p-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="quiz-question" class="mr-3">
+                            <span>A landlord needs a court order to enter</span>
+                        </label>
+                    </div>
+                    <div class="quiz-option border border-gray-300 rounded-lg p-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="quiz-question" class="mr-3">
+                            <span>A landlord can never enter unless the tenant is present</span>
+                        </label>
+                    </div>
+                `;
+            });
+        });
+        
+        closeQuizBtn.addEventListener('click', () => {
+            quizModal.style.display = 'none';
+        });
+
+        // Animation with GSAP
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hero section animations
+            gsap.from('#heroText', {
+                duration: 1,
+                x: -50,
+                opacity: 0,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('#heroImage', {
+                duration: 1,
+                x: 50,
+                opacity: 0,
+                ease: 'power3.out',
+                delay: 0.3
+            });
+            
+            // Quiz cards animations
+            gsap.from('.quiz-card', {
+                duration: 0.8,
+                y: 30,
+                opacity: 0,
+                stagger: 0.1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '#quiz-categories',
+                    start: 'top 80%'
+                }
+            });
+            
+            // Badges animations
+            gsap.from('.badge-item', {
+                duration: 0.6,
+                scale: 0.8,
+                opacity: 0,
+                stagger: 0.1,
+                ease: 'back.out(1.7)',
+                scrollTrigger: {
+                    trigger: '.badge-item',
+                    start: 'top 80%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>

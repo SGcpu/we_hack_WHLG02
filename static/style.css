@@ -1,0 +1,67 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.dark-mode {
+    background-color: #1a202c;
+    color: #f7fafc;
+}
+.dark-mode .navbar {
+    background-color: #2d3748;
+}
+.dark-mode .card {
+    background-color: #2d3748;
+    color: #f7fafc;
+}
+.dark-mode .footer {
+    background-color: #2d3748;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+.hero-text-animation {
+    overflow: hidden;
+    white-space: nowrap;
+}
+.hero-container {
+    position: relative;
+    overflow: hidden;
+}
+.chatbot-bubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.chatbot-bubble:hover {
+    transform: scale(1.1);
+}
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.topic-icon {
+    transition: transform 0.3s ease;
+}
+.topic-icon:hover {
+    transform: scale(1.2);
+}
+.news-ticker {
+    overflow: hidden;
+    position: relative;
+    height: 40px;
+}
+.ticker-content {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+}

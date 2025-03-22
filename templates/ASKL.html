@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumbai Lawyer Finder</title>
+    <link rel="stylesheet" href="ASKL.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mumbai Lawyer Finder</h1>
+        
+        <div class="search-container">
+            <h2>Find Lawyers by Pincode</h2>
+            <p>Enter a Mumbai pincode to find lawyers in that area</p>
+            <div class="search-form">
+                <input type="text" id="pincode-input" placeholder="Enter pincode (e.g. 400001)" value="400001">
+                <button id="search-button">Find Lawyers</button>
+            </div>
+        </div>
+        
+        <div class="results-container">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Searching for lawyers...</p>
+            </div>
+            
+            <div class="error-message" id="error-message">
+                No lawyers found in this area. Please try another pincode.
+            </div>
+            
+            <div class="results-table" id="results-table">
+                <h2>Lawyers in your area</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Specialization</th>
+                            <th>Experience (Years)</th>
+                            <th>Contact</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lawyers-table-body">
+                        <!-- Lawyer data will be inserted here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-message">
+                Looking for lawyers in Mumbai? Enter a pincode above to get started.
+            </div>
+        </div>
+    </div>
+
+    <script src="ASKL.js"></script>
+</body>
+</html>
