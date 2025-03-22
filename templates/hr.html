@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Rights in India</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.2), 0 8px 10px -6px rgba(99, 102, 241, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4338ca;
+        }
+
+        .content-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="navbar px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="font-extrabold text-indigo-300 animated-border">Home</a>
+                <a href="legalguides.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search legal topics..." 
+                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>   
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-indigo-900 opacity-10 z-0"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="flex flex-col items-center text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Understand Your <span class="gradient-text">Human Rights</span> in India
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
+                    Comprehensive guide to fundamental rights guaranteed by the Indian Constitution, protections for vulnerable groups, and mechanisms to seek justice.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fundamental Rights Cards Section -->
+    <section id="fundamental-rights" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                Fundamental <span class="text-indigo-500">Rights</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Equality (Articles 14-18)</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Ensures equality before the law, prohibits discrimination based on religion, race, caste, sex, or place of birth, and abolishes untouchability and titles.
+                    </p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.465a5 5 0 01-.732-6.334l-.586.586a1 1 0 001.414 1.414l.586-.586a5 5 0 016.364.732" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Freedom (Articles 19-22)</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Protects freedom of speech and expression, assembly, association, movement, residence, and the right to practice any profession or occupation.
+                    </p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right Against Exploitation (Articles 23-24)</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Prohibits human trafficking, forced labor (beggar), and employment of children under 14 years in hazardous conditions.
+                    </p>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Freedom of Religion (Articles 25-28)</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Guarantees freedom of conscience, profession, practice, and propagation of religion, and prohibits religious instruction in state-funded educational institutions.
+                    </p>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Cultural and Educational Rights (Articles 29-30)</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Protects the rights of minorities to conserve their distinct language, script, and culture, and to establish and administer educational institutions of their choice.
+                    </p>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Constitutional Remedies (Article 32)</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Empowers citizens to approach the Supreme Court directly if their fundamental rights are violated, through writs of habeas corpus, mandamus, prohibition, certiorari, and quo warranto.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Protection for Vulnerable Groups Section -->
+    <section id="vulnerable-groups" class="py-16 md:py-24 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Protection</span> for Vulnerable Groups
+            </h2>
+            
+            <div class="max-w-4xl mx-auto content-section">
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Women's Rights and Protection</h3>
+                    <p class="text-gray-300 mb-4">
+                        Indian law provides comprehensive protections for women through various legislations such as the Protection of Women from Domestic Violence Act (2005), Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act (2013), and Dowry Prohibition Act (1961).
+                    </p>
+                    <p class="text-gray-300">
+                        These laws address issues of domestic violence, workplace harassment, dowry-related crimes, and ensure equal rights in matters of marriage, divorce, inheritance, and employment. The Constitution also permits special provisions for women under Article 15(3).
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Rights of Scheduled Castes and Scheduled Tribes</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Scheduled Castes and Scheduled Tribes (Prevention of Atrocities) Act, 1989 protects marginalized communities from acts of violence, humiliation, and exploitation based on their social status.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        The Constitution also provides for reservation in educational institutions, government jobs, and political representation to ensure social justice and equal opportunities for advancement.
+                    </p>
+                    <p class="text-gray-300">
+                        Additionally, the Protection of Civil Rights Act, 1955 makes the practice of untouchability a punishable offense, reinforcing Article 17 of the Constitution which abolishes untouchability.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Rights of Religious and Linguistic Minorities</h3>
+                    <p class="text-gray-300 mb-4">
+                        Articles 29 and 30 of the Constitution specifically protect the rights of religious and linguistic minorities to preserve their culture and establish and administer educational institutions of their choice.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        The National Commission for Minorities Act, 1992 established a statutory body to safeguard the rights of minority communities and ensure their welfare.
+                    </p>
+                    <p class="text-gray-300">
+                        Various Supreme Court judgments have reinforced the secular fabric of India and the right to religious freedom, while maintaining the principle of reasonable restrictions.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Rights of Persons with Disabilities</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Rights of Persons with Disabilities Act, 2016 ensures equal opportunities, protection of rights, and full participation for persons with disabilities in all aspects of society.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        The law mandates accessibility in public buildings, transportation, and information systems, and prohibits discrimination in employment, education, and other areas.
+                    </p>
+                    <p class="text-gray-300">
+                        It also provides for reservation in higher education institutions and government jobs, social security, healthcare, rehabilitation, and recreation facilities for persons with disabilities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- National Human Rights Commission Section -->
+    <section id="nhrc" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">National Human Rights</span> Commission
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- About NHRC -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">About NHRC</h3>
+                    <p class="text-gray-300 mb-4">
+                        The National Human Rights Commission (NHRC) was established in 1993 under the Protection of Human Rights Act. It serves as an independent statutory body responsible for the protection and promotion of human rights in India.
+                    </p>
+                    <p class="text-gray-300">
+                        The Commission is composed of a Chairperson (former Chief Justice of India), members from the judiciary, and experts in human rights. It functions as a watchdog for human rights violations and recommends appropriate remedial measures to the government.
+                    </p>
+                </div>
+                
+                <!-- Functions of NHRC -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Functions of NHRC</h3>
+                    <ul class="text-gray-300 list-disc pl-5 space-y-2">
+                        <li>Investigating complaints of human rights violations</li>
+                        <li>Visiting jails and detention centers to study living conditions</li>
+                        <li>Reviewing safeguards provided by the Constitution</li>
+                        <li>Studying international treaties and recommending their implementation</li>
+                        <li>Promoting human rights literacy and awareness</li>
+                        <li>Encouraging NGOs working in the human rights field</li>
+                        <li>Undertaking research on human rights issues</li>
+                    </ul>
+                </div>
+                
+                <!-- Filing a Complaint -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">How to File a Complaint</h3>
+                    <p class="text-gray-300 mb-4">
+                        Any person can file a complaint with the NHRC if they believe their human rights or those of others have been violated. Complaints can be filed:
+                    </p>
+                    <ul class="text-gray-300 list-disc pl-5 space-y-2">
+                        <li>Online through the NHRC portal (nhrc.nic.in)</li>
+                        <li>Via post addressed to the Secretary General, NHRC</li>
+                        <li>By fax to the Commission's office</li>
+                        <li>In person at the NHRC headquarters in New Delhi</li>
+                        <li>Through email to complaints@nhrc.nic.in</li>
+                    </ul>
+                    <p class="text-gray-300 mt-4">
+                        There is no fee for filing a complaint, and complaints can be made in any language recognized in the Indian Constitution.
+                    </p>
+                </div>
+                
+                <!-- Complaint Process -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Complaint Process</h3>
+                    <ol class="text-gray-300 list-decimal pl-5 space-y-2">
+                        <li>Submission of complaint with relevant details and supporting documents</li>
+                        <li>Registration and assignment of a case number</li>
+                        <li>Preliminary examination by the Commission</li>
+                        <li>Request for reports from relevant authorities</li>
+                        <li>Investigation by NHRC team if necessary</li>
+                        <li>Hearings may be conducted if required</li>
+                        <li>Recommendations issued to the concerned authority</li>
+                        <li>Follow-up on implementation of recommendations</li>
+                    </ol>
+                    <p class="text-gray-300 mt-4">
+                        The Commission aims to dispose of cases expeditiously, though complex matters may take longer depending on the cooperation of concerned authorities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Human Rights Laws Section -->
+    <section id="laws" class="py-16 md:py-24 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                Important <span class="text-indigo-500">Human Rights Laws</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Law 1 -->
+                <div class="bg-slate-900 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Protection of Human Rights Act, 1993</h3>
+                    <p class="text-gray-300">
+                        Established the National Human Rights Commission (NHRC) and State Human Rights Commissions (SHRCs) to protect and promote human rights in India, providing a framework for investigation and redressal of human rights violations.
+                    </p>
+                </div>
+                
+                <!-- Law 2 -->
+                <div class="bg-slate-900 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Right to Information Act, 2005</h3>
+                    <p class="text-gray-300">
+                        Empowers citizens to seek information from public authorities, promoting transparency and accountability in governance, which is essential for the protection of human rights.
+                    </p>
+                </div>
+                
+                <!-- Law 3 -->
+                <div class="bg-slate-900 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">POCSO Act, 2012</h3>
+                    <p class="text-gray-300">
+                        The Protection of Children from Sexual Offences Act provides for stringent punishment for sexual crimes against children and establishes special courts for speedy trials of such offenses.
+                    </p>
+                </div>
+                
+                <!-- Law 4 -->
+                <div class="bg-slate-900 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Mental Healthcare Act, 2017</h3>
+                    <p class="text-gray-300">
+                        Protects the rights of persons with mental illness, ensuring they receive care and treatment in a dignified manner, and prohibiting procedures like electroconvulsive therapy without anesthesia.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-r from-indigo-900 to-purple-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 content-section">Stand Up for Your Rights</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10 content-section">
+                Human rights are not a privilege but a fundamental entitlement. Learn, advocate, and ensure justice for all.
+            </p>
+            <div class="content-section">
+                <button class="bg-white text-indigo-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                    <a href="legalguides.html">Get Legal Support</a>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-10 border-t border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-white">HumanRights</span>
+                </div>
+                <div class="text-gray-400 text-center md:text-right">
+                    <p>© 2025 Legal Pathshala. All rights reserved.</p>
+                    <p class="text-sm mt-2">Information provided is for educational purposes only and not legal advice.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Register ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Stagger animation for content sections
+        const contentSections = document.querySelectorAll('.content-section');
+        contentSections.forEach(section => {
+            gsap.to(section, {
+                opacity: 1,
+                y: 0,duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            // Ensure that the sections are visible on load
+            section.style.opacity = 1;
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (document.getElementById('mobile-menu')) {
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // Adjust for header height
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

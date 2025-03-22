@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer Protection in India</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.2), 0 8px 10px -6px rgba(99, 102, 241, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4338ca;
+        }
+
+        .content-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="navbar px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="font-extrabold text-indigo-300 animated-border">Home</a>
+                <a href="legalguides.html" class="font-extrabold  text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search legal topics..." 
+                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>   
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-indigo-900 opacity-10 z-0"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="flex flex-col items-center text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Know Your <span class="gradient-text">Consumer Rights</span> in India
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
+                    Comprehensive guide to understanding the Consumer Protection Act, safeguarding your rights, and ensuring fair treatment in the marketplace.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Rights Cards Section -->
+    <section id="#" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                Key <span class="text-indigo-500">Consumer Rights</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Safety</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Protection against products and services that are hazardous to health or life. Includes safety standards for goods and services across all sectors.
+                    </p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Information</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        The right to be fully informed about the quality, quantity, potency, purity, price, and standard of products or services to protect against unfair trade practices.
+                    </p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Choose</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        The assurance of access to a variety of goods and services at competitive prices. Includes protection against monopolistic practices and unfair restrictions.
+                    </p>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Redressal</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        The right to seek remedy for unfair practices and exploitation. Includes compensation for damages caused by deficient products or services.
+                    </p>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Consumer Education</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        The right to acquire knowledge and skills needed to make informed decisions. Includes awareness programs about consumer rights and responsibilities.
+                    </p>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Healthy Environment</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        The right to live and work in an environment that doesn't threaten the well-being of present and future generations. Includes protection against environmental hazards.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Information Section -->
+    <section id="detailed-info" class="py-16 md:py-24 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Key Provisions</span> of Consumer Protection Act
+            </h2>
+            
+            <div class="max-w-4xl mx-auto content-section">
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Consumer Protection Authorities</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Act establishes a Central Consumer Protection Authority (CCPA) to regulate matters relating to violation of consumer rights, unfair trade practices, and false or misleading advertisements.
+                    </p>
+                    <p class="text-gray-300">
+                        The authority has investigative powers and can impose penalties on manufacturers, advertisers, and service providers for violations. It also has the ability to recall products, order refunds, and issue directions to discontinue unfair practices.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Misleading Advertisements</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Act defines misleading advertisements as any advertisement that falsely describes a product or service, gives a false guarantee, or is likely to mislead consumers regarding the nature, substance, or quality of goods or services.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Endorsers, including celebrities, can be held liable for making false or misleading claims. They may face prohibition from endorsing products for up to three years and significant financial penalties.
+                    </p>
+                    <p class="text-gray-300">
+                        The Act empowers the CCPA to issue guidelines for preventing false, misleading, or deceptive advertisements and impose penalties for violations.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Product Liability</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Consumer Protection Act introduces the concept of product liability, which holds manufacturers or sellers liable for any harm caused to consumers by defective products or deficiency in services.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Grounds for product liability claims include manufacturing defects, design defects, deviations from manufacturing specifications, not conforming to express warranties, and failing to provide adequate instructions.
+                    </p>
+                    <p class="text-gray-300">
+                        Consumers can seek compensation for personal injury, death, or property damage caused by defective products. The liability extends to manufacturers, service providers, sellers, and product distributors.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">E-Commerce and Digital Platforms</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Consumer Protection Act has special provisions addressing e-commerce platforms that require them to disclose return, refund, exchange, warranty and guarantee, delivery and shipment, payment methods, and grievance redressal mechanisms.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        E-commerce entities cannot manipulate the price of goods or services to gain unreasonable profit or impose unfair or unreasonable conditions on consumers.
+                    </p>
+                    <p class="text-gray-300">
+                        The Act prohibits e-commerce platforms from refusing to take back goods or withdraw services or refuse refunds if the goods or services are defective, deficient, delivered late, or do not meet the description on the platform.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filing Complaints Section -->
+    <section id="laws" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Filing</span> Consumer Complaints
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Step 1 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">District Consumer Disputes Redressal Commission</h3>
+                    <p class="text-gray-300">
+                        For complaints where the value of goods or services and compensation claimed is up to ₹1 crore. File in person at the district forum office or online through the consumer helpline portal.
+                    </p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">State Consumer Disputes Redressal Commission</h3>
+                    <p class="text-gray-300">
+                        For complaints where the value of goods or services and compensation claimed exceeds ₹1 crore but is less than ₹10 crores. Also handles appeals against District Commission decisions.
+                    </p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">National Consumer Disputes Redressal Commission</h3>
+                    <p class="text-gray-300">
+                        For complaints where the value of goods or services and compensation claimed exceeds ₹10 crores. Also handles appeals against State Commission decisions.
+                    </p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Online Complaint Filing</h3>
+                    <p class="text-gray-300">
+                        Visit the National Consumer Helpline portal (consumerhelpline.gov.in) or use the mobile app to file complaints digitally. You can also dial the toll-free number 1800-11-4000 for guidance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filing Process Section -->
+    <section id="filing-process" class="py-16 md:py-24 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Complaint Filing</span> Process
+            </h2>
+            
+            <div class="max-w-4xl mx-auto content-section">
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Step 1: Documentation</h3>
+                    <p class="text-gray-300">
+                        Gather all necessary documents including purchase receipts, warranty cards, correspondence with the seller/service provider, photographs of defective products, and any other relevant evidence supporting your claim.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Step 2: Initial Communication</h3>
+                    <p class="text-gray-300">
+                        Before filing a formal complaint, send a written notice to the business outlining your grievance and the remedy sought. Keep a copy of this communication for your records. Allow reasonable time for response, typically 15-30 days.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Step 3: Complaint Preparation</h3>
+                    <p class="text-gray-300">
+                        Draft your complaint with details including your name and contact information, details of the product/service, purchase date, description of the defect or deficiency, copies of supporting documents, relief sought, and declaration that the matter is not pending in any other court.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Step 4: Submission</h3>
+                    <p class="text-gray-300">
+                        Submit your complaint to the appropriate consumer forum based on the value of your claim. Pay the prescribed fee (which varies based on the value of goods/services and compensation claimed). You can file in person or through an authorized agent.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Step 5: Hearing and Resolution</h3>
+                    <p class="text-gray-300">
+                        After admission of your complaint, notices will be issued to the opposite party. Attend all hearings as scheduled. The Commission will examine evidence, hear arguments, and deliver a decision. Most cases are required to be decided within 3-5 months under the Act.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-r from-indigo-900 to-purple-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 content-section">Ready to Assert Your Consumer Rights?</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10 content-section">
+                Stay informed, keep documentation, and ensure fair treatment in the marketplace.
+            </p>
+            <div class="content-section">
+                <button class="bg-white text-indigo-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                    <a href="legalguides.html">Get Legal Advice</a>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-10 border-t border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-white">ConsumerRights</span>
+                </div>
+                <div class="text-gray-400 text-center md:text-right">
+                    <p>© 2025 ConsumerRights. All rights reserved.</p>
+                    <p class="text-sm mt-2">Information provided is for educational purposes only and not legal advice.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu) {
+                        mobileMenu.classList.toggle('hidden');
+                    }
+                });
+            }
+            
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Create animated background shapes
+            function createBackgroundShapes() {
+                const homeSection = document.querySelector('#home');
+                if (homeSection) {
+                    const shapes = [
+                        { class: 'shape1', size: '400px', color: '#4f46e5' },
+                        { class: 'shape2', size: '300px', color: '#8b5cf6' },
+                        { class: 'shape3', size: '350px', color: '#6366f1' }
+                    ];
+
+                    shapes.forEach(shape => {
+                        const element = document.querySelector(`.${shape.class}`);
+                        if (!element) {
+                            const div = document.createElement('div');
+                            div.classList.add(shape.class, 'home-shape');
+                            div.style.position = 'absolute';
+                            div.style.width = shape.size;
+                            div.style.height = shape.size;
+                            div.style.borderRadius = '50%';
+                            div.style.background = `radial-gradient(circle, ${shape.color} 0%, transparent 70%)`;
+                            div.style.filter = 'blur(50px)';
+                            div.style.top = `${Math.random() * 100}%`;
+                            div.style.left = `${Math.random() * 100}%`;
+                            div.style.transform = 'translate(-50%, -50%)';
+                            div.style.zIndex = '-1';
+                            
+                            homeSection.appendChild(div);
+                        }
+                    });
+
+                    // Animate home shapes
+                    gsap.to('.shape1', {
+                        x: '30%',
+                        y: '20%',
+                        rotation: 360,
+                        duration: 30,
+                        repeat: -1,
+                        ease: 'none',
+                        opacity: 0.5
+                    });
+                    
+                    gsap.to('.shape2', {
+                        x: '-20%',
+                        y: '15%',
+                        rotation: -360,
+                        duration: 25,
+                        repeat: -1,
+                        ease: 'none',
+                        opacity: 0.3
+                    });
+                    
+                    gsap.to('.shape3', {
+                        x: '15%',
+                        y: '-25%',
+                        rotation: 240,
+                        duration: 35,
+                        repeat: -1,
+                        ease: 'none',
+                        opacity: 0.4
+                    });
+                }
+            }
+
+            createBackgroundShapes();
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // Close mobile menu if open
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (mobileMenu) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70, // Adjust for header height
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Stagger animation for content sections
+            const contentSections = document.querySelectorAll('.content-section');
+            contentSections.forEach(section => {
+                gsap.to(section, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+                // Ensure that the sections are visible on load
+                section.style.opacity = 1;
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (navbar) {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

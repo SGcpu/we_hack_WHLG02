@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government & Citizen Rights in India</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.2), 0 8px 10px -6px rgba(99, 102, 241, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4338ca;
+        }
+
+        .content-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="navbar px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="font-extrabold text-indigo-300 animated-border">Home</a>
+                <a href="legalguides.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search legal topics..." 
+                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>   
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-indigo-900 opacity-10 z-0"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="flex flex-col items-center text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Understand Your <span class="gradient-text">Citizen Rights</span> in India
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
+                    A comprehensive guide to empower yourself, understand your constitutional rights, and ensure active participation in India's democracy.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Rights Cards Section -->
+    <section id="key-rights" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                Key <span class="text-indigo-500">Citizen Rights</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Vote</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Every citizen aged 18 and above has the right to vote in elections regardless of religion, caste, gender or social status, enabling democratic participation.
+                    </p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Freedom of Speech</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Citizens have the right to express opinions freely through any medium, though subject to reasonable restrictions related to security, public order, and morality.
+                    </p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Equality</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Guarantees equality before law and prohibits discrimination based on religion, race, caste, gender, or place of birth, promoting social and legal equality.
+                    </p>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Justice</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Ensures fair treatment by the legal system including the right to a fair trial, legal aid, and protection against arbitrary arrest and detention.
+                    </p>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Right to Information</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Empowers citizens to request information from public authorities, promoting transparency and accountability in government functioning.
+                    </p>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Religious Freedom</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Citizens have the freedom to practice, profess, and propagate any religion of their choice, with the state maintaining secularism in its governance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Information Section -->
+    <section id="detailed-info" class="py-16 md:py-24 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Detailed</span> Information
+            </h2>
+            
+            <div class="max-w-4xl mx-auto content-section">
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Electoral Rights and Voting Process</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Election Commission of India (ECI) is an autonomous constitutional authority responsible for administering election processes. All citizens aged 18 and above are eligible to vote after registering in the electoral rolls.
+                    </p>
+                    <p class="text-gray-300">
+                        Voters must carry valid identification such as Voter ID, Aadhaar, passport, or other government-issued IDs. The ECI ensures free and fair elections through measures like Electronic Voting Machines (EVMs), security arrangements, and strict enforcement of the Model Code of Conduct during election periods.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Free Speech and Expression Limitations</h3>
+                    <p class="text-gray-300 mb-4">
+                        While the Constitution guarantees freedom of speech and expression, there are reasonable restrictions under Article 19(2). These include national security, public order, decency, morality, defamation, contempt of court, and incitement to offense.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        The Information Technology Act, 2000 and its amendments regulate online speech, with provisions against publishing or transmitting obscene, defamatory, or misleading information.
+                    </p>
+                    <p class="text-gray-300">
+                        Citizens should be aware that hate speech, sedition, and defamation can have legal consequences while exercising free speech rights.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Right to Information Implementation</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Right to Information Act, 2005 empowers citizens to request information from public authorities. To exercise this right, citizens must submit applications to the designated Public Information Officer with a nominal fee.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Information must be provided within 30 days (or 48 hours in life/liberty cases). If denied, citizens can appeal to higher authorities and ultimately to the Central or State Information Commissions.
+                    </p>
+                    <p class="text-gray-300">
+                        While certain information related to national security, privacy, intellectual property, and cabinet papers is exempt, the Act has become a powerful tool for transparency and accountability in governance.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Remedies Against Rights Violations</h3>
+                    <p class="text-gray-300 mb-4">
+                        In cases of fundamental rights violations, citizens can approach the Supreme Court directly under Article 32 or High Courts under Article 226 through writs like Habeas Corpus, Mandamus, Prohibition, Quo Warranto, and Certiorari.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        The National Human Rights Commission (NHRC) and State Human Rights Commissions can be approached for human rights violations, while specialized commissions exist for issues related to women, children, and marginalized communities.
+                    </p>
+                    <p class="text-gray-300">
+                        Public Interest Litigation (PIL) allows any citizen to approach courts on behalf of marginalized groups who cannot access justice themselves, making the judicial system more accessible.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Constitutional Provisions Section -->
+    <section id="constitutional-provisions" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Constitutional</span> Provisions
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Provision 1 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Fundamental Rights (Articles 12-35)</h3>
+                    <p class="text-gray-300">
+                        These are the basic human rights enshrined in the Constitution that apply to all citizens. They include rights to equality, freedom, against exploitation, freedom of religion, cultural and educational rights, and constitutional remedies.
+                    </p>
+                </div>
+                
+                <!-- Provision 2 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Directive Principles of State Policy (Articles 36-51)</h3>
+                    <p class="text-gray-300">
+                        These are guidelines for the government to establish a just society. While not enforceable in courts, they are fundamental in governance and include principles like social justice, minimum wages, and equal justice.
+                    </p>
+                </div>
+                
+                <!-- Provision 3 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Fundamental Duties (Article 51A)</h3>
+                    <p class="text-gray-300">
+                        Added by the 42nd Amendment in 1976, these outline the moral obligations of citizens including respecting the Constitution, promoting harmony, preserving the environment, and developing scientific temper.
+                    </p>
+                </div>
+                
+                <!-- Provision 4 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Right to Constitutional Remedies (Article 32)</h3>
+                    <p class="text-gray-300">
+                        Described by Dr. B.R. Ambedkar as the "heart and soul" of the Constitution, this right allows citizens to move the Supreme Court directly for enforcement of fundamental rights through writs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-r from-indigo-900 to-purple-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 content-section">Ready to Exercise Your Rights?</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10 content-section">
+                Stay informed, participate actively, and help build a stronger democracy.
+            </p>
+            <div class="content-section">
+                <button class="bg-white text-indigo-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                    <a href="legalguides.html">Get Legal Advice</a>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-10 border-t border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span class="text-xl font-bold text-white">CitizenRights</span>
+                </div>
+                <div class="text-gray-400 text-center md:text-right">
+                    <p>© 2025 CitizenRights. All rights reserved.</p>
+                    <p class="text-sm mt-2">Information provided is for educational purposes only and not legal advice.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.md\\:hidden').addEventListener('click', function() {
+            const mobileMenu = document.querySelector('.md\\:flex.space-x-6');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // GSAP Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Stagger animation for content sections
+            const contentSections = document.querySelectorAll('.content-section');
+            contentSections.forEach(section => {
+                gsap.to(section, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+                // Ensure that the sections are visible on load
+                section.style.opacity = 1;
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 10) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

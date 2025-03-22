@@ -759,6 +759,13 @@
             60% {transform: translateY(-5px);}
         }
         
+        .center-vertical {
+        display: flex;
+        justify-content: center; /* Centers horizontally */
+        align-items: center; /* Centers vertically */
+        height: 45px; /* Adjust as needed */
+        }
+        
         /* Show more buttons */
         .show-more {
             display: inline-block;
@@ -835,7 +842,9 @@
             <div class="particle" style="top: 60%; left: 10%; width: 6px; height: 6px; animation-delay: 8s;"></div>
         </div>
         <div class="container mx-auto text-center max-w-4xl">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 gradient-text" id="heroTitle">🏛 Legal Guides: Know Your Rights & Responsibilities</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 gradient-text" id="heroTitle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="m18.66 8.286l.368-.368c.342-.343.514-.514.617-.692a1.56 1.56 0 0 0 0-1.562c-.103-.178-.275-.35-.617-.692s-.514-.514-.692-.616a1.56 1.56 0 0 0-1.562 0c-.178.102-.35.274-.692.616l-.368.368m-4.419 10.31l-5.523 5.524c-.343.343-.514.514-.692.617a1.56 1.56 0 0 1-1.562 0c-.179-.103-.35-.274-.692-.617c-.343-.342-.514-.514-.617-.692a1.56 1.56 0 0 1 0-1.562c.103-.178.274-.35.617-.692l5.523-5.523m-.736-.737l4.419 4.42c1.735 1.735 2.603 2.603 3.682 2.603s1.946-.868 3.682-2.604S22 13.783 22 12.705c0-1.079-.868-1.947-2.604-3.682l-4.419-4.42C13.242 2.869 12.374 2 11.295 2s-1.946.868-3.682 2.604s-2.604 2.604-2.604 3.682c0 1.079.868 1.947 2.604 3.682Z"/></svg>
+                Legal Guides: Know Your Rights & Responsibilities</h1>
             <p class="text-xl text-gray-400 mb-8" id="heroDescription">
                 Understanding the law shouldn't be complicated. Our legal guides break down complex legal topics into simple, easy-to-understand explanations.
             </p>
@@ -908,7 +917,10 @@
                 <!-- Housing & Tenant Rights -->
                 <div class="category-card border rounded-xl overflow-hidden shadow-md hover:shadow-lg">
                     <div class="bg-gray-600 p-6 flex justify-center">
-                        <div class="icon-container text-5xl">🏠</div>
+                        <div class="icon-container text-5xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M22 22H2m0-11l8.126-6.5a3 3 0 0 1 3.748 0L22 11"/><path stroke-linecap="round" d="M15.5 5.5v-2A.5.5 0 0 1 16 3h2.5a.5.5 0 0 1 .5.5v5" opacity="0.5"/><path stroke-linecap="round" d="M4 22V9.5M20 22V9.5"/><path d="M15 22v-5c0-1.414 0-2.121-.44-2.56C14.122 14 13.415 14 12 14s-2.121 0-2.56.44C9 14.878 9 15.585 9 17v5m5-12.5a2 2 0 1 1-4 0a2 2 0 0 1 4 0Z" opacity="0.5"/></g></svg>
+                    
+                        </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 py-3">Housing & Tenant Rights</h3>
@@ -918,7 +930,7 @@
                             <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Repairs</span>
                             <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Deposits</span>
                         </div>
-                        <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
+                        <a href="tenant.html" class="text-blue-600 font-medium hover:underline flex items-center">
                             Explore guides <i class="fas fa-chevron-right ml-1 text-sm"></i>
                         </a>
                     </div>
@@ -927,7 +939,7 @@
                 <!-- Workplace & Employment Laws -->
                 <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg">
                     <div class="bg-green-50 p-6 flex justify-center">
-                        <div class="icon-container text-5xl">💼</div>
+                        <div class="flex flex-wrap gap-2 mb-4 ">💼</div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Workplace & Employment Laws</h3>
@@ -937,7 +949,7 @@
                             <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Termination</span>
                             <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Safety</span>
                         </div>
-                        <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
+                        <a href="workplace.html" class="text-blue-600 font-medium hover:underline flex items-center">
                             Explore guides <i class="fas fa-chevron-right ml-1 text-sm"></i>
                         </a>
                     </div>
@@ -956,7 +968,7 @@
                             <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Warranties</span>
                             <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Scams</span>
                         </div>
-                        <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
+                        <a href="consumer.html" class="text-blue-600 font-medium hover:underline flex items-center">
                             Explore guides <i class="fas fa-chevron-right ml-1 text-sm"></i>
                         </a>
                     </div>
@@ -975,7 +987,7 @@
                             <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Fraud</span>
                             <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Identity Theft</span>
                         </div>
-                        <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
+                        <a href="cybersec.html" class="text-blue-600 font-medium hover:underline flex items-center">
                             Explore guides <i class="fas fa-chevron-right ml-1 text-sm"></i>
                         </a>
                     </div>
@@ -993,7 +1005,7 @@
                             <span class="bg-red-300 text-red-800 text-xs px-2 py-1 rounded">Self-Defense</span>
                             <span class="bg-red-300 text-red-800 text-xs px-2 py-1 rounded">Court Process</span>
                         </div>
-                        <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
+                        <a href="criminallaw.html" class="text-blue-600 font-medium hover:underline flex items-center">
                             Explore guides <i class="fas fa-chevron-right ml-1 text-sm"></i>
                         </a>
                     </div>
@@ -1012,7 +1024,7 @@
                             <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">Free Speech</span>
                             <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">Protests</span>
                         </div>
-                        <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
+                        <a href="citizenrights.html" class="text-blue-600 font-medium hover:underline flex items-center">
                             Explore guides <i class="fas fa-chevron-right ml-1 text-sm"></i>
                         </a>
                     </div>
@@ -1031,7 +1043,7 @@
                             <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">Custody</span>
                             <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">Inheritance</span>
                         </div>
-                        <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
+                        <a href="fam.html" class="text-blue-600 font-medium hover:underline flex items-center">
                             Explore guides <i class="fas fa-chevron-right ml-1 text-sm"></i>
                         </a>
                     </div>
@@ -1047,7 +1059,7 @@
                             <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group">
                                 <span class="flex items-center">
                                 <i class="fas fa-book-open mr-2 group-hover:animate-pulse"></i>
-                                    Start with a Quiz
+                                    <a href="QT.html"> Start with a Quiz</a>
                                 </span>
                             </button>
                         </div>
@@ -1078,7 +1090,7 @@
                         <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group items-center">
                             <span class="flex items-center">
                             <i class="fas fa-book-open mr-2 group-hover:animate-pulse"></i>
-                                Start a Quiz
+                                <a href="QT.html">Start a Quiz</a> 
                             </span>
                         </button>
                     </div>
@@ -1089,40 +1101,13 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-10">
-                <div class="bg-gray-700 rounded-lg hover:rounded-xl shadow-md p-6 border-t-4 border-green-500">
-                    <div class="text-3xl mb-3">💼</div>
-                    <h3 class="text-lg font-semibold mb-2">Employment Law Quiz</h3>
-                    <p class="text-gray-400 mb-4">Test your knowledge of workplace rights and discrimination laws.</p>
-                    <button class="w-full bg-green-300 hover:bg-green-600  text-gray-800 font-medium hover:font-800 py-2 rounded transition duration-300">
-                        Take Quiz
-                    </button>
-                </div>
-                
-                <div class="bg-gray-700 rounded-lg hover:rounded-xl shadow-md p-6 border-t-4 border-yellow-500">
-                    <div class="text-3xl mb-3">🛒</div> 
-                    <h3 class="text-lg font-semibold mb-2">Consumer Rights Quiz</h3>
-                    <p class="text-gray-400 mb-4">Know when you're entitled to refunds, repairs, or replacements?</p>
-                    <button class="w-full bg-yellow-300 hover:bg-yellow-600 hover:font-bold text-gray-800 font-medium py-2 rounded transition duration-300">
-                        Take Quiz
-                    </button>
-                </div>
-                
-                <div class="bg-gray-700 rounded-lg hover:rounded-xl shadow-md p-6 border-t-4 border-red-500">
-                    <div class="text-3xl mb-3">⚖️</div>
-                    <h3 class="text-lg font-semibold mb-2">Criminal Law Basics</h3>
-                    <p class="text-gray-400 mb-4">Test your understanding of rights during arrests and police interactions.</p>
-                    <button class="w-full bg-red-300 hover:bg-red-600 text-gray-800 hover:font-bold font-medium py-2 rounded transition duration-300">
-                        Take Quiz
-                    </button>
-                </div>
-            </div>
+            
         </div>
     </section>
 
     <!-- Key Legal Terms Glossary -->
     <section class="gradient-section py-6 px-4 items-center ">
-        <div class="container ml-28">
+        <div class="container">
             <h2>Key Legal Terms Glossary</h2>
             <p class="section-intro">Understand common legal terminology with our simplified definitions.</p>
             
@@ -1139,9 +1124,7 @@
                             </ul>
                             <p class="text-secondary">To win a defamation case, you typically must prove the statement was false, published to others, and caused harm.</p>
                         </div>
-                        <button class="glossary-toggle">
-                            Show more <i class="fas fa-chevron-down"></i>
-                        </button>
+                        
                     </div>
                 </div>
                 
@@ -1159,9 +1142,7 @@
                             </ul>
                             <p class="text-secondary">Both the 5th and 14th Amendments to the U.S. Constitution protect due process rights.</p>
                         </div>
-                        <button class="glossary-toggle">
-                            Show more <i class="fas fa-chevron-down"></i>
-                        </button>
+                        
                     </div>
                 </div>
                 
@@ -1178,9 +1159,7 @@
                             </ul>
                             <p class="text-secondary">Liability insurance exists to protect individuals and businesses from financial losses due to liability claims.</p>
                         </div>
-                        <button class="glossary-toggle">
-                            Show more <i class="fas fa-chevron-down"></i>
-                        </button>
+                        
                     </div>
                 </div>
                 
@@ -1197,9 +1176,7 @@
                             </ul>
                             <p class="text-secondary">Once the statute of limitations expires, you generally lose your right to sue, with some exceptions.</p>
                         </div>
-                        <button class="glossary-toggle">
-                            Show more <i class="fas fa-chevron-down"></i>
-                        </button>
+                        
                     </div>
                 </div>
                 
@@ -1217,9 +1194,7 @@
                             </ul>
                             <p class="text-secondary">Creating a power of attorney requires proper documentation and often notarization.</p>
                         </div>
-                        <button class="glossary-toggle">
-                            Show more <i class="fas fa-chevron-down"></i>
-                        </button>
+                        
                     </div>
                 </div>
                 
@@ -1237,9 +1212,7 @@
                             </ul>
                             <p class="text-secondary">Negligence forms the basis for many personal injury lawsuits, including car accidents and medical malpractice.</p>
                         </div>
-                        <button class="glossary-toggle">
-                            Show more <i class="fas fa-chevron-down"></i>
-                        </button>
+                        
                     </div>
                 </div>
             </div>
@@ -1257,7 +1230,7 @@
 
     <!-- Downloadable Resources Section -->
     <section>
-        <div class="container ml-28">
+        <div class="container ">
             <h2 class="py-3">Downloadable Resources</h2>
             <p class="section-intro">Access our legal guides offline with these downloadable PDF resources.</p>
             
@@ -1324,7 +1297,7 @@
 
     <!-- Video Explainers Section -->
     <section class="gradient-section py-6 ">
-        <div class="container ml-28">
+        <div class="container ">
             <h2>Video Explainers & Infographics</h2>
             <p class="section-intro">Visual guides to help you understand complex legal concepts.</p>
             
@@ -1396,7 +1369,7 @@
 
     <!-- Ask a Lawyer Section -->
     <section class="mt-10 mb-10">
-        <div class="container ml-28">
+        <div class="container ">
             <div class="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto">
                 <div class="md:w-1/2 mb-8 md:mb-0">
                     <h2 class="text-left">Need Personalized Legal Advice?</h2>
@@ -1480,7 +1453,7 @@
 
     <!-- Community Section -->
     <section class="mt-10 mb-10" >
-        <div class="container ml-28">
+        <div class="container ">
             <h2>Join Our Legal Community</h2>
             <p class="section-intro">Connect with others, share experiences, and learn from community discussions about everyday legal matters.</p>
             
@@ -1559,24 +1532,24 @@
             <div>
                 <h4 class="text-lg font-medium mb-4">Quick Links</h4>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Home</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Legal Guides</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Quizzes</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Ask a Lawyer</a></li>
+                    <li><a href="index.html" class="hover:text-indigo-400 transition duration-300">Home</a></li>
+                    <li><a href="legalguides.html" class="hover:text-indigo-400 transition duration-300">Legal Guides</a></li>
+                    <li><a href="QT.html" class="hover:text-indigo-400 transition duration-300">Quizzes</a></li>
+                    <li><a href="askalawyer.html" class="hover:text-indigo-400 transition duration-300">Ask a Lawyer</a></li>
                     <li><a href="#" class="hover:text-indigo-400 transition duration-300">Community Forums</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">About Us</a></li>
+                    <li><a href="aboutus.html" class="hover:text-indigo-400 transition duration-300">About Us</a></li>
                 </ul>
             </div>
             
             <div>
                 <h4 class="text-lg font-medium mb-4">Legal Topics</h4>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Tenant Rights</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Employment Law</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Consumer Protection</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Family Law</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Criminal Law</a></li>
-                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">View All Topics</a></li>
+                    <li><a href="tenant.html" class="hover:text-indigo-400 transition duration-300">Tenant Rights</a></li>
+                    <li><a href="workplace.html" class="hover:text-indigo-400 transition duration-300">Employment Law</a></li>
+                    <li><a href="consumer.html" class="hover:text-indigo-400 transition duration-300">Consumer Protection</a></li>
+                    <li><a href="fam.html" class="hover:text-indigo-400 transition duration-300">Family Law</a></li>
+                    <li><a href="criminallaw.html" class="hover:text-indigo-400 transition duration-300">Criminal Law</a></li>
+                    <li><a href="legalguides.html" class="hover:text-indigo-400 transition duration-300">View All Topics</a></li>
                 </ul>
             </div>
             
