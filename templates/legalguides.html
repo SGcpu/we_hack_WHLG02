@@ -32,6 +32,8 @@
             color: var(--text-primary);
             transition: all 0.3s ease;
             overflow-x: hidden;
+            margin-left: 1rem;
+            margin-right: 1rem;
         }
         
         /* Custom Scrollbar */
@@ -287,6 +289,513 @@
         input:checked + .slider:before {
             transform: translateX(30px);
         }
+        
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--primary);
+        }
+        
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--text-secondary);
+        }
+        
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid-cols-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+            height: 100%;
+            position: relative;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-dark);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--primary-light);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .badge-primary {
+            background-color: rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-light);
+            border: 2px solid var(--primary-light);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .icon-box {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .icon-circle {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(79, 70, 229, 0.2));
+            color: var(--primary-light);
+        }
+        
+        /* Glossary Term Styling */
+        .glossary-term {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .glossary-term::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+            z-index: 2;
+        }
+        
+        .glossary-toggle {
+            display: flex;
+            align-items: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+        
+        .glossary-toggle i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .glossary-toggle.active i {
+            transform: rotate(180deg);
+        }
+        
+        .glossary-details {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* Resources Styling */
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .resource-badge {
+            align-self: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resource-emoji {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+        
+        /* Video Card Styling */
+        .video-card-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .video-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .video-card:hover .video-card-image img {
+            transform: scale(1.05);
+        }
+        
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3.5rem;
+            height: 3.5rem;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 0 0 10px rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .video-card:hover .play-btn {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Ask a Lawyer Section */
+        .gradient-section {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary), var(--accent), var(--primary-light));
+        }
+        
+        .chatbot-card {
+            background-color: #334155;
+            border-radius: 1rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .chat-bubble {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .chat-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+        }
+        
+        .chat-input {
+            display: flex;
+            margin-top: 1rem;
+        }
+        
+        .chat-input input {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0.5rem 0 0 0.5rem;
+            background-color: #1e293b;
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        .chat-input button {
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0 0.5rem 0.5rem 0;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Chatbot Bubble */
+        .chatbot-bubble {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Newsletter Section */
+        .newsletter-card {
+            display: flex;
+            flex-direction: column;
+            background: #1e293b;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (min-width: 768px) {
+            .newsletter-card {
+                flex-direction: row;
+            }
+        }
+        
+        .newsletter-content {
+            padding: 2rem;
+            flex: 3;
+        }
+        
+        .newsletter-accent {
+            flex: 2;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .newsletter-accent-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .newsletter-form {
+                flex-direction: row;
+            }
+        }
+        
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: #0f172a;
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        /* Community Section */
+        .feature-card {
+            height: 100%;
+        }
+        
+        /* FAQ Section */
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .faq-item:hover {
+            border-color: var(--primary-dark);
+        }
+        
+        .faq-toggle {
+            width: 100%;
+            padding: 1.25rem;
+            text-align: left;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+        
+        .faq-toggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-toggle.active i {
+            transform: rotate(45deg);
+        }
+        
+        .faq-content {
+            padding: 0 1.25rem 1.25rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Animations and Effects */
+        .glow {
+            position: absolute;
+            width: 40%;
+            height: 200px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(15, 23, 42, 0) 70%);
+            border-radius: 100%;
+            pointer-events: none;
+        }
+        
+        .glow-1 {
+            top: 10%;
+            left: -10%;
+        }
+        
+        .glow-2 {
+            bottom: 20%;
+            right: -5%;
+        }
+        
+        /* Button animations */
+        .btn-bounce {
+            animation: bounce 3s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+        
+        /* Show more buttons */
+        .show-more {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--primary-light);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .show-more:hover {
+            background-color: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .show-more i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .show-more:hover i {
+            transform: translateX(3px);
+        }
     </style>
 </head>
 <body>
@@ -297,9 +806,9 @@
                 <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
             </div>
             
-            <div class="hidden md:flex space-x-6">
-                <a href="index.html" class="font-medium text-indigo-300 animated-border">Home</a>
-                <a href="legalguides.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+            <div class="hidden md:flex space-x-6 ">
+                <a href="index.html" class="font-medium text-gray-400 animated-border ">Home</a>
+                <a href="legalguides.html" class="font-medium text-indigo-300 hover:text-indigo-300 animated-border">Legal Guides</a>
                 <a href="QT.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
                 <a href="askalawyer.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
                 <a href="emergencycontacts.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
@@ -365,57 +874,52 @@
        
 
                 <div class="flex flex-wrap items-center gap-3 mb-4 mt-10">
-                    <span class="font-medium text-gray-700">Filter by:</span>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100 active" data-filter="all">All</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-filter="housing">Housing</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-filter="employment">Employment</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-filter="consumer">Consumer</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-filter="cyber">Cyber Laws</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-filter="criminal">Criminal</button>
+                    <span class="font-medium text-gray-200">Filter by:</span>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400 active" data-filter="all">All</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-filter="housing">Housing</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-filter="employment">Employment</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-filter="consumer">Consumer</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-filter="cyber">Cyber Laws</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-filter="criminal">Criminal</button>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3 mb-4">
                     <span class="font-medium text-gray-700">Relevance:</span>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100 active" data-relevance="all">All</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-relevance="popular">Most Read</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-relevance="updated">Recently Updated</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400 active" data-relevance="all">All</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-relevance="popular">Most Read</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-relevance="updated">Recently Updated</button>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3 mb-4">
                     <span class="font-medium text-gray-700">Difficulty:</span>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100 active" data-difficulty="all">All</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-difficulty="beginner">Beginner</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-difficulty="intermediate">Intermediate</button>
-                    <button class="filter-tag px-3 py-1 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100" data-difficulty="advanced">In-Depth</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400 active" data-difficulty="all">All</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-difficulty="beginner">Beginner</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-difficulty="intermediate">Intermediate</button>
+                    <button class="filter-tag px-3 py-1 rounded-full text-gray-200 bg-gray-700  hover:bg-blue-400" data-difficulty="advanced">In-Depth</button>
                 </div>
 
-                <div class="flex justify-end items-center mb-2">
-                    <label for="sortOption" class="mr-2 text-gray-700">Sort by:</label>
-                    <select id="sortOption" class="border rounded py-1 px-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                        <option value="newest">Newest</option>
-                        <option value="popular">Most Popular</option>
-                        <option value="az">A-Z</option>
-                    </select>
-                </div>
+                
             </div>
         </div>
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
     </section>
 
     <!-- Category-Based Legal Guides -->
-    <section id="categories" class="py-12 px-6 bg-white">
+    <section class="py-20 bg-gradient-to-b from-gray-800 to-slate-900 relative">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Legal Categories</h2>
+            <h2 class="text-3xl font-bold text-center text-gray-200 mb-10">Legal Categories</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <!-- Housing & Tenant Rights -->
-                <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg">
-                    <div class="bg-blue-50 p-6 flex justify-center">
+                <div class="category-card border rounded-xl overflow-hidden shadow-md hover:shadow-lg">
+                    <div class="bg-gray-600 p-6 flex justify-center">
                         <div class="icon-container text-5xl">🏠</div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Housing & Tenant Rights</h3>
-                        <p class="text-gray-600 mb-4">Know your rights as a tenant or landlord.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
+                        <h3 class="text-xl font-semibold mb-2 py-3">Housing & Tenant Rights</h3>
+                        <p class="text-gray-400 mb-4 ">Know your rights as a tenant or landlord.</p>
+                        <div class="flex flex-wrap gap-2 mb-4 ">
                             <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Eviction</span>
                             <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Repairs</span>
                             <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Deposits</span>
@@ -433,7 +937,7 @@
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Workplace & Employment Laws</h3>
-                        <p class="text-gray-600 mb-4">Understand fair wages, working hours, and wrongful termination.</p>
+                        <p class="text-gray-400 mb-4">Understand fair wages, working hours, and wrongful termination.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Wages</span>
                             <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Termination</span>
@@ -451,8 +955,8 @@
                         <div class="icon-container text-5xl">💳</div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Consumer Protection</h3>
-                        <p class="text-gray-600 mb-4">Your rights when buying products and services.</p>
+                        <h3 class="text-xl font-semibold mb-2 py-3">Consumer Protection</h3>
+                        <p class="text-gray-400 mb-4">Your rights when buying products and services.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Refunds</span>
                             <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Warranties</span>
@@ -471,7 +975,7 @@
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Cybersecurity & Privacy Laws</h3>
-                        <p class="text-gray-600 mb-4">How to protect yourself online and report fraud.</p>
+                        <p class="text-gray-400 mb-4">How to protect yourself online and report fraud.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Data Privacy</span>
                             <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Fraud</span>
@@ -489,12 +993,11 @@
                         <div class="icon-container text-5xl">⚖</div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Criminal & Civil Rights</h3>
-                        <p class="text-gray-600 mb-4">Know what to do if you're accused or need legal assistance.</p>
+                        <h3 class="text-xl font-semibold mb-2 py-3">Criminal & Civil Rights</h3>
+                        <p class="text-gray-400 mb-4">Know what to do if you're accused or need legal assistance.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Miranda Rights</span>
-                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Self-Defense</span>
-                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Court Process</span>
+                            <span class="bg-red-300 text-red-800 text-xs px-2 py-1 rounded">Self-Defense</span>
+                            <span class="bg-red-300 text-red-800 text-xs px-2 py-1 rounded">Court Process</span>
                         </div>
                         <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
                             Explore guides <i class="fas fa-chevron-right ml-1 text-sm"></i>
@@ -503,13 +1006,13 @@
                 </div>
                 
                 <!-- Government & Citizen Rights -->
-                <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg">
+                <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg bg-slate-600">
                     <div class="bg-indigo-50 p-6 flex justify-center">
                         <div class="icon-container text-5xl">🏛</div>
                     </div>
-                    <div class="p-6">
+                    <div class="bg-slate-600 p-6">
                         <h3 class="text-xl font-semibold mb-2">Government & Citizen Rights</h3>
-                        <p class="text-gray-600 mb-4">Understand voting rights, free speech, and more.</p>
+                        <p class="text-gray-400 mb-4">Understand voting rights, free speech, and more.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">Voting</span>
                             <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">Free Speech</span>
@@ -527,8 +1030,8 @@
                         <div class="icon-container text-5xl">👨‍👩‍👧</div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Family Law & Marriage</h3>
-                        <p class="text-gray-600 mb-4">Divorce, child custody, inheritance, and family rights.</p>
+                        <h3 class="text-xl font-semibold mb-2 py-3">Family Law & Marriage</h3>
+                        <p class="text-gray-400 mb-4">Divorce, child custody, inheritance, and family rights.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">Divorce</span>
                             <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">Custody</span>
@@ -541,14 +1044,17 @@
                 </div>
                 
                 <!-- View All Categories -->
-                <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg bg-gradient-to-r from-blue-50 to-blue-100">
+                <div class="category-card border rounded-lg overflow-hidden shadow-md hover:shadow-lg bg-gradient-to-b from-gray-800 to-slate-900">
                     <div class="flex items-center justify-center h-full p-6">
                         <div class="text-center">
                             <div class="text-5xl mb-4">🔍</div>
                             <h3 class="text-xl font-semibold mb-2">Browse All Categories</h3>
                             <p class="text-gray-600 mb-4">Discover more specialized legal topics.</p>
-                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
-                                Explore All
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group">
+                                <span class="flex items-center">
+                                <i class="fas fa-book-open mr-2 group-hover:animate-pulse"></i>
+                                    Start with a Quiz
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -557,117 +1063,14 @@
         </div>
     </section>
 
-    <!-- Featured Legal Topics Section -->
-    <section class="py-12 px-6 bg-gray-100">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Featured Legal Topics</h2>
-            <p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">Stay informed on the latest legal developments and trending issues that might affect you.</p>
-            
-            <div class="carousel-container max-w-5xl mx-auto">
-                <div class="carousel-inner">
-                    <!-- Carousel Item 1 -->
-                    <div class="carousel-item p-2">
-                        <div class="featured-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col md:flex-row">
-                            <div class="md:w-2/5">
-                                <img src="/api/placeholder/400/300" alt="New Consumer Law" class="h-full w-full object-cover">
-                            </div>
-                            <div class="md:w-3/5 p-6">
-                                <div class="flex items-center mb-2">
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">New Law</span>
-                                    <span class="text-gray-500 text-sm">Updated: March 15, 2025</span>
-                                </div>
-                                <h3 class="text-2xl font-bold mb-3">New Consumer Protection Law 2025: What You Need to Know</h3>
-                                <p class="text-gray-600 mb-4">The new Consumer Rights Act introduces stronger protections against online scams and unfair return policies. Learn how these changes affect your shopping rights.</p>
-                                <div class="flex items-center justify-between">
-                                    <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
-                                        Read Full Guide <i class="fas fa-arrow-right ml-1"></i>
-                                    </a>
-                                    <div class="flex items-center text-gray-500">
-                                        <span><i class="far fa-eye mr-1"></i> 2.4k</span>
-                                        <span class="ml-3"><i class="far fa-bookmark mr-1"></i> Save</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Carousel Item 2 -->
-                    <div class="carousel-item p-2">
-                        <div class="featured-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col md:flex-row">
-                            <div class="md:w-2/5">
-                                <img src="/api/placeholder/400/300" alt="Workplace Harassment" class="h-full w-full object-cover">
-                            </div>
-                            <div class="md:w-3/5 p-6">
-                                <div class="flex items-center mb-2">
-                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">Employment</span>
-                                    <span class="text-gray-500 text-sm">Updated: March 10, 2025</span>
-                                </div>
-                                <h3 class="text-2xl font-bold mb-3">Workplace Harassment: Steps You Can Take</h3>
-                                <p class="text-gray-600 mb-4">Experiencing harassment at work? Learn about the legal definition of harassment, documentation practices, and the proper channels for reporting incidents.</p>
-                                <div class="flex items-center justify-between">
-                                    <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
-                                        Read Full Guide <i class="fas fa-arrow-right ml-1"></i>
-                                    </a>
-                                    <div class="flex items-center text-gray-500">
-                                        <span><i class="far fa-eye mr-1"></i> 3.7k</span>
-                                        <span class="ml-3"><i class="far fa-bookmark mr-1"></i> Save</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Carousel Item 3 -->
-                    <div class="carousel-item p-2">
-                        <div class="featured-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col md:flex-row">
-                            <div class="md:w-2/5">
-                                <img src="/api/placeholder/400/300" alt="Police Rights" class="h-full w-full object-cover">
-                            </div>
-                            <div class="md:w-3/5 p-6">
-                                <div class="flex items-center mb-2">
-                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Criminal Law</span>
-                                    <span class="text-gray-500 text-sm">Updated: February 28, 2025</span>
-                                </div>
-                                <h3 class="text-2xl font-bold mb-3">Your Rights If Stopped by the Police</h3>
-                                <p class="text-gray-600 mb-4">Understanding your rights during police interactions is crucial. This guide covers what officers can and cannot do, and how to respectfully assert your rights.</p>
-                                <div class="flex items-center justify-between">
-                                    <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
-                                        Read Full Guide <i class="fas fa-arrow-right ml-1"></i>
-                                    </a>
-                                    <div class="flex items-center text-gray-500">
-                                        <span><i class="far fa-eye mr-1"></i> 5.2k</span>
-                                        <span class="ml-3"><i class="far fa-bookmark mr-1"></i> Save</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex justify-center mt-6">
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300 mx-1 active"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300 mx-1"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300 mx-1"></button>
-                </div>
-                
-                <div class="flex justify-center mt-6">
-                    <button id="prevBtn" class="bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-lg mr-2">
-                        <i class="fas fa-chevron-left"></i> Previous
-                    </button>
-                    <button id="nextBtn" class="bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-lg ml-2">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Interactive Quiz Section -->
-    <section id="quiz-section" class="py-12 px-6 bg-white">
+    <section id="quiz-section" class="py-12 px-6 bg-gradient-to-b from-gray-800 to-slate-900">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Test Your Legal Knowledge</h2>
+            <h2 class="text-3xl font-bold text-center text-white mb-8">Test Your Legal Knowledge</h2>
             
-            <div class="max-w-4xl mx-auto bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-lg overflow-hidden">
+            <div class="max-w-4xl mx-auto bg-gradient-to-r from-violet-400 to-violet-800 rounded-xl shadow-lg overflow-hidden">
                 <div class="flex flex-col md:flex-row">
                     <div class="md:w-1/2 p-8">
                         <div class="text-4xl mb-4">✅</div>
@@ -678,41 +1081,44 @@
                             <li class="flex items-center mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i> Instant results</li>
                             <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Detailed explanations</li>
                         </ul>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
-                            Start Quiz
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group items-center">
+                            <span class="flex items-center">
+                            <i class="fas fa-book-open mr-2 group-hover:animate-pulse"></i>
+                                Start a Quiz
+                            </span>
                         </button>
                     </div>
                     
                     <div class="md:w-1/2">
-                        <img src="/api/placeholder/400/300" alt="Quiz illustration" class="h-full w-full object-cover">
+                        <img src="https://c.stocksy.com/a/P8xA00/z9/2610597.jpg" alt="Quiz illustration" class="h-full w-full object-cover">
                     </div>
                 </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-10">
-                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-green-500">
+                <div class="bg-gray-700 rounded-lg hover:rounded-xl shadow-md p-6 border-t-4 border-green-500">
                     <div class="text-3xl mb-3">💼</div>
                     <h3 class="text-lg font-semibold mb-2">Employment Law Quiz</h3>
-                    <p class="text-gray-600 mb-4">Test your knowledge of workplace rights and discrimination laws.</p>
-                    <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 rounded transition duration-300">
+                    <p class="text-gray-400 mb-4">Test your knowledge of workplace rights and discrimination laws.</p>
+                    <button class="w-full bg-green-300 hover:bg-green-600  text-gray-800 font-medium hover:font-800 py-2 rounded transition duration-300">
                         Take Quiz
                     </button>
                 </div>
                 
-                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-yellow-500">
-                    <div class="text-3xl mb-3">🛒</div>
+                <div class="bg-gray-700 rounded-lg hover:rounded-xl shadow-md p-6 border-t-4 border-yellow-500">
+                    <div class="text-3xl mb-3">🛒</div> 
                     <h3 class="text-lg font-semibold mb-2">Consumer Rights Quiz</h3>
-                    <p class="text-gray-600 mb-4">Know when you're entitled to refunds, repairs, or replacements?</p>
-                    <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 rounded transition duration-300">
+                    <p class="text-gray-400 mb-4">Know when you're entitled to refunds, repairs, or replacements?</p>
+                    <button class="w-full bg-yellow-300 hover:bg-yellow-600 hover:font-bold text-gray-800 font-medium py-2 rounded transition duration-300">
                         Take Quiz
                     </button>
                 </div>
                 
-                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-red-500">
+                <div class="bg-gray-700 rounded-lg hover:rounded-xl shadow-md p-6 border-t-4 border-red-500">
                     <div class="text-3xl mb-3">⚖️</div>
                     <h3 class="text-lg font-semibold mb-2">Criminal Law Basics</h3>
-                    <p class="text-gray-600 mb-4">Test your understanding of rights during arrests and police interactions.</p>
-                    <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 rounded transition duration-300">
+                    <p class="text-gray-400 mb-4">Test your understanding of rights during arrests and police interactions.</p>
+                    <button class="w-full bg-red-300 hover:bg-red-600 text-gray-800 hover:font-bold font-medium py-2 rounded transition duration-300">
                         Take Quiz
                     </button>
                 </div>
@@ -721,240 +1127,261 @@
     </section>
 
     <!-- Key Legal Terms Glossary -->
-    <section class="py-12 px-6 bg-gray-100">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Key Legal Terms Glossary</h2>
-            <p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">Understand common legal terminology with our simplified definitions.</p>
+    <section class="gradient-section py-6 px-4 items-center ">
+        <div class="container ml-28">
+            <h2>Key Legal Terms Glossary</h2>
+            <p class="section-intro">Understand common legal terminology with our simplified definitions.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <div class="glossary-term bg-white rounded-lg shadow-md p-6 border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Defamation</h3>
-                    <p class="text-gray-600 mb-3">Spreading false information that harms someone's reputation.</p>
-                    <div class="hidden glossary-details mt-3 pt-3 border-t border-gray-200">
-                        <p class="text-gray-700 mb-2">Defamation can be either:</p>
-                        <ul class="list-disc pl-5 text-gray-600 mb-3">
-                            <li><strong>Libel:</strong> Written false statements</li>
-                            <li><strong>Slander:</strong> Spoken false statements</li>
-                        </ul>
-                        <p class="text-gray-700">To win a defamation case, you typically must prove the statement was false, published to others, and caused harm.</p>
+            <div class="grid grid-cols-3">
+                <div class="card glossary-term">
+                    <div class="card-content">
+                        <h3 class="card-title">Defamation</h3>
+                        <p class="text-secondary">Spreading false information that harms someone's reputation.</p>
+                        <div class="glossary-details hidden">
+                            <p class="text-secondary mb-3">Defamation can be either:</p>
+                            <ul class="list-disc pl-5 text-secondary mb-3">
+                                <li><strong>Libel:</strong> Written false statements</li>
+                                <li><strong>Slander:</strong> Spoken false statements</li>
+                            </ul>
+                            <p class="text-secondary">To win a defamation case, you typically must prove the statement was false, published to others, and caused harm.</p>
+                        </div>
+                        <button class="glossary-toggle">
+                            Show more <i class="fas fa-chevron-down"></i>
+                        </button>
                     </div>
-                    <button class="glossary-toggle text-blue-600 font-medium hover:underline mt-2 flex items-center">
-                        Show more <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
                 </div>
                 
-                <div class="glossary-term bg-white rounded-lg shadow-md p-6 border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Due Process</h3>
-                    <p class="text-gray-600 mb-3">Fair treatment under the law, ensuring all legal rights are respected.</p>
-                    <div class="hidden glossary-details mt-3 pt-3 border-t border-gray-200">
-                        <p class="text-gray-700 mb-2">Due process includes:</p>
-                        <ul class="list-disc pl-5 text-gray-600 mb-3">
-                            <li>Right to a fair hearing</li>
-                            <li>Notice of legal proceedings</li>
-                            <li>Opportunity to present your side</li>
-                            <li>Decision by an impartial judge</li>
-                        </ul>
-                        <p class="text-gray-700">Both the 5th and 14th Amendments to the U.S. Constitution protect due process rights.</p>
+                <div class="card glossary-term">
+                    <div class="card-content">
+                        <h3 class="card-title">Due Process</h3>
+                        <p class="text-secondary">Fair treatment under the law, ensuring all legal rights are respected.</p>
+                        <div class="glossary-details hidden">
+                            <p class="text-secondary mb-3">Due process includes:</p>
+                            <ul class="list-disc pl-5 text-secondary mb-3">
+                                <li>Right to a fair hearing</li>
+                                <li>Notice of legal proceedings</li>
+                                <li>Opportunity to present your side</li>
+                                <li>Decision by an impartial judge</li>
+                            </ul>
+                            <p class="text-secondary">Both the 5th and 14th Amendments to the U.S. Constitution protect due process rights.</p>
+                        </div>
+                        <button class="glossary-toggle">
+                            Show more <i class="fas fa-chevron-down"></i>
+                        </button>
                     </div>
-                    <button class="glossary-toggle text-blue-600 font-medium hover:underline mt-2 flex items-center">
-                        Show more <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
                 </div>
                 
-                <div class="glossary-term bg-white rounded-lg shadow-md p-6 border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Liability</h3>
-                    <p class="text-gray-600 mb-3">Legal responsibility for one's actions or omissions.</p>
-                    <div class="hidden glossary-details mt-3 pt-3 border-t border-gray-200">
-                        <p class="text-gray-700 mb-2">Common types of liability:</p>
-                        <ul class="list-disc pl-5 text-gray-600 mb-3">
-                            <li><strong>Civil Liability:</strong> Responsibility to compensate for damages</li>
-                            <li><strong>Criminal Liability:</strong> Responsibility for breaking criminal laws</li>
-                            <li><strong>Strict Liability:</strong> Responsibility regardless of fault or intent</li>
-                        </ul>
-                        <p class="text-gray-700">Liability insurance exists to protect individuals and businesses from financial losses due to liability claims.</p>
+                <div class="card glossary-term">
+                    <div class="card-content">
+                        <h3 class="card-title">Liability</h3>
+                        <p class="text-secondary">Legal responsibility for one's actions or omissions.</p>
+                        <div class="glossary-details hidden">
+                            <p class="text-secondary mb-3">Common types of liability:</p>
+                            <ul class="list-disc pl-5 text-secondary mb-3">
+                                <li><strong>Civil Liability:</strong> Responsibility to compensate for damages</li>
+                                <li><strong>Criminal Liability:</strong> Responsibility for breaking criminal laws</li>
+                                <li><strong>Strict Liability:</strong> Responsibility regardless of fault or intent</li>
+                            </ul>
+                            <p class="text-secondary">Liability insurance exists to protect individuals and businesses from financial losses due to liability claims.</p>
+                        </div>
+                        <button class="glossary-toggle">
+                            Show more <i class="fas fa-chevron-down"></i>
+                        </button>
                     </div>
-                    <button class="glossary-toggle text-blue-600 font-medium hover:underline mt-2 flex items-center">
-                        Show more <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
                 </div>
                 
-                <div class="glossary-term bg-white rounded-lg shadow-md p-6 border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Statute of Limitations</h3>
-                    <p class="text-gray-600 mb-3">Time limit for filing a lawsuit after an injury or violation.</p>
-                    <div class="hidden glossary-details mt-3 pt-3 border-t border-gray-200">
-                        <p class="text-gray-700 mb-3">These time limits vary by:</p>
-                        <ul class="list-disc pl-5 text-gray-600 mb-3">
-                            <li>Type of case (personal injury, contract, etc.)</li>
-                            <li>State or jurisdiction</li>
-                            <li>When the harm was discovered</li>
-                        </ul>
-                        <p class="text-gray-700">Once the statute of limitations expires, you generally lose your right to sue, with some exceptions.</p>
+                <div class="card glossary-term">
+                    <div class="card-content">
+                        <h3 class="card-title">Statute of Limitations</h3>
+                        <p class="text-secondary">Time limit for filing a lawsuit after an injury or violation.</p>
+                        <div class="glossary-details hidden">
+                            <p class="text-secondary mb-3">These time limits vary by:</p>
+                            <ul class="list-disc pl-5 text-secondary mb-3">
+                                <li>Type of case (personal injury, contract, etc.)</li>
+                                <li>State or jurisdiction</li>
+                                <li>When the harm was discovered</li>
+                            </ul>
+                            <p class="text-secondary">Once the statute of limitations expires, you generally lose your right to sue, with some exceptions.</p>
+                        </div>
+                        <button class="glossary-toggle">
+                            Show more <i class="fas fa-chevron-down"></i>
+                        </button>
                     </div>
-                    <button class="glossary-toggle text-blue-600 font-medium hover:underline mt-2 flex items-center">
-                        Show more <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
                 </div>
                 
-                <div class="glossary-term bg-white rounded-lg shadow-md p-6 border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Power of Attorney</h3>
-                    <p class="text-gray-600 mb-3">Legal document giving someone authority to act on your behalf.</p>
-                    <div class="hidden glossary-details mt-3 pt-3 border-t border-gray-200">
-                        <p class="text-gray-700 mb-2">Common types include:</p>
-                        <ul class="list-disc pl-5 text-gray-600 mb-3">
-                            <li><strong>General:</strong> Broad powers over property and finances</li>
-                            <li><strong>Limited:</strong> Specific powers for defined situations</li>
-                            <li><strong>Medical:</strong> Healthcare decisions only</li>
-                            <li><strong>Durable:</strong> Remains valid if you become incapacitated</li>
-                        </ul>
-                        <p class="text-gray-700">Creating a power of attorney requires proper documentation and often notarization.</p>
+                <div class="card glossary-term">
+                    <div class="card-content">
+                        <h3 class="card-title">Power of Attorney</h3>
+                        <p class="text-secondary">Legal document giving someone authority to act on your behalf.</p>
+                        <div class="glossary-details hidden">
+                            <p class="text-secondary mb-3">Common types include:</p>
+                            <ul class="list-disc pl-5 text-secondary mb-3">
+                                <li><strong>General:</strong> Broad powers over property and finances</li>
+                                <li><strong>Limited:</strong> Specific powers for defined situations</li>
+                                <li><strong>Medical:</strong> Healthcare decisions only</li>
+                                <li><strong>Durable:</strong> Remains valid if you become incapacitated</li>
+                            </ul>
+                            <p class="text-secondary">Creating a power of attorney requires proper documentation and often notarization.</p>
+                        </div>
+                        <button class="glossary-toggle">
+                            Show more <i class="fas fa-chevron-down"></i>
+                        </button>
                     </div>
-                    <button class="glossary-toggle text-blue-600 font-medium hover:underline mt-2 flex items-center">
-                        Show more <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
                 </div>
                 
-                <div class="glossary-term bg-white rounded-lg shadow-md p-6 border border-gray-200">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Negligence</h3>
-                    <p class="text-gray-600 mb-3">Failure to take proper care, resulting in damage or injury to another.</p>
-                    <div class="hidden glossary-details mt-3 pt-3 border-t border-gray-200">
-                        <p class="text-gray-700 mb-2">To prove negligence, you must establish:</p>
-                        <ul class="list-disc pl-5 text-gray-600 mb-3">
-                            <li>Duty of care was owed</li>
-                            <li>That duty was breached</li>
-                            <li>The breach caused harm</li>
-                            <li>Actual damages occurred</li>
-                        </ul>
-                        <p class="text-gray-700">Negligence forms the basis for many personal injury lawsuits, including car accidents and medical malpractice.</p>
+                <div class="card glossary-term">
+                    <div class="card-content">
+                        <h3 class="card-title">Negligence</h3>
+                        <p class="text-secondary">Failure to take proper care, resulting in damage or injury to another.</p>
+                        <div class="glossary-details hidden">
+                            <p class="text-secondary mb-3">To prove negligence, you must establish:</p>
+                            <ul class="list-disc pl-5 text-secondary mb-3">
+                                <li>Duty of care was owed</li>
+                                <li>That duty was breached</li>
+                                <li>The breach caused harm</li>
+                                <li>Actual damages occurred</li>
+                            </ul>
+                            <p class="text-secondary">Negligence forms the basis for many personal injury lawsuits, including car accidents and medical malpractice.</p>
+                        </div>
+                        <button class="glossary-toggle">
+                            Show more <i class="fas fa-chevron-down"></i>
+                        </button>
                     </div>
-                    <button class="glossary-toggle text-blue-600 font-medium hover:underline mt-2 flex items-center">
-                        Show more <i class="fas fa-chevron-down ml-1"></i>
-                    </button>
                 </div>
             </div>
             
             <div class="text-center mt-8">
-                <a href="#" class="text-blue-600 font-medium hover:underline">View full legal glossary →</a>
+                <a href="#" class="show-more">
+                    View full legal glossary <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
+            
+            <div class="glow glow-1"></div>
+            <div class="glow glow-2"></div>
         </div>
     </section>
 
     <!-- Downloadable Resources Section -->
-    <section class="py-12 px-6 bg-white">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Downloadable Resources</h2>
-            <p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">Access our legal guides offline with these downloadable PDF resources.</p>
+    <section>
+        <div class="container ml-10">
+            <h2 class="py-3">Downloadable Resources</h2>
+            <p class="section-intro">Access our legal guides offline with these downloadable PDF resources.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <div class="bg-gray-50 rounded-lg shadow-md p-6 border border-gray-200">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="text-3xl">📋</div>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">PDF</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Tenant Rights Checklist</h3>
-                    <p class="text-gray-600 mb-4">A comprehensive guide to your rights as a tenant, including repairs, privacy, and eviction protections.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">12 pages • Updated Mar 2025</span>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 flex items-center">
-                            <i class="fas fa-download mr-1"></i> Download
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-50 rounded-lg shadow-md p-6 border border-gray-200">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="text-3xl">📋</div>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">PDF</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Workplace Rights Guide</h3>
-                    <p class="text-gray-600 mb-4">Understand your employment rights, including minimum wage, overtime, and protection against discrimination.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">15 pages • Updated Feb 2025</span>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 flex items-center">
-                            <i class="fas fa-download mr-1"></i> Download
-                        </button>
+            <div class="grid grid-cols-3">
+                <div class="card resource-card">
+                    <div class="card-content">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="resource-emoji">📋</div>
+                            <span class="badge badge-primary">PDF</span>
+                        </div>
+                        <h3 class="card-title">Tenant Rights Checklist</h3>
+                        <p class="text-secondary">A comprehensive guide to your rights as a tenant, including repairs, privacy, and eviction protections.</p>
+                        <div class="resource-meta">
+                            <span class="text-muted">12 pages • Updated Mar 2025</span>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-download mr-2"></i> Download
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="bg-gray-50 rounded-lg shadow-md p-6 border border-gray-200">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="text-3xl">📋</div>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">PDF</span>
+                <div class="card resource-card">
+                    <div class="card-content">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="resource-emoji">📋</div>
+                            <span class="badge badge-primary">PDF</span>
+                        </div>
+                        <h3 class="card-title">Workplace Rights Guide</h3>
+                        <p class="text-secondary">Understand your employment rights, including minimum wage, overtime, and protection against discrimination.</p>
+                        <div class="resource-meta">
+                            <span class="text-muted">15 pages • Updated Feb 2025</span>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-download mr-2"></i> Download
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Consumer Protection Handbook</h3>
-                    <p class="text-gray-600 mb-4">Learn about warranties, refunds, online shopping rights, and how to file consumer complaints.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">18 pages • Updated Mar 2025</span>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 flex items-center">
-                            <i class="fas fa-download mr-1"></i> Download
-                        </button>
+                </div>
+                
+                <div class="card resource-card">
+                    <div class="card-content">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="resource-emoji">📋</div>
+                            <span class="badge badge-primary">PDF</span>
+                        </div>
+                        <h3 class="card-title">Consumer Protection Handbook</h3>
+                        <p class="text-secondary">Learn about warranties, refunds, online shopping rights, and how to file consumer complaints.</p>
+                        <div class="resource-meta">
+                            <span class="text-muted">18 pages • Updated Mar 2025</span>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-download mr-2"></i> Download
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="text-center mt-8">
-                <a href="#" class="text-blue-600 font-medium hover:underline">View all downloadable resources →</a>
+            <div class="text-center mt-8 mb-8">
+                <a href="#" class="show-more">
+                    View all downloadable resources <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Video Explainers Section -->
-    <section class="py-12 px-6 bg-gray-100">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Video Explainers & Infographics</h2>
-            <p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">Visual guides to help you understand complex legal concepts.</p>
+    <section class="gradient-section py-6">
+        <div class="container">
+            <h2>Video Explainers & Infographics</h2>
+            <p class="section-intro">Visual guides to help you understand complex legal concepts.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="relative">
-                        <img src="/api/placeholder/350/200" alt="Tenants Rights Video" class="w-full h-48 object-cover">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-12 h-12 flex items-center justify-center cursor-pointer">
-                                <i class="fas fa-play"></i>
-                            </div>
+            <div class="grid grid-cols-3">
+                <div class="card video-card">
+                    <div class="video-card-image">
+                        <img src="https://www.shutterstock.com/image-photo/book-about-tenant-rights-model-260nw-2236585253.jpg" alt="Tenants Rights Video">
+                        <div class="play-btn">
+                            <i class="fas fa-play"></i>
                         </div>
                     </div>
-                    <div class="p-5">
-                        <h3 class="text-lg font-semibold mb-2">Know Your Tenant Rights</h3>
-                        <p class="text-gray-600 text-sm mb-3">This 5-minute video explains the basics of tenant rights, including repairs, privacy, and evictions.</p>
-                        <div class="flex items-center text-gray-500 text-sm">
+                    <div class="card-content">
+                        <h3 class="card-title">Know Your Tenant Rights</h3>
+                        <p class="text-secondary">This 5-minute video explains the basics of tenant rights, including repairs, privacy, and evictions.</p>
+                        <div class="flex items-center text-muted mt-3">
                             <span><i class="far fa-clock mr-1"></i> 5:23</span>
                             <span class="ml-3"><i class="far fa-eye mr-1"></i> 4.2k views</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="relative">
-                        <img src="/api/placeholder/350/200" alt="Employment Rights Infographic" class="w-full h-48 object-cover">
-                        <div class="absolute top-2 right-2 bg-white bg-opacity-90 px-2 py-1 rounded text-xs font-medium text-gray-800">
+                <div class="card video-card">
+                    <div class="video-card-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLtqL-FV3XqzTTAtJgb6gNEYCQ_NBaxT98A&s" alt="Employment Rights Infographic">
+                        <div class="badge badge-primary" style="position: absolute; top: 1rem; right: 1rem;">
                             Infographic
                         </div>
                     </div>
-                    <div class="p-5">
-                        <h3 class="text-lg font-semibold mb-2">Employment Rights Flowchart</h3>
-                        <p class="text-gray-600 text-sm mb-3">This flowchart walks you through what to do if you face workplace discrimination or harassment.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-gray-500 text-sm"><i class="far fa-calendar mr-1"></i> Mar 10, 2025</span>
-                            <button class="text-blue-600 hover:text-blue-700 text-sm flex items-center">
+                    <div class="card-content">
+                        <h3 class="card-title">Employment Rights Flowchart</h3>
+                        <p class="text-secondary">This flowchart walks you through what to do if you face workplace discrimination or harassment.</p>
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="text-muted"><i class="far fa-calendar mr-1"></i> Mar 10, 2025</span>
+                            <button class="text-primary-light flex items-center text-sm">
                                 <i class="fas fa-expand mr-1"></i> View Full Size
                             </button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="relative">
-                        <img src="/api/placeholder/350/200" alt="Criminal Law Video" class="w-full h-48 object-cover">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-12 h-12 flex items-center justify-center cursor-pointer">
-                                <i class="fas fa-play"></i>
-                            </div>
+                <div class="card video-card">
+                    <div class="video-card-image">
+                        <img src="https://rslegal.in/images/criminal-law.jpg" alt="Criminal Law Video">
+                        <div class="play-btn">
+                            <i class="fas fa-play"></i>
                         </div>
                     </div>
-                    <div class="p-5">
-                        <h3 class="text-lg font-semibold mb-2">Police Interactions: Know Your Rights</h3>
-                        <p class="text-gray-600 text-sm mb-3">Learn what to do and say if you're stopped by police, including your Miranda rights explained.</p>
-                        <div class="flex items-center text-gray-500 text-sm">
+                    <div class="card-content">
+                        <h3 class="card-title">Police Interactions: Know Your Rights</h3>
+                        <p class="text-secondary">Learn what to do and say if you're stopped by police, including your Miranda rights explained.</p>
+                        <div class="flex items-center text-muted mt-3">
                             <span><i class="far fa-clock mr-1"></i> 7:15</span>
                             <span class="ml-3"><i class="far fa-eye mr-1"></i> 6.8k views</span>
                         </div>
@@ -962,54 +1389,58 @@
                 </div>
             </div>
             
-            <div class="text-center mt-8">
-                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
-                    <i class="fas fa-video mr-1"></i> Browse All Videos & Infographics
+            <div class="text-center mt-8 mb-8">
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-video mr-2"></i> Browse All Videos & Infographics
                 </a>
             </div>
+            
+            <div class="glow glow-1"></div>
+            <div class="glow glow-2"></div>
         </div>
     </section>
 
     <!-- Ask a Lawyer Section -->
-    <section class="py-12 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white">
-        <div class="container mx-auto">
+    <section class="mt-10 mb-10">
+        <div class="container">
             <div class="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto">
                 <div class="md:w-1/2 mb-8 md:mb-0">
-                    <h2 class="text-3xl font-bold mb-4">Need Personalized Legal Advice?</h2>
-                    <p class="text-blue-100 mb-6">Some legal questions require professional guidance. Connect with a legal expert who can help with your specific situation.</p>
+                    <h2 class="text-left">Need Personalized Legal Advice?</h2>
+                    <p class="text-secondary mb-6">Some legal questions require professional guidance. Connect with a legal expert who can help with your specific situation.</p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-white text-blue-700 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
-                            <i class="fas fa-user-tie mr-1"></i> Ask a Lawyer
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-user-tie mr-2"></i> Ask a Lawyer
                         </a>
-                        <a href="#" class="bg-transparent border border-white text-white hover:bg-blue-600 font-medium py-3 px-6 rounded-lg transition duration-300">
-                            <i class="fas fa-map-marker-alt mr-1"></i> Find Legal Aid Near You
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Find Legal Aid Near You
                         </a>
                     </div>
                 </div>
                 
                 <div class="md:w-5/12">
-                    <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-700">Ask Our Legal AI Assistant</h3>
-                        <p class="text-gray-600 mb-4">Get instant answers to common legal questions with our AI chatbot. Available 24/7.</p>
-                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
-                            <div class="flex items-start mb-3">
-                                <div class="bg-blue-100 text-blue-600 p-2 rounded-full mr-3">
-                                    <i class="fas fa-robot"></i>
+                    <div class="chatbot-card">
+                        <div class="card-content">
+                            <h3 class="card-title">Ask Our Legal AI Assistant</h3>
+                            <p class="text-secondary mb-4">Get instant answers to common legal questions with our AI chatbot. Available 24/7.</p>
+                            <div class="bg-card-bg rounded-lg p-4 mb-4">
+                                <div class="chat-bubble">
+                                    <div class="chat-avatar">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-primary">How can I help with your legal questions today?</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-gray-800">How can I help with your legal questions today?</p>
+                                <div class="chat-input">
+                                    <input type="text" placeholder="Type your legal question here..." class="chat-input-field">
+                                    <button>
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="flex">
-                                <input type="text" placeholder="Type your legal question here..." 
-                                    class="flex-grow px-4 py-2 rounded-l-lg border-2 border-r-0 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
-                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg">
-                                    <i class="fas fa-paper-plane"></i>
-                                </button>
+                            <div class="text-xs text-muted text-center">
+                                Note: AI responses are for informational purposes only and not a substitute for professional legal advice.
                             </div>
-                        </div>
-                        <div class="text-xs text-gray-500 text-center">
-                            Note: AI responses are for informational purposes only and not a substitute for professional legal advice.
                         </div>
                     </div>
                 </div>
@@ -1017,30 +1448,28 @@
         </div>
     </section>
 
-<!-- Chatbot Bubble -->
-<div class="chatbot-bubble bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">
-    <i class="fas fa-comment-dots text-2xl"></i>
-</div>
+    <!-- Chatbot Bubble -->
+    <div class="chatbot-bubble">
+        <i class="fas fa-comment-dots text-2xl"></i>
+    </div>
 
-<!-- Newsletter Subscription Section -->
-<section class="py-12 px-6 bg-white">
-    <div class="container mx-auto">
-        <div class="max-w-4xl mx-auto bg-gray-50 rounded-xl shadow-md overflow-hidden">
-            <div class="flex flex-col md:flex-row">
-                <div class="md:w-3/5 p-8">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Stay Updated on Legal Changes</h3>
-                    <p class="text-gray-600 mb-5">Subscribe to our free newsletter for the latest legal news, updates to laws, and new guides relevant to you.</p>
-                    <form class="flex flex-col sm:flex-row gap-3">
-                        <input type="email" placeholder="Your email address" 
-                            class="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
-                            Subscribe <i class="fas fa-paper-plane ml-1"></i>
+    <!-- Newsletter Subscription Section -->
+    <section class="gradient-section ">
+        <div class="container mt-10 mb-10">
+            <div class="newsletter-card max-w-4xl mx-auto">
+                <div class="newsletter-content">
+                    <h3 class="text-2xl font-bold text-primary-light mb-3">Stay Updated on Legal Changes</h3>
+                    <p class="text-secondary mb-5">Subscribe to our free newsletter for the latest legal news, updates to laws, and new guides relevant to you.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" class="newsletter-input">
+                        <button class="btn btn-primary">
+                            Subscribe <i class="fas fa-paper-plane ml-2"></i>
                         </button>
                     </form>
-                    <p class="text-xs text-gray-500 mt-3">We respect your privacy. You can unsubscribe at any time.</p>
+                    <p class="text-xs text-muted mt-3">We respect your privacy. You can unsubscribe at any time.</p>
                 </div>
-                <div class="md:w-2/5 bg-gradient-to-r from-blue-500 to-blue-700 p-8 flex items-center justify-center">
-                    <div class="text-center text-white">
+                <div class="newsletter-accent">
+                    <div class="newsletter-accent-content">
                         <div class="text-5xl mb-4">📬</div>
                         <h4 class="text-lg font-semibold mb-2">What You'll Get</h4>
                         <ul class="text-sm space-y-1">
@@ -1053,200 +1482,148 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Community Section -->
-<section class="py-12 px-6 bg-gray-100">
-    <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Join Our Legal Community</h2>
-        <p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">Connect with others, share experiences, and learn from community discussions about everyday legal matters.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="flex items-center mb-4">
-                    <div class="bg-purple-100 p-3 rounded-full mr-4">
-                        <i class="fas fa-comments text-purple-600 text-xl"></i>
+    <!-- Community Section -->
+    <section class="mt-10 mb-10" >
+        <div class="container">
+            <h2>Join Our Legal Community</h2>
+            <p class="section-intro">Connect with others, share experiences, and learn from community discussions about everyday legal matters.</p>
+            
+            <div class="grid grid-cols-3">
+                <div class="card feature-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <div class="icon-circle">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3 class="card-title">Discussion Forums</h3>
+                        </div>
+                        <p class="text-secondary mb-4">Participate in moderated discussions on various legal topics and get insights from the community.</p>
+                        <a href="#" class="text-primary-light flex items-center">
+                            Join discussions <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                        </a>
                     </div>
-                    <h3 class="text-xl font-semibold">Discussion Forums</h3>
                 </div>
-                <p class="text-gray-600 mb-4">Participate in moderated discussions on various legal topics and get insights from the community.</p>
-                <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
-                    Join discussions <i class="fas fa-chevron-right ml-1 text-sm"></i>
-                </a>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="flex items-center mb-4">
-                    <div class="bg-green-100 p-3 rounded-full mr-4">
-                        <i class="fas fa-calendar-alt text-green-600 text-xl"></i>
+                
+                <div class="card feature-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <div class="icon-circle" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));">
+                                <i class="fas fa-calendar-alt text-green-500"></i>
+                            </div>
+                            <h3 class="card-title">Free Webinars</h3>
+                        </div>
+                        <p class="text-secondary mb-4">Attend monthly webinars where legal experts discuss common issues and answer community questions.</p>
+                        <a href="#" class="text-primary-light flex items-center">
+                            View schedule <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                        </a>
                     </div>
-                    <h3 class="text-xl font-semibold">Free Webinars</h3>
                 </div>
-                <p class="text-gray-600 mb-4">Attend monthly webinars where legal experts discuss common issues and answer community questions.</p>
-                <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
-                    View schedule <i class="fas fa-chevron-right ml-1 text-sm"></i>
-                </a>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="flex items-center mb-4">
-                    <div class="bg-orange-100 p-3 rounded-full mr-4">
-                        <i class="fas fa-user-friends text-orange-600 text-xl"></i>
+                
+                <div class="card feature-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <div class="icon-circle" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));">
+                                <i class="fas fa-user-friends text-amber-500"></i>
+                            </div>
+                            <h3 class="card-title">Peer Support</h3>
+                        </div>
+                        <p class="text-secondary mb-4">Connect with others who have navigated similar legal situations and learn from their experiences.</p>
+                        <a href="#" class="text-primary-light flex items-center">
+                            Join support groups <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                        </a>
                     </div>
-                    <h3 class="text-xl font-semibold">Peer Support</h3>
-                </div>
-                <p class="text-gray-600 mb-4">Connect with others who have navigated similar legal situations and learn from their experiences.</p>
-                <a href="#" class="text-blue-600 font-medium hover:underline flex items-center">
-                    Join support groups <i class="fas fa-chevron-right ml-1 text-sm"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ Section -->
-<section class="py-12 px-6 bg-white">
-    <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Frequently Asked Questions</h2>
-        
-        <div class="max-w-3xl mx-auto space-y-4">
-            <div class="border border-gray-200 rounded-lg">
-                <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none">
-                    <span class="text-lg font-medium text-gray-800">Is legal information on this site valid for all states?</span>
-                    <i class="fas fa-plus text-blue-600"></i>
-                </button>
-                <div class="faq-content hidden px-6 pb-4">
-                    <p class="text-gray-600">While many legal principles are similar across states, specific laws can vary significantly. We provide general information and indicate state-specific variations where possible. Always verify information for your specific jurisdiction.</p>
-                </div>
-            </div>
-            
-            <div class="border border-gray-200 rounded-lg">
-                <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none">
-                    <span class="text-lg font-medium text-gray-800">Can I rely on these guides for my legal situation?</span>
-                    <i class="fas fa-plus text-blue-600"></i>
-                </button>
-                <div class="faq-content hidden px-6 pb-4">
-                    <p class="text-gray-600">Our guides provide educational information but should not be considered legal advice. Every legal situation is unique. For specific advice about your circumstances, consult with a qualified attorney in your area.</p>
-                </div>
-            </div>
-            
-            <div class="border border-gray-200 rounded-lg">
-                <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none">
-                    <span class="text-lg font-medium text-gray-800">How often are the legal guides updated?</span>
-                    <i class="fas fa-plus text-blue-600"></i>
-                </button>
-                <div class="faq-content hidden px-6 pb-4">
-                    <p class="text-gray-600">We review and update our guides quarterly and whenever significant legal changes occur. The last updated date is always displayed on each guide. If you notice outdated information, please let us know.</p>
-                </div>
-            </div>
-            
-            <div class="border border-gray-200 rounded-lg">
-                <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none">
-                    <span class="text-lg font-medium text-gray-800">How can I find legal help if I can't afford a lawyer?</span>
-                    <i class="fas fa-plus text-blue-600"></i>
-                </button>
-                <div class="faq-content hidden px-6 pb-4">
-                    <p class="text-gray-600">We provide information about legal aid organizations, pro bono services, and low-cost legal clinics in our "Find Legal Help" section. Many communities offer free legal consultations or sliding scale fees based on income.</p>
-                </div>
-            </div>
-            
-            <div class="border border-gray-200 rounded-lg">
-                <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none">
-                    <span class="text-lg font-medium text-gray-800">Can I share or use these legal guides for my organization?</span>
-                    <i class="fas fa-plus text-blue-600"></i>
-                </button>
-                <div class="faq-content hidden px-6 pb-4">
-                    <p class="text-gray-600">Our guides are available for personal educational use. For organizational or commercial use, please contact us for permission. We offer licensing options for nonprofits, educational institutions, and community organizations.</p>
                 </div>
             </div>
         </div>
-        
-        <div class="text-center mt-8">
-            <a href="#" class="text-blue-600 font-medium hover:underline">View all FAQs →</a>
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-white py-12 px-6">
+    <!-- Footer -->
+<footer class="bg-slate-900 text-white pt-16 pb-8 px-6 border-t border-gray-800">
     <div class="container mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div>
-                <h3 class="text-xl font-bold mb-4">LegalEase</h3>
-                <p class="text-gray-400 mb-4">Simplifying legal knowledge for everyone. Making the law accessible and understandable.</p>
+                <h3 class="text-xl font-bold gradient-text mb-4">LegalEase</h3>
+                <p class="text-gray-400 mb-4">Making legal knowledge accessible to everyone. Empowering you with the information you need to understand and protect your rights.</p>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-youtube"></i>
+                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                        <i class="fab fa-linkedin"></i>
                     </a>
                 </div>
             </div>
             
             <div>
-                <h4 class="text-lg font-semibold mb-4">Guides</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Housing Rights</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Employment Law</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Consumer Protection</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Laws</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Criminal Justice</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Family Law</a></li>
+                <h4 class="text-lg font-medium mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Home</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Legal Guides</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Quizzes</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Ask a Lawyer</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Community Forums</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">About Us</a></li>
                 </ul>
             </div>
             
             <div>
-                <h4 class="text-lg font-semibold mb-4">Resources</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Legal Glossary</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Downloadable Forms</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Legal Videos</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Find Legal Aid</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Community Forums</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Legal News</a></li>
+                <h4 class="text-lg font-medium mb-4">Legal Topics</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Tenant Rights</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Employment Law</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Consumer Protection</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Family Law</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">Criminal Law</a></li>
+                    <li><a href="#" class="hover:text-indigo-400 transition duration-300">View All Topics</a></li>
                 </ul>
             </div>
             
             <div>
-                <h4 class="text-lg font-semibold mb-4">About</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Our Mission</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Legal Experts</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Partnerships</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Careers</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Contact Us</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Donate</a></li>
+                <h4 class="text-lg font-medium mb-4">Contact Us</h4>
+                <ul class="space-y-3 text-gray-400">
+                    <li class="flex items-start">
+                        <i class="fas fa-envelope mt-1 mr-3 text-indigo-400"></i>
+                        <span>support@legalease.com</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-phone-alt mt-1 mr-3 text-indigo-400"></i>
+                        <span>(800) 123-4567</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-indigo-400"></i>
+                        <span>123 Legal Street<br>Justice City, LC 12345</span>
+                    </li>
                 </ul>
             </div>
         </div>
         
-        <div class="border-t border-gray-700 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <div class="text-gray-400 mb-4 md:mb-0">
-                <p>© 2025 LegalEase. All rights reserved.</p>
-            </div>
-            
-            <div class="flex space-x-6">
-                <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Privacy Policy</a>
-                <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Terms of Service</a>
-                <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Cookie Policy</a>
-                <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Accessibility</a>
+        <div class="border-t border-gray-800 pt-8 pb-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LegalEase. All rights reserved.</p>
+                <div class="flex space-x-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-indigo-400 transition duration-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-indigo-400 transition duration-300">Terms of Service</a>
+                    <a href="#" class="hover:text-indigo-400 transition duration-300">Cookie Policy</a>
+                    <a href="#" class="hover:text-indigo-400 transition duration-300">Accessibility</a>
+                </div>
             </div>
         </div>
         
-        <div class="text-center text-gray-500 text-xs mt-8">
-            <p>LegalEase provides general legal information for educational purposes only. It is not a substitute for professional legal advice.</p>
+        <div class="text-center mt-6 text-xs text-gray-500">
+            <p>LegalEase provides legal information for educational purposes only. It is not a substitute for professional legal advice.</p>
         </div>
     </div>
 </footer>
 
+    
 <!-- JavaScript for interactive elements -->
 <script>
    
@@ -1406,6 +1783,63 @@
         // Chatbot toggle functionality would be implemented here
         alert('Legal AI Assistant is coming soon!');
     });
+
+    // Glossary Toggle Functionality
+    document.querySelectorAll('.glossary-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const details = button.previousElementSibling;
+                details.classList.toggle('hidden');
+                button.classList.toggle('active');
+                if (details.classList.contains('hidden')) {
+                    button.innerHTML = 'Show more <i class="fas fa-chevron-down"></i>';
+                } else {
+                    button.innerHTML = 'Show less <i class="fas fa-chevron-up"></i>';
+                }
+            });
+        });
+        
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                content.classList.toggle('hidden');
+                button.classList.toggle('active');
+            });
+        });
+        
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.card, .chatbot-card, .newsletter-card').forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Add hover glow effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                button.style.background = `radial-gradient(circle at ${x}px ${y}px, var(--primary), var(--primary-dark))`;
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                if (button.classList.contains('btn-primary')) {
+                    button.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-dark))';
+                } else {
+                    button.style.background = '';
+                }
+            });
+        });
 </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,262 +9,912 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap');
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #10b981;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --card-hover: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --accent: #f59e0b;
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
         }
-        .dark-mode {
-            background-color: #1a202c;
-            color: #f7fafc;
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .dark-mode .navbar {
-            background-color: #2d3748;
+        
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
         }
-        .dark-mode .card {
-            background-color: #2d3748;
-            color: #f7fafc;
+        
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 10px;
         }
-        .dark-mode .footer {
-            background-color: #2d3748;
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #818cf8;
         }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 100;
-            transition: background-color 0.3s ease;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
-        .hero-shape {
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        
+        .navbar.scrolled {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
         }
+        
+        .hero-text-animation {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .hero-container {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .hero-glow {
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(15, 23, 42, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
         .chatbot-bubble {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 99;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 25px rgba(99, 102, 241, 0.5);
         }
+        
         .chatbot-bubble:hover {
             transform: scale(1.1);
+            box-shadow: 0 8px 35px rgba(99, 102, 241, 0.7);
         }
+        
         .feature-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .question-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .question-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .lawyer-card {
+            background: var(--card-bg);
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .lawyer-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: var(--card-hover);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
         }
+        
+        .topic-icon {
+            transition: all 0.3s ease;
+            color: var(--primary);
+        }
+        
+        .topic-link:hover .topic-icon {
+            transform: scale(1.2);
+            color: var(--primary-light);
+        }
+        
         .news-ticker {
             overflow: hidden;
             position: relative;
             height: 40px;
+            background: rgba(79, 70, 229, 0.2);
+            border-radius: 10px;
         }
+        
         .ticker-content {
             position: absolute;
             white-space: nowrap;
             will-change: transform;
         }
-        .chatbot-container {
+        
+        /* Neon effect for primary buttons */
+        .btn-neon {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+        }
+        
+        .btn-neon:hover {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.8);
+        }
+        
+        .btn-neon:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+        
+        .btn-neon:hover:before {
+            left: 100%;
+        }
+        
+        /* Card hover effects */
+        .hover-lift {
             transition: all 0.3s ease;
-            transform: translateY(350px);
-            max-height: 0;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Particle background for sections */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(0) translateX(20px); }
+            75% { transform: translateY(20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
+        /* Animated borders */
+        .animated-border {
+            position: relative;
             overflow: hidden;
         }
+        
+        .animated-border:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .animated-border:hover:after {
+            width: 100%;
+        }
+        
+        /* Custom switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--card-bg);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar.scrolled {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .logo-glow {
+            text-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hero-shape {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-shape::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, var(--primary-transparent) 0%, transparent 60%);
+            animation: pulse 15s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(0deg) scale(1); opacity: 0.3; }
+            100% { transform: rotate(360deg) scale(1.1); opacity: 0.6; }
+        }
+
+        .glass-card {
+            background-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .question-card {
+            background-color: var(--card-bg);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .question-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            border-color: var(--primary-light);
+        }
+
+        .lawyer-card {
+            background-color: var(--card-bg);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .lawyer-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-item {
+            background-color: rgba(30, 41, 59, 0.8);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .category-item:hover {
+            background-color: var(--card-hover);
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .emoji-icon {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .category-item:hover .emoji-icon {
+            transform: scale(1.2);
+        }
+
+        .gradient-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .gradient-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 100%);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .gradient-button:hover::before {
+            opacity: 1;
+        }
+
+        .gradient-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .outline-button {
+            border: 2px solid var(--primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .outline-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .outline-button:hover::before {
+            left: 0;
+        }
+
+        .chatbot-bubble {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .chatbot-bubble:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(79, 70, 229, 0.6);
+        }
+
+        .chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 350px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
+            z-index: 98;
+        }
+
         .chatbot-open {
             transform: translateY(0);
-            max-height: 400px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+        }
+
+        .chat-message-bot {
+            background-color: var(--primary-transparent);
+            border-radius: 18px 18px 18px 4px;
+            border-left: 3px solid var(--primary);
+            max-width: 85%;
+        }
+
+        .chat-message-user {
+            background-color: var(--card-hover);
+            border-radius: 18px 18px 4px 18px;
+            border-right: 3px solid var(--secondary);
+            max-width: 85%;
+            align-self: flex-end;
+        }
+
+        .chat-input {
+            background-color: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .form-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .custom-input, .custom-textarea, .custom-select {
+            background-color: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .custom-input:focus, .custom-textarea:focus, .custom-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .upload-area {
+            background-color: var(--darker-bg);
+            border: 2px dashed var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .faq-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .faq-card:hover {
+            border-color: var(--primary-light);
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-active .faq-content {
+            max-height: 200px;
+        }
+
+        .faq-toggle {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .testimonial {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary-transparent);
+            border-radius: 50%;
+            opacity: 0.2;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover::before {
+            transform: scale(1.5);
+            opacity: 0.3;
+        }
+
+        .star-rating {
+            color: var(--warning);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+        }
+
+        .bubble-animation {
+            animation: float 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .footer {
+            background-color: var(--darker-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: var(--primary);
+        }
+
+        /* Custom Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        /* Neon glow effect for special elements */
+        .neon-glow {
+            box-shadow: 0 0 15px var(--primary);
+            animation: neon-pulse 2s infinite alternate;
+        }
+
+        @keyframes neon-pulse {
+            0% { box-shadow: 0 0 5px var(--primary); }
+            100% { box-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary-light); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-shape {
+                clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            }
+            
+            .chatbot-container {
+                width: calc(100% - 50px);
+                max-width: 350px;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="dark">
     <!-- Navigation Bar -->
-    <nav class="navbar bg-white shadow-md px-6 py-4">
+    <nav class="navbar px-6 py-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <h1 class="text-2xl font-bold text-blue-800">LegalEase</h1>
-                <span class="text-sm text-gray-500 ml-2">⚖️</span>
+                <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
             </div>
             
             <div class="hidden md:flex space-x-6">
-                <a href="index.html" class="font-medium text-gray-600 hover:text-blue-600">Home</a>
-                <a href="legalguides.html" class="font-medium text-gray-600 hover:text-blue-600">Legal Guides</a>
-                <a href="QT" class="font-medium text-gray-600 hover:text-blue-600">Quizzes & Tests</a>
-                <a href="askalawyer.html" class="font-medium text-blue-600">Ask a Lawyer</a>
-                <a href="emergencycontacts.html" class="font-medium text-gray-600 hover:text-blue-600">Emergency Contacts</a>
-                <a href="aboutus.html" class="font-medium text-gray-600 hover:text-blue-600">About Us</a>
+                <a href="index.html" class="font-medium text-gray-400 animated-border">Home</a>
+                <a href="legalguides.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-medium text-indigo-300 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
             </div>
             
             <div class="flex items-center space-x-4">
                 <div class="relative hidden md:block">
                     <input type="text" placeholder="Search legal topics..." 
-                           class="px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-300 w-48">
-                    <button class="absolute right-3 top-2 text-gray-400">
+                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
                         <i class="fas fa-search"></i>
                     </button>
-                </div>
- 
+                </div>   
                 <button class="md:hidden">
-                    <i class="fas fa-bars text-gray-600 text-xl"></i>
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Breadcrumb Navigation -->
-    <div class="bg-gray-100 pt-24 pb-3 px-6">
-        <div class="container mx-auto">
-            <div class="text-sm text-gray-600">
-                <a href="index.html" class="hover:text-blue-600">Home</a> > 
-                <span class="text-blue-600 font-medium">Ask a Lawyer</span>
-            </div>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white hero-shape pt-8 pb-16 px-6">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0 slide-right" id="heroText">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">👨‍⚖️ Ask a Lawyer: Get Legal Advice from Experts</h1>
-                <p class="text-xl opacity-90 mb-6">Have a legal question? Our network of legal professionals is here to help. Ask your question, browse previously answered queries, or get personalized advice.</p>
+    <section class="bg-gradient-to-b from-gray-800 to-slate-900 mt-20">
+        <div class="container mx-auto flex flex-col md:flex-row items-center ml-10 ">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white py-4">
+                    <span class="text-indigo-400">👨‍⚖️ Ask a Lawyer:</span> Expert Legal Guidance When You Need It
+                </h1>
+                <p class="text-xl opacity-90 mb-8 text-gray-300 leading-relaxed">Have a legal question? Our network of legal professionals is ready to help. Submit your question, explore previously answered queries, or get personalized advice.</p>
                 
-                <div class="flex flex-wrap gap-4">
-                    <a href="#questionForm" class="bg-white text-blue-700 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                <div class="flex flex-wrap gap-5">
+                    <a href="#questionForm" class="gradient-button text-white font-medium py-3 px-8 rounded-lg shadow-lg">
                         📝 Ask a Question
                     </a>
-                    <a href="#featuredQuestions" class="bg-transparent border border-white text-white hover:bg-blue-700 font-medium py-3 px-6 rounded-lg transition duration-300">
-                        🔍 Browse Legal Answers
+                    <a href="#featuredQuestions" class="outline-button py-3 px-8 rounded-lg">
+                        🔍 Browse Answers
                     </a>
                 </div>
             </div>
             
-            <div class="md:w-1/2 flex justify-center fade-in">
-                <img src="/api/placeholder/500/400" alt="Lawyer helping a client" class="rounded-lg shadow-xl max-w-full h-auto" id="heroImage">
+            <div class="md:w-1/2 flex justify-center zoom-in" id="heroImage">
+                <div class="relative">
+                    <div class="absolute -left-6 -top-6 w-32 h-32 bg-indigo-500 rounded-full opacity-10 bubble-animation"></div>
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-indigo-500 rounded-full opacity-10" style="animation: float 4s ease-in-out infinite alternate-reverse;"></div>
+                    <img src="/api/placeholder/500/400" alt="Lawyer helping a client" class="rounded-2xl shadow-2xl z-10 relative glass-card">
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Category Selection -->
-    <section class="py-12 px-6 bg-white">
+    <section class="py-16 px-6 bg-gray-900">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Browse by Legal Category</h2>
+            <h2 class="text-3xl font-bold text-center text-white mb-10">Browse by Legal Category</h2>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
-                <a href="#" class="bg-blue-50 rounded-lg p-5 text-center transition duration-300 hover:bg-blue-100 shadow-sm">
-                    <div class="text-3xl mb-2">💼</div>
-                    <h3 class="font-medium text-gray-800">Employment Law</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 md:gap-6">
+                <a href="#" class="category-item rounded-lg p-5 text-center">
+                    <div class="text-3xl mb-3 emoji-icon">💼</div>
+                    <h3 class="font-medium text-gray-200">Employment Law</h3>
                 </a>
                 
-                <a href="#" class="bg-blue-50 rounded-lg p-5 text-center transition duration-300 hover:bg-blue-100 shadow-sm">
-                    <div class="text-3xl mb-2">🏠</div>
-                    <h3 class="font-medium text-gray-800">Housing & Property</h3>
+                <a href="#" class="category-item rounded-lg p-5 text-center">
+                    <div class="text-3xl mb-3 emoji-icon">🏠</div>
+                    <h3 class="font-medium text-gray-200">Housing & Property</h3>
                 </a>
                 
-                <a href="#" class="bg-blue-50 rounded-lg p-5 text-center transition duration-300 hover:bg-blue-100 shadow-sm">
-                    <div class="text-3xl mb-2">👪</div>
-                    <h3 class="font-medium text-gray-800">Family Law</h3>
+                <a href="#" class="category-item rounded-lg p-5 text-center">
+                    <div class="text-3xl mb-3 emoji-icon">👪</div>
+                    <h3 class="font-medium text-gray-200">Family Law</h3>
                 </a>
                 
-                <a href="#" class="bg-blue-50 rounded-lg p-5 text-center transition duration-300 hover:bg-blue-100 shadow-sm">
-                    <div class="text-3xl mb-2">💳</div>
-                    <h3 class="font-medium text-gray-800">Consumer Rights</h3>
+                <a href="#" class="category-item rounded-lg p-5 text-center">
+                    <div class="text-3xl mb-3 emoji-icon">💳</div>
+                    <h3 class="font-medium text-gray-200">Consumer Rights</h3>
                 </a>
                 
-                <a href="#" class="bg-blue-50 rounded-lg p-5 text-center transition duration-300 hover:bg-blue-100 shadow-sm">
-                    <div class="text-3xl mb-2">🔒</div>
-                    <h3 class="font-medium text-gray-800">Criminal Law</h3>
+                <a href="#" class="category-item rounded-lg p-5 text-center">
+                    <div class="text-3xl mb-3 emoji-icon">🔒</div>
+                    <h3 class="font-medium text-gray-200">Criminal Law</h3>
                 </a>
                 
-                <a href="#" class="bg-blue-50 rounded-lg p-5 text-center transition duration-300 hover:bg-blue-100 shadow-sm">
-                    <div class="text-3xl mb-2">⚖️</div>
-                    <h3 class="font-medium text-gray-800">View All</h3>
+                <a href="#" class="category-item rounded-lg p-5 text-center">
+                    <div class="text-3xl mb-3 emoji-icon">⚖️</div>
+                    <h3 class="font-medium text-gray-200">View All</h3>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Question Submission Form -->
-    <section id="questionForm" class="py-12 px-6 bg-gray-100 relative">
+    <section id="questionForm" class="py-16 px-6 bg-gray-800 relative">
         <div class="container mx-auto max-w-4xl">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="form-card rounded-xl overflow-hidden bg-slate-400">
                 <div class="p-8">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6">📝 Submit Your Legal Question</h2>
+                    <h2 class="text-3xl font-bold text-white mb-8">📝 Submit Your Legal Question</h2>
                     
                     <form class="space-y-6">
                         <div>
-                            <label for="category" class="block text-gray-700 font-medium mb-2">Legal Category</label>
-                            <select id="category" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                                <option value="" selected disabled>Select a category...</option>
-                                <option value="employment">Employment Law</option>
-                                <option value="housing">Housing & Property</option>
-                                <option value="family">Family Law</option>
-                                <option value="consumer">Consumer Rights</option>
-                                <option value="criminal">Criminal Law</option>
-                                <option value="immigration">Immigration Law</option>
-                                <option value="business">Business Law</option>
-                                <option value="other">Other</option>
+                            <label for="category" class="block text-gray-300 font-medium mb-2 bg-slate-400">Legal Category</label>
+                            <select id="category" class="custom-select w-full px-4 py-3 rounded-lg border focus:outline-none bg">
+                                <option class="text-black" value="">Select a category...</option>
+                                <option class="text-black" value="employment">Employment Law</option>
+                                <option class="text-black" value="housing">Housing & Property</option>
+                                <option class="text-black" value="family">Family Law</option>
+                                <option class="text-black" value="consumer">Consumer Rights</option>
+                                <option class="text-black" value="criminal">Criminal Law</option>
+                                <option class="text-black" value="immigration">Immigration Law</option>
+                                <option class="text-black" value="business">Business Law</option>
+                                <option class="text-black" value="other">Other</option>
                             </select>
                         </div>
                         
-                        <div>
-                            <label for="title" class="block text-gray-700 font-medium mb-2">Question Title</label>
+                        <div class="bg-slate-400">
+                            <label for="title" class="block text-gray-300 bg-slate-400 font-medium mb-2">Question Title</label>
                             <input type="text" id="title" placeholder="E.g., Can my landlord increase rent without notice?" 
-                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                   class="custom-input w-full px-4 py-3 rounded-lg border focus:outline-none">
                         </div>
                         
                         <div>
-                            <label for="details" class="block text-gray-700 font-medium mb-2">Question Details</label>
+                            <label for="details" class="block text-gray-300 font-medium mb-2">Question Details</label>
                             <textarea id="details" rows="5" placeholder="Provide context and specific details about your situation..." 
-                                      class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
+                                      class="custom-textarea w-full px-4 py-3 rounded-lg border focus:outline-none"></textarea>
                         </div>
                         
                         <div>
-                            <label for="attachment" class="block text-gray-700 font-medium mb-2">Attachments (Optional)</label>
-                            <div class="border border-dashed border-gray-300 rounded-lg p-6 text-center">
+                            <label for="attachment" class="block text-gray-300 font-medium mb-2">Attachments (Optional)</label>
+                            <div class="upload-area rounded-lg p-8 text-center">
                                 <input type="file" id="attachment" class="hidden">
                                 <label for="attachment" class="cursor-pointer">
-                                    <i class="fas fa-upload text-blue-600 text-2xl mb-2"></i>
-                                    <p class="text-gray-600">Drop files here or click to upload</p>
-                                    <p class="text-xs text-gray-500 mt-1">You can upload contracts, documents, or images (PDF, DOC, JPG)</p>
+                                    <i class="fas fa-upload text-indigo-400 text-2xl mb-3"></i>
+                                    <p class="text-gray-300">Drop files here or click to upload</p>
+                                    <p class="text-xs text-gray-400 mt-2">You can upload contracts, documents, or images (PDF, DOC, JPG)</p>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="flex items-center">
-                            <input type="checkbox" id="anonymous" class="mr-2">
-                            <label for="anonymous" class="text-gray-700">Post as Anonymous</label>
+                            <input type="checkbox" id="anonymous" class="mr-3 h-5 w-5 rounded border-gray-600 text-indigo-500 focus:ring-indigo-500 focus:ring-opacity-25">
+                            <label for="anonymous" class="text-gray-300">Post as Anonymous</label>
                         </div>
                         
                         <div>
-                            <label for="email" class="block text-gray-700 font-medium mb-2">Email for Follow-up (Optional)</label>
+                            <label for="email" class="block text-gray-300 font-medium mb-2">Email for Follow-up (Optional)</label>
                             <input type="email" id="email" placeholder="Your email to receive notifications" 
-                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                            <p class="text-xs text-gray-500 mt-1">We'll notify you when your question is answered.</p>
+                                   class="custom-input w-full px-4 py-3 rounded-lg border focus:outline-none">
+                            <p class="text-xs text-gray-400 mt-1">We'll notify you when your question is answered.</p>
                         </div>
                         
                         <div class="pt-4">
-                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                            <button type="submit" class="gradient-button w-full font-medium py-3 px-6 rounded-lg shadow-lg">
                                 📩 Submit Question
                             </button>
                         </div>
                         
-                        <p class="text-xs text-gray-500 text-center">
-                            By submitting, you agree to our <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> and 
-                            <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>.
+                        <p class="text-xs text-gray-400 text-center">
+                            By submitting, you agree to our <a href="#" class="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors">Terms of Service</a> and 
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors">Privacy Policy</a>.
                         </p>
                     </form>
                 </div>
@@ -273,281 +923,339 @@
     </section>
 
     <!-- Featured Legal Questions -->
-    <section id="featuredQuestions" class="py-16 px-6 bg-white">
+    <section id="featuredQuestions" class="py-16 px-6 bg-gray-900">
         <div class="container mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4 md:mb-0">Featured Legal Questions</h2>
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-6 md:mb-0">Featured Legal Questions</h2>
                 
                 <div class="flex space-x-2">
-                    <button class="bg-blue-100 hover:bg-blue-200 text-blue-800 font-medium py-2 px-4 rounded transition duration-300">
+                    <button class="bg-indigo-900 text-indigo-200 font-medium py-2 px-4 rounded-lg transition-all hover:bg-indigo-800 shadow-lg">
                         Most Recent
                     </button>
-                    <button class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded transition duration-300">
+                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium py-2 px-4 rounded-lg transition-all">
                         Most Viewed
                     </button>
-                    <button class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded transition duration-300">
+                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium py-2 px-4 rounded-lg transition-all">
                         Top Rated
                     </button>
                 </div>
             </div>
             
-            <div class="space-y-6 max-w-5xl mx-auto">
+            <div class="space-y-8 max-w-5xl mx-auto">
                 <!-- Question 1 -->
-                <div class="question-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+                <div class="question-card rounded-xl overflow-hidden">
                     <div class="p-6">
                         <div class="flex justify-between items-start">
                             <div>
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">Employment Law</span>
-                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Can I get fired without a warning?</h3>
+                                <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Employment Law</span>
+                                <h3 class="text-xl font-semibold text-white mb-3">Can I get fired without a warning?</h3>
                             </div>
-                            <div class="flex space-x-3 text-sm text-gray-500">
+                            <div class="flex space-x-4 text-sm text-gray-400">
                                 <span><i class="fas fa-eye mr-1"></i> 156</span>
                                 <span><i class="fas fa-comment mr-1"></i> 8</span>
+                                <span><i class="fas fa-star mr-1"></i> 12</span>
                             </div>
                         </div>
                         
-                        <p class="text-gray-600 mb-4">In most states, employers must give notice before termination unless you are employed at-will. Exceptions exist for contract violations or severe misconduct...</p>
+                        <p class="text-gray-300 mb-4">I've been at my current job for 8 months. Yesterday, my manager called me into his office and informed me I was being terminated due to "performance issues." However, I've never received any formal warnings or negative performance reviews. Is this legal? What are my options?</p>
+                        
+                        <div class="p-4 rounded-lg bg-gray-800 mb-4">
+                            <div class="flex items-center mb-3">
+                                <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
+                                <div>
+                                    <h4 class="font-medium text-white">Sarah Johnson, Esq.</h4>
+                                    <p class="text-xs text-gray-400">Employment Law Specialist • 2 days ago</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300">In most states, employment is considered "at-will," meaning employers can terminate employees for any reason (except illegal discrimination) without notice. However, if you have an employment contract or if company policy requires progressive discipline, you may have a case. I recommend checking your employee handbook and gathering documentation of your work performance. You could also file for unemployment benefits while you seek new employment.</p>
+                        </div>
                         
                         <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-600 font-medium hover:underline">Read Full Answer <i class="fas fa-chevron-right text-xs ml-1"></i></a>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 8 answers <i class="fas fa-arrow-right ml-1"></i></a>
                             
-                            <div class="flex items-center text-sm text-gray-500">
-                                <div class="flex items-center mr-4">
-                                    <button class="text-gray-400 hover:text-blue-600 mr-1"><i class="fas fa-thumbs-up"></i></button>
-                                    <span>24</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <button class="text-gray-400 hover:text-red-600 mr-1"><i class="fas fa-thumbs-down"></i></button>
-                                    <span>2</span>
-                                </div>
+                            <div class="flex space-x-2">
+                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
+                                    <i class="fas fa-thumbs-up mr-1"></i> Helpful (24)
+                                </button>
+                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
                             </div>
-                        </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-sm">
-                            <div class="flex items-center">
-                                <img src="/api/placeholder/32/32" alt="Lawyer" class="w-8 h-8 rounded-full mr-2">
-                                <div>
-                                    <p class="font-medium text-gray-700">Answered by Sarah Johnson</p>
-                                    <p class="text-gray-500">Employment Law Specialist • 3 days ago</p>
-                                </div>
-                            </div>
-                            <a href="#" class="text-blue-600 hover:underline">Related: Employee Rights Guide</a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Question 2 -->
-                <div class="question-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+                <div class="question-card rounded-xl overflow-hidden">
                     <div class="p-6">
                         <div class="flex justify-between items-start">
                             <div>
-                                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">Housing Law</span>
-                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Can my landlord enter my apartment without notice?</h3>
+                                <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Housing Law</span>
+                                <h3 class="text-xl font-semibold text-white mb-3">Landlord entered without notice</h3>
                             </div>
-                            <div class="flex space-x-3 text-sm text-gray-500">
+                            <div class="flex space-x-4 text-sm text-gray-400">
                                 <span><i class="fas fa-eye mr-1"></i> 243</span>
                                 <span><i class="fas fa-comment mr-1"></i> 12</span>
+                                <span><i class="fas fa-star mr-1"></i> 18</span>
                             </div>
                         </div>
                         
-                        <p class="text-gray-600 mb-4">In most jurisdictions, landlords must provide at least 24 hours notice before entering your rental unit, except in genuine emergencies such as fire, flood, or gas leak...</p>
+                        <p class="text-gray-300 mb-4">I came home from work yesterday to find that my landlord had been in my apartment to "check the plumbing." He didn't give any advance notice. I feel like my privacy was violated. Is this legal? What rights do I have as a tenant?</p>
+                        
+                        <div class="p-4 rounded-lg bg-gray-800 mb-4">
+                            <div class="flex items-center mb-3">
+                                <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
+                                <div>
+                                    <h4 class="font-medium text-white">Michael Chen, Esq.</h4>
+                                    <p class="text-xs text-gray-400">Real Estate Attorney • 1 day ago</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300">Most states require landlords to provide at least 24-48 hours notice before entering a tenant's unit, except in genuine emergencies (like an active water leak). If there was no emergency, your landlord likely violated your right to quiet enjoyment. I recommend: 1) Document the incident in writing, 2) Send a formal letter reminding your landlord of notice requirements, 3) Check your lease and local tenant laws for specific protections. If this is a recurring issue, you may have grounds for legal action.</p>
+                        </div>
                         
                         <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-600 font-medium hover:underline">Read Full Answer <i class="fas fa-chevron-right text-xs ml-1"></i></a>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 12 answers <i class="fas fa-arrow-right ml-1"></i></a>
                             
-                            <div class="flex items-center text-sm text-gray-500">
-                                <div class="flex items-center mr-4">
-                                    <button class="text-gray-400 hover:text-blue-600 mr-1"><i class="fas fa-thumbs-up"></i></button>
-                                    <span>42</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <button class="text-gray-400 hover:text-red-600 mr-1"><i class="fas fa-thumbs-down"></i></button>
-                                    <span>3</span>
-                                </div>
+                            <div class="flex space-x-2">
+                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
+                                    <i class="fas fa-thumbs-up mr-1"></i> Helpful (31)
+                                </button>
+                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
                             </div>
-                        </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-sm">
-                            <div class="flex items-center">
-                                <img src="/api/placeholder/32/32" alt="Lawyer" class="w-8 h-8 rounded-full mr-2">
-                                <div>
-                                    <p class="font-medium text-gray-700">Answered by Michael Chen</p>
-                                    <p class="text-gray-500">Property Law Attorney • 1 week ago</p>
-                                </div>
-                            </div>
-                            <a href="#" class="text-blue-600 hover:underline">Related: Tenant Rights Guide</a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Question 3 -->
-                <div class="question-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+                <div class="question-card rounded-xl overflow-hidden">
                     <div class="p-6">
                         <div class="flex justify-between items-start">
                             <div>
-                                <span class="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">Consumer Rights</span>
-                                <h3 class="text-xl font-semibold text-gray-800 mb-2">What can I do about defective products I purchased online?</h3>
+                                <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Family Law</span>
+                                <h3 class="text-xl font-semibold text-white mb-3">Child custody after relocation</h3>
                             </div>
-                            <div class="flex space-x-3 text-sm text-gray-500">
-                                <span><i class="fas fa-eye mr-1"></i> 178</span>
+                            <div class="flex space-x-4 text-sm text-gray-400">
+                                <span><i class="fas fa-eye mr-1"></i> 187</span>
                                 <span><i class="fas fa-comment mr-1"></i> 6</span>
+                                <span><i class="fas fa-star mr-1"></i> 9</span>
                             </div>
                         </div>
                         
-                        <p class="text-gray-600 mb-4">When you receive defective products purchased online, you have several options: First, contact the seller directly for a replacement or refund. Most reputable companies have return policies...</p>
+                        <p class="text-gray-300 mb-4">I have primary custody of my children and need to relocate for a job opportunity that's about 200 miles away. My ex-spouse is threatening to take me to court to prevent this move. What do I need to know about relocating with children after divorce?</p>
+                        
+                        <div class="p-4 rounded-lg bg-gray-800 mb-4">
+                            <div class="flex items-center mb-3">
+                                <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
+                                <div>
+                                    <h4 class="font-medium text-white">Rebecca Martinez, Esq.</h4>
+                                    <p class="text-xs text-gray-400">Family Law Attorney • 3 days ago</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300">Relocation cases can be complex. Courts typically consider whether the move is in the child's best interest. You'll need to demonstrate: 1) Legitimate reason for the move (better job, education, family support), 2) How you'll maintain the relationship between the children and the other parent, 3) How the move benefits the children. I recommend filing a petition for relocation before moving and proposing a modified visitation schedule. Each state has different notification requirements, so check your local laws. Consider mediation before court proceedings to reach an agreement.</p>
+                        </div>
                         
                         <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-600 font-medium hover:underline">Read Full Answer <i class="fas fa-chevron-right text-xs ml-1"></i></a>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 6 answers <i class="fas fa-arrow-right ml-1"></i></a>
                             
-                            <div class="flex items-center text-sm text-gray-500">
-                                <div class="flex items-center mr-4">
-                                    <button class="text-gray-400 hover:text-blue-600 mr-1"><i class="fas fa-thumbs-up"></i></button>
-                                    <span>18</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <button class="text-gray-400 hover:text-red-600 mr-1"><i class="fas fa-thumbs-down"></i></button>
-                                    <span>1</span>
-                                </div>
+                            <div class="flex space-x-2">
+                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
+                                    <i class="fas fa-thumbs-up mr-1"></i> Helpful (17)
+                                </button>
+                                <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
                             </div>
-                        </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-sm">
-                            <div class="flex items-center">
-                                <img src="/api/placeholder/32/32" alt="Lawyer" class="w-8 h-8 rounded-full mr-2">
-                                <div>
-                                    <p class="font-medium text-gray-700">Answered by David Rodriguez</p>
-                                    <p class="text-gray-500">Consumer Rights Attorney • 2 weeks ago</p>
-                                </div>
-                            </div>
-                            <a href="#" class="text-blue-600 hover:underline">Related: Online Shopping Rights</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="text-center mt-10">
-                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
-                    View More Questions <i class="fas fa-chevron-right ml-1"></i>
-                </a>
+                
+                <div class="text-center pt-6">
+                    <a href="#" class="outline-button inline-block py-3 px-8 rounded-lg">
+                        View More Questions <i class="fas fa-angle-right ml-2"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    
     <!-- How It Works -->
-    <section class="py-16 px-6 bg-blue-50">
+    <section class="py-16 px-6 bg-gradient-to-b from-slate-800 to-slate-900">
         <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">How the Process Works</h2>
+            <h2 class="text-3xl font-bold text-white text-center mb-12">How It Works</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="text-center">
-                    <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4 shadow-md">
-                        <span>1</span>
+            <div class="space-y-12">
+                <!-- Step 1 -->
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/4 flex justify-center mb-6 md:mb-0">
+                        <div class="step-number text-2xl">1</div>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Ask Your Question</h3>
-                    <p class="text-gray-600">Submit your legal question through our easy-to-use form with relevant details.</p>
+                    <div class="md:w-3/4">
+                        <h3 class="text-xl font-semibold text-white mb-3">Submit Your Question</h3>
+                        <p class="text-gray-300">Fill out the simple form with details about your legal issue. Be specific and include relevant information to help attorneys provide accurate guidance.</p>
+                    </div>
                 </div>
                 
-                <div class="text-center">
-                    <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4 shadow-md">
-                        <span>2</span>
+                <!-- Step 2 -->
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/4 flex justify-center mb-6 md:mb-0">
+                        <div class="step-number text-2xl">2</div>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Get Expert Answers</h3>
-                    <p class="text-gray-600">Qualified attorneys review and provide answers based on your specific situation.</p>
+                    <div class="md:w-3/4">
+                        <h3 class="text-xl font-semibold text-white mb-3">Get Professional Answers</h3>
+                        <p class="text-gray-300">Licensed attorneys in our network review your question and provide informative responses based on their expertise and legal knowledge.</p>
+                    </div>
                 </div>
                 
-                <div class="text-center">
-                    <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4 shadow-md">
-                        <span>3</span>
+                <!-- Step 3 -->
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/4 flex justify-center mb-6 md:mb-0">
+                        <div class="step-number text-2xl">3</div>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Follow Up if Needed</h3>
-                    <p class="text-gray-600">Schedule consultations or ask follow-up questions if you need more assistance.</p>
+                    <div class="md:w-3/4">
+                        <h3 class="text-xl font-semibold text-white mb-3">Follow Up (Optional)</h3>
+                        <p class="text-gray-300">Need more clarification? Ask follow-up questions or request a private consultation with an attorney for more personalized advice.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/4 flex justify-center mb-6 md:mb-0">
+                        <div class="step-number text-2xl">4</div>
+                    </div>
+                    <div class="md:w-3/4">
+                        <h3 class="text-xl font-semibold text-white mb-3">Rate & Review</h3>
+                        <p class="text-gray-300">After receiving help, rate the answers and provide feedback to help our community and improve the quality of future responses.</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 px-6 bg-gray-900">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-white text-center mb-12">Frequently Asked Questions</h2>
             
-            <div class="mt-12 text-center">
-                <p class="text-gray-600 mb-6">Need urgent legal assistance? Talk to an attorney right away.</p>
-                <a href="ASKL.html" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
-                    <i class="fas fa-phone-alt mr-1"></i> Find Lawyers Near You
-                </a>
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="faq-card rounded-xl p-5">
+                    <div class="flex justify-between items-center cursor-pointer faq-header">
+                        <h3 class="text-lg font-medium text-white">Is the advice provided legally binding?</h3>
+                        <i class="fas fa-chevron-down text-indigo-400 faq-toggle"></i>
+                    </div>
+                    <div class="faq-content pt-4">
+                        <p class="text-gray-300">The information provided by attorneys on our platform is for general informational purposes only and should not be considered formal legal advice. While the guidance is provided by licensed professionals, it does not establish an attorney-client relationship. For specific legal matters, we recommend scheduling a private consultation.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="faq-card rounded-xl p-5">
+                    <div class="flex justify-between items-center cursor-pointer faq-header">
+                        <h3 class="text-lg font-medium text-white">How long does it take to get an answer?</h3>
+                        <i class="fas fa-chevron-down text-indigo-400 faq-toggle"></i>
+                    </div>
+                    <div class="faq-content pt-4">
+                        <p class="text-gray-300">Most questions receive their first response within 24-48 hours. Complex legal issues might take longer. If you need an urgent response, you can mark your question as "urgent" when submitting, which prioritizes it in our system.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="faq-card rounded-xl p-5">
+                    <div class="flex justify-between items-center cursor-pointer faq-header">
+                        <h3 class="text-lg font-medium text-white">How are the attorneys verified?</h3>
+                        <i class="fas fa-chevron-down text-indigo-400 faq-toggle"></i>
+                    </div>
+                    <div class="faq-content pt-4">
+                        <p class="text-gray-300">All attorneys on our platform go through a verification process that includes checking their bar license, practice history, and professional standing. We verify credentials and ensure they are in good standing with their state bar association before they can provide answers on our platform.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="faq-card rounded-xl p-5">
+                    <div class="flex justify-between items-center cursor-pointer faq-header">
+                        <h3 class="text-lg font-medium text-white">Is my information kept confidential?</h3>
+                        <i class="fas fa-chevron-down text-indigo-400 faq-toggle"></i>
+                    </div>
+                    <div class="faq-content pt-4">
+                        <p class="text-gray-300">Yes, we take privacy seriously. While questions and answers are publicly viewable (unless marked private), we remove personally identifying information. You can also submit questions anonymously. For complete privacy, consider scheduling a private consultation with an attorney.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="faq-card rounded-xl p-5">
+                    <div class="flex justify-between items-center cursor-pointer faq-header">
+                        <h3 class="text-lg font-medium text-white">Can I hire an attorney from this platform?</h3>
+                        <i class="fas fa-chevron-down text-indigo-400 faq-toggle"></i>
+                    </div>
+                    <div class="faq-content pt-4">
+                        <p class="text-gray-300">Yes! If you find an attorney whose answers are helpful, you can request a consultation directly through their profile. Many attorneys offer initial consultations at discounted rates for users from our platform. You can then decide if you want to formally hire them for your legal matter.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials -->
-    <section class="py-16 px-6 bg-white">
-        <div class="container mx-auto max-w-5xl">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">What Our Users Say</h2>
+    <section class="py-16 px-6 bg-gray-900">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-white text-center mb-12">What Our Users Say</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex text-yellow-400 mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial rounded-xl p-6">
+                    <div class="flex space-x-1 mb-4 star-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="text-gray-700 italic mb-4">"I was facing eviction and had no idea what to do. The lawyer who answered my question gave me clear steps to take and helped me understand my rights. I was able to stay in my home."</p>
+                    <p class="text-gray-300 mb-4">"I was dealing with a difficult landlord situation and wasn't sure about my rights. The attorneys here gave me clear, actionable advice that helped me resolve the issue without going to court. So grateful!"</p>
                     <div class="flex items-center">
-                        <img src="/api/placeholder/48/48" alt="User" class="w-10 h-10 rounded-full mr-3">
+                        <img src="/api/placeholder/40/40" alt="User avatar" class="rounded-full mr-3">
                         <div>
-                            <p class="font-medium text-gray-800">Jessica M.</p>
-                            <p class="text-gray-500 text-sm">Housing Law Question</p>
+                            <h4 class="font-medium text-white">Alex R.</h4>
+                            <p class="text-xs text-gray-400">Housing Law Question</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex text-yellow-400 mb-4">
+                <!-- Testimonial 2 -->
+                <div class="testimonial rounded-xl p-6">
+                    <div class="flex space-x-1 mb-4 star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-4">"The responses I received were detailed and helpful. An attorney even pointed out considerations I hadn't thought of. I ended up hiring one of the responding lawyers for my divorce case after seeing their expertise."</p>
+                    <div class="flex items-center">
+                        <img src="/api/placeholder/40/40" alt="User avatar" class="rounded-full mr-3">
+                        <div>
+                            <h4 class="font-medium text-white">Jamie T.</h4>
+                            <p class="text-xs text-gray-400">Family Law Question</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial rounded-xl p-6">
+                    <div class="flex space-x-1 mb-4 star-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <p class="text-gray-700 italic mb-4">"After getting fired unexpectedly, I was confused about my options. The employment lawyer who answered my question explained severance packages and helped me negotiate better terms. Worth every penny!"</p>
+                    <p class="text-gray-300 mb-4">"As a small business owner, I had questions about contractor agreements. I received multiple perspectives from different attorneys, which gave me a comprehensive understanding of my options. Excellent service!"</p>
                     <div class="flex items-center">
-                        <img src="/api/placeholder/48/48" alt="User" class="w-10 h-10 rounded-full mr-3">
+                        <img src="/api/placeholder/40/40" alt="User avatar" class="rounded-full mr-3">
                         <div>
-                            <p class="font-medium text-gray-800">Marcus T.</p>
-                            <p class="text-gray-500 text-sm">Employment Law Question</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 italic mb-4">"Going through a divorce is overwhelming, but the family law attorney who answered my questions made the process much clearer. I felt more prepared for each step and saved a lot on legal fees."</p>
-                    <div class="flex items-center">
-                        <img src="/api/placeholder/48/48" alt="User" class="w-10 h-10 rounded-full mr-3">
-                        <div>
-                            <p class="font-medium text-gray-800">Amanda R.</p>
-                            <p class="text-gray-500 text-sm">Family Law Question</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 italic mb-4">"I had issues with a faulty product and the company wouldn't refund me. The consumer rights attorney provided a strategy that worked perfectly. I got a full refund within a week!"</p>
-                    <div class="flex items-center">
-                        <img src="/api/placeholder/48/48" alt="User" class="w-10 h-10 rounded-full mr-3">
-                        <div>
-                            <p class="font-medium text-gray-800">Carlos G.</p>
-                            <p class="text-gray-500 text-sm">Consumer Rights Question</p>
+                            <h4 class="font-medium text-white">Morgan W.</h4>
+                            <p class="text-xs text-gray-400">Business Law Question</p>
                         </div>
                     </div>
                 </div>
@@ -555,244 +1263,171 @@
         </div>
     </section>
 
-    <!-- Legal Resources -->
-    <section class="py-16 px-6 bg-gray-100">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Helpful Legal Resources</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <a href="#" class="feature-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl mb-4">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Legal Document Templates</h3>
-                        <p class="text-gray-600 mb-4">Access free templates for common legal documents like lease agreements, wills, and more.</p>
-                        <span class="text-blue-600 font-medium hover:underline">Browse Templates <i class="fas fa-arrow-right ml-1"></i></span>
-                    </div>
-                </a>
-                
-                <a href="#" class="feature-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-2xl mb-4">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Legal Guides & Articles</h3>
-                        <p class="text-gray-600 mb-4">Educational resources explaining common legal issues in plain, easy-to-understand language.</p>
-                        <span class="text-blue-600 font-medium hover:underline">Read Guides <i class="fas fa-arrow-right ml-1"></i></span>
-                    </div>
-                </a>
-                
-                <a href="#" class="feature-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-2xl mb-4">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Legal Webinars & Videos</h3>
-                        <p class="text-gray-600 mb-4">Watch informative webinars on common legal topics presented by experienced attorneys.</p>
-                        <span class="text-blue-600 font-medium hover:underline">Watch Videos <i class="fas fa-arrow-right ml-1"></i></span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter and FAQ Section -->
-    <section class="py-16 px-6 bg-white">
+    <!-- Call to Action -->
+    <section class="py-12 px-6 bg-gray-800 border-t border-b border-gray-700">
         <div class="container mx-auto max-w-6xl">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Newsletter Signup -->
-                <div class="bg-blue-600 rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-8 text-white">
-                        <h3 class="text-2xl font-bold mb-4">Subscribe to Legal Updates</h3>
-                        <p class="opacity-90 mb-6">Get the latest legal news, tips, and resources delivered straight to your inbox. We never spam!</p>
-                        
-                        <form class="space-y-4">
-                            <div>
-                                <input type="email" placeholder="Your email address" 
-                                       class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                            </div>
-                            <div class="flex space-x-4">
-                                <div class="flex items-center">
-                                    <input type="checkbox" id="lawUpdates" class="mr-2">
-                                    <label for="lawUpdates" class="text-sm">Law Updates</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input type="checkbox" id="caseStudies" class="mr-2">
-                                    <label for="caseStudies" class="text-sm">Case Studies</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input type="checkbox" id="events" class="mr-2">
-                                    <label for="events" class="text-sm">Legal Events</label>
-                                </div>
-                            </div>
-                            <button type="submit" class="w-full bg-white text-blue-600 hover:bg-blue-50 font-medium py-3 rounded-lg transition duration-300">
-                                Subscribe Now
-                            </button>
-                            <p class="text-xs text-blue-200 text-center">You can unsubscribe at any time. Privacy Policy</p>
-                        </form>
-                    </div>
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-2/3 mb-8 md:mb-0">
+                    <h2 class="text-2xl font-bold text-white mb-3">Need Personalized Legal Advice?</h2>
+                    <p class="text-gray-300">Submit your question now or browse our extensive library of answered legal queries.</p>
                 </div>
-                
-                <!-- FAQ Section -->
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h3>
-                    
-                    <div class="space-y-4">
-                        <div class="border border-gray-200 rounded-lg overflow-hidden">
-                            <button class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none">
-                                <span class="font-medium text-gray-800">Is legal advice on this platform binding?</span>
-                                <i class="fas fa-chevron-down text-gray-500"></i>
-                            </button>
-                            <div class="px-6 pb-4 text-gray-600">
-                                <p>No, the information provided on LegalEase is for general informational purposes only and should not be considered legally binding advice. While our attorneys strive to provide accurate information, your specific situation may require personalized legal counsel.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="border border-gray-200 rounded-lg overflow-hidden">
-                            <button class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none">
-                                <span class="font-medium text-gray-800">How quickly will I receive an answer?</span>
-                                <i class="fas fa-chevron-down text-gray-500"></i>
-                            </button>
-                            <div class="px-6 pb-4 text-gray-600 hidden">
-                                <p>Most questions receive a response within 24-48 hours, but complex inquiries may take longer. Premium members receive priority responses with faster turnaround times.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="border border-gray-200 rounded-lg overflow-hidden">
-                            <button class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none">
-                                <span class="font-medium text-gray-800">How much does it cost to ask a question?</span>
-                                <i class="fas fa-chevron-down text-gray-500"></i>
-                            </button>
-                            <div class="px-6 pb-4 text-gray-600 hidden">
-                                <p>Basic questions can be asked for free, with a limit of one per month. For more complex questions or faster responses, we offer affordable subscription plans starting at $19.99/month with unlimited questions.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="border border-gray-200 rounded-lg overflow-hidden">
-                            <button class="flex justify-between items-center w-full px-6 py-4 text-left focus:outline-none">
-                                <span class="font-medium text-gray-800">Are my questions and information private?</span>
-                                <i class="fas fa-chevron-down text-gray-500"></i>
-                            </button>
-                            <div class="px-6 pb-4 text-gray-600 hidden">
-                                <p>Your privacy is important to us. By default, all questions are posted anonymously. You can also choose to make your question completely private for an additional fee. All communications are encrypted and secure.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6">
-                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
-                            View All FAQs <i class="fas fa-chevron-right ml-1"></i>
-                        </a>
-                    </div>
+                <div class="md:w-1/3 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#questionForm" class="gradient-button text-white font-medium py-3 px-8 rounded-lg shadow-lg text-center">
+                        Ask a Question
+                    </a>
+                    <a href="#" class="outline-button py-3 px-8 rounded-lg text-center">
+                        Browse Topics
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Chatbot Feature -->
-    <div class="chatbot-bubble bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center shadow-lg" id="chatbotButton">
-        <i class="fas fa-comment-dots text-white text-2xl"></i>
+    <!-- AI Legal Assistant Chatbot -->
+    <div class="chatbot-bubble w-16 h-16 rounded-full flex items-center justify-center" id="chatbotButton">
+        <i class="fas fa-robot text-2xl text-white"></i>
     </div>
     
-    <div id="chatbotContainer" class="fixed bottom-24 right-6 w-80 bg-white rounded-xl shadow-2xl overflow-hidden chatbot-container">
-        <div class="bg-blue-600 text-white p-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <span class="text-2xl mr-2">⚖️</span>
-                <h3 class="font-bold">LegalEase Assistant</h3>
-            </div>
-            <button id="closeChatbot" class="text-white hover:text-gray-200">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="h-80 overflow-y-auto p-4 bg-gray-50" id="chatMessages">
-            <div class="flex mb-4">
-                <div class="bg-blue-100 rounded-lg py-2 px-4 max-w-[80%]">
-                    <p class="text-gray-800">Hello! How can I help with your legal questions today?</p>
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header p-4 rounded-t-lg">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-robot text-xl text-white mr-2"></i>
+                    <h3 class="font-medium text-white">Legal Assistant</h3>
                 </div>
+                <button id="closeChatbot" class="text-white hover:text-gray-300 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         </div>
-        <div class="border-t border-gray-200 p-4">
+        
+        <div class="p-4 h-80 overflow-y-auto" id="chatMessages">
+            <div class="chat-message-bot p-3 mb-4">
+                <p class="text-gray-200">👋 Hello! I'm LegalEase's AI assistant. I can help answer basic legal questions or guide you to resources. What legal matter can I help you with today?</p>
+            </div>
+            
+            <!-- Messages will be appended here -->
+        </div>
+        
+        <div class="p-4 border-t border-gray-700">
             <div class="flex">
-                <input type="text" placeholder="Type your question..." class="flex-1 px-4 py-2 rounded-l-lg border border-r-0 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                <button class="bg-blue-600 text-white px-4 rounded-r-lg hover:bg-blue-700">
+                <input type="text" id="chatInput" placeholder="Type your question..." 
+                       class="chat-input flex-grow px-4 py-2 rounded-l-lg focus:outline-none">
+                <button id="sendMessage" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded-r-lg transition-colors">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
-            <p class="text-xs text-gray-500 mt-2 text-center">This is a preliminary assistant. For legal advice, please submit a formal question.</p>
+            <p class="text-xs text-gray-400 mt-2">This AI assistant provides general information only, not legal advice.</p>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-12 px-6">
+    <footer class="footer py-12 px-6">
         <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <!-- Column 1 -->
                 <div>
-                    <h3 class="text-2xl font-bold text-white mb-4">LegalEase</h3>
-                    <p class="text-gray-400 mb-6">Making legal help accessible to everyone through technology and expert guidance.</p>
+                    <h3 class="text-xl font-bold text-white mb-4">LegalEase</h3>
+                    <p class="text-gray-400 mb-4">Making legal help accessible to everyone through technology and expert guidance.</p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-indigo-400">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-indigo-400">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-indigo-400">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-indigo-400">
+                            <i class="fab fa-instagram"></i>
+                        </a>
                     </div>
                 </div>
                 
+                <!-- Column 2 -->
                 <div>
-                    <h4 class="text-lg font-semibold text-white mb-4">Legal Resources</h4>
+                    <h3 class="text-white font-medium mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Legal Guides</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Document Templates</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Legal News</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Free Legal Tools</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Lawyer Directory</a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-indigo-400 transition-colors">Home</a></li>
+                        <li><a href="legalguides.html" class="text-gray-400 hover:text-indigo-400 transition-colors">Legal Guides</a></li>
+                        <li><a href="QT" class="text-gray-400 hover:text-indigo-400 transition-colors">Quizzes & Tests</a></li>
+                        <li><a href="askalawyer.html" class="text-gray-400 hover:text-indigo-400 transition-colors">Ask a Lawyer</a></li>
+                        <li><a href="emergencycontacts.html" class="text-gray-400 hover:text-indigo-400 transition-colors">Emergency Contacts</a></li>
+                        <li><a href="aboutus.html" class="text-gray-400 hover:text-indigo-400 transition-colors">About Us</a></li>
                     </ul>
                 </div>
                 
+                <!-- Column 3 -->
                 <div>
-                    <h4 class="text-lg font-semibold text-white mb-4">Customer Support</h4>
+                    <h3 class="text-white font-medium mb-4">Legal Categories</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Community Forum</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">Employment Law</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">Family Law</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">Housing & Property</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">Consumer Rights</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">Criminal Law</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">Immigration Law</a></li>
                     </ul>
                 </div>
                 
+                <!-- Column 4 -->
                 <div>
-                    <h4 class="text-lg font-semibold text-white mb-4">Contact Information</h4>
-                    <ul class="space-y-2 text-gray-400">
+                    <h3 class="text-white font-medium mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
-                            <span>123 Legal Street, Suite 100<br>New York, NY 10001</span>
+                            <i class="fas fa-map-marker-alt text-indigo-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">123 Legal Avenue, Suite 500<br>New York, NY 10001</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-phone-alt mr-2"></i>
-                            <span>(800) 123-4567</span>
+                            <i class="fas fa-phone text-indigo-400 mr-3"></i>
+                            <span class="text-gray-400">(555) 123-4567</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <span>help@legalease.com</span>
+                            <i class="fas fa-envelope text-indigo-400 mr-3"></i>
+                            <span class="text-gray-400">help@legalease.com</span>
                         </li>
                     </ul>
                 </div>
             </div>
             
             <div class="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">&copy; 2025 LegalEase. All rights reserved.</p>
-                <div class="mt-4 md:mt-0">
-                    <p class="text-gray-400 text-sm">Not a substitute for professional legal advice.</p>
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 LegalEase. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors text-sm">Disclaimer</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Chatbot functionality
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // FAQ Toggles
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const faqCard = header.parentElement;
+                faqCard.classList.toggle('faq-active');
+            });
+        });
+        
+        // Chatbot Toggle
         const chatbotButton = document.getElementById('chatbotButton');
         const chatbotContainer = document.getElementById('chatbotContainer');
         const closeChatbot = document.getElementById('closeChatbot');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessage = document.getElementById('sendMessage');
+        const chatMessages = document.getElementById('chatMessages');
         
         chatbotButton.addEventListener('click', () => {
             chatbotContainer.classList.toggle('chatbot-open');
@@ -802,63 +1437,94 @@
             chatbotContainer.classList.remove('chatbot-open');
         });
         
-        // FAQ accordion functionality
-        const faqButtons = document.querySelectorAll('.border.border-gray-200 button');
-        faqButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                content.classList.toggle('hidden');
-                const icon = button.querySelector('i');
-                icon.classList.toggle('fa-chevron-down');
-                icon.classList.toggle('fa-chevron-up');
-            });
+        function sendChatMessage() {
+            const message = chatInput.value.trim();
+            if (message) {
+                // Add user message
+                const userMessageDiv = document.createElement('div');
+                userMessageDiv.className = 'chat-message-user p-3 mb-4';
+                userMessageDiv.innerHTML = `<p class="text-gray-200">${message}</p>`;
+                chatMessages.appendChild(userMessageDiv);
+                
+                // Clear input
+                chatInput.value = '';
+                
+                // Auto scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Simulate AI response (in a real app, this would be an API call)
+                setTimeout(() => {
+                    const botMessageDiv = document.createElement('div');
+                    botMessageDiv.className = 'chat-message-bot p-3 mb-4';
+                    botMessageDiv.innerHTML = `<p class="text-gray-200">Thank you for your question. This is a demo AI assistant. In a real application, I would connect to our legal database to provide you with accurate information about "${message}". Please submit your question through our form for a response from a real attorney.</p>`;
+                    chatMessages.appendChild(botMessageDiv);
+                    
+                    // Auto scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+        
+        sendMessage.addEventListener('click', sendChatMessage);
+        
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
         });
         
-        // Initialize GSAP animations
-        document.addEventListener('DOMContentLoaded', () => {
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Animate hero text
+        // GSAP Animation Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero section animations
             gsap.from("#heroText", {
+                duration: 1,
                 x: -50,
                 opacity: 0,
-                duration: 1.2,
-                ease: "power3.out"
+                ease: "power3.out",
+                delay: 0.2
             });
             
-            // Animate hero image
             gsap.from("#heroImage", {
-                opacity: 0,
+                duration: 1,
                 scale: 0.9,
-                duration: 1.2,
-                delay: 0.3,
-                ease: "power3.out"
+                opacity: 0,
+                ease: "power3.out",
+                delay: 0.5
             });
             
-            // Animate lawyer cards
-            gsap.from(".lawyer-card", {
-                scrollTrigger: {
-                    trigger: ".lawyer-card",
-                    start: "top bottom-=100",
-                },
-                y: 30,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power3.out"
+            // Scroll trigger animations
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Fade in animations for sections
+            gsap.utils.toArray('.fade-in').forEach(element => {
+                gsap.from(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                });
             });
             
-            // Animate feature cards
-            gsap.from(".feature-card", {
-                scrollTrigger: {
-                    trigger: ".feature-card",
-                    start: "top bottom-=100",
-                },
-                y: 30,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power3.out"
+            // Staggered item animations (for cards, features, etc)
+            document.querySelectorAll('.stagger-container').forEach(container => {
+                const items = container.querySelectorAll('.stagger-item');
+                gsap.from(items, {
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "power3.out"
+                });
             });
         });
     </script>

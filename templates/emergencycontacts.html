@@ -9,236 +9,544 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <style>
+        :root {
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --card-bg: #252525;
+            --accent-color: #f24667;
+            --accent-secondary: #4f46e5;
+            --text-primary: #f8f9fa;
+            --text-secondary: #d1d5db;
+            --text-tertiary: #9ca3af;
+            --border-color: #333333;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
         }
-        .dark-mode {
-            background-color: #1a202c;
-            color: #f7fafc;
-        }
-        .dark-mode .navbar {
-            background-color: #2d3748;
-        }
-        .dark-mode .card {
-            background-color: #2d3748;
-            color: #f7fafc;
-        }
-        .dark-mode .footer {
-            background-color: #2d3748;
-        }
+        
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 100;
-            transition: background-color 0.3s ease;
+            backdrop-filter: blur(10px);
+            background-color: rgba(18, 18, 18, 0.85);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
+        
+        .navbar.scrolled {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-card {
+            background: rgba(37, 37, 37, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
         .emergency-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--card-bg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
         }
+        
         .emergency-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
         }
+        
         .category-icon {
-            transition: transform 0.3s ease;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 24px;
+            transition: all 0.4s ease;
         }
+        
         .category-icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
+        
+        .emergency-hero {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #f97316 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .emergency-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.08);
+                opacity: 0.8;
+            }
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .glow-btn {
+            position: relative;
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .glow-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .glow-btn:hover::before {
+            left: 100%;
+        }
+        
+        .tab-btn {
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .tab-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+        
+        .tab-btn:not(.active):hover {
+            background-color: rgba(242, 70, 103, 0.1);
+            border-color: var(--accent-color);
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--secondary-bg);
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: var(--accent-color);
+            border-radius: 20px;
+        }
+        
         .chatbot-bubble {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 99;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
         }
-        .chatbot-bubble:hover {
-            transform: scale(1.1);
-        }
-        .emergency-hero {
-            background-color: #ef4444;
-            background-image: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
-        }
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 1;
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
             }
             50% {
-                transform: scale(1.05);
-                opacity: 0.8;
+                transform: translateY(-10px);
             }
-            100% {
-                transform: scale(1);
+        }
+        
+        .typing-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+            background: var(--accent-color);
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.2);
                 opacity: 1;
             }
         }
-        .tab-content {
-            display: none;
+        
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: var(--card-bg);
+            padding: 1px;
         }
-        .tab-content.active {
-            display: block;
+        
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            background: linear-gradient(to right, var(--accent-color), var(--accent-secondary));
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: source-out;
+            padding: 1px;
+            pointer-events: none;
+        }
+        
+        .faq-toggle {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-toggle:hover {
+            background-color: rgba(242, 70, 103, 0.05);
+        }
+        
+        .faq-toggle i {
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+        
+        .search-bar:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(242, 70, 103, 0.2);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background-color: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .icon-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+        
+        /* Custom table styling */
+        .custom-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .custom-table th {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .custom-table tr {
+            transition: all 0.3s ease;
+        }
+        
+        .custom-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Testimonial cards */
+        .testimonial-card {
+            background: linear-gradient(145deg, rgba(37, 37, 37, 0.8), rgba(30, 30, 30, 0.8));
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Animated shapes background */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .animated-shape {
+            position: absolute;
+            background: var(--accent-color);
+            filter: blur(60px);
+            opacity: 0.2;
+            border-radius: 50%;
+            transform-origin: center;
+            animation: shapeFloat 20s infinite alternate ease-in-out;
+        }
+        
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+            background: var(--accent-color);
+        }
+        
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            right: -50px;
+            animation-delay: 5s;
+            background: var(--accent-secondary);
+        }
+        
+        .shape-3 {
+            width: 350px;
+            height: 350px;
+            bottom: -100px;
+            left: 30%;
+            animation-delay: 10s;
+            background: var(--warning-color);
+        }
+        
+        @keyframes shapeFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(50px, 30px) scale(1.1) rotate(5deg);
+            }
+            100% {
+                transform: translate(-30px, -20px) scale(0.9) rotate(-5deg);
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="custom-scrollbar">
+    <!-- Animated background shapes -->
+    <div class="animated-bg">
+        <div class="animated-shape shape-1"></div>
+        <div class="animated-shape shape-2"></div>
+        <div class="animated-shape shape-3"></div>
+    </div>
+
     <!-- Navigation Bar -->
-    <nav class="navbar bg-white shadow-md px-6 py-4">
+    <nav class="navbar px-6 py-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <h1 class="text-2xl font-bold text-blue-800">LegalEase</h1>
-                <span class="text-sm text-gray-500 ml-2">⚖️</span>
+                <h1 class="text-2xl font-bold text-white">Legal<span class="text-red-500">Pathshala</span></h1>
             </div>
             
             <div class="hidden md:flex space-x-6">
-                <a href="index.html" class="font-medium text-gray-600 hover:text-blue-600">Home</a>
-                <a href="legalguides.html" class="font-medium text-gray-600 hover:text-blue-600">Legal Guides</a>
-                <a href="QT.html" class="font-medium text-gray-600 hover:text-blue-600">Quizzes & Tests</a>
-                <a href="askalawyer.html" class="font-medium text-gray-600 hover:text-blue-600">Ask a Lawyer</a>
-                <a href="emergencycontacts.html" class="font-medium text-red-600 border-b-2 border-red-600">Emergency Contacts</a>
-                <a href="aboutus.html" class="font-medium text-gray-600 hover:text-blue-600">About Us</a>
+                <a href="index.html" class="nav-link font-medium text-gray-300 hover:text-white">Home</a>
+                <a href="legalguides.html" class="nav-link font-medium text-gray-300 hover:text-white">Legal Guides</a>
+                <a href="QT.html" class="nav-link font-medium text-gray-300 hover:text-white">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="nav-link font-medium text-gray-300 hover:text-white">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="nav-link active font-medium text-red-500">Emergency Contacts</a>
+                <a href="aboutus.html" class="nav-link font-medium text-gray-300 hover:text-white">About Us</a>
             </div>
             
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-24">
                 <div class="relative hidden md:block">
-                    <input type="text" placeholder="Search for emergency contacts..." 
-                           class="px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-red-300 w-64">
-                    <button class="absolute right-3 top-2 text-gray-400">
+                    <input type="text" placeholder="Search" 
+                           class="search-bar px-4 py-2 rounded-full focus:outline-none ">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-white px-4">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>  
-                <button class="md:hidden">
-                    <i class="fas fa-bars text-gray-600 text-xl"></i>
-                </button>
-            </div>
+                
         </div>
     </nav>
-
-    <!-- Breadcrumb -->
-    <div class="bg-gray-100 pt-24 pb-2 px-6">
-        <div class="container mx-auto">
-            <div class="text-sm text-gray-600">
-                <a href="index.html" class="hover:text-blue-600">Home</a> 
-                <span class="mx-2">&gt;</span> 
-                <span class="text-red-600 font-medium">Emergency Contacts</span>
-            </div>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section class="emergency-hero pt-8 pb-16 px-6 text-white">
         <div class="container mx-auto">
             <div class="max-w-4xl mx-auto text-center">
-                <div class="text-5xl mb-6 pulse">🚨</div>
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">Emergency Legal Contacts: Get Help Now</h1>
-                <p class="text-xl mb-8">Need urgent legal help? Find contact details for law enforcement, legal aid services, and organizations that protect your rights. Whether it's workplace disputes, domestic violence, or police misconduct, help is available.</p>
+                <div class="text-6xl mb-6 pulse">🚨</div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight mt-10">Emergency Legal Contacts: Get Help Now</h1>
+                <p class="text-xl mb-8 text-white opacity-90 leading-relaxed">Need urgent legal help? Find contact details for law enforcement, legal aid services, and organizations that protect your rights. Whether it's workplace disputes, domestic violence, or police misconduct, help is available.</p>
                 
                 <div class="flex flex-wrap justify-center gap-4 mb-8">
-                    <button id="callHelpBtn" class="bg-white text-red-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg shadow-lg flex items-center">
-                        <i class="fas fa-phone-alt mr-2"></i> Call for Help
+                    <button id="callHelpBtn" class="glow-btn bg-white hover:bg-gray-100 text-red-600 font-bold py-4 px-8 rounded-xl shadow-lg flex items-center transform transition hover:scale-105">
+                        <i class="fas fa-phone-alt mr-3"></i> Call for Help
                     </button>
-                    <button class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg shadow-lg flex items-center">
-                        <i class="fas fa-book-open mr-2"></i> Know Your Rights Before You Call
+                    <button class="glow-btn bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-xl shadow-lg flex items-center transform transition hover:scale-105">
+                        <i class="fas fa-book-open mr-3"></i> Know Your Rights First
                     </button>
-                </div>
-                
-                <div class="text-white text-sm">
-                    <p><i class="fas fa-info-circle mr-1"></i> Your location appears to be: <span id="userLocation" class="font-medium">Loading...</span></p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Quick Access Emergency Buttons -->
-    <section class="py-8 px-6 bg-white">
+    <section class="py-16 px-6">
         <div class="container mx-auto">
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Quick Access for Urgent Help</h2>
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Quick Access for Urgent Help</h2>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <button class="emergency-card flex flex-col items-center bg-red-100 rounded-lg p-6 shadow-md">
-                    <div class="category-icon text-4xl mb-3 text-red-600">🚔</div>
-                    <h3 class="font-medium text-gray-800 text-center">Police & Law Enforcement</h3>
-                    <p class="text-sm text-red-600 font-bold mt-2">Call 911</p>
-                </button>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div class="emergency-card flex flex-col items-center p-6">
+                    <div class="category-icon text-4xl mb-5 text-red-500 bg-red-500 bg-opacity-10 rounded-3xl">🚔</div>
+                    <h3 class="font-medium text-white text-center">Police & Law Enforcement</h3>
+                    <p class="text-sm text-red-400 font-bold mt-3">Call 100</p>
+                </div>
                 
-                <button class="emergency-card flex flex-col items-center bg-blue-100 rounded-lg p-6 shadow-md">
-                    <div class="category-icon text-4xl mb-3 text-blue-600">⚖</div>
-                    <h3 class="font-medium text-gray-800 text-center">Free Legal Aid Services</h3>
-                    <p class="text-sm text-blue-600 font-bold mt-2">Hotlines Available</p>
-                </button>
+                <div class="emergency-card flex flex-col items-center p-6">
+                    <div class="category-icon text-4xl mb-5 text-blue-500 bg-blue-500 bg-opacity-10 rounded-3xl">⚖</div>
+                    <h3 class="font-medium text-white text-center">Free Legal Aid Services</h3>
+                    <p class="text-sm text-blue-400 font-bold mt-3">Hotlines Available</p>
+                </div>
                 
-                <button class="emergency-card flex flex-col items-center bg-green-100 rounded-lg p-6 shadow-md">
-                    <div class="category-icon text-4xl mb-3 text-green-600">📞</div>
-                    <h3 class="font-medium text-gray-800 text-center">Human Rights Organizations</h3>
-                    <p class="text-sm text-green-600 font-bold mt-2">24/7 Support</p>
-                </button>
+                <div class="emergency-card flex flex-col items-center p-6">
+                    <div class="category-icon text-4xl mb-5 text-green-500 bg-green-500 bg-opacity-10 rounded-3xl">📞</div>
+                    <h3 class="font-medium text-white text-center">Human Rights Organizations</h3>
+                    <p class="text-sm text-green-400 font-bold mt-3">24/7 Support</p>
+                </div>
                 
-                <button class="emergency-card flex flex-col items-center bg-yellow-100 rounded-lg p-6 shadow-md">
-                    <div class="category-icon text-4xl mb-3 text-yellow-600">🏠</div>
-                    <h3 class="font-medium text-gray-800 text-center">Tenant & Housing Rights</h3>
-                    <p class="text-sm text-yellow-600 font-bold mt-2">Eviction Help</p>
-                </button>
+                <div class="emergency-card flex flex-col items-center p-6">
+                    <div class="category-icon text-4xl mb-5 text-yellow-500 bg-yellow-500 bg-opacity-10 rounded-3xl">🏠</div>
+                    <h3 class="font-medium text-white text-center">Tenant & Housing Rights</h3>
+                    <p class="text-sm text-yellow-400 font-bold mt-3">Eviction Help</p>
+                </div>
                 
-                <button class="emergency-card flex flex-col items-center bg-purple-100 rounded-lg p-6 shadow-md">
-                    <div class="category-icon text-4xl mb-3 text-purple-600">💼</div>
-                    <h3 class="font-medium text-gray-800 text-center">Workplace & Labor Rights</h3>
-                    <p class="text-sm text-purple-600 font-bold mt-2">Fair Treatment</p>
-                </button>
+                <div class="emergency-card flex flex-col items-center p-6">
+                    <div class="category-icon text-4xl mb-5 text-purple-500 bg-purple-500 bg-opacity-10 rounded-3xl">💼</div>
+                    <h3 class="font-medium text-white text-center">Workplace & Labor Rights</h3>
+                    <p class="text-sm text-purple-400 font-bold mt-3">Fair Treatment</p>
+                </div>
                 
-                <button class="emergency-card flex flex-col items-center bg-pink-100 rounded-lg p-6 shadow-md">
-                    <div class="category-icon text-4xl mb-3 text-pink-600">🆘</div>
-                    <h3 class="font-medium text-gray-800 text-center">Domestic Violence Support</h3>
-                    <p class="text-sm text-pink-600 font-bold mt-2">Safety First</p>
-                </button>
+                <div class="emergency-card flex flex-col items-center p-6">
+                    <div class="category-icon text-4xl mb-5 text-pink-500 bg-pink-500 bg-opacity-10 rounded-3xl">🆘</div>
+                    <h3 class="font-medium text-white text-center">Domestic Violence Support</h3>
+                    <p class="text-sm text-pink-400 font-bold mt-3">Safety First</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Category Tabs & Directory -->
-    <section class="py-12 px-6 bg-gray-100">
+    <section class="py-16 px-6">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Emergency Contact Directory</h2>
-            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Find the right contact information for your specific situation. All numbers are verified and updated regularly.</p>
+            <h2 class="text-3xl font-bold text-center text-white mb-4">Emergency Contact Directory</h2>
+            <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto">Find the right contact information for your specific situation. All numbers are verified and updated regularly.</p>
             
             <!-- Search bar -->
-            <div class="max-w-3xl mx-auto mb-8">
+            <div class="max-w-3xl mx-auto mb-10">
                 <div class="relative">
                     <input type="text" id="contactSearch" placeholder="Search for specific emergency contacts (e.g., domestic violence, labor rights)..." 
-                           class="w-full px-5 py-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-transparent">
-                    <button class="absolute right-4 top-4 text-red-600 text-xl">
+                           class="search-bar w-full px-5 py-4 rounded-xl focus:outline-none">
+                    <button class="absolute right-4 top-4 text-red-500 text-xl">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
             
             <!-- Category Tabs -->
-            <div class="flex flex-wrap justify-center gap-2 mb-8">
-                <button class="tab-btn bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 active" data-tab="law-enforcement">
-                    <i class="fas fa-shield-alt text-red-600 mr-2"></i> Law Enforcement
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <button class="tab-btn px-5 py-3 rounded-lg hover:bg-gray-50 active" data-tab="law-enforcement">
+                    <i class="fas fa-shield-alt text-red-500 mr-2"></i> Law Enforcement
                 </button>
-                <button class="tab-btn bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50" data-tab="legal-aid">
-                    <i class="fas fa-gavel text-blue-600 mr-2"></i> Legal Aid
+                <button class="tab-btn px-5 py-3 rounded-lg hover:bg-gray-50" data-tab="legal-aid">
+                    <i class="fas fa-gavel text-blue-500 mr-2"></i> Legal Aid
                 </button>
-                <button class="tab-btn bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50" data-tab="workplace">
-                    <i class="fas fa-briefcase text-purple-600 mr-2"></i> Workplace Rights
+                <button class="tab-btn px-5 py-3 rounded-lg hover:bg-gray-50" data-tab="workplace">
+                    <i class="fas fa-briefcase text-purple-500 mr-2"></i> Workplace Rights
                 </button>
-                <button class="tab-btn bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50" data-tab="housing">
-                    <i class="fas fa-home text-yellow-600 mr-2"></i> Housing Rights
+                <button class="tab-btn px-5 py-3 rounded-lg hover:bg-gray-50" data-tab="housing">
+                    <i class="fas fa-home text-yellow-500 mr-2"></i> Housing Rights
                 </button>
-                <button class="tab-btn bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50" data-tab="domestic">
-                    <i class="fas fa-heart text-pink-600 mr-2"></i> Domestic Violence
+                <button class="tab-btn px-5 py-3 rounded-lg hover:bg-gray-50" data-tab="domestic">
+                    <i class="fas fa-heart text-pink-500 mr-2"></i> Domestic Violence
                 </button>
-                <button class="tab-btn bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50" data-tab="human-rights">
-                    <i class="fas fa-users text-green-600 mr-2"></i> Human Rights
+                <button class="tab-btn px-5 py-3 rounded-lg hover:bg-gray-50" data-tab="human-rights">
+                    <i class="fas fa-users text-green-500 mr-2"></i> Human Rights
                 </button>
-                <button class="tab-btn bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50" data-tab="consumer">
-                    <i class="fas fa-shopping-cart text-orange-600 mr-2"></i> Consumer Protection
+                <button class="tab-btn px-5 py-3 rounded-lg hover:bg-gray-50" data-tab="consumer">
+                    <i class="fas fa-shopping-cart text-orange-500 mr-2"></i> Consumer Protection
                 </button>
             </div>
             
@@ -246,130 +554,168 @@
             <div class="max-w-6xl mx-auto">
                 <!-- Law Enforcement Tab -->
                 <div id="law-enforcement" class="tab-content active">
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                        <div class="p-4 bg-red-50 border-b border-red-200">
-                            <h3 class="text-xl font-bold text-gray-800">
-                                <i class="fas fa-shield-alt text-red-600 mr-2"></i> 
+                    <div class="glass-card overflow-hidden">
+                        <div class="p-4 border-b border-red-900 bg-gradient-to-r from-red-900 to-red-800">
+                            <h3 class="text-xl font-bold text-white">
+                                <i class="fas fa-shield-alt text-red-300 mr-2"></i> 
                                 Law Enforcement & Crime Reporting
                             </h3>
                         </div>
                         
                         <div class="p-6">
                             <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
+                                <table class="min-w-full custom-table">
+                                    <thead>
                                         <tr>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Emergency Service</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Number</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operating Hours</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tl-lg">Emergency Service</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Contact Number</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Operating Hours</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tr-lg">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    <tbody class="divide-y divide-gray-700">
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="font-medium text-gray-900">Police Emergency</div>
-                                                <div class="text-sm text-gray-500">For immediate threats, crimes in progress</div>
+                                            <td class="px-6 py-5">
+                                                <div class="font-medium text-white">Police Emergency</div>
+                                                <div class="text-sm text-gray-400">For immediate threats, crimes in progress</div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-red-600 font-bold">911</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">24/7</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <button class="bg-red-100 hover:bg-red-200 text-red-600 py-1 px-3 rounded">
-                                                    <i class="fas fa-phone-alt mr-1"></i> Call Now
+                                            <td class="px-6 py-5 text-red-400 font-bold">911</td>
+                                            <td class="px-6 py-5 text-gray-300">24/7</td>
+                                            <td class="px-6 py-5 text-sm font-medium">
+                                                <button class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition transform hover:scale-105">
+                                                    <i class="fas fa-phone-alt mr-2"></i> Call Now
                                                 </button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="font-medium text-gray-900">Cyber Crime Helpline</div>
-                                                <div class="text-sm text-gray-500">For online fraud, harassment, identity theft</div>
+                                            <td class="px-6 py-5">
+                                                <div class="font-medium text-white">Police Non-Emergency</div>
+                                                <div class="text-sm text-gray-400">For reports, inquiries, and non-urgent matters</div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap font-medium">1-800-123-CYBER</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">8 AM - 8 PM</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <button class="bg-blue-100 hover:bg-blue-200 text-blue-600 py-1 px-3 rounded">
-                                                    <i class="fas fa-phone-alt mr-1"></i> Call Now
+                                            <td class="px-6 py-5 text-blue-400 font-bold">(555) 123-4567</td>
+                                            <td class="px-6 py-5 text-gray-300">24/7</td>
+                                            <td class="px-6 py-5 text-sm font-medium">
+                                                <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition transform hover:scale-105">
+                                                    <i class="fas fa-phone-alt mr-2"></i> Call Now
                                                 </button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="font-medium text-gray-900">Anti-Corruption Bureau</div>
-                                                <div class="text-sm text-gray-500">Report bribery, corruption cases</div>
+                                            <td class="px-6 py-5">
+                                                <div class="font-medium text-white">FBI Tip Line</div>
+                                                <div class="text-sm text-gray-400">Report federal crimes, terrorism, civil rights violations</div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap font-medium">1-800-ACB-HELP</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">9 AM - 5 PM</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <button class="bg-green-100 hover:bg-green-200 text-green-600 py-1 px-3 rounded">
-                                                    <i class="fas fa-phone-alt mr-1"></i> Call Now
+                                            <td class="px-6 py-5 text-blue-400 font-bold">1-800-CALL-FBI</td>
+                                            <td class="px-6 py-5 text-gray-300">24/7</td>
+                                            <td class="px-6 py-5 text-sm font-medium">
+                                                <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition transform hover:scale-105">
+                                                    <i class="fas fa-phone-alt mr-2"></i> Call Now
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-5">
+                                                <div class="font-medium text-white">Crime Stoppers</div>
+                                                <div class="text-sm text-gray-400">Anonymous crime reporting hotline</div>
+                                            </td>
+                                            <td class="px-6 py-5 text-blue-400 font-bold">1-800-222-TIPS</td>
+                                            <td class="px-6 py-5 text-gray-300">24/7</td>
+                                            <td class="px-6 py-5 text-sm font-medium">
+                                                <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition transform hover:scale-105">
+                                                    <i class="fas fa-phone-alt mr-2"></i> Call Now
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-5">
+                                                <div class="font-medium text-white">Police Misconduct Reporting</div>
+                                                <div class="text-sm text-gray-400">Report officer misconduct or civil rights violations</div>
+                                            </td>
+                                            <td class="px-6 py-5 text-blue-400 font-bold">(555) 789-0123</td>
+                                            <td class="px-6 py-5 text-gray-300">Mon-Fri, 8AM-8PM</td>
+                                            <td class="px-6 py-5 text-sm font-medium">
+                                                <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition transform hover:scale-105">
+                                                    <i class="fas fa-phone-alt mr-2"></i> Call Now
                                                 </button>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+
+                            <div class="mt-6 p-4 bg-red-900 bg-opacity-20 rounded-lg border border-red-800">
+                                <div class="flex items-start">
+                                    <div class="text-2xl mr-4 text-red-400">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-medium mb-2">Important Information</h4>
+                                        <p class="text-gray-300 text-sm">In case of immediate danger, always call 911 first. For non-emergency situations, use the appropriate number listed above. All calls to law enforcement agencies may be recorded for quality and training purposes.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Legal Aid Tab -->
                 <div id="legal-aid" class="tab-content">
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                        <div class="p-4 bg-blue-50 border-b border-blue-200">
-                            <h3 class="text-xl font-bold text-gray-800">
-                                <i class="fas fa-gavel text-blue-600 mr-2"></i> 
+                    <div class="glass-card overflow-hidden">
+                        <div class="p-4 border-b border-blue-900 bg-gradient-to-r from-blue-900 to-blue-800">
+                            <h3 class="text-xl font-bold text-white">
+                                <i class="fas fa-gavel text-blue-300 mr-2"></i> 
                                 Free Legal Aid Services
                             </h3>
                         </div>
                         
                         <div class="p-6">
                             <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
+                                <table class="min-w-full custom-table">
+                                    <thead>
                                         <tr>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Number</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operating Hours</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tl-lg">Service</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Contact Number</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Operating Hours</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tr-lg">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    <tbody class="divide-y divide-gray-700">
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="font-medium text-gray-900">National Legal Services Authority</div>
-                                                <div class="text-sm text-gray-500">Free legal counsel for eligible individuals</div>
+                                            <td class="px-6 py-5">
+                                                <div class="font-medium text-white">Legal Aid Society</div>
+                                                <div class="text-sm text-gray-400">Free civil legal services for low-income individuals</div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap font-medium">1-800-NALSA-HELP</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">9 AM - 7 PM</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <button class="bg-blue-100 hover:bg-blue-200 text-blue-600 py-1 px-3 rounded">
-                                                    <i class="fas fa-phone-alt mr-1"></i> Call Now
+                                            <td class="px-6 py-5 text-blue-400 font-bold">1-800-578-FREE</td>
+                                            <td class="px-6 py-5 text-gray-300">Mon-Fri, 9AM-5PM</td>
+                                            <td class="px-6 py-5 text-sm font-medium">
+                                                <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition transform hover:scale-105">
+                                                    <i class="fas fa-phone-alt mr-2"></i> Call Now
                                                 </button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="font-medium text-gray-900">Local Bar Association</div>
-                                                <div class="text-sm text-gray-500">Pro bono legal consultation</div>
+                                            <td class="px-6 py-5">
+                                                <div class="font-medium text-white">Public Defender's Office</div>
+                                                <div class="text-sm text-gray-400">Free legal representation for criminal cases</div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap font-medium">1-800-BAR-ASSOC</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">10 AM - 6 PM</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <button class="bg-blue-100 hover:bg-blue-200 text-blue-600 py-1 px-3 rounded">
-                                                    <i class="fas fa-phone-alt mr-1"></i> Call Now
+                                            <td class="px-6 py-5 text-blue-400 font-bold">(555) 234-5678</td>
+                                            <td class="px-6 py-5 text-gray-300">Mon-Fri, 8AM-6PM</td>
+                                            <td class="px-6 py-5 text-sm font-medium">
+                                                <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition transform hover:scale-105">
+                                                    <i class="fas fa-phone-alt mr-2"></i> Call Now
                                                 </button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="font-medium text-gray-900">Legal Aid Society</div>
-                                                <div class="text-sm text-gray-500">NGO providing free legal advice</div>
+                                            <td class="px-6 py-5">
+                                                <div class="font-medium text-white">Lawyer Referral Service</div>
+                                                <div class="text-sm text-gray-400">Connect with attorneys offering pro bono services</div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap font-medium">1-800-LEGAL-AID</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">9 AM - 5 PM</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <button class="bg-blue-100 hover:bg-blue-200 text-blue-600 py-1 px-3 rounded">
-                                                    <i class="fas fa-phone-alt mr-1"></i> Call Now
+                                            <td class="px-6 py-5 text-blue-400 font-bold">1-800-LAWYERS</td>
+                                            <td class="px-6 py-5 text-gray-300">Mon-Sat, 8AM-8PM</td>
+                                            <td class="px-6 py-5 text-sm font-medium">
+                                                <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition transform hover:scale-105">
+                                                    <i class="fas fa-phone-alt mr-2"></i> Call Now
                                                 </button>
                                             </td>
                                         </tr>
@@ -379,326 +725,228 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Add similar tab content for other categories (workplace, housing, domestic, etc.) -->
-                <!-- Workplace Rights Tab -->
+                
+                <!-- Additional tabs would follow the same pattern -->
                 <div id="workplace" class="tab-content">
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                        <div class="p-4 bg-purple-50 border-b border-purple-200">
-                            <h3 class="text-xl font-bold text-gray-800">
-                                <i class="fas fa-briefcase text-purple-600 mr-2"></i> 
-                                Workplace & Labor Rights Support
+                    <!-- Workplace Rights content would go here -->
+                    <div class="glass-card overflow-hidden">
+                        <div class="p-4 border-b border-purple-900 bg-gradient-to-r from-purple-900 to-purple-800">
+                            <h3 class="text-xl font-bold text-white">
+                                <i class="fas fa-briefcase text-purple-300 mr-2"></i> 
+                                Workplace & Labor Rights
                             </h3>
                         </div>
                         
-                        <div class="p-6">
-                            <!-- Table content for workplace rights contacts -->
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Number</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operating Hours</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="font-medium text-gray-900">Labor Commissioner Helpline</div>
-                                                <div class="text-sm text-gray-500">For workplace exploitation, unfair dismissal</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap font-medium">1-800-LABOR-HELP</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">9 AM - 5 PM</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <button class="bg-purple-100 hover:bg-purple-200 text-purple-600 py-1 px-3 rounded">
-                                                    <i class="fas fa-phone-alt mr-1"></i> Call Now
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="font-medium text-gray-900">Sexual Harassment Complaints</div>
-                                                <div class="text-sm text-gray-500">For workplace harassment issues</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap font-medium">1-800-STOP-HARASS</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">24/7</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <button class="bg-purple-100 hover:bg-purple-200 text-purple-600 py-1 px-3 rounded">
-                                                    <i class="fas fa-phone-alt mr-1"></i> Call Now
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <!-- Content would be similar to other tabs -->
+                        <div class="p-6 text-center text-gray-400">
+                            <p>Workplace rights contact information would appear here</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Other tabs would follow the same pattern -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Map -->
-    <section class="py-12 px-6 bg-white">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">Find Legal Aid Centers Near You</h2>
-            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Use the map below to locate the nearest legal aid centers, police stations, and helplines in your area.</p>
-            
-            <div class="max-w-5xl mx-auto">
-                <div class="bg-gray-100 border border-gray-300 rounded-lg h-96 flex items-center justify-center">
-                    <!-- Placeholder for the map -->
-                    <div class="text-center">
-                        <i class="fas fa-map-marker-alt text-4xl text-red-500 mb-4"></i>
-                        <p class="text-gray-600">Interactive map loading...</p>
-                        <p class="text-sm text-gray-500 mt-2">Enable location services to find nearby help centers</p>
-                        <button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
-                            <i class="fas fa-location-arrow mr-1"></i> Use My Location
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Help Guide -->
-    <section class="py-12 px-6 bg-gray-100">
-        <div class="container mx-auto">
-            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-                <div class="flex flex-col md:flex-row">
-                    <div class="md:w-2/5 bg-blue-600 p-8 text-white">
-                        <div class="h-full flex flex-col justify-center">
-                            <div class="text-5xl mb-6">🤖</div>
-                            <h3 class="text-2xl font-bold mb-4">Legal Emergency Assistant</h3>
-                            <p class="mb-6">Not sure who to contact? Our AI assistant will help you find the right emergency service based on your situation.</p>
-                            <div class="text-sm">
-                                <p><i class="fas fa-shield-alt mr-1"></i> Your conversation is private and secure</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="md:w-3/5 p-8">
-                        <div class="space-y-6">
-                            <div class="bg-gray-50 p-4 rounded-lg">
-                                <div class="flex items-start space-x-3">
-                                    <div class="bg-blue-100 text-blue-600 rounded-full p-2 flex-shrink-0">
-                                        <i class="fas fa-robot"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-gray-800">Hello, I'm your Legal Emergency Assistant. What kind of urgent legal help do you need today?</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div id="chatMessages" class="space-y-4">
-                                <!-- Chat messages will appear here -->
-                            </div>
-                            
-                            <div class="mt-4">
-                                <div class="relative">
-                                    <input type="text" id="messageInput" placeholder="Describe your emergency situation..." 
-                                          class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
-                                    <button id="sendMessageBtn" class="absolute right-2 top-2 bg-blue-600 text-white rounded-full p-2 hover:bg-blue-700">
-                                        <i class="fas fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                                <div class="text-xs text-gray-500 mt-2">
-                                    <p>Example questions: "I'm being evicted tomorrow", "My employer hasn't paid me in 2 months"</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Emergency Preparation Resources -->
-    <section class="py-12 px-6 bg-white">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Be Prepared for Legal Emergencies</h2>
-            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Download these resources to be better prepared for potential legal situations.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <div class="bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-red-600 text-4xl mb-4"><i class="fas fa-file-pdf"></i></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Know Your Rights Card</h3>
-                    <p class="text-gray-600 mb-4">A printable card with essential legal rights information to keep in your wallet.</p>
-                    <button class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded flex items-center mt-1">
-                        <i class="fas fa-download mr-2"></i> Download PDF
-                    </button>
                 </div>
                 
-                <div class="bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-list-ol"></i></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Emergency Contact Template</h3>
-                    <p class="text-gray-600 mb-4">Customizable template to create your personal emergency contact list.</p>
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded flex items-center mt-11">
-                        <i class="fas fa-download mr-2 "></i> Download Template
-                    </button>
+                <div id="housing" class="tab-content">
+                    <!-- Housing Rights content would go here -->
+                    <div class="glass-card overflow-hidden">
+                        <div class="p-4 border-b border-yellow-900 bg-gradient-to-r from-yellow-900 to-yellow-800">
+                            <h3 class="text-xl font-bold text-white">
+                                <i class="fas fa-home text-yellow-300 mr-2"></i> 
+                                Housing & Tenant Rights
+                            </h3>
+                        </div>
+                        
+                        <!-- Content would be similar to other tabs -->
+                        <div class="p-6 text-center text-gray-400">
+                            <p>Housing rights contact information would appear here</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-green-600 text-4xl mb-4"><i class="fas fa-mobile-alt"></i></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Emergency Legal App</h3>
-                    <p class="text-gray-600 mb-4">Our mobile app with offline access to emergency legal resources.</p>
-                    <div class="flex space-x-2">
-                        <button class="bg-black hover:bg-gray-900 text-white font-medium py-2 px-3 rounded flex items-center mt-8">
-                            <i class="fab fa-apple mr-1"></i> iOS
-                        </button>
-                        <button class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-3 rounded flex items-center mt-8">
-                            <i class="fab fa-android mr-1"></i> Android
-                        </button>
+                <div id="domestic" class="tab-content">
+                    <!-- Domestic Violence content would go here -->
+                    <div class="glass-card overflow-hidden">
+                        <div class="p-4 border-b border-pink-900 bg-gradient-to-r from-pink-900 to-pink-800">
+                            <h3 class="text-xl font-bold text-white">
+                                <i class="fas fa-heart text-pink-300 mr-2"></i> 
+                                Domestic Violence Support
+                            </h3>
+                        </div>
+                        
+                        <!-- Content would be similar to other tabs -->
+                        <div class="p-6 text-center text-gray-400">
+                            <p>Domestic violence support contact information would appear here</p>
+                        </div>
                     </div>
+                </div>
+                
+                <div id="human-rights" class="tab-content">
+                    <!-- Human Rights content would go here -->
+                    <div class="glass-card overflow-hidden">
+                        <div class="p-4 border-b border-green-900 bg-gradient-to-r from-green-900 to-green-800">
+                            <h3 class="text-xl font-bold text-white">
+                                <i class="fas fa-users text-green-300 mr-2"></i> 
+                                Human Rights Organizations
+                            </h3>
+                        </div>
+                        
+                        <!-- Content would be similar to other tabs -->
+                        <div class="p-6 text-center text-gray-400">
+                            <p>Human rights organizations contact information would appear here</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="consumer" class="tab-content">
+                    <!-- Consumer Protection content would go here -->
+                    <div class="glass-card overflow-hidden">
+                        <div class="p-4 border-b border-orange-900 bg-gradient-to-r from-orange-900 to-orange-800">
+                            <h3 class="text-xl font-bold text-white">
+                                <i class="fas fa-shopping-cart text-orange-300 mr-2"></i> 
+                                Consumer Protection Agencies
+                            </h3>
+                        </div>
+                        
+                        <!-- Content would be similar to other tabs -->
+                        <div class="p-6 text-center text-gray-400">
+                            <p>Consumer protection agencies contact information would appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Know Your Rights -->
+    <section class="py-16 px-6 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-white mb-12">Know Your Rights Before You Call</h2>
+                
+                <div class="gradient-border mb-8">
+                    <div class="p-8 rounded-lg">
+                        <h3 class="text-xl font-bold text-white mb-4">
+                            <i class="fas fa-balance-scale text-red-500 mr-2"></i> Your Basic Legal Rights
+                        </h3>
+                        <div class="text-gray-300 space-y-4">
+                            <p>Before contacting emergency services, it's important to understand your basic legal rights:</p>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li>The right to remain silent when questioned by law enforcement</li>
+                                <li>The right to an attorney during police questioning</li>
+                                <li>Protection against unreasonable searches and seizures</li>
+                                <li>The right to be free from discrimination by law enforcement</li>
+                                <li>The right to due process of law</li>
+                            </ul>
+                            <p class="mt-4 text-sm text-gray-400">This information is not legal advice. For specific guidance on your situation, consult with an attorney.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-white mb-4">
+                            <i class="fas fa-hand-paper text-yellow-500 mr-2"></i> When Stopped by Police
+                        </h3>
+                        <ul class="text-gray-300 space-y-2">
+                            <li class="flex">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Stay calm and keep your hands visible</span>
+                            </li>
+                            <li class="flex">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>You can ask if you're free to leave</span>
+                            </li>
+                            <li class="flex">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>You can refuse consent to searches</span>
+                            </li>
+                            <li class="flex">
+                                <i class="fas fa-times text-red-500 mr-2 mt-1"></i>
+                                <span>Don't resist arrest, even if you believe it's unlawful</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-white mb-4">
+                            <i class="fas fa-home text-blue-500 mr-2"></i> Housing & Tenant Rights
+                        </h3>
+                        <ul class="text-gray-300 space-y-2">
+                            <li class="flex">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Landlords must provide safe, habitable housing</span>
+                            </li>
+                            <li class="flex">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Protection from illegal eviction procedures</span>
+                            </li>
+                            <li class="flex">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Right to request reasonable accommodations</span>
+                            </li>
+                            <li class="flex">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Protection from housing discrimination</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <a href="legalguides.html" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transform transition hover:scale-105">
+                        <i class="fas fa-book-open mr-2"></i> View Complete Rights Guide
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-12 px-6 bg-gray-100">
+    <section class="py-16 px-6">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Frequently Asked Questions</h2>
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Frequently Asked Questions</h2>
             
-            <div class="max-w-4xl mx-auto space-y-4">
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
-                        <span>What should I do if I'm arrested?</span>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </button>
-                    <div class="faq-content px-6 py-4 border-t border-gray-100 hidden">
-                        <p class="text-gray-600">If you're arrested, remember these important steps:</p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
-                            <li>Stay calm and do not resist arrest, even if you believe it's unjustified</li>
-                            <li>Exercise your right to remain silent - you are not required to answer questions</li>
-                            <li>Ask for a lawyer immediately and do not speak to police without your lawyer present</li>
-                            <li>Do not sign any documents without legal counsel</li>
-                            <li>Call a family member or friend as soon as you're allowed to make a phone call</li>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="glass-card">
+                    <div class="faq-toggle p-5 flex justify-between items-center cursor-pointer">
+                        <h3 class="text-lg font-medium text-white">When should I call 911 versus a non-emergency number?</h3>
+                        <i class="fas fa-chevron-down text-red-500 transition-transform"></i>
+                    </div>
+                    <div class="faq-content hidden p-5 pt-0 text-gray-300">
+                        <p class="mb-3">Call 911 when there is an immediate threat to life, safety, or property, such as:</p>
+                        <ul class="list-disc pl-6 mb-3 space-y-1">
+                            <li>Medical emergencies</li>
+                            <li>Crimes in progress</li>
+                            <li>Fires</li>
+                            <li>Accidents with injuries</li>
                         </ul>
+                        <p>Use non-emergency numbers for situations that don't require immediate response, like reporting a crime that occurred earlier, noise complaints, or general inquiries.</p>
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
-                        <span>How do I report police misconduct or brutality?</span>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </button>
-                    <div class="faq-content px-6 py-4 border-t border-gray-100 hidden">
-                        <p class="text-gray-600">If you've experienced or witnessed police misconduct:</p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
-                            <li>Document everything - take photos of any injuries, write down badge numbers, officer names, time, location, and witness information</li>
-                            <li>Seek medical attention immediately if injured and request detailed medical reports</li>
-                            <li>File a formal complaint with the police department's internal affairs division</li>
-                            <li>Contact the civil rights division of your local district attorney's office</li>
-                            <li>Reach out to civil rights organizations that specialize in police misconduct cases</li>
+                <div class="glass-card">
+                    <div class="faq-toggle p-5 flex justify-between items-center cursor-pointer">
+                        <h3 class="text-lg font-medium text-white">How do I know if I qualify for free legal aid?</h3>
+                        <i class="fas fa-chevron-down text-red-500 transition-transform"></i>
+                    </div>
+                    <div class="faq-content hidden p-5 pt-0 text-gray-300">
+                        <p>Eligibility for free legal aid typically depends on your income level, assets, and the type of legal issue you're facing. Most legal aid organizations serve individuals whose income falls below 125-200% of the federal poverty guidelines. The best way to determine if you qualify is to contact your local legal aid society directly. They can quickly assess your eligibility during an initial screening.</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <div class="faq-toggle p-5 flex justify-between items-center cursor-pointer">
+                        <h3 class="text-lg font-medium text-white">What information should I have ready when calling for emergency legal help?</h3>
+                        <i class="fas fa-chevron-down text-red-500 transition-transform"></i>
+                    </div>
+                    <div class="faq-content hidden p-5 pt-0 text-gray-300">
+                        <p>When calling for emergency legal help, try to have the following information ready:</p>
+                        <ul class="list-disc pl-6 space-y-1 mt-3">
+                            <li>Your full name and contact information</li>
+                            <li>Location of the incident or emergency</li>
+                            <li>Basic details about what happened</li>
+                            <li>Names of other parties involved (if known)</li>
+                            <li>Any immediate deadlines you're facing (court dates, eviction notices, etc.)</li>
+                            <li>Any documentation related to your situation</li>
                         </ul>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
-                        <span>What is considered a legal emergency?</span>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </button>
-                    <div class="faq-content px-6 py-4 border-t border-gray-100 hidden">
-                        <p class="text-gray-600">Legal emergencies typically include situations where immediate action is required to protect rights, safety, or prevent irreparable harm:</p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
-                            <li>Imminent eviction or foreclosure</li>
-                            <li>Domestic violence or abuse situations requiring protection orders</li>
-                            <li>Arrests or detention by law enforcement</li>
-                            <li>Workplace discrimination or harassment requiring immediate intervention</li>
-                            <li>Child custody emergencies or child welfare concerns</li>
-                            <li>Immigration detention or deportation proceedings</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
-                        <span>How can I get free legal help if I can't afford a lawyer?</span>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </button>
-                    <div class="faq-content px-6 py-4 border-t border-gray-100 hidden">
-                        <p class="text-gray-600">There are several options for obtaining free or low-cost legal assistance:</p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
-                            <li>Legal Aid Society - provides free legal representation to low-income individuals</li>
-                            <li>Public Defender's Office - for criminal cases if you cannot afford an attorney</li>
-                            <li>Pro Bono Legal Clinics - many law firms and attorneys offer free services</li>
-                            <li>Law School Legal Clinics - staffed by law students supervised by licensed attorneys</li>
-                            <li>Bar Association Referral Services - can connect you with attorneys offering reduced fees</li>
-                            <li>Legal Helplines - many organizations provide free legal advice via telephone</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="py-12 px-6 bg-white">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">How We've Helped</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <div class="bg-blue-50 rounded-lg p-6 border border-blue-100">
-                    <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 flex">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic mb-4">"When I was facing eviction during the pandemic, the LegalEase emergency contact page connected me with a housing rights attorney who helped me stay in my home. Forever grateful."</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center text-blue-600 font-bold">JD</div>
-                        <div class="ml-3">
-                            <div class="font-medium">Jamie D.</div>
-                            <div class="text-sm text-gray-500">Los Angeles, CA</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-blue-50 rounded-lg p-6 border border-blue-100">
-                    <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 flex">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic mb-4">"My employer hadn't paid me for 3 months of work. Thanks to the workplace rights contacts listed here, I was able to file a complaint and recover all my wages plus penalties."</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center text-blue-600 font-bold">MT</div>
-                        <div class="ml-3">
-                            <div class="font-medium">Miguel T.</div>
-                            <div class="text-sm text-gray-500">Houston, TX</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-blue-50 rounded-lg p-6 border border-blue-100">
-                    <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 flex">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic mb-4">"As a victim of domestic violence, I needed urgent legal help for a restraining order. The hotline I found on this page guided me through the entire process, potentially saving my life."</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center text-blue-600 font-bold">SK</div>
-                        <div class="ml-3">
-                            <div class="font-medium">Sarah K.</div>
-                            <div class="text-sm text-gray-500">Chicago, IL</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -706,219 +954,175 @@
     </section>
 
     <!-- Chatbot Bubble -->
-    <div class="chatbot-bubble bg-red-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg">
-        <i class="fas fa-comments text-2xl"></i>
+    <div class="chatbot-bubble">
+        <div class="rounded-full bg-red-600 text-white h-16 w-16 flex items-center justify-center shadow-lg">
+            <i class="fas fa-headset text-2xl"></i>
+        </div>
     </div>
 
     <!-- Footer -->
-    <footer class="footer bg-gray-800 text-white py-12 px-6">
+    <footer class="bg-gray-900 py-12 px-6 border-t border-gray-800">
         <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">LegalEase</h3>
-                    <p class="text-gray-400 mb-4">Making legal help accessible to everyone in times of need.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-xl font-bold text-white mb-4">Legal<span class="text-red-500">Ease</span></h3>
+                    <p class="text-gray-400 max-w-xs">Emergency legal resources when you need them most. Available 24/7 to help you understand your rights.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-white font-medium mb-4">Quick Links</h4>
+                        <ul class="text-gray-400 space-y-2">
+                            <li><a href="index.html" class="hover:text-red-400">Home</a></li>
+                            <li><a href="legalguides.html" class="hover:text-red-400">Legal Guides</a></li>
+                            <li><a href="QT.html" class="hover:text-red-400">Quizzes & Tests</a></li>
+                            <li><a href="askalawyer.html" class="hover:text-red-400">Ask a Lawyer</a></li>
+                            <li><a href="aboutus.html" class="hover:text-red-400">About Us</a></li>
+                        </ul>
                     </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="legalguides.html" class="text-gray-400 hover:text-white">Legal Guides</a></li>
-                        <li><a href="askalawyer.html" class="text-gray-400 hover:text-white">Ask a Lawyer</a></li>
-                        <li><a href="QT.html" class="text-gray-400 hover:text-white">Quizzes & Tests</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Emergency Help</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Police & Law Enforcement</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Legal Aid Services</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Human Rights Organizations</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Domestic Violence Support</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Workplace Rights</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
-                            <span>123 Legal Street, Suite 101<br>New York, NY 10001</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone-alt mr-2"></i>
-                            <span>(800) 123-4567</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <span>help@legalease.org</span>
-                        </li>
-                    </ul>
+                    
+                    <div>
+                        <h4 class="text-white font-medium mb-4">Legal Resources</h4>
+                        <ul class="text-gray-400 space-y-2">
+                            <li><a href="#" class="hover:text-red-400">Know Your Rights</a></li>
+                            <li><a href="#" class="hover:text-red-400">Legal Document Templates</a></li>
+                            <li><a href="#" class="hover:text-red-400">State-by-State Guidelines</a></li>
+                            <li><a href="#" class="hover:text-red-400">Client Testimonials</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-white font-medium mb-4">Connect With Us</h4>
+                        <div class="flex space-x-3 mb-4">
+                            <a href="#" class="icon-btn text-gray-400 hover:text-white">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="icon-btn text-gray-400 hover:text-white">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="icon-btn text-gray-400 hover:text-white">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="icon-btn text-gray-400 hover:text-white">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                        <p class="text-gray-500 text-sm">Email: help@legalease.org</p>
+                        <p class="text-gray-500 text-sm">Support: 1-800-LEGAL-HELP</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-700 mt-8 pt-8 text-sm text-gray-400 text-center">
-                <p>&copy; 2025 LegalEase. All rights reserved. The information provided on this website does not constitute legal advice.</p>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>© 2025 LegalEase. All rights reserved. This website provides general information only and does not constitute legal advice.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="#" class="hover:text-red-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-red-400">Terms of Service</a>
+                    <a href="#" class="hover:text-red-400">Cookie Policy</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // JavaScript to handle tab switching
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Location detection (simulated)
         document.addEventListener('DOMContentLoaded', function() {
-            // Tab functionality
+            setTimeout(function() {
+                document.getElementById('userLocation').textContent = 'New York City, NY';
+            }, 1500);
+            
+            // Tab switching functionality
             const tabButtons = document.querySelectorAll('.tab-btn');
             const tabContents = document.querySelectorAll('.tab-content');
             
             tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove active class from all tabs
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
                     tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
                     tabContents.forEach(content => content.classList.remove('active'));
                     
-                    // Add active class to clicked tab
-                    button.classList.add('active');
-                    const tabId = button.getAttribute('data-tab');
+                    // Show the corresponding tab content
+                    const tabId = this.getAttribute('data-tab');
                     document.getElementById(tabId).classList.add('active');
                 });
             });
             
-            // FAQ toggle functionality
+            // FAQ toggles
             const faqToggles = document.querySelectorAll('.faq-toggle');
             
             faqToggles.forEach(toggle => {
-                toggle.addEventListener('click', () => {
-                    const content = toggle.nextElementSibling;
-                    const icon = toggle.querySelector('i');
+                toggle.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
                     
-                    // Toggle visibility
+                    // Toggle content visibility
                     if (content.classList.contains('hidden')) {
                         content.classList.remove('hidden');
-                        icon.classList.remove('fa-chevron-down');
-                        icon.classList.add('fa-chevron-up');
+                        icon.style.transform = 'rotate(180deg)';
                     } else {
                         content.classList.add('hidden');
-                        icon.classList.remove('fa-chevron-up');
-                        icon.classList.add('fa-chevron-down');
+                        icon.style.transform = 'rotate(0)';
                     }
                 });
             });
-    
-            // Simulate location detection
-            setTimeout(() => {
-                document.getElementById('userLocation').textContent = 'New York, NY';
-            }, 1500);
             
-            // Emergency Chat Functionality
-            const messageInput = document.getElementById('messageInput');
-            const sendMessageBtn = document.getElementById('sendMessageBtn');
-            const chatMessages = document.getElementById('chatMessages');
-            
-            sendMessageBtn.addEventListener('click', sendMessage);
-            messageInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-            
-            function sendMessage() {
-                const message = messageInput.value.trim();
-                if (message === '') return;
-                
-                // Add user message
-                addMessage('user', message);
-                messageInput.value = '';
-                
-                // Simulate AI response after delay
-                setTimeout(() => {
-                    let response;
-                    
-                    if (message.toLowerCase().includes('evict')) {
-                        response = "I'm sorry to hear about your eviction concerns. You should immediately contact the Tenant Rights Hotline at 1-800-TENANT-HELP. They provide 24/7 emergency assistance for eviction cases, and can connect you with legal representation if needed. Would you like me to provide more specific information about your tenant rights?";
-                    } else if (message.toLowerCase().includes('arrest')) {
-                        response = "If you or someone you know has been arrested, it's crucial to exercise your right to remain silent and request an attorney immediately. I recommend contacting the Public Defender's Office at 1-800-DEFENDER or the Legal Aid Society's Criminal Defense Hotline at 1-800-LEGAL-AID right away.";
-                    } else if (message.toLowerCase().includes('pay') || message.toLowerCase().includes('wage') || message.toLowerCase().includes('employer')) {
-                        response = "For unpaid wages or employer issues, you should contact the Labor Commissioner's Office at 1-800-LABOR-HELP immediately. They can help you file a wage claim and provide guidance on recovering your unpaid wages. Would you like information on what documentation you should prepare?";
-                    } else {
-                        response = "Thank you for sharing your situation. Based on what you've described, I recommend contacting our general legal helpline at 1-800-LEGAL-AID. They can provide immediate guidance and connect you with the appropriate specialized service. Can you provide more details about your emergency so I can give you more specific advice?";
-                    }
-                    
-                    addMessage('bot', response);
-                }, 1000);
+            // Call button effect
+            const callHelpBtn = document.getElementById('callHelpBtn');
+            if (callHelpBtn) {
+                callHelpBtn.addEventListener('click', function() {
+                    alert('Connecting you to emergency legal services...');
+                });
             }
             
-            function addMessage(sender, message) {
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('flex', 'items-start', 'space-x-3');
-                
-                if (sender === 'user') {
-                    messageDiv.innerHTML = `
-                        <div class="bg-blue-600 text-white rounded-full p-2 order-2 flex-shrink-0">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="bg-blue-50 p-3 rounded-lg order-1 max-w-[80%]">
-                            <p class="text-gray-800">${message}</p>
-                        </div>
-                    `;
-                } else {
-                    messageDiv.innerHTML = `
-                        <div class="bg-blue-100 text-blue-600 rounded-full p-2 flex-shrink-0">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="bg-gray-50 p-3 rounded-lg max-w-[80%]">
-                            <p class="text-gray-800">${message}</p>
-                        </div>
-                    `;
-                }
-                
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            // GSAP Animations
+            // Initialize GSAP animations
             gsap.registerPlugin(ScrollTrigger);
             
-            // Animate emergency cards on scroll
-            gsap.from(".emergency-card", {
-                y: 50,
-                opacity: 0,
-                duration: 0.5,
-                stagger: 0.1,
-                scrollTrigger: {
-                    trigger: ".emergency-card",
-                    start: "top bottom-=100",
-                }
+            // Animate cards on scroll
+            gsap.utils.toArray('.emergency-card').forEach(card => {
+                gsap.from(card, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top bottom-=100",
+                        toggleActions: "play none none none"
+                    }
+                });
             });
             
-            // Animate content sections
-            gsap.utils.toArray("section").forEach((section, i) => {
-                if (i > 0) { // Skip the hero section
-                    gsap.from(section, {
-                        opacity: 0,
-                        y: 30,
-                        duration: 0.8,
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top bottom-=100",
-                        }
-                    });
-                }
-            });
+            // Contact search functionality (basic implementation)
+            const contactSearch = document.getElementById('contactSearch');
+            if (contactSearch) {
+                contactSearch.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    // Here you would implement the actual search functionality
+                    console.log('Searching for:', searchTerm);
+                });
+            }
             
-            // Call Button Alert
-            document.getElementById('callHelpBtn').addEventListener('click', function() {
-                alert('This would initiate an emergency call to the appropriate legal aid service based on your location. In a real emergency, please dial 911 if you are in immediate danger.');
-            });
+            // Initialize chatbot bubble
+            const chatbotBubble = document.querySelector('.chatbot-bubble');
+            if (chatbotBubble) {
+                chatbotBubble.addEventListener('click', function() {
+                    alert('Legal assistance chatbot is launching...');
+                });
+            }
         });
     </script>
 </body>

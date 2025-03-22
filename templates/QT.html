@@ -9,83 +9,443 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
+        @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap');
+        
+        
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .dark-mode {
-            background-color: #1a202c;
-            color: #f7fafc;
+        
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
         }
-        .dark-mode .navbar {
-            background-color: #2d3748;
+        
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 10px;
         }
-        .dark-mode .card {
-            background-color: #2d3748;
-            color: #f7fafc;
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #818cf8;
         }
-        .dark-mode .footer {
-            background-color: #2d3748;
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
+        
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 100;
-            transition: background-color 0.3s ease;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
-        .quiz-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        .navbar.scrolled {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
         }
-        .quiz-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        
+        .hero-text-animation {
+            overflow: hidden;
+            white-space: nowrap;
         }
-        .category-icon {
-            transition: transform 0.3s ease;
+        
+        .hero-container {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         }
-        .category-icon:hover {
-            transform: scale(1.1);
+        
+        .hero-glow {
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(15, 23, 42, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
         }
-        .badge-item {
-            transition: transform 0.3s ease;
-        }
-        .badge-item:hover {
-            transform: scale(1.05);
-        }
+        
         .chatbot-bubble {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 99;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 25px rgba(99, 102, 241, 0.5);
         }
+        
         .chatbot-bubble:hover {
             transform: scale(1.1);
+            box-shadow: 0 8px 35px rgba(99, 102, 241, 0.7);
         }
+        
+        .feature-card {
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: var(--card-hover);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .topic-icon {
+            transition: all 0.3s ease;
+            color: var(--primary);
+        }
+        
+        .topic-link:hover .topic-icon {
+            transform: scale(1.2);
+            color: var(--primary-light);
+        }
+        
+        .news-ticker {
+            overflow: hidden;
+            position: relative;
+            height: 40px;
+            background: rgba(79, 70, 229, 0.2);
+            border-radius: 10px;
+        }
+        
+        .ticker-content {
+            position: absolute;
+            white-space: nowrap;
+            will-change: transform;
+        }
+        
+        /* Neon effect for primary buttons */
+        .btn-neon {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+        }
+        
+        .btn-neon:hover {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.8);
+        }
+        
+        .btn-neon:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+        
+        .btn-neon:hover:before {
+            left: 100%;
+        }
+        
+        /* Card hover effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Particle background for sections */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(0) translateX(20px); }
+            75% { transform: translateY(20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
+        /* Animated borders */
+        .animated-border {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animated-border:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .animated-border:hover:after {
+            width: 100%;
+        }
+        
+        /* Custom switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--card-bg);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+        :root {
+            --primary: #6D28D9;
+            --primary-hover: #5B21B6;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark-bg: #111827;
+            --darker-bg: #0F172A;
+            --card-bg: #1F2937;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --text-muted: #9CA3AF;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+        
+        /* Glass Morphism Effect */
+        .glass {
+            background: rgba(31, 41, 55, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Animated Gradient Background */
+        .animated-gradient {
+            background: linear-gradient(-45deg, #5B21B6, #3B82F6, #10B981, #6D28D9);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Hover Effects */
+        .hover-float {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-float:hover {
+            transform: translateY(-8px);
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 15px rgba(109, 40, 217, 0.5);
+        }
+        
+        /* Custom Button Styles */
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+        
+        /* Custom Quiz Card Styles */
+        .quiz-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .quiz-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Neon Glow Effect */
+        .neon-glow {
+            box-shadow: 0 0 10px rgba(109, 40, 217, 0.5), 
+                        0 0 20px rgba(109, 40, 217, 0.3), 
+                        0 0 30px rgba(109, 40, 217, 0.1);
+        }
+        
+        /* Custom Badge Styles */
+        .badge-item {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .badge-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(109, 40, 217, 0.5);
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: all 0.3s ease;
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        /* Quiz Options */
         .quiz-option {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             transition: all 0.2s ease;
             cursor: pointer;
         }
+        
         .quiz-option:hover {
-            background-color: #EBF4FF;
+            background-color: rgba(109, 40, 217, 0.2);
+            border-color: var(--primary);
         }
+        
         .quiz-option.selected {
-            background-color: #4299E1;
+            background-color: var(--primary);
             color: white;
+            border-color: var(--primary);
         }
+        
         .quiz-option.correct {
-            background-color: #48BB78;
+            background-color: var(--secondary);
             color: white;
+            border-color: var(--secondary);
         }
+        
         .quiz-option.incorrect {
-            background-color: #F56565;
+            background-color: #EF4444;
             color: white;
+            border-color: #DC2626;
         }
+        
+        /* Progress Bar */
         .progress-bar {
-            transition: width 0.5s ease;
+            background-color: var(--primary);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 6px;
+            border-radius: 9999px;
         }
+        
+        /* Modal */
         .overlay {
             display: none;
             position: fixed;
@@ -97,121 +457,194 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
         }
+        
         .modal {
-            background-color: white;
-            border-radius: 10px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
             max-width: 90%;
             width: 600px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
         }
-        .dark-mode .modal {
-            background-color: #2d3748;
+        
+        /* Chatbot Bubble */
+        .chatbot-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            transition: transform 0.3s ease;
+        }
+        
+        .chatbot-bubble button {
+            background: linear-gradient(135deg, var(--primary), #4F46E5);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-bubble:hover {
+            transform: scale(1.1) translateY(-5px);
+        }
+        
+        .chatbot-bubble button:hover {
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(109, 40, 217, 0.5);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-hover);
+        }
+        
+        /* Fancy Section Backgrounds */
+        .section-angle {
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            padding-bottom: 6rem;
+        }
+        
+        .section-angle-alt {
+            position: relative;
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            padding-top: 6rem;
+        }
+        
+        /* Dark mode specific overwrites */
+        table thead tr {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        input[type="text"], input[type="email"] {
+            background-color: rgba(31, 41, 55, 0.5);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        input[type="text"]:focus, input[type="email"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.2);
+        }
+        
+        input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--darker-bg);
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body>
     <!-- Navigation Bar -->
-    <nav class="navbar bg-white shadow-md px-6 py-4">
+    <nav class="navbar px-6 py-4 ">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <h1 class="text-2xl font-bold text-blue-800">LegalEase</h1>
-                <span class="text-sm text-gray-500 ml-2">⚖️</span>
+                <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
             </div>
             
             <div class="hidden md:flex space-x-6">
-                <a href="index.html" class="font-medium text-gray-600 hover:text-blue-600">Home</a>
-                <a href="legalguides.html" class="font-medium text-gray-600 hover:text-blue-600">Legal Guides</a>
-                <a href="QT.html" class="font-medium text-blue-600 border-b-2 border-blue-600">Quizzes & Tests</a>
-                <a href="askalawyer.html" class="font-medium text-gray-600 hover:text-blue-600">Ask a Lawyer</a>
-                <a href="emergencycontacts.html" class="font-medium text-gray-600 hover:text-blue-600">Emergency Contacts</a>
-                <a href="aboutus.html" class="font-medium text-gray-600 hover:text-blue-600">About Us</a>
+                <a href="index.html" class="font-medium text-gray-400 animated-border">Home</a>
+                <a href="legalguides.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-medium text-indigo-300 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
             </div>
             
             <div class="flex items-center space-x-4">
                 <div class="relative hidden md:block">
-                    <input type="text" placeholder="Search quizzes..." 
-                           class="px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-300 w-48">
-                    <button class="absolute right-3 top-2 text-gray-400">
+                    <input type="text" placeholder="Search legal topics..." 
+                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
                         <i class="fas fa-search"></i>
                     </button>
-                </div>
-                
-                <button id="languageToggle" class="p-2 rounded-full hover:bg-gray-100" title="Change Language">
-                    <span>🌍</span>
-                </button>
-                
-                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-100" title="Toggle Dark Mode">
-                    <span>🌙</span>
-                </button>
-                
+                </div>   
                 <button class="md:hidden">
-                    <i class="fas fa-bars text-gray-600 text-xl"></i>
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Breadcrumb Navigation -->
-    <div class="bg-gray-100 py-2 px-6 mt-16">
-        <div class="container mx-auto">
-            <div class="text-sm text-gray-600">
-                <a href="index.html" class="hover:text-blue-600">Home</a> 
-                <span class="mx-2">&gt;</span> 
-                <span class="text-blue-600">Quizzes & Tests</span>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Hero Section -->
-    <section class="pt-10 pb-16 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+    <section class="animated-gradient section-angle pt-20 pb-24 px-6 py-5 text-white">
         <div class="container mx-auto flex flex-col md:flex-row items-center">
             <div class="md:w-3/5 mb-10 md:mb-0" id="heroText">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Test Your Legal Knowledge: Quizzes & Interactive Tests</h1>
-                <p class="text-xl mb-8">Do you know your rights? Take our interactive legal quizzes to learn about the laws that protect you. Each quiz provides instant feedback, explanations, and useful resources.</p>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 mt-5">Test Your Legal Knowledge: Quizzes & Interactive Tests</h1>
+                <p class="text-xl mb-8 text-gray-200">Do you know your rights? Take our interactive legal quizzes to learn about the laws that protect you. Each quiz provides instant feedback, explanations, and useful resources.</p>
                 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#quiz-categories" class="bg-white text-blue-700 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                    <a href="#quiz-categories" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
                         🏆 Start a Quiz Now!
                     </a>
-                    <a href="legalguides.html" class="bg-transparent border border-white text-white hover:bg-blue-600 font-medium py-3 px-6 rounded-lg transition duration-300">
+                    <a href="legalguides.html" class="bg-transparent border border-white text-white hover:bg-gray-800 hover:border-purple-400 hover:text-purple-400 font-medium py-3 px-6 rounded-lg transition duration-300">
                         📜 Learn Before You Test
                     </a>
                 </div>
             </div>
             
             <div class="md:w-2/5 flex justify-center" id="heroImage">
-                <img src="/api/placeholder/500/400" alt="People taking a legal quiz" class="rounded-lg shadow-xl max-w-full h-auto">
+                <img src="https://kidskintha.com/wp-content/uploads/2020/07/Online-Test-Makers.jpg" alt="People taking a legal quiz" class="rounded-2xl shadow-2xl hover-float neon-glow">
             </div>
         </div>
     </section>
 
     <!-- Quiz Categories Section -->
-    <section id="quiz-categories" class="py-16 px-6 bg-white">
+    <section id="quiz-categories" class="py-16 px-6 bg-gray-900">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Quiz Categories</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Test your knowledge across different legal topics. Each quiz is designed to help you understand your rights better.</p>
+            <h2 class="text-3xl font-bold text-center text-white mb-4">Quiz Categories</h2>
+            <p class="text-center text-gray-300 mb-12 max-w-3xl mx-auto">Test your knowledge across different legal topics. Each quiz is designed to help you understand your rights better.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Housing Quiz Card -->
-                <div class="quiz-card bg-blue-50 rounded-xl overflow-hidden shadow-md mt-1">
+                <div class="quiz-card hover-float mt-1">
                     <div class="p-6">
                         <div class="flex items-center mb-4">
                             <div class="category-icon text-4xl mr-4">🏠</div>
-                            <h3 class="text-xl font-semibold text-gray-800">Housing & Tenant Legal Rights Quiz</h3>
+                            <h3 class="text-xl font-semibold text-white">Housing & Tenant Legal Rights Quiz</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">Test your knowledge on tenant laws and landlord obligations.</p>
+                        <p class="text-gray-300 mb-4">Test your knowledge on tenant laws and landlord obligations.</p>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Beginner</span>
-                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 5 minutes, 10 questions</span>
+                            <span class="bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full">Beginner</span>
+                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 5 minutes, 10 questions</span>
                         </div>
-                        <button class="take-quiz-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="housing">
+                        <button class="take-quiz-btn w-full btn-primary font-medium py-3 rounded-lg transition duration-300" data-quiz="housing">
                             Take Quiz <i class="fas fa-arrow-right ml-1"></i>
                         </button>
                     </div>
-                    <div class="bg-blue-600 px-6 py-3 text-white text-sm">
+                    <div class="bg-gradient-to-r from-purple-700 to-indigo-700 px-6 py-3 text-white text-sm">
                         <div class="flex justify-between">
                             <span><i class="fas fa-users"></i> 2,540 people took this quiz</span>
                             <span><i class="fas fa-star"></i> 4.8/5</span>
@@ -220,22 +653,22 @@
                 </div>
                 
                 <!-- Workplace Quiz Card -->
-                <div class="quiz-card bg-green-50 rounded-xl overflow-hidden shadow-md mt-1">
+                <div class="quiz-card hover-float mt-1">
                     <div class="p-6">
                         <div class="flex items-center mb-4">
                             <div class="category-icon text-4xl mr-4">💼</div>
-                            <h3 class="text-xl font-semibold text-gray-800">Workplace & Employment Laws Quiz</h3>
+                            <h3 class="text-xl font-semibold text-white">Workplace & Employment Laws Quiz</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">Find out if you know your employee rights and workplace protections.</p>
+                        <p class="text-gray-300 mb-4">Find out if you know your employee rights and workplace protections.</p>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Intermediate</span>
-                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 8 minutes, 15 questions</span>
+                            <span class="bg-green-900 text-green-200 text-xs px-3 py-1 rounded-full">Intermediate</span>
+                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 8 minutes, 15 questions</span>
                         </div>
-                        <button class="take-quiz-btn w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="workplace">
+                        <button class="take-quiz-btn w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="workplace">
                             Take Quiz <i class="fas fa-arrow-right ml-1"></i>
                         </button>
                     </div>
-                    <div class="bg-green-600 px-6 py-3 text-white text-sm">
+                    <div class="bg-gradient-to-r from-green-700 to-teal-700 px-6 py-3 text-white text-sm">
                         <div class="flex justify-between">
                             <span><i class="fas fa-users"></i> 3,120 people took this quiz</span>
                             <span><i class="fas fa-star"></i> 4.7/5</span>
@@ -244,22 +677,22 @@
                 </div>
                 
                 <!-- Consumer Protection Quiz Card -->
-                <div class="quiz-card bg-purple-50 rounded-xl overflow-hidden shadow-md mt-1">
+                <div class="quiz-card hover-float mt-1">
                     <div class="p-6">
                         <div class="flex items-center mb-4">
                             <div class="category-icon text-4xl mr-4">💳</div>
-                            <h3 class="text-xl font-semibold text-gray-800">Consumer Protection Law Quiz</h3>
+                            <h3 class="text-xl font-semibold text-white">Consumer Protection Law Quiz</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">What are your rights when buying products and services? Test your knowledge!</p>
+                        <p class="text-gray-300 mb-4">What are your rights when buying products and services? Test your knowledge!</p>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">Beginner</span>
-                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 6 minutes, 12 questions</span>
+                            <span class="bg-purple-900 text-purple-200 text-xs px-3 py-1 rounded-full">Beginner</span>
+                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 6 minutes, 12 questions</span>
                         </div>
-                        <button class="take-quiz-btn w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="consumer">
+                        <button class="take-quiz-btn w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="consumer">
                             Take Quiz <i class="fas fa-arrow-right ml-1"></i>
                         </button>
                     </div>
-                    <div class="bg-purple-600 px-6 py-3 text-white text-sm">
+                    <div class="bg-gradient-to-r from-purple-700 to-pink-700 px-6 py-3 text-white text-sm">
                         <div class="flex justify-between">
                             <span><i class="fas fa-users"></i> 1,975 people took this quiz</span>
                             <span><i class="fas fa-star"></i> 4.9/5</span>
@@ -268,22 +701,22 @@
                 </div>
                 
                 <!-- Cybersecurity Quiz Card -->
-                <div class="quiz-card bg-indigo-50 rounded-xl overflow-hidden shadow-md">
+                <div class="quiz-card hover-float">
                     <div class="p-6">
                         <div class="flex items-center mb-4">
                             <div class="category-icon text-4xl mr-4">🔗</div>
-                            <h3 class="text-xl font-semibold text-gray-800">Cybersecurity & Privacy Laws Quiz</h3>
+                            <h3 class="text-xl font-semibold text-white">Cybersecurity & Privacy Laws Quiz</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">Learn how to stay safe online and understand your digital privacy rights.</p>
+                        <p class="text-gray-300 mb-4">Learn how to stay safe online and understand your digital privacy rights.</p>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">Advanced</span>
-                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 10 minutes, 20 questions</span>
+                            <span class="bg-indigo-900 text-indigo-200 text-xs px-3 py-1 rounded-full">Advanced</span>
+                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 10 minutes, 20 questions</span>
                         </div>
-                        <button class="take-quiz-btn w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="cyber">
+                        <button class="take-quiz-btn w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="cyber">
                             Take Quiz <i class="fas fa-arrow-right ml-1"></i>
                         </button>
                     </div>
-                    <div class="bg-indigo-600 px-6 py-3 text-white text-sm">
+                    <div class="bg-gradient-to-r from-indigo-700 to-blue-700 px-6 py-3 text-white text-sm">
                         <div class="flex justify-between">
                             <span><i class="fas fa-users"></i> 1,340 people took this quiz</span>
                             <span><i class="fas fa-star"></i> 4.6/5</span>
@@ -292,22 +725,22 @@
                 </div>
                 
                 <!-- Criminal Rights Quiz Card -->
-                <div class="quiz-card bg-red-50 rounded-xl overflow-hidden shadow-md">
+                <div class="quiz-card hover-float">
                     <div class="p-6">
                         <div class="flex items-center mb-4">
                             <div class="category-icon text-4xl mr-4">⚖</div>
-                            <h3 class="text-xl font-semibold text-gray-800">Criminal Law & Civil Rights Quiz</h3>
+                            <h3 class="text-xl font-semibold text-white">Criminal Law & Civil Rights Quiz</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">Understand legal procedures and your rights in criminal and civil situations.</p>
+                        <p class="text-gray-300 mb-4">Understand legal procedures and your rights in criminal and civil situations.</p>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Intermediate</span>
-                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 7 minutes, 15 questions</span>
+                            <span class="bg-red-900 text-red-200 text-xs px-3 py-1 rounded-full">Intermediate</span>
+                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 7 minutes, 15 questions</span>
                         </div>
-                        <button class="take-quiz-btn w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="criminal">
+                        <button class="take-quiz-btn w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="criminal">
                             Take Quiz <i class="fas fa-arrow-right ml-1"></i>
                         </button>
                     </div>
-                    <div class="bg-red-600 px-6 py-3 text-white text-sm">
+                    <div class="bg-gradient-to-r from-red-700 to-pink-700 px-6 py-3 text-white text-sm">
                         <div class="flex justify-between">
                             <span><i class="fas fa-users"></i> 2,105 people took this quiz</span>
                             <span><i class="fas fa-star"></i> 4.8/5</span>
@@ -316,22 +749,22 @@
                 </div>
                 
                 <!-- Government Quiz Card -->
-                <div class="quiz-card bg-yellow-50 rounded-xl overflow-hidden shadow-md">
+                <div class="quiz-card hover-float">
                     <div class="p-6">
                         <div class="flex items-center mb-4">
                             <div class="category-icon text-4xl mr-4">🏛</div>
-                            <h3 class="text-xl font-semibold text-gray-800">Government & Citizen Rights Quiz</h3>
+                            <h3 class="text-xl font-semibold text-white">Government & Citizen Rights Quiz</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">Do you know your rights as a citizen? Test your knowledge of constitutional rights.</p>
+                        <p class="text-gray-300 mb-4">Do you know your rights as a citizen? Test your knowledge of constitutional rights.</p>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Beginner</span>
-                            <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 5 minutes, 10 questions</span>
+                            <span class="bg-yellow-900 text-yellow-200 text-xs px-3 py-1 rounded-full">Beginner</span>
+                            <span class="text-gray-400 text-sm"><i class="far fa-clock mr-1"></i> 5 minutes, 10 questions</span>
                         </div>
-                        <button class="take-quiz-btn w-full bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="government">
+                        <button class="take-quiz-btn w-full bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-700 hover:to-amber-700 text-white font-medium py-3 rounded-lg transition duration-300" data-quiz="government">
                             Take Quiz <i class="fas fa-arrow-right ml-1"></i>
                         </button>
                     </div>
-                    <div class="bg-yellow-600 px-6 py-3 text-white text-sm">
+                    <div class="bg-gradient-to-r from-yellow-700 to-amber-700 px-6 py-3 text-white text-sm">
                         <div class="flex justify-between">
                             <span><i class="fas fa-users"></i> 1,820 people took this quiz</span>
                             <span><i class="fas fa-star"></i> 4.7/5</span>
@@ -341,7 +774,7 @@
             </div>
             
             <div class="text-center mt-16">
-                <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                <button class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
                     View All Quizzes <i class="fas fa-th ml-1"></i>
                 </button>
             </div>
@@ -349,600 +782,476 @@
     </section>
 
     <!-- How it Works Section -->
-    <section class="py-16 px-6 bg-gray-100">
+    <section class="py-16 px-6 bg-gray-800">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">How the Quizzes Work</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Our interactive quizzes are designed to be educational and engaging. Here's how to get started:</p>
+            <h2 class="text-3xl font-bold text-center text-white mb-4">How the Quizzes Work</h2>
+            <p class="text-center text-gray-300 mb-12 max-w-3xl mx-auto">Our interactive quizzes are designed to be educational and engaging. Here's how to get started:</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <div class="bg-white rounded-lg p-6 shadow-md">
+                <div class="glass rounded-2xl p-6 hover-float">
                     <div class="text-center mb-4">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">1</div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-full text-2xl font-bold shadow-lg">1</div>
                     </div>
-                    <h3 class="text-xl font-semibold text-center mb-3">Choose a Quiz</h3>
-                    <p class="text-gray-600 text-center">Select from our range of legal topics that interest you most.</p>
+                    <h3 class="text-xl font-semibold text-center mb-3 text-white">Choose a Quiz</h3>
+                    <p class="text-gray-300 text-center">Select from our range of legal topics that interest you most.</p>
                 </div>
                 
-                <div class="bg-white rounded-lg p-6 shadow-md">
+                <div class="glass rounded-2xl p-6 hover-float">
                     <div class="text-center mb-4">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">2</div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-full text-2xl font-bold shadow-lg">2</div>
                     </div>
-                    <h3 class="text-xl font-semibold text-center mb-3">Answer Questions</h3>
-                    <p class="text-gray-600 text-center">Test your knowledge with multiple-choice, true/false, and scenario-based questions.</p>
+                    <h3 class="text-xl font-semibold text-center mb-3 text-white">Answer Questions</h3>
+                    <p class="text-gray-300 text-center">Test your knowledge with multiple-choice, true/false, and scenario-based questions.</p>
                 </div>
                 
-                <div class="bg-white rounded-lg p-6 shadow-md">
+                <div class="glass rounded-2xl p-6 hover-float">
                     <div class="text-center mb-4">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">3</div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-full text-2xl font-bold shadow-lg">3</div>
                     </div>
-                    <h3 class="text-xl font-semibold text-center mb-3">Get Instant Feedback</h3>
-                    <p class="text-gray-600 text-center">Learn why your answer was right or wrong with detailed explanations.</p>
+                    <h3 class="text-xl font-semibold text-center mb-3 text-white">Get Instant Feedback</h3>
+                    <p class="text-gray-300 text-center">Learn why your answer was right or wrong with detailed explanations.</p>
                 </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-8">
-                <div class="bg-white rounded-lg p-6 shadow-md">
+                <div class="glass rounded-2xl p-6 hover-float">
                     <div class="text-center mb-4">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">4</div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-full text-2xl font-bold shadow-lg">4</div>
                     </div>
-                    <h3 class="text-xl font-semibold text-center mb-3">Earn Badges & Points</h3>
-                    <p class="text-gray-600 text-center">Track your progress and unlock achievements as you improve your legal knowledge.</p>
+                    <h3 class="text-xl font-semibold text-center mb-3 text-white">Review Your Results</h3>
+                    <p class="text-gray-300 text-center">See your score and which areas you might need to learn more about.</p>
                 </div>
                 
-                <div class="bg-white rounded-lg p-6 shadow-md">
+                <div class="glass rounded-2xl p-6 hover-float">
                     <div class="text-center mb-4">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full text-2xl font-bold">5</div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-full text-2xl font-bold shadow-lg">5</div>
                     </div>
-                    <h3 class="text-xl font-semibold text-center mb-3">Share Your Score</h3>
-                    <p class="text-gray-600 text-center">Challenge friends and spread legal awareness by sharing your results on social media.</p>
+                    <h3 class="text-xl font-semibold text-center mb-3 text-white">Access Additional Resources</h3>
+                    <p class="text-gray-300 text-center">Each quiz includes links to guides, articles, and resources for further learning.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Achievements & Gamification Section -->
-    <section class="py-16 px-6 bg-white">
+    <!-- Stats Section -->
+    <section class="py-16 px-6 bg-gray-900">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Earn Badges & Track Your Progress</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">As you complete quizzes and improve your legal knowledge, you'll earn badges that showcase your expertise.</p>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
-                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
-                    <div class="text-5xl mb-3">🎓</div>
-                    <h3 class="font-semibold text-gray-800 mb-1">Legal Beginner</h3>
-                    <p class="text-sm text-gray-600">Complete your first quiz</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+                <div class="glass rounded-xl p-6 hover-float">
+                    <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 mb-2">50+</div>
+                    <p class="text-gray-300">Legal Quizzes</p>
                 </div>
                 
-                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
-                    <div class="text-5xl mb-3">🏆</div>
-                    <h3 class="font-semibold text-gray-800 mb-1">Perfect Score</h3>
-                    <p class="text-sm text-gray-600">Score 100% on any quiz</p>
+                <div class="glass rounded-xl p-6 hover-float">
+                    <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 mb-2">25,000+</div>
+                    <p class="text-gray-300">Quiz Participants</p>
                 </div>
                 
-                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
-                    <div class="text-5xl mb-3">⚖️</div>
-                    <h3 class="font-semibold text-gray-800 mb-1">Rights Champion</h3>
-                    <p class="text-sm text-gray-600">Score 80%+ on 3 quizzes</p>
+                <div class="glass rounded-xl p-6 hover-float">
+                    <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 mb-2">4.8/5</div>
+                    <p class="text-gray-300">Average Rating</p>
                 </div>
                 
-                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
-                    <div class="text-5xl mb-3">🔍</div>
-                    <h3 class="font-semibold text-gray-800 mb-1">Legal Explorer</h3>
-                    <p class="text-sm text-gray-600">Try quizzes in 5 categories</p>
-                </div>
-                
-                <div class="badge-item bg-blue-50 rounded-lg p-4 text-center shadow-md">
-                    <div class="text-5xl mb-3">📚</div>
-                    <h3 class="font-semibold text-gray-800 mb-1">Legal Expert</h3>
-                    <p class="text-sm text-gray-600">Complete all quizzes</p>
-                </div>
-            </div>
-            
-            <div class="max-w-4xl mx-auto mt-12 bg-blue-50 rounded-lg p-6 shadow-md">
-                <h3 class="text-2xl font-semibold text-center text-gray-800 mb-6">Weekly Leaderboard</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="bg-blue-100">
-                                <th class="py-3 px-4 text-left">Rank</th>
-                                <th class="py-3 px-4 text-left">User</th>
-                                <th class="py-3 px-4 text-left">Quizzes Completed</th>
-                                <th class="py-3 px-4 text-left">Average Score</th>
-                                <th class="py-3 px-4 text-left">Badges</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-blue-100">
-                                <td class="py-3 px-4"><span class="bg-yellow-400 text-white rounded-full w-6 h-6 inline-flex items-center justify-center">1</span></td>
-                                <td class="py-3 px-4">LegalEagle492</td>
-                                <td class="py-3 px-4">15</td>
-                                <td class="py-3 px-4">94%</td>
-                                <td class="py-3 px-4">🎓 🏆 ⚖️ 🔍 📚</td>
-                            </tr>
-                            <tr class="border-b border-blue-100">
-                                <td class="py-3 px-4"><span class="bg-gray-300 text-white rounded-full w-6 h-6 inline-flex items-center justify-center">2</span></td>
-                                <td class="py-3 px-4">JusticeFinder</td>
-                                <td class="py-3 px-4">12</td>
-                                <td class="py-3 px-4">91%</td>
-                                <td class="py-3 px-4">🎓 ⚖️ 🔍 📚</td>
-                            </tr>
-                            <tr class="border-b border-blue-100">
-                                <td class="py-3 px-4"><span class="bg-orange-400 text-white rounded-full w-6 h-6 inline-flex items-center justify-center">3</span></td>
-                                <td class="py-3 px-4">LawStudent2025</td>
-                                <td class="py-3 px-4">10</td>
-                                <td class="py-3 px-4">88%</td>
-                                <td class="py-3 px-4">🎓 🏆 ⚖️</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-center mt-6">
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition duration-300">
-                        View Full Leaderboard
-                    </button>
+                <div class="glass rounded-xl p-6 hover-float">
+                    <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 mb-2">12</div>
+                    <p class="text-gray-300">Legal Categories</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Challenge Friends Section -->
-    <section class="py-16 px-6 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-4">Challenge Your Friends!</h2>
-            <p class="text-center mb-12 max-w-3xl mx-auto">Learning is more fun with friends! Challenge others to test their legal knowledge and see who scores the highest.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-                <div class="bg-white bg-opacity-10 rounded-lg p-6 border border-white border-opacity-20 backdrop-filter backdrop-blur-sm">
-                    <div class="flex flex-col items-center">
-                        <div class="text-5xl mb-6">👥</div>
-                        <h3 class="text-xl font-semibold text-center mb-4">Social Challenge</h3>
-                        <p class="text-center mb-6">Share your quiz results on social media and challenge friends to beat your score.</p>
-                        <div class="flex space-x-4">
-                            <button class="bg-blue-500 hover:bg-blue-600 p-3 rounded-full transition">
-                                <i class="fab fa-facebook-f"></i>
-                            </button>
-                            <button class="bg-blue-400 hover:bg-blue-500 p-3 rounded-full transition">
-                                <i class="fab fa-twitter"></i>
-                            </button>
-                            <button class="bg-pink-600 hover:bg-pink-700 p-3 rounded-full transition">
-                                <i class="fab fa-instagram"></i>
-                            </button>
-                            <button class="bg-blue-600 hover:bg-blue-700 p-3 rounded-full transition">
-                                <i class="fab fa-linkedin-in"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white bg-opacity-10 rounded-lg p-6 border border-white border-opacity-20 backdrop-filter backdrop-blur-sm">
-                    <div class="flex flex-col items-center">
-                        <div class="text-5xl mb-6">✉️</div>
-                        <h3 class="text-xl font-semibold text-center mb-4">Email Invite</h3>
-                        <p class="text-center mb-6">Send a direct challenge to your friends, colleagues, or classmates via email.</p>
-                        <form class="w-full">
-                            <input type="email" placeholder="Enter your friend's email" class="w-full mb-3 px-4 py-2 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white">
-                            <button type="submit" class="w-full bg-white text-purple-600 hover:bg-opacity-90 font-medium py-2 rounded-lg transition duration-300">
-                                Send Challenge
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <!-- Featured Quiz -->
+    <section class="py-16 px-6 bg-gray-800 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute transform -rotate-12 -left-10 -top-10 w-64 h-64 rounded-full bg-purple-600 filter blur-3xl"></div>
+            <div class="absolute transform rotate-12 -right-10 -bottom-10 w-64 h-64 rounded-full bg-blue-600 filter blur-3xl"></div>
         </div>
-    </section>
-
-    <!-- Quiz Demo/Preview Section -->
-    <section class="py-16 px-6 bg-white">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Try a Sample Question</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">See how our quizzes work with this sample question from our Housing & Tenant Rights quiz.</p>
-            
-            <div class="max-w-3xl mx-auto bg-blue-50 rounded-lg p-8 shadow-md">
-                <div class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Question: What is generally required for a landlord to enter a tenant's rental unit?</h3>
+        
+        <div class="container mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between glass rounded-2xl p-8 border border-purple-500/20">
+                <div class="md:w-2/3 mb-8 md:mb-0 md:pr-8">
+                    <div class="inline-block px-3 py-1 rounded-full bg-purple-900 text-purple-200 text-xs font-medium mb-4">Featured Quiz</div>
+                    <h2 class="text-3xl font-bold text-white mb-4">Know Your Digital Privacy Rights</h2>
+                    <p class="text-gray-300 mb-6">In today's digital world, everyone should understand their privacy rights. This comprehensive quiz covers data protection laws, your rights with online services, and how to protect your personal information.</p>
                     
-                    <div class="flex flex-col space-y-3 mt-6">
-                        <div class="quiz-option border border-gray-300 rounded-lg p-4">
-                            <label class="flex items-center">
-                                <input type="radio" name="sample-question" class="mr-3">
-                                <span>A landlord can enter at any time without notice</span>
-                            </label>
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <div class="flex items-center text-gray-300 text-sm">
+                            <i class="far fa-clock mr-2 text-purple-400"></i>
+                            <span>12 minutes</span>
                         </div>
-                        
-                        <div class="quiz-option border border-gray-300 rounded-lg p-4">
-                            <label class="flex items-center">
-                                <input type="radio" name="sample-question" class="mr-3">
-                                <span>A landlord must give reasonable notice (typically 24-48 hours)</span>
-                            </label>
+                        <div class="flex items-center text-gray-300 text-sm">
+                            <i class="far fa-question-circle mr-2 text-purple-400"></i>
+                            <span>25 questions</span>
                         </div>
-                        
-                        <div class="quiz-option border border-gray-300 rounded-lg p-4">
-                            <label class="flex items-center">
-                                <input type="radio" name="sample-question" class="mr-3">
-                                <span>A landlord needs a court order to enter</span>
-                            </label>
-                        </div>
-                        
-                        <div class="quiz-option border border-gray-300 rounded-lg p-4">
-                            <label class="flex items-center">
-                                <input type="radio" name="sample-question" class="mr-3">
-                                <span>A landlord can never enter unless the tenant is present</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-8">
-                    <button id="check-answer" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
-                        Submit Answer
-                    </button>
-                </div>
-                
-                <div id="answer-explanation" class="mt-8 hidden">
-                    <div class="border-l-4 border-green-500 bg-green-50 p-4">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <svg class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm text-green-700">
-                                    Correct answer: A landlord must give reasonable notice (typically 24-48 hours)
-                                </p>
-                            </div>
+                        <div class="flex items-center text-gray-300 text-sm">
+                            <i class="fas fa-chart-bar mr-2 text-purple-400"></i>
+                            <span>Updated monthly</span>
                         </div>
                     </div>
                     
-                    <div class="mt-4 bg-gray-50 p-4 rounded-lg">
-                        <h4 class="font-semibold text-gray-800 mb-2">Explanation:</h4>
-                        <p class="text-gray-700">
-                            Most state laws require landlords to provide "reasonable notice" before entering a tenant's rental unit, which is typically defined as 24-48 hours depending on the state. This notice requirement balances the landlord's right to access their property with the tenant's right to privacy and quiet enjoyment. Exceptions may exist for emergencies that threaten safety or property damage.
-                        </p>
-                        <div class="mt-4">
-                            <a href="#" class="text-blue-600 hover:underline font-medium">Learn more about tenant privacy rights →</a>
-                        </div>
-                    </div>
+                    <button class="take-quiz-btn btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md" data-quiz="privacy">
+                        Start Featured Quiz <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
                 </div>
-            </div>
-            
-            <div class="text-center mt-10">
-                <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
-                    Take the Full Housing Quiz <i class="fas fa-arrow-right ml-1"></i>
-                </button>
+                
+                <div class="md:w-1/3">
+                    <img src="https://media.licdn.com/dms/image/v2/D5612AQHnrOxV5AV5XA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1721182567770?e=2147483647&v=beta&t=0Tx0kcZrZkMHQK98Br8ak676KhH_CtZDReKik7fUze4" alt="Digital Privacy" class="rounded-xl shadow-2xl hover-float">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="py-16 px-6 bg-gray-100">
+    <!-- Testimonials -->
+    <section class="py-16 px-6 bg-gray-900">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">What Our Users Say</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Thousands of people have improved their legal knowledge through our interactive quizzes.</p>
+            <h2 class="text-3xl font-bold text-center text-white mb-4">What Our Users Say</h2>
+            <p class="text-center text-gray-300 mb-12 max-w-3xl mx-auto">Here's what people are saying about our legal quizzes:</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg p-6 shadow-md">
+                <div class="glass rounded-xl p-6 hover-float">
                     <div class="flex items-center mb-4">
-                        <div class="mr-4">
-                            <img src="/api/placeholder/60/60" alt="User avatar" class="rounded-full w-12 h-12">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800">Sarah J.</h3>
-                            <p class="text-sm text-gray-500">Law Student</p>
+                        <span class="ml-2 text-gray-400 text-sm">5.0</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">"Taking the tenant rights quiz helped me understand that my landlord's actions were illegal. I was able to stand up for my rights and get the repairs I needed. This site is a lifesaver!"</p>
+                    <div class="flex items-center">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSExIWFhUWFRcXFxcXFRUVFRUXFxgXGBcYFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGBAQFyslHR0tKy0tKy0tLSstLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS4tKy0tLS0tLS0tKystLf/AABEIAPsAyQMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAADBAIFAQYHAAj/xABBEAABAwIDBQUGAQsEAgMAAAABAAIRAyEEEjEFQVFhcQYigZGxEzKhwdHwQgcUFSNSYnKCwuHxM5KisiTiFjRz/8QAGgEAAwEBAQEAAAAAAAAAAAAAAAECAwQFBv/EACIRAAICAwEBAQEAAwEAAAAAAAABAhEDITESBEEiMlFhE//aAAwDAQACEQMRAD8A6YVhZXiuE1AvCEivKEEygrF5xWKbllyQAHlCRHlCKAJhecVEFBxVdrGlziAAJJOgA1RQyRK81y5htz8or3OLcKzuzGdwueg0Hilm9o8aQCanlAAWixMhzR1h9QLAqLjn/wAursP+u4nm1pHmQrHCdvMQIDoPPIj/AMmHtHWabkR5Wi7N7dUyQKgc3iRBb8FteA2jSqszU3hw5eYEblLi10dpllSKlUQabrIroSEQlYaVhSagoIxZCwsoERcVgLxKwEDD00WUJikgk8V5eWCkAJ6EpvUCmUEphSqaIbCpuSELEoUqdQwgPqQD0vKYyZfGq5t2+7Qe3puo0XdzNle4aOv7oPDj0Sfa7tc+u40KMilOVxBg1P8A1VVUoAMyG1gYtGm4hbQh+siUvxFHhXhozRYHug8d5jyXqmPed+qths2Y7p0AFrc+nFW2A7KSJeL+W749VTmkJQbNWbXaCXuYCSbA6AC09SZ8liptKfca1p8wf9xW6bQ7LCLCLX68uK13aPZtzW5mgnw+hQssWN4pIrDWqtvBIN4DbffNXGytpVGAVaTiCDDh8iDqN6qqYMRDpG6J+fVZw9dzHSAQNHNM+YlW6ZB13sp2qbXGR5DanDcei2pr9025rggxLqZFRukyCNx+/NdO7KdpBXYGuIDgLidRuI5eiwnCtotM2xp3ojSl2nn80amZWZQZpUiotCyRZAECvLDipNQMPSFkRRpEKaBECvFYK8gKAPCEi1EIoGSabojo3oTAivNrpMTEMVUvpu+5Wgdutv2OFY6M3vkTMfsjr96rZu1e0vY0KlQagGOp08FyAuNTM7NLuesEXB8vitccb2TJgjiWh0gRB04q72Rji8xHmCfIBa22jLom/MXW5dmcLG65+9N3iqyS8oeOHpm1bD2ZMGADwhbH+hd+n18EpscQR8yti9uAIsuJT9bO3x50ijds+NyTr4FpBBaD81ePfO5LvHRZtuzRcOf7e7PNMuaIPwWiYmg5hItPMWPJdt2qwObEXXMu02C1kQdxXZgyPjOTPjXUa1h8VYjdvHontkbRNGo17TodN3ToVQ1SQb2I+PVMYerPiupnKd42JtIVaYcDaPv6K6puXLuwG0Ymnmg7uY+/VdMoVPvXVc8lRoh5pWXFQpohUjAELLFly8zVADFJEUKYRISAg4KKI4LGVAC1QILkxVagOQB5hWK9RoEnhZeYlcZVABM679I+wgRoP5TcSDTyg21PUWjnr8FyilVIuNVt/brbgqvLGgZWuMH9rUGfFaZTK6IKkRLpf7Foue4cSeR8+i6jsbZwY0WvvJ1PVab+T3BZgakad0ep9QtsxW3KdI5ReNTfKDwka+C481yl5R24Eox9M2jBYcpl7Oq1DC9uaIcAQ4fFbBh9v06oBa6x03feqy8OPUaqak9DRlRe0rP5xPRAr7TY3Ui3+UqsqyFSiStf2zs4PBDgj4vtfQbIzSeAB9UnT7Q0ah1LZ3nRWoSW6Ic4vVnNu0OzHUnmdOKpaZiRwMhdI7a4TNSc4atE9Rv+vgua0L5v4fmF34p+onBlh5lRtXZ3FZS14PXxgEffBdk2VXdlE6gX59FwzYzopunc7/PyXYOzGLFSi0zJ+93RTNAja6J0uilLYYyNNEcrOigb1JixCkwIAYpIngo0kWEgIkLBCk4LxQArUCA8JqogPCAFqkBa521xJZh3kAiWETprYwr7P3ifXcqXtJ36ZadCJPhuHXRC6DOSV6TWUXVTdxljd+UG7ndYK1qoC2QfDhHEeSvMRVNNz6JvlcYmL8JnkJhJYum17mgD9kdZA+C6Voyo6V2cwZp4GmAYc5oJ496/pZFqYqkwZXAEDWSABPEn0CvKWzy6kGgxAA8gtdqbIbRrB9QF2sA3EmO9HG2q86LUm7Z6TjS0VOP/ADJ5im6nn4MdPhBAM9JXtnuDCMrjE2vZAo7CYyrmdUY+kHFzRFSd9nBzQ3xvorfYmwM9QvE5C4FovaDOp1EQuidJaZlBNvaNmw9Z3s80HRavtV0ky4gTK6gME0UQ2Lw489B/dcy7RbLfeAbuvrYeAWOJ7NJ7RSYejQnvRfe94aD5/RX+GpUCMoaADpBBB6OHoVQ7Q2E2o5rqeQAsDXjMZtN82W8k7+CsamzQBTbRsWgBzgID4A1HG2uq3nTXTGNp15GsZhj7KowmW5Tl4xGnT76ctw7IY4necvlc28Wrr9ak4UnF2uU+i5PWNsoERbqd5PwT+d9I+hcGMHUOTqfQBdS/JjUJouncYHQCIXKcObR97l1n8m0GlANgb8Z1+a0kZI3+gDJRnBRotRHBZlAoU2BYhTphADFJqIvMFlLMgVkCsFZUHuSGBqlI4ipYo9Z0pSqkApWmzhu3cVrPajGFtF7gTMRw+44dFs1Y+o81qvaejLW5vdLgH8pIPju8kLoHK9r4dzHAuuXAOtz08UXZmHc8NqTORzcw4Se6fRO9osNlqZS6SNDxbuPkApbBrWfTAs9k8SS06+EBbSf8kxX9HbdngBjU5X2RTrDvMa7qPQ8VT7MxQc0X3BXFLHFm9ebDT2ek7a0JUexuGY7N7IGOLnOFuRJTDWAEwBwEaJLa+3XZTe+5Jt23RpNZnqAOMTJAJJ3CVc7lwIxrptdazGDfkcPOfqtfAbngo9XtC1wBnQKhxG0adQOe14Lm8HAwRuMIkregiq6WGL7KUXnM0Fp/dMSsYXswG3E23kkouzNrS0SU7V2hIiUnJh5KbHYYZT0v0XBX+84cz6rvW0q4DHHg0nyC4AH96+9dPyrpy/U9oZoOuRy/z6LpvYcBoovbYueGGCYIDCTmGmpC5sxoNxqNfqF0TsA2WUx+y8+FnE/0reRzxOtUHAhTeUrgnptZlA4UmBYhTYECYxSRVCkbIkFIQJL1XSjPcgOQULVEs9NVUs8IYCuIVbtimwsPtAMsX8lY1Dck7vJapjj7fEexe7LTAzETBqGdOgGscUgNK21st/8ArCfZzla4mSNYnleJ6JXsti20sRkrd0EOyk2yl0C/UaeC6TtPDs9n7OBBBDR6LVH7Jp16LC4CcgBIFxltI6jUcld2qDjs2jDVYaHNuI+G5er7QIVZ2WqEUTRcZdTJbPEatPkR5J7E0A5sb1xtU6Z2xlaszsv9bUvoL+O5N7d2D7Uh9PWILToY0jmtezYul/pUc4JH4gHRxynVWNCviiMxp1HRqGuaI6Bpkq/Lu0Wtin5lUB9mQeBBHw6J/A7JawGwBO4CAECttCrUtkrWn8NQu8ZuhuxFZsw1w5PI+ZlW06F5oI+qaRjcrCji5Co6WJrPB9rRLJsYc1wjjbRXOEw2VoBMkb1ElQrIbZeTQqRvaQOpsuLY7CllUsO5dK/KPtP2OGbTaYfUdu1htyfQeK5c0kySZJ1JMk9V0/PF+bOP6JJuhjDEkgDUmI4yuxdi9n+zYJ3Nj+YxPlELQ+wGwHVqhqEwxhF9+bgOBjfzXXsHhmsaGgQAqm9mcSzw5Vi10qvoo7KkFQMZhEpoYKK1AMOwosqFIIqBCSG8Iu5CcgoBVStTRNVClnpAJ4jQDeSqmrg2PGV7Zi4IkOni07lcxeTf+6Fi8Pm7wMED4pDNer4d9LvE56dwZAzt5gj3vVIY/ZVEnuUx3gIIsOM+K2B7MzSNHAwfhKq8LRApMdug23tBJiOghFga5VojBvFQGGO7r7yBwcOhMdCrf84mCDqle0be47KARZo4d7efNVOAY6iHUySQ18N/hIBEcgZHgpnG1ZpjnTo3qizMwA+BVVii+mZa46848CLomxtqCzXFbPSwlJ4kgLnT8vZ2RlW0ah+l6rrZrdXI2Gw2Y5nEn4DyW0fobDTZl+v2EPEYamwd0+CtzX4EpSfWVFekMkJR+KFNpc8gBokk6ADeibSxzW281qfayq44aoTYFtgnCN0jGUqNL7T7YOKruqfhHdYDuaN/U6pDD0ySOdkEBHwrjK9CqVI8+7ds7n2VwFKlh2NpXaQHTvcSBc81f01qfYPE58Kzi0lp85HwK2ymsDQcpBEeoUQpFABKFRPUwqwJzC1NyALKk1EhRYsykIUAsgPRgUKokUL1Eq9N1ClXFIBepp1UxBBGixWMCyD3jb7jikBXYppyViz3nNIb1iJlLOxLA0AHQCw96w0jVXVWkBpu+7rRO1m16lV35rhn5S5wa6pv1AIad1purjGwbGNq02MZNVzGBxkhzgBJOl/kgYbAsfTcKe4B1p1ud6ls7siynBJNSpEBzyXkcXCdB0V7QwgpEAcLrnnlVVE6ceJp2zTACNLK1wO2XtsSsbUweR5jQ3HikSxCaZe0bI3bUj3kri9rONm+arqLJ0T2EwRceA3lGkK2wGCwhcczr/MpPtzh/wDxKhOoA9QtpYwNEBUPbCgauHexupHoZ+SUZf2glH+WchdayNggJnh92WKNHMSCYj6xZZxNHL3gbSvSPPOmdi9tAPbRdEPAgxHeAtPGdPJdDolfPez8U9jmOEjKZB6Gfou/4Z8tB4gHzCwkqZonZZ0TZScgU3I0pAZRKaGiMQBbYV0hGyqvwz4KfzBAhRoQagRGoNRykoDVSj3Jmq6y1HbXaXKSylBixebif3Rv6q4Y3N0iXJLpe4iu1olzg0cyAqDavbKjSEMBqO04Nn1K1HHbQc4lz3Ekak7vp0VVTaT33ak90cOa6o/Kl0yeV/hZ7R27Xrul1SGzZre6OhjXxVdgwW1Gv/ZcHeX2Vl1LhZHptW6xxqqI9O7Ot4DBtLA9pzZgHB3EEWhKY+jOmo+KouxHaQUx+b1jDZ/VuOjSfwuPCdD4cFsuPF5C+fz4ZYp0z1sWRTjZrG1GSLiHN3HeFUFi2ytldZwlUmIwRababkQZbBYforCk6yVp0jwRRSdxhWxBTUAQ3UZud+gRKbANLlMMZdQM4xtbCGlXeP3j4/cJSk7MSCLEQOui2vt+Ge3ge9F+W8A8+S10YQOgDX5gR63XpQdxTZ501UnQ5SZNBjCPxW4X+4W+bC7Zd0Cs2QLEts5pFoI0Pgua4bFOygHThusf8q2w9WKg4PH/ACG9awipWmRNtbR27ZuMp1W5mODhy1HUbk5ouN4TGvouDmOLeYPrxC27ZvbU2FZk/vNgE9QbSpl87XAWRfpu4RWKs2ZtWlXH6t8n9k2cPBWbFi0100TsZphHzoNNTSEeVVtfbNGhZ7pdEhjbu/t4qe3dqDD0XVNXe60cXHTyufBcxqVi5znuMucZJ3lb4MPvb4TOdcLfavaOrVkN7jDbKILiObt3gtdJk28TuHIItR9kriK2Vh3ABd8YRitI522+idUe0qBg9xtzzPNGeJdyFlHCUsjC46uufFEY2AihGHhRplZUHaoGEKu9j9pH0gGVJqU91++wfuk6jkfNa+4qDK4mDY89PArPJjjkVSRUZuDtHTMOWVxnpuDhyNxycNQeqJiMGSOi5/gHuYQ9ri0jQtMHzG5bbgu1TxAqsD/3hDHHrAynyC87J8Eo7g7O2H1xepaDDDkLxbCtyGPojEU5LHTYiCCCQQb8QVybbWLe6tVD3OID3AAkwBMiBppCwxYXkk4vVGuTKoRUu2bdjNtUacy8E8G953kNPFUu0u1dRwLaQyD9omX+G5vxWsZgp5vFd+P5McdvbOOf0zlzRX7TPeEnfPG97niUIVwHA7gJ8Zv6LO0H94clX1pmOKrItkQeizw2BzNDpiQI63sesFOYluVrT+y4eWnzWNlViJpnQsi414HqA7zCJi703dJRh/QycQ8wg2OhWaQIdlNwUCg6WA8gnML3r8F0mRZ4emRDgSCNCDBHits2N2oLYbXu39se8ObhvWoseih9kpY4yWxqTR2ChUDgHNIIIkEaEIq0nsDjoL6BJiM7Ad25wHK4Pmt1lefOHmVHRF2rOddu9pZ64pA92mPNx18rDzWs+01XsdiC97nnUuJPiSk6j7r0scfMUjnk7Y06oNToElVJflB/Ecx/hbcD0WKlSRCzTPfJ4AAeN/oqJD1jJjzU4UQ23VFcICYCzSsOWWb1khTQAXLD6EifJM0qcLDLGN276J0MWwuI/DMH1/unmVH9TzEA+I+iRx+GjvD7PFEwWOBhrjfnv8UhHQuz3bChSwvsnMqEtadzS1zouJmRJ3kLmu2w+pUfWLC1rnkWBbTsAIa4jvREa7laUu7YpKg9zn1aeYBoc3jOmYb41e7dvWUMEINyXWavI5Kn+FCWa+SYYbJvF7Pi7fEfRJqqMhaph5N+qrtbcPRW9Qd0nkVWNw5e5rRYuIA+pWeSNouLoefVzOa5tjdv0tzkp+o2WEco+CNh9ihkZXNeZaPfILSd2UgAb73BvexRcIwOvFlOBdLyMVwDT7JhI5JzBd0kbjf6phjIaRwKCRfzXRRiMiqpe1SWZSpuMoA2TsrjC3E0nE/jynmHAj5hdXhcS2fWyuDhuIPiDK67+l2cR5rl+iLbTRrjejjVQ7uNvFKPf5hMVDISrnTrZ2k8eq6zMxmTdBup5pWjqBvJjorSjQTQGWjyWHGVJ4nujxU20lQhOkLlGZTRRTA8VPIigsE4IGIFp4JktWHNSAjTIc31VZi8KWzAzN+I5gpyl3XEbim6TTeI3a/fJLoFPg9o5e6/wP1XsE5pxVUEEgta74MH1TOOwAdMRm18PokNnUHsqHM03aRI4AhTsB/E6Jars4nQjxTLKZJHBNlVQFHVwxbYqvrUsji+DDW/8jYes9JWz81XYu9yLSDHILLJH+WVHotQqurDKxrQ0T3XGHOt7xI3nruVpgmQDxnTggYGk1/sxH7rDoTJzCY4Zla1MPleGEDvCxG/hv4LlxZFB0zecHJaAtvISxCdFOCQbHglHi7v4j8bruu+HO0LTZZaYUHEfH+6nRIceCQDdBW36QdxVS08NFLOgBWqCw5hdu/ksVKYPebcKNRzhppwQaJgkiwOoOiYGGPAqdBPRWP563c4ExPFUTXTWcJ/DceI+qabeWzAMzzLiBJG+JJ8EkwLQYhoA7wk9R6p+jVB/ED0IKpKFT2r7HuAhoBvOpJvvgE+ARnuzuhoABcbwJLR3R5mSOStMRbVXXhYDoskHAFxgRLjBB0aIk9S6R4HgiQ6R3zcwJAPP5fFOxD3tYsQhuhCe6pIGYEc2aeTuqg8vG4XPPr8kARxVORI1Hoi4eoN+h4JariYuQANDc/HgoF7h+AkHSCD81Ix72XeLhpEeRP1QazzI3agzI3T8lCjtFuhkHgRBWMY8ZQ8XAcD52+aYgtBn4vBeKjSe8gNAA+9V4NMxm+H3uQMzUZbmq7aAtCfqcZJ4aA30+CRq05eJJ94dInepnwa6MYLDuGRrdcmdsj8QcQL88oTm3auZuZtnNhzdxkXPjqPLivB5DqTubpN+AMT1/7FL4vEgh3MZgOGmbrdeW/9nahultBlai2oR3zAMcbg9btVdVnObWcB8OHGxCqG1S2mQ2ffLvCf7lW2IaZE+8CJ8rj/AJfBdHzyduJjmWrEnG5S9DFEGItKk5/6x44AeZ/wlZvrvXUc5sFB1pWZS+GqDJI4qcpjF6roUM3x1RH0wTPzSrtSfmhgI0Kn/ku/hMdLfRN1KuVhd1Pwj+seSr6hjEMPEEeYICPtKXOZRH4gJ6Fxn4AeShPoxzDSylI97KGt/jqb+oaJ/mVrQYKbC6LMbbnAsPggNpg1GNizcz/KGt++SexLZDW8XN+He/pWsVolnsLRIIB3NE8zqT5z5phwl3Qev+PivUBqVOFYgUnOL2381nFbuvrI+aEJJnmPVFxZt/M3/s1AC1XgR/cJGpgHNvTNp906f2Vu+mCpvcGtM6QpoDX6jKjoDmXmAQZWa2BexpnS88QRuIVhiq7XDKPedYaj7CG7NkdmMki+4abh4KaK1X/RynoDxE+aDhnAuJ3AQPP+x81l1WKUjXKI+Sjh6UNgch5BWSTJkzuCQxZIuNfTRWBEBIYg6BRPhSHNl4lr6eU65XAbsrpFr+HkqSpioqkH97fPvCYtukN8lPDgMe7XXnxj0jqktoDvzpf7+9682Sp0didqyw2LRD3wdA0k8vr0TmNrfrXjm0D/AGj5yktj4v2c2u7XwjThv+wsYqpNTN+1lP8AyP1WuD/JszyvVCod3qruNQj/AG935INHvOuiY1pZINpLvWfmEDZplx8PmupM5y8pWb4o0hA3ALGVUBHEu3BKPEcExX95CewQbIAqsWf1lM8Ht9QrDJOLb+7Tn1b/AFKvxuo/iHqrej/9p/8AB/UFC6Ms8E3vvdwhg/l1+J+CaPvN5SfQfMoGF0Hj6lMt949G/wBS3XCBqi2yxWsCps0ChitExAqLO71QMY/9W88L+Rn5Jl57qSrf6L/4XehQxjlMyk9tVIpqVFyS2ye75+iTegPbMomcxmYtO4RqEzVbrPNQ2eIA6fIKVY6qfwYGjJZSB5E/yiU6xIYE9yn/APn9E7STQmSq6Kvqi6fqpWrqh7GVlcQ53gfMR8kriRJtwkKzqDv9QPUqsrmNP3v+391x5407N8T/AAxgidNCOOl5+Gif/N5c0xGk8LOm3xR8Hh2uZmIk3v8AyynKpyUmZbZrHpMxJ0FhosISd6NZRVbNc23i8zsuoZInidPgAB4IOxbl3h80rtA99/8AE71Ka2JqV2RVHK97LyVNDKItBH//2Q==" alt="User" class="rounded-full w-10 h-10">
+                        <div class="ml-3">
+                            <div class="font-medium text-white">Dipali Shetty</div>
+                            <div class="text-sm text-gray-400">Tenant & Student</div>
                         </div>
                     </div>
-                    <div class="text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 mb-2">"These quizzes have been an excellent supplement to my law school studies. The explanations are thorough and help me understand concepts better than just memorizing facts."</p>
                 </div>
                 
-                <div class="bg-white rounded-lg p-6 shadow-md">
+                <div class="glass rounded-xl p-6 hover-float">
                     <div class="flex items-center mb-4">
-                        <div class="mr-4">
-                            <img src="/api/placeholder/60/60" alt="User avatar" class="rounded-full w-12 h-12">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800">Michael T.</h3>
-                            <p class="text-sm text-gray-500">Small Business Owner</p>
+                        <span class="ml-2 text-gray-400 text-sm">5.0</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">"As a small business owner, I needed to understand employee rights. The employment law quiz was eye-opening and helped me create better policies for my team. Highly recommended!"</p>
+                    <div class="flex items-center">
+                        <img src="data:image/jpeg;base64,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" alt="User" class="rounded-full w-10 h-10">
+                        <div class="ml-3">
+                            <div class="font-medium text-white">Saurabh Ranawade</div>
+                            <div class="text-sm text-gray-400">Business Owner</div>
                         </div>
                     </div>
-                    <div class="text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p class="text-gray-600 mb-2">"The employment law quiz helped me understand my obligations as an employer. I feel much more confident in creating workplace policies that are fair and legally compliant."</p>
                 </div>
                 
-                <div class="bg-white rounded-lg p-6 shadow-md">
+                <div class="glass rounded-xl p-6 hover-float">
                     <div class="flex items-center mb-4">
-                        <div class="mr-4">
-                            <img src="/api/placeholder/60/60" alt="User avatar" class="rounded-full w-12 h-12">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800">Elena R.</h3>
-                            <p class="text-sm text-gray-500">First-time Renter</p>
+                        <span class="ml-2 text-gray-400 text-sm">4.5</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">"The explanations that come with each answer are fantastic. I've learned more from these quizzes than I did in my university law class. The consumer rights quiz saved me from a scam!"</p>
+                    <div class="flex items-center">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5bEydXXCNjpv0QbocNfdaoplEQjZHiAxewg&s" alt="User" class="rounded-full w-10 h-10">
+                        <div class="ml-3">
+                            <div class="font-medium text-white">Fiona D'sa</div>
+                            <div class="text-sm text-gray-400">Graduate Student</div>
                         </div>
                     </div>
-                    <div class="text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 mb-2">"After taking the housing quiz, I understood my rights as a tenant. I was able to address a security deposit issue with my landlord confidently and got a positive outcome!"</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Quiz Modal Overlay -->
-    <div id="quiz-modal" class="overlay">
-        <div class="modal">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 id="quiz-title" class="text-2xl font-bold text-gray-800">Housing & Tenant Rights Quiz</h3>
-                    <button id="close-quiz" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-                
-                <div class="mb-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm text-gray-600">Question <span id="current-question">1</span> of <span id="total-questions">10</span></span>
-                        <span class="text-sm text-gray-600"><i class="far fa-clock mr-1"></i> <span id="quiz-timer">5:00</span> remaining</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div id="progress-bar" class="progress-bar bg-blue-600 h-2.5 rounded-full" style="width: 10%"></div>
-                    </div>
-                </div>
-                
-                <div id="quiz-content">
-                    <h4 id="question-text" class="text-lg font-semibold text-gray-800 mb-4">What is generally required for a landlord to enter a tenant's rental unit?</h4>
-                    
-                    <div id="quiz-options" class="flex flex-col space-y-3 mt-6">
-                        <!-- Options will be added dynamically with JavaScript -->
-                    </div>
-                    
-                    <div id="explanation-box" class="mt-6 hidden">
-                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
-                            <h4 class="font-semibold text-gray-800 mb-2">Explanation:</h4>
-                            <p id="explanation-text" class="text-gray-700"></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex justify-between mt-8">
-                    <button id="prev-question" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition duration-300">
-                        Previous
-                    </button>
-                    <button id="next-question" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
-                        Next
-                    </button>
-                </div>
-            </div>
+    <!-- Quiz Modal (will be shown when a quiz is selected) -->
+    <div id="quizModal" class="overlay">
+        <div class="modal" id="modalContent">
+            <!-- Quiz content will be loaded here dynamically -->
         </div>
     </div>
 
-    <!-- Chatbot Bubble -->
-    <div class="chatbot-bubble">
-        <button class="bg-blue-600 hover:bg-blue-700 w-16 h-16 rounded-full flex items-center justify-center shadow-lg">
-            <i class="fas fa-comments text-white text-2xl"></i>
-        </button>
-    </div>
+    <!-- Call-to-Action -->
+    <section class="py-16 px-6 bg-gradient-to-r from-purple-900 to-indigo-900">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Ready to Test Your Legal Knowledge?</h2>
+            <p class="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">Our quizzes are designed to help you understand the laws that affect your everyday life. Start learning about your rights today.</p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#quiz-categories" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                    <i class="fas fa-trophy mr-1"></i> Take a Quiz Now
+                </a>
+                <a href="legalguides.html" class="bg-white text-purple-900 hover:bg-gray-100 font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                    <i class="fas fa-book mr-1"></i> Browse Legal Guides
+                </a>
+                <a href="aboutus.html" class="bg-transparent border border-white text-white hover:bg-purple-800 hover:border-purple-800 font-medium py-3 px-6 rounded-lg transition duration-300">
+                    <i class="fas fa-info-circle mr-1"></i> Learn About Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 px-6 bg-gray-800">
+        <div class="container mx-auto">
+            <div class="max-w-3xl mx-auto glass rounded-2xl p-8 border border-purple-500/20">
+                <h2 class="text-2xl font-bold text-white mb-2 text-center">Get Legal Updates & New Quizzes</h2>
+                <p class="text-gray-300 mb-6 text-center">Subscribe to our newsletter to receive new quizzes, legal updates, and educational resources.</p>
+                
+                <form class="flex flex-col md:flex-row gap-4">
+                    <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400">
+                    <button type="submit" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 whitespace-nowrap">
+                        Subscribe <i class="fas fa-paper-plane ml-1"></i>
+                    </button>
+                </form>
+                
+                <p class="text-gray-400 text-sm mt-4 text-center">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer bg-gray-800 text-white py-12 px-6">
+    <footer class="footer py-12 px-6">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">LegalEase</h3>
-                    <p class="text-gray-300 mb-4">Making legal knowledge accessible to everyone through interactive quizzes and learning tools.</p>
+                    <h3 class="text-xl font-bold text-white mb-4">LegalEase</h3>
+                    <p class="text-gray-400 mb-4">Making legal knowledge accessible for everyone through interactive learning.</p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-300 hover:text-white transition">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-300 hover:text-white transition">Home</a></li>
-                        <li><a href="legalguides.html" class="text-gray-300 hover:text-white transition">Legal Guides</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Quizzes & Tests</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Ask a Lawyer</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">About Us</a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-purple-400 transition">Home</a></li>
+                        <li><a href="legalguides.html" class="text-gray-400 hover:text-purple-400 transition">Legal Guides</a></li>
+                        <li><a href="QT.html" class="text-gray-400 hover:text-purple-400 transition">Quizzes & Tests</a></li>
+                        <li><a href="askalawyer.html" class="text-gray-400 hover:text-purple-400 transition">Ask a Lawyer</a></li>
+                        <li><a href="emergencycontacts.html" class="text-gray-400 hover:text-purple-400 transition">Emergency Contacts</a></li>
+                        <li><a href="aboutus.html" class="text-gray-400 hover:text-purple-400 transition">About Us</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Legal Categories</h3>
+                    <h4 class="text-lg font-semibold text-white mb-4">Legal Categories</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Housing & Tenant Rights</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Employment Law</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Consumer Protection</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Family Law</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">All Categories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">Housing Law</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">Employment Law</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">Consumer Protection</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">Family Law</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">Criminal Law</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">View All Categories</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact & Support</h3>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Contact Us</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">FAQ</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition">Disclaimer</a></li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-purple-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">Shop No. 6, Dreamland Building,<br>Shanti Park, Andheri(W), Mumbai-400053</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-purple-400 mr-3"></i>
+                            <span class="text-gray-400">+91 8850123688</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-purple-400 mr-3"></i>
+                            <span class="text-gray-400">legal_pathshala_1@gmail.com</span>
+                        </li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2025 LegalEase. All rights reserved. Legal information is not legal advice.</p>
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 LegalEase. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-purple-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-purple-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-purple-400 text-sm transition">Cookie Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-purple-400 text-sm transition">Disclaimer</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Chatbot Bubble -->
+    <div class="chatbot-bubble">
+        <button class="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl shadow-lg">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
     <script>
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
         
-
-        // Sample Quiz Functionality
-        const checkAnswerBtn = document.getElementById('check-answer');
-        const answerExplanation = document.getElementById('answer-explanation');
-        const quizOptions = document.querySelectorAll('.quiz-option');
-
-        checkAnswerBtn.addEventListener('click', () => {
-            // Show the correct answer explanation
-            answerExplanation.classList.remove('hidden');
-            
-            // Highlight the correct option
-            quizOptions.forEach((option, index) => {
-                if (index === 1) { // Second option is correct
-                    option.classList.add('correct');
-                } else {
-                    const radio = option.querySelector('input[type="radio"]');
-                    if (radio.checked) {
-                        option.classList.add('incorrect');
-                    }
-                }
-            });
-            
-            // Change the button text
-            checkAnswerBtn.textContent = 'Continue to Next Question';
-            checkAnswerBtn.addEventListener('click', () => {
-                window.location.href = '#quiz-categories';
-            }, { once: true });
-        });
-
-        // Quiz Modal Functionality
-        const takeQuizBtns = document.querySelectorAll('.take-quiz-btn');
-        const quizModal = document.getElementById('quiz-modal');
-        const closeQuizBtn = document.getElementById('close-quiz');
-        
-        takeQuizBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                quizModal.style.display = 'flex';
-                const quizType = btn.getAttribute('data-quiz');
-                
-                // Customize quiz title based on the selected quiz
-                const quizTitle = document.getElementById('quiz-title');
-                if (quizType === 'housing') {
-                    quizTitle.textContent = 'Housing & Tenant Rights Quiz';
-                } else if (quizType === 'workplace') {
-                    quizTitle.textContent = 'Workplace & Employment Laws Quiz';
-                } else if (quizType === 'consumer') {
-                    quizTitle.textContent = 'Consumer Protection Quiz';
-                } else if (quizType === 'cyber') {
-                    quizTitle.textContent = 'Cybersecurity & Privacy Laws Quiz';
-                } else if (quizType === 'criminal') {
-                    quizTitle.textContent = 'Criminal & Civil Rights Quiz';
-                } else if (quizType === 'government') {
-                    quizTitle.textContent = 'Government & Citizen Rights Quiz';
-                }
-                
-                // Reset quiz state
-                document.getElementById('current-question').textContent = '1';
-                document.getElementById('progress-bar').style.width = '10%';
-                document.getElementById('explanation-box').classList.add('hidden');
-                
-                // Add sample quiz options
-                const quizOptions = document.getElementById('quiz-options');
-                quizOptions.innerHTML = `
-                    <div class="quiz-option border border-gray-300 rounded-lg p-4">
-                        <label class="flex items-center">
-                            <input type="radio" name="quiz-question" class="mr-3">
-                            <span>A landlord can enter at any time without notice</span>
-                        </label>
-                    </div>
-                    <div class="quiz-option border border-gray-300 rounded-lg p-4">
-                        <label class="flex items-center">
-                            <input type="radio" name="quiz-question" class="mr-3">
-                            <span>A landlord must give reasonable notice (typically 24-48 hours)</span>
-                        </label>
-                    </div>
-                    <div class="quiz-option border border-gray-300 rounded-lg p-4">
-                        <label class="flex items-center">
-                            <input type="radio" name="quiz-question" class="mr-3">
-                            <span>A landlord needs a court order to enter</span>
-                        </label>
-                    </div>
-                    <div class="quiz-option border border-gray-300 rounded-lg p-4">
-                        <label class="flex items-center">
-                            <input type="radio" name="quiz-question" class="mr-3">
-                            <span>A landlord can never enter unless the tenant is present</span>
-                        </label>
-                    </div>
-                `;
-            });
+        // Hero Section Animation
+        gsap.from("#heroText", {
+            opacity: 0,
+            x: -50,
+            duration: 1,
+            scrollTrigger: {
+                trigger: "#heroText",
+                start: "top 80%"
+            }
         });
         
-        closeQuizBtn.addEventListener('click', () => {
-            quizModal.style.display = 'none';
+        gsap.from("#heroImage", {
+            opacity: 0,
+            x: 50,
+            duration: 1,
+            scrollTrigger: {
+                trigger: "#heroImage",
+                start: "top 80%"
+            }
         });
-
-        // Animation with GSAP
-        document.addEventListener('DOMContentLoaded', () => {
-            // Hero section animations
-            gsap.from('#heroText', {
-                duration: 1,
-                x: -50,
+        
+        // Quiz Card Animations
+        gsap.utils.toArray(".quiz-card").forEach(card => {
+            gsap.from(card, {
                 opacity: 0,
-                ease: 'power3.out'
-            });
-            
-            gsap.from('#heroImage', {
-                duration: 1,
-                x: 50,
-                opacity: 0,
-                ease: 'power3.out',
-                delay: 0.3
-            });
-            
-            // Quiz cards animations
-            gsap.from('.quiz-card', {
-                duration: 0.8,
                 y: 30,
-                opacity: 0,
-                stagger: 0.1,
-                ease: 'power2.out',
+                duration: 0.8,
                 scrollTrigger: {
-                    trigger: '#quiz-categories',
-                    start: 'top 80%'
-                }
-            });
-            
-            // Badges animations
-            gsap.from('.badge-item', {
-                duration: 0.6,
-                scale: 0.8,
-                opacity: 0,
-                stagger: 0.1,
-                ease: 'back.out(1.7)',
-                scrollTrigger: {
-                    trigger: '.badge-item',
-                    start: 'top 80%'
+                    trigger: card,
+                    start: "top 85%"
                 }
             });
         });
+        
+        // Modal functionality
+        const quizModal = document.getElementById('quizModal');
+        const modalContent = document.getElementById('modalContent');
+        const quizButtons = document.querySelectorAll('.take-quiz-btn');
+        
+        quizButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const quizType = button.getAttribute('data-quiz');
+                loadQuiz(quizType);
+                quizModal.style.display = 'flex';
+            });
+        });
+        
+        // Close modal when clicking outside
+        quizModal.addEventListener('click', function(e) {
+            if (e.target === quizModal) {
+                quizModal.style.display = 'none';
+            }
+        });
+        
+        // Sample function to load quiz content
+        function loadQuiz(quizType) {
+            // This would normally fetch quiz data from a server
+            // For demo purposes, we'll just show some sample content
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-white">${getQuizTitle(quizType)} Quiz</h2>
+                        <button id="closeModal" class="text-gray-400 hover:text-white">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="w-full bg-gray-700 rounded-full h-2 mb-2">
+                            <div class="progress-bar w-20"></div>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400">
+                            <span>Question 2 of 10</span>
+                            <span>20% Complete</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl text-white mb-4">${getSampleQuestion(quizType)}</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="quiz-option p-3 rounded-lg">
+                                A. The landlord can enter whenever they want if they own the property
+                            </div>
+                            <div class="quiz-option p-3 rounded-lg">
+                                B. The landlord must provide at least 24 hours written notice
+                            </div>
+                            <div class="quiz-option p-3 rounded-lg">
+                                C. The landlord can only enter in emergencies
+                            </div>
+                            <div class="quiz-option p-3 rounded-lg">
+                                D. The landlord needs to get a court order to enter
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition">
+                            <i class="fas fa-arrow-left mr-1"></i> Previous
+                        </button>
+                        <button class="btn-primary hover-glow font-medium py-2 px-4 rounded-lg transition">
+                            Next <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Add event listener to close button
+            document.getElementById('closeModal').addEventListener('click', function() {
+                quizModal.style.display = 'none';
+            });
+            
+            // Add event listeners to quiz options
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                });
+            });
+        }
+        
+        // Helper functions to get quiz content
+        function getQuizTitle(quizType) {
+            const titles = {
+                'housing': 'Housing & Tenant Legal Rights',
+                'workplace': 'Workplace & Employment Laws',
+                'consumer': 'Consumer Protection Law',
+                'cyber': 'Cybersecurity & Privacy Laws',
+                'criminal': 'Criminal Law & Civil Rights',
+                'government': 'Government & Citizen Rights',
+                'privacy': 'Digital Privacy Rights'
+            };
+            return titles[quizType] || 'Legal Knowledge';
+        }
+        
+        function getSampleQuestion(quizType) {
+            const questions = {
+                'housing': 'In most states, how much notice must a landlord provide before entering a tenant\'s unit for non-emergency repairs?',
+                'workplace': 'What is the minimum federal overtime pay rate for eligible employees working more than 40 hours in a workweek?',
+                'consumer': 'Under the Fair Credit Billing Act, how long do you have to dispute a billing error on your credit card statement?',
+                'cyber': 'Which of the following is NOT typically protected under data privacy laws?',
+                'criminal': 'What are your rights when stopped by police while driving?',
+                'government': 'Which Amendment to the U.S. Constitution protects against unreasonable searches and seizures?',
+                'privacy': 'Who owns the personal data you share on social media platforms?'
+            };
+            return questions[quizType] || 'Sample legal question';
+        }
     </script>
 </body>
 </html>
