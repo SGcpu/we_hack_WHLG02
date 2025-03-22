@@ -3,14 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LegalEase - Test Your Legal Knowledge</title>
+    <title>LegalPathshala - Test Your Legal Knowledge</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap');
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
         
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #818cf8;
+        }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-text-animation {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .hero-container {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .hero-glow {
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(15, 23, 42, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .chatbot-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 25px rgba(99, 102, 241, 0.5);
+        }
+        
+        .chatbot-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 35px rgba(99, 102, 241, 0.7);
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: var(--card-hover);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .topic-icon {
+            transition: all 0.3s ease;
+            color: var(--primary);
+        }
+        
+        .topic-link:hover .topic-icon {
+            transform: scale(1.2);
+            color: var(--primary-light);
+        }
+        
+        .news-ticker {
+            overflow: hidden;
+            position: relative;
+            height: 40px;
+            background: rgba(79, 70, 229, 0.2);
+            border-radius: 10px;
+        }
+        
+        .ticker-content {
+            position: absolute;
+            white-space: nowrap;
+            will-change: transform;
+        }
+        
+        /* Neon effect for primary buttons */
+        .btn-neon {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+        }
+        
+        .btn-neon:hover {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.8);
+        }
+        
+        .btn-neon:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+        
+        .btn-neon:hover:before {
+            left: 100%;
+        }
+        
+        /* Card hover effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Particle background for sections */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(0) translateX(20px); }
+            75% { transform: translateY(20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
+        /* Animated borders */
+        .animated-border {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animated-border:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .animated-border:hover:after {
+            width: 100%;
+        }
+        
+        /* Custom switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--card-bg);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
         
         
         /* Custom Scrollbar */
@@ -297,12 +549,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
         
-        /* Animated Gradient Background */
-        .animated-gradient {
-            background: linear-gradient(-45deg, #5B21B6, #3B82F6, #10B981, #6D28D9);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
+        
         
         @keyframes gradient {
             0% {
@@ -566,19 +813,19 @@
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar px-6 py-4 ">
+    <nav class="navbar px-6 py-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
                 <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
             </div>
             
             <div class="hidden md:flex space-x-6">
-                <a href="index.html" class="font-medium text-gray-400 animated-border">Home</a>
-                <a href="legalguides.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
-                <a href="QT.html" class="font-medium text-indigo-300 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
-                <a href="askalawyer.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
-                <a href="emergencycontacts.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
-                <a href="aboutus.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+                <a href="index.html" class="font-extrabold text-gray-400 animated-border">Home</a>
+                <a href="legalguides.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-indigo-300 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
             </div>
             
             <div class="flex items-center space-x-4">
@@ -600,7 +847,7 @@
 
     <!-- Hero Section -->
     <section class="animated-gradient section-angle pt-20 pb-24 px-6 py-5 text-white">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
+        <div class="container mx-auto flex flex-col md:flex-row items-center mt-10">
             <div class="md:w-3/5 mb-10 md:mb-0" id="heroText">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4 mt-5">Test Your Legal Knowledge: Quizzes & Interactive Tests</h1>
                 <p class="text-xl mb-8 text-gray-200">Do you know your rights? Take our interactive legal quizzes to learn about the laws that protect you. Each quiz provides instant feedback, explanations, and useful resources.</p>
@@ -901,6 +1148,12 @@
         </div>
     </section>
 
+     <!-- Chatbot Bubble -->
+     <div >
+        <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>    
+    </div>
+
     <!-- Testimonials -->
     <section class="py-16 px-6 bg-gray-900">
         <div class="container mx-auto">
@@ -1025,7 +1278,7 @@
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-4">LegalEase</h3>
+                    <h3 class="text-xl font-bold text-white mb-4">LegalPathshala</h3>
                     <p class="text-gray-400 mb-4">Making legal knowledge accessible for everyone through interactive learning.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
@@ -1079,7 +1332,7 @@
             </div>
             
             <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 LegalEase. All rights reserved.</p>
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 LegalPathshala. All rights reserved.</p>
                 <div class="flex space-x-6">
                     <a href="#" class="text-gray-400 hover:text-purple-400 text-sm transition">Privacy Policy</a>
                     <a href="#" class="text-gray-400 hover:text-purple-400 text-sm transition">Terms of Service</a>

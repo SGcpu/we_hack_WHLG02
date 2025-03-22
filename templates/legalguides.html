@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LegalEase - Know Your Rights</title>
+    <title>LegalPathshala - Know Your Rights</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
@@ -27,7 +27,7 @@
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-primary);
             transition: all 0.3s ease;
@@ -100,20 +100,7 @@
             z-index: 0;
         }
         
-        .chatbot-bubble {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 25px rgba(99, 102, 241, 0.5);
-        }
-        
-        .chatbot-bubble:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 35px rgba(99, 102, 241, 0.7);
-        }
+       
         
         .feature-card {
             background: var(--card-bg);
@@ -796,6 +783,7 @@
         .show-more:hover i {
             transform: translateX(3px);
         }
+        
     </style>
 </head>
 <body>
@@ -807,12 +795,12 @@
             </div>
             
             <div class="hidden md:flex space-x-6 ">
-                <a href="index.html" class="font-medium text-gray-400 animated-border ">Home</a>
-                <a href="legalguides.html" class="font-medium text-indigo-300 hover:text-indigo-300 animated-border">Legal Guides</a>
-                <a href="QT.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
-                <a href="askalawyer.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
-                <a href="emergencycontacts.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
-                <a href="aboutus.html" class="font-medium text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+                <a href="index.html" class="font-extrabold text-gray-400 animated-border ">Home</a>
+                <a href="legalguides.html" class="font-extrabold text-indigo-300 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
             </div>
             
             <div class="flex items-center space-x-4">
@@ -830,6 +818,12 @@
         </div>
     </nav>
 
+     <!-- Chatbot Bubble -->
+     <div >
+        <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>    
+    </div>
+    
     <!-- Hero Section -->
     <section class="hero-container pt-32 pb-20 px-6 relative">
         <div class="hero-glow"></div>
@@ -1263,7 +1257,7 @@
 
     <!-- Downloadable Resources Section -->
     <section>
-        <div class="container ml-10">
+        <div class="container ml-28">
             <h2 class="py-3">Downloadable Resources</h2>
             <p class="section-intro">Access our legal guides offline with these downloadable PDF resources.</p>
             
@@ -1329,8 +1323,8 @@
     </section>
 
     <!-- Video Explainers Section -->
-    <section class="gradient-section py-6">
-        <div class="container">
+    <section class="gradient-section py-6 ">
+        <div class="container ml-28">
             <h2>Video Explainers & Infographics</h2>
             <p class="section-intro">Visual guides to help you understand complex legal concepts.</p>
             
@@ -1402,7 +1396,7 @@
 
     <!-- Ask a Lawyer Section -->
     <section class="mt-10 mb-10">
-        <div class="container">
+        <div class="container ml-28">
             <div class="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto">
                 <div class="md:w-1/2 mb-8 md:mb-0">
                     <h2 class="text-left">Need Personalized Legal Advice?</h2>
@@ -1486,7 +1480,7 @@
 
     <!-- Community Section -->
     <section class="mt-10 mb-10" >
-        <div class="container">
+        <div class="container ml-28">
             <h2>Join Our Legal Community</h2>
             <p class="section-intro">Connect with others, share experiences, and learn from community discussions about everyday legal matters.</p>
             
@@ -1544,7 +1538,7 @@
     <div class="container mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div>
-                <h3 class="text-xl font-bold gradient-text mb-4">LegalEase</h3>
+                <h3 class="text-xl font-bold gradient-text mb-4">LegalPathshala</h3>
                 <p class="text-gray-400 mb-4">Making legal knowledge accessible to everyone. Empowering you with the information you need to understand and protect your rights.</p>
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
@@ -1591,15 +1585,15 @@
                 <ul class="space-y-3 text-gray-400">
                     <li class="flex items-start">
                         <i class="fas fa-envelope mt-1 mr-3 text-indigo-400"></i>
-                        <span>support@legalease.com</span>
+                        <span>legal_pathshala_1@gmail.com</span>
                     </li>
                     <li class="flex items-start">
                         <i class="fas fa-phone-alt mt-1 mr-3 text-indigo-400"></i>
-                        <span>(800) 123-4567</span>
+                        <span>+91 8850123688</span>
                     </li>
                     <li class="flex items-start">
                         <i class="fas fa-map-marker-alt mt-1 mr-3 text-indigo-400"></i>
-                        <span>123 Legal Street<br>Justice City, LC 12345</span>
+                        <span>Shop No. 6, Dreamland Building,<br>Shanti Park, Andheri(W), Mumbai-400053</span>
                     </li>
                 </ul>
             </div>
@@ -1607,7 +1601,7 @@
         
         <div class="border-t border-gray-800 pt-8 pb-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LegalEase. All rights reserved.</p>
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LegalPathshala. All rights reserved.</p>
                 <div class="flex space-x-6 text-sm text-gray-500">
                     <a href="#" class="hover:text-indigo-400 transition duration-300">Privacy Policy</a>
                     <a href="#" class="hover:text-indigo-400 transition duration-300">Terms of Service</a>
@@ -1618,7 +1612,7 @@
         </div>
         
         <div class="text-center mt-6 text-xs text-gray-500">
-            <p>LegalEase provides legal information for educational purposes only. It is not a substitute for professional legal advice.</p>
+            <p>LegalPathshala provides legal information for educational purposes only. It is not a substitute for professional legal advice.</p>
         </div>
     </div>
 </footer>

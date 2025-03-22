@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Legal Topics Guide</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --accent: #6d28d9;
+            --text: #e2e2e2;
+            --highlight: #8b5cf6;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .section-card {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.2);
+        }
+        
+        .icon-container {
+            background: linear-gradient(135deg, var(--accent), var(--highlight));
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            z-index: 50;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #4b5563;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            background-color: var(--highlight);
+            transform: scale(1.2);
+        }
+        
+        .nav-dot:hover {
+            background-color: var(--accent);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="progress-bar"></div>
+    
+    <!-- Navigation Dots -->
+    <div class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden md:block">
+        <div class="flex flex-col items-center space-y-2">
+            <div class="nav-dot active" data-section="tenant"></div>
+            <div class="nav-dot" data-section="workplace"></div>
+            <div class="nav-dot" data-section="consumer"></div>
+            <div class="nav-dot" data-section="cyber"></div>
+            <div class="nav-dot" data-section="criminal"></div>
+            <div class="nav-dot" data-section="human"></div>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header class="py-6 px-4 md:px-10 flex items-center justify-between sticky top-0 z-30 backdrop-filter backdrop-blur-lg bg-opacity-80 bg-gray-900">
+        <div class="flex items-center">
+            <div class="text-2xl md:text-3xl font-bold text-white">
+                <span class="text-purple-500">Indian</span> Legal Guide
+            </div>
+        </div>
+        <nav class="hidden md:block">
+            <ul class="flex space-x-6">
+                <li><a href="#tenant" class="text-gray-300 hover:text-purple-400 transition">Tenant Rights</a></li>
+                <li><a href="#workplace" class="text-gray-300 hover:text-purple-400 transition">Workplace Laws</a></li>
+                <li><a href="#consumer" class="text-gray-300 hover:text-purple-400 transition">Consumer Protection</a></li>
+                <li><a href="#cyber" class="text-gray-300 hover:text-purple-400 transition">Cybersecurity</a></li>
+                <li><a href="#criminal" class="text-gray-300 hover:text-purple-400 transition">Criminal Law</a></li>
+                <li><a href="#human" class="text-gray-300 hover:text-purple-400 transition">Human Rights</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden fixed bottom-4 right-4 z-50">
+        <button id="mobileMenuBtn" class="bg-purple-600 text-white p-3 rounded-full shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-gray-900 bg-opacity-95 z-40 hidden flex-col justify-center items-center md:hidden">
+        <button id="closeMenuBtn" class="absolute top-4 right-4 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <nav>
+            <ul class="space-y-6 text-center">
+                <li><a href="#tenant" class="text-white text-2xl hover:text-purple-400 transition">Tenant Rights</a></li>
+                <li><a href="#workplace" class="text-white text-2xl hover:text-purple-400 transition">Workplace Laws</a></li>
+                <li><a href="#consumer" class="text-white text-2xl hover:text-purple-400 transition">Consumer Protection</a></li>
+                <li><a href="#cyber" class="text-white text-2xl hover:text-purple-400 transition">Cybersecurity</a></li>
+                <li><a href="#criminal" class="text-white text-2xl hover:text-purple-400 transition">Criminal Law</a></li>
+                <li><a href="#human" class="text-white text-2xl hover:text-purple-400 transition">Human Rights</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4 md:px-10 mb-10 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <svg class="absolute inset-0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M0 40L40 0M0 0L40 40" stroke="rgba(109, 40, 217, 0.1)" fill="none" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+        </div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">Know Your <span class="text-purple-500">Legal Rights</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8">Essential legal information every Indian citizen should understand, presented in a clear and accessible way.</p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#tenant" class="px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition transform hover:-translate-y-1">Start Reading</a>
+                <a href="#" class="bookmark-btn px-6 py-3 bg-transparent border border-purple-500 text-purple-400 font-medium rounded-lg hover:bg-purple-900 hover:bg-opacity-20 transition transform hover:-translate-y-1">Bookmark This Guide</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 md:px-8 pb-20">
+        <!-- Tenant Rights -->
+        <section id="tenant" class="mb-20 scroll-section">
+            <div class="section-card rounded-xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 22V12H15V22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="flex items-start">
+                    <div class="icon-container p-3 rounded-full mr-4">
+                        <span class="text-2xl">🏠</span>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4 text-white">Tenant Rights</h2>
+                        <div class="space-y-4 text-gray-300">
+                            <p>Under the <strong class="text-purple-400">Rent Control Act</strong> and <strong class="text-purple-400">Model Tenancy Act</strong>, tenants in India have specific protections regarding rent increases, eviction procedures, and property maintenance. The Model Tenancy Act of 2021 caps security deposits at two months' rent for residential properties and limits annual rent increases.</p>
+                            
+                            <p>Landlords must provide written notice (typically 3 months) before eviction and can only evict for specific reasons like property damage or rent default. All rental agreements should be in writing and registered with local authorities to be legally binding.</p>
+                            
+                            <p>For disputes, tenants can approach Rent Control Tribunals or Rent Authorities established under state laws. Legal aid is available through District Legal Services Authority, and organizations like Housing Rights Association provide free consultations.</p>
+                        </div>
+                        
+                        <div class="mt-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-white mb-2">Quick Action Steps</h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Always insist on a written, registered rent agreement</li>
+                                <li>Document the property condition before moving in</li>
+                                <li>Keep all payment receipts and communication records</li>
+                                <li>For disputes, file a complaint with local Rent Authority</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Workplace Laws -->
+        <section id="workplace" class="mb-20 scroll-section">
+            <div class="section-card rounded-xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 21V5C16 4.46957 15.7893 3.96086 15.4142 3.58579C15.0391 3.21071 14.5304 3 14 3H10C9.46957 3 8.96086 3.21071 8.58579 3.58579C8.21071 3.96086 8 4.46957 8 5V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="flex items-start">
+                    <div class="icon-container p-3 rounded-full mr-4">
+                        <span class="text-2xl">💼</span>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4 text-white">Workplace Laws</h2>
+                        <div class="space-y-4 text-gray-300">
+                            <p>The <strong class="text-purple-400">Industrial Disputes Act</strong> protects workers from unfair dismissal and provides mechanisms for resolving workplace conflicts. The <strong class="text-purple-400">Factories Act</strong> and <strong class="text-purple-400">Shops & Establishments Act</strong> regulate working hours (typically 48 hours weekly), overtime payments, and workplace safety standards.</p>
+                            
+                            <p>Under the <strong class="text-purple-400">Maternity Benefit Act</strong>, women employees are entitled to 26 weeks of paid maternity leave. The <strong class="text-purple-400">Equal Remuneration Act</strong> mandates equal pay for equal work regardless of gender, while the <strong class="text-purple-400">Sexual Harassment of Women at Workplace Act</strong> requires all organizations to have Internal Complaints Committees.</p>
+                            
+                            <p>Workers facing unfair treatment can file complaints with the Labor Commissioner's office, approach Industrial Tribunals, or contact specialized labor unions for support and guidance.</p>
+                        </div>
+                        
+                        <div class="mt-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-white mb-2">Filing a Workplace Complaint</h3>
+                            <ol class="list-decimal list-inside text-gray-300 space-y-1">
+                                <li>Document all instances of unfair treatment with dates and details</li>
+                                <li>Submit a written complaint to HR or management</li>
+                                <li>If unresolved, file a complaint with the Labor Commissioner</li>
+                                <li>For severe violations, approach the Industrial Tribunal in your region</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Consumer Protection -->
+        <section id="consumer" class="mb-20 scroll-section">
+            <div class="section-card rounded-xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="flex items-start">
+                    <div class="icon-container p-3 rounded-full mr-4">
+                        <span class="text-2xl">💳</span>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4 text-white">Consumer Protection</h2>
+                        <div class="space-y-4 text-gray-300">
+                            <p>The <strong class="text-purple-400">Consumer Protection Act (2019)</strong> significantly enhances consumer rights in India, covering product liability, unfair trade practices, and misleading advertisements. It establishes a three-tier dispute resolution system: District, State, and National Consumer Disputes Redressal Commissions.</p>
+                            
+                            <p>Consumers have the right to safe products, accurate information, fair pricing, and effective grievance redressal. The Act also regulates e-commerce platforms, requiring transparent refund policies and disclosure of seller information. Penalties for misleading advertisements can reach ₹50 lakhs.</p>
+                            
+                            <p>For defective products or services, consumers can file online complaints through the <strong class="text-purple-400">National Consumer Helpline</strong> or the <strong class="text-purple-400">INGRAM portal</strong>. Claims up to ₹1 crore can be filed at District Forums, with higher amounts directed to State and National Commissions.</p>
+                        </div>
+                        
+                        <div class="mt-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-white mb-2">Filing an Online Consumer Complaint</h3>
+                            <ol class="list-decimal list-inside text-gray-300 space-y-1">
+                                <li>Visit <span class="text-purple-400">consumerhelpline.gov.in</span> or the INGRAM portal</li>
+                                <li>Register with your contact details</li>
+                                <li>Submit your complaint with supporting documents</li>
+                                <li>Track your complaint using the provided reference number</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cybersecurity & Privacy -->
+        <section id="cyber" class="mb-20 scroll-section">
+            <div class="section-card rounded-xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12H22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="flex items-start">
+                    <div class="icon-container p-3 rounded-full mr-4">
+                        <span class="text-2xl">🔗</span>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4 text-white">Cybersecurity & Privacy</h2>
+                        <div class="space-y-4 text-gray-300">
+                            <p>The <strong class="text-purple-400">Information Technology Act (2000)</strong> and its amendments form the foundation of India's cybersecurity laws, addressing hacking, data theft, identity fraud, and online privacy violations. The recent <strong class="text-purple-400">Digital Personal Data Protection Act (2023)</strong> enhances privacy protections, introducing consent requirements and data minimization principles.</p>
+                            
+                            <p>Cybercrimes like unauthorized access (hacking), data theft, online harassment, identity theft, and phishing are punishable with imprisonment up to 7 years and fines up to ₹10 lakhs. Companies are legally required to implement reasonable security practices and procedures to protect sensitive personal data.</p>
+                            
+                            <p>Victims of cybercrime can file complaints through the <strong class="text-purple-400">National Cyber Crime Reporting Portal</strong> (cybercrime.gov.in) or approach the local police's Cyber Cell. For data breaches, individuals can also lodge complaints with the Data Protection Board once fully established.</p>
+                        </div>
+                        
+                        <div class="mt-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-white mb-2">Reporting Cybercrime</h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>For immediate assistance, call the <span class="text-purple-400">Cyber Helpline: 1930</span></li>
+                                <li>Report online through <span class="text-purple-400">cybercrime.gov.in</span></li>
+                                <li>Preserve all evidence (screenshots, emails, messages)</li>
+                                <li>For financial fraud, report to your bank immediately</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Criminal Law -->
+        <section id="criminal" class="mb-20 scroll-section">
+            <div class="section-card rounded-xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1V23" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="flex items-start">
+                    <div class="icon-container p-3 rounded-full mr-4">
+                        <span class="text-2xl">⚖️</span>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4 text-white">Criminal Law</h2>
+                        <div class="space-y-4 text-gray-300">
+                            <p>The <strong class="text-purple-400">Indian Penal Code (IPC)</strong> defines criminal offenses and their punishments, while the <strong class="text-purple-400">Criminal Procedure Code (CrPC)</strong> outlines procedures for investigation, trial, and sentencing. The <strong class="text-purple-400">Evidence Act</strong> governs how evidence is collected and presented in court.</p>
+                            
+                            <p>Criminal offenses are categorized as bailable (where getting bail is a right) or non-bailable (where bail is at the court's discretion). They're further classified as cognizable (police can arrest without warrant) or non-cognizable (requiring court permission for arrest).</p>
+                            
+                            <p>Every accused person has the fundamental right to legal representation. If unable to afford a lawyer, free legal aid is provided through the <strong class="text-purple-400">Legal Services Authority</strong>. Other key rights include the right against self-incrimination, right to be informed of charges, and protection against arbitrary arrest.</p>
+                        </div>
+                        
+                        <div class="mt-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-white mb-2">Your Rights If Arrested</h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Right to know the grounds of arrest</li>
+                                <li>Right to consult a lawyer of your choice</li>
+                                <li>Right to be produced before a magistrate within 24 hours</li>
+                                <li>Right to inform a relative/friend about the arrest</li>
+                                <li>Right to free legal aid if unable to afford a lawyer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Human Rights -->
+        <section id="human" class="mb-10 scroll-section">
+            <div class="section-card rounded-xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8.5 11C10.7091 11 12.5 9.20914 12.5 7C12.5 4.79086 10.7091 3 8.5 3C6.29086 3 4.5 4.79086 4.5 7C4.5 9.20914 6.29086 11 8.5 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17 11L19 13M19 13L21 11M19 13V7M19 7H17M19 7H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="flex items-start">
+                    <div class="icon-container p-3 rounded-full mr-4">
+                        <span class="text-2xl">⚖️</span>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4 text-white">Human Rights</h2>
+                        <div class="space-y-4 text-gray-300">
+                            <p>The <strong class="text-purple-400">Indian Constitution</strong> guarantees fundamental rights under Articles 12-35, including the right to equality, freedom, against exploitation, freedom of religion, cultural and educational rights, and constitutional remedies. These rights are enforceable through courts, with the Supreme Court as the ultimate guardian.</p>
+                            
+                            <p>Specialized laws protect specific groups: <strong class="text-purple-400">SC/ST (Prevention of Atrocities) Act</strong> for Dalits and tribals, <strong class="text-purple-400">Protection of Women from Domestic Violence Act</strong>, <strong class="text-purple-400">Rights of Persons with Disabilities Act</strong>, and the <strong class="text-purple-400">Transgender Persons (Protection of Rights) Act</strong>.</p>
+                            
+                            <p>The <strong class="text-purple-400">National Human Rights Commission (NHRC)</strong> investigates human rights violations, recommends compensation, and initiates proceedings against officials. Complaints can be filed online or via post, with no filing fee. State Human Rights Commissions function similarly at the state level.</p>
+                        </div>
+                        
+                        <div class="mt-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-white mb-2">Filing a Human Rights Complaint</h3>
+                            <ol class="list-decimal list-inside text-gray-300 space-y-1">
+                                <li>Visit <span class="text-purple-400">nhrc.nic.in</span> or use the HRC Net portal</li>
+                                <li>Submit your complaint with all relevant details and evidence</li>
+                                <li>Track your complaint using the provided reference number</li>
+                                <li>For urgent cases, call the NHRC helpline: <span class="text-purple-400">9810298900</span></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 px-4 md:px-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold text-white mb-4">Indian Legal Guide</h3>
+                    <p class="text-gray-400 max-w-md">This guide provides general information and is not a substitute for professional legal advice. Laws may change over time.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-lg font-medium text-white mb-3">Legal Topics</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#tenant" class="text-gray-400 hover:text-purple-400 transition">Tenant Rights</a></li>
+                            <li><a href="#workplace" class="text-gray-400 hover:text-purple-400 transition">Workplace Laws</a></li>
+                            <li><a href="#consumer" class="text-gray-400 hover:text-purple-400 transition">Consumer Protection</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-medium text-white mb-3">More Topics</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#cyber" class="text-gray-400 hover:text-purple-400 transition">Cybersecurity</a></li>
+                            <li><a href="#criminal" class="text-gray-400 hover:text-purple-400 transition">Criminal Law</a></li>
+                            <li><a href="#human" class="text-gray-400 hover:text-purple-400 transition">Human Rights</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-medium text-white mb-3">Helpful Resources</h4>
+                        <ul class="space-y-2">
+                            <li><a href="https://nalsa.gov.in" class="text-gray-400 hover:text-purple-400 transition">National Legal Services Authority</a></li>
+                            <li><a href="https://nhrc.nic.in" class="text-gray-400 hover:text-purple-400 transition">National Human Rights Commission</a></li>
+                            <li><a href="https://cybercrime.gov.in" class="text-gray-400 hover:text-purple-400 transition">Cybercrime Reporting Portal</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>© 2025 Indian Legal Guide. This is for informational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize GSAP
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.style.display = 'flex';
+                gsap.fromTo(mobileMenu, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+            });
+            
+            closeMenuBtn.addEventListener('click', () => {
+                gsap.to(mobileMenu, { 
+                    opacity: 0, 
+                    duration: 0.3,
+                    onComplete: () => {
+                        mobileMenu.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Mobile menu links should close the menu when clicked
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    gsap.to(mobileMenu, { 
+                        opacity: 0, 
+                        duration: 0.3,
+                        onComplete: () => {
+                            mobileMenu.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Scroll progress bar
+            const progressBar = document.querySelector('.progress-bar');
+            window.addEventListener('scroll', () => {
+                const totalScroll = document.body.scrollHeight - window.innerHeight;
+                const progress = (window.pageYOffset / totalScroll) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Section animations
+            gsap.utils.toArray('.section-card').forEach(card => {
+                gsap.fromTo(card, 
+                    { y: 50, opacity: 0 },
+                    { 
+                        y: 0, 
+                        opacity: 1, 
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 80%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            });
+            
+            // Navigation dots active state
+            const sections = document.querySelectorAll('.scroll-section');
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            const setActiveNavDot = () => {
+                let current = '';
+                
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if(pageYOffset >= (sectionTop - 300)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navDots.forEach((dot) => {
+                    dot.classList.remove('active');
+                    if(dot.dataset.section === current) {
+                        dot.classList.add('active');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', setActiveNavDot);
+            
+            // Navigation dots click
+            navDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const targetSection = document.getElementById(dot.dataset.section);
+                    if(targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Bookmark Button Animation
+            const bookmarkBtn = document.querySelector('.bookmark-btn');
+            bookmarkBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                if(!bookmarkBtn.classList.contains('bookmarked')) {
+                    bookmarkBtn.classList.add('bookmarked');
+                    bookmarkBtn.textContent = 'Bookmarked!';
+                    bookmarkBtn.style.backgroundColor = 'rgba(139, 92, 246, 0.2)';
+                    
+                    // Show notification
+                    const notification = document.createElement('div');
+                    notification.className = 'fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                    notification.textContent = 'Guide bookmarked successfully!';
+                    document.body.appendChild(notification);
+                    
+                    gsap.fromTo(notification, 
+                        { y: 20, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.3 }
+                    );
+                    
+                    setTimeout(() => {
+                        gsap.to(notification, {
+                            y: 20, 
+                            opacity: 0, 
+                            duration: 0.3,
+                            onComplete: () => {
+                                notification.remove();
+                            }
+                        });
+                    }, 3000);
+                } else {
+                    bookmarkBtn.classList.remove('bookmarked');
+                    bookmarkBtn.textContent = 'Bookmark This Guide';
+                    bookmarkBtn.style.backgroundColor = 'transparent';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Rights in India</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.2), 0 8px 10px -6px rgba(99, 102, 241, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4338ca;
+        }
+
+        .content-section {
+            opacity: 1; /* Changed from 0 to 1 to make sections visible */
+            transform: translateY(0); /* Changed from translateY(30px) to 0 to position sections correctly */
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+        
+
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="navbar px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="font-extrabold text-indigo-300 animated-border">Home</a>
+                <a href="legalguides.html" class="font-extrabold  text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search legal topics..." 
+                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>   
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-indigo-900 opacity-10 z-0"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="flex flex-col items-center text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Know Your <span class="gradient-text">Tenant Rights</span> in India
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
+                    Comprehensive guide to protect yourself, understand your legal standing, and ensure a fair and secure rental experience.
+                </p>
+                
+            </div>
+        </div>
+        
+    </section>
+
+    <!-- Key Rights Cards Section -->
+    <section id="#" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                Key <span class="text-indigo-500">Tenant Rights</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Fair Rent</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Regulations prevent property owners from enforcing excessively high rental charges. Typically calculated at 8-10% of the property's value.
+                    </p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Rent Agreement</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        A legally binding document that should cover lease duration, rental amount, payment method, and other mutually agreed terms and conditions.
+                    </p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Privacy Rights</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Tenants have the fundamental right to privacy. Landlords can only enter after prior permission or notice, except in genuine emergencies.
+                    </p>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Security Deposit</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Usually equals one month's rent. Must be returned at the end of lease, minus deductions for damages beyond normal wear and tear.
+                    </p>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Essential Services</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Landlords must ensure access to water, electricity, and other essential facilities regardless of rent payment status.
+                    </p>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Protection from Eviction</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Tenants cannot be evicted without valid grounds such as rent default, property damage, or other legally specified reasons.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Information Section -->
+    <section id="detailed-info" class="py-16 md:py-24 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Detailed</span> Information
+            </h2>
+            
+            <div class="max-w-4xl mx-auto content-section">
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Maintenance and Repairs</h3>
+                    <p class="text-gray-300 mb-4">
+                        The landlord is responsible for ensuring that the rented property is well-maintained and habitable. It is their duty to carry out necessary repairs promptly, especially those affecting the tenant's safety and convenience.
+                    </p>
+                    <p class="text-gray-300">
+                        However, minor repairs may be the tenant's responsibility as per the rent agreement. The precise responsibilities of both the tenant and the landlord concerning the upkeep and mending of communal amenities will be determined based on the terms set forth in the lease accord.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Eviction and Notice Period</h3>
+                    <p class="text-gray-300 mb-4">
+                        A landlord's ability to evict a tenant hinges on adhering to the established legal protocol. Generally, a landlord is required to furnish a notice period spanning from 30 to 180 days, contingent on the circumstances and the specific laws of the state.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Grounds for eviction include rent non-payment, contractual breaches, unlawful activities on the premises, or other reasons stipulated by relevant laws.
+                    </p>
+                    <p class="text-gray-300">
+                        Tenants have the right to contest an eviction notice if they perceive it as unjust or if they possess valid defenses against the grounds asserted by the landlord.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Tenant Harassment and Retaliation</h3>
+                    <p class="text-gray-300 mb-4">
+                        It is legally impermissible for landlords to partake in harassment or retaliation directed at tenants. Harassment encompasses acts like cutting off essential services, enforcing eviction without due process, or creating an atmosphere of intimidation.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Retaliation pertains to negative actions taken by landlords as a reaction to tenants exercising their lawful rights, including reporting issues or requesting maintenance.
+                    </p>
+                    <p class="text-gray-300">
+                        Tenants should document incidents meticulously and may lodge complaints with relevant housing authorities or pursue legal remedies via civil court proceedings.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Dispute Resolution</h3>
+                    <p class="text-gray-300 mb-4">
+                        In situations where conflicts arise between tenants and landlords, the pathways for resolution encompass negotiation, mediation, arbitration, or legal recourse.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Arbitration stands as a dispute resolution method involving an impartial third party appointed to evaluate the presented arguments and evidence from both tenants and landlords.
+                    </p>
+                    <p class="text-gray-300">
+                        Maintaining comprehensive records of communication, rent receipts, and agreements is advised to substantiate claims when necessary.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Laws Section -->
+    <section id="laws" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Laws</span> and Acts
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Law 1 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">The Rent Control Act</h3>
+                    <p class="text-gray-300">
+                        State-specific legislation designed to oversee rental matters encompassing rent regulation, eviction procedures, and other relevant aspects of tenancy. Each Indian state possesses its distinct Rent Control Act.
+                    </p>
+                </div>
+                
+                <!-- Law 2 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">The Transfer of Property Act, 1882</h3>
+                    <p class="text-gray-300">
+                        Incorporates clauses pertaining to property transfer and leasing. It governs the creation and termination of leases, rights and duties of lessors and lessees, and rent determination.
+                    </p>
+                </div>
+                
+                <!-- Law 3 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">The Real Estate Act, 2016</h3>
+                    <p class="text-gray-300">
+                        Enacted to regulate the real estate realm, including rental housing. It delineates guidelines for rental agreements, promotes transparency within rental transactions, and institutes a dispute resolution mechanism.
+                    </p>
+                </div>
+                
+                <!-- Law 4 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">The Consumer Protection Act, 2019</h3>
+                    <p class="text-gray-300">
+                        Safeguards consumer rights, which includes tenants. Its framework upholds equitable practices, addresses grievances, and facilitates the resolution of consumer-related conflicts, encompassing matters related to leased properties.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-r from-indigo-900 to-purple-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 content-section">Ready to Assert Your Rights?</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10 content-section">
+                Stay informed, keep documentation, and ensure fair treatment in your rental journey.
+            </p>
+            <div class="content-section">
+                <button class="bg-white text-indigo-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                    <a href="legalguides.html">Get Legal Advice</a>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-10 border-t border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span class="text-xl font-bold text-white">TenantRights</span>
+                </div>
+                <div class="text-gray-400 text-center md:text-right">
+                    <p>© 2025 TenantRights. All rights reserved.</p>
+                    <p class="text-sm mt-2">Information provided is for educational purposes only and not legal advice.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // GSAP Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate home shapes
+            gsap.to('.shape1', {
+                x: '30%',
+                y: '20%',
+                rotation: 360,
+                duration: 30,
+                repeat: -1,
+                ease: 'none',
+                opacity: 0.5
+            });
+            
+            gsap.to('.shape2', {
+                x: '-20%',
+                y: '15%',
+                rotation: -360,
+                duration: 25,
+                repeat: -1,
+                ease: 'none',
+                opacity: 0.3
+            });
+            
+            gsap.to('.shape3', {
+                x: '15%',
+                y: '-25%',
+                rotation: 240,
+                duration: 35,
+                repeat: -1,
+                ease: 'none',
+                opacity: 0.4
+            });
+            
+            // Stagger animation for content sections
+            const contentSections = document.querySelectorAll('.content-section');
+            contentSections.forEach(section => {
+            gsap.to(section, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            // Ensure that the sections are visible on load
+            section.style.opacity = 1; // Added to ensure visibility on load
+
+            });
+        });
+
+        // Create animated background shapes
+        function createBackgroundShapes() {
+            const shapes = [
+                { class: 'shape1', size: '400px', color: '#4f46e5' },
+                { class: 'shape2', size: '300px', color: '#8b5cf6' },
+                { class: 'shape3', size: '350px', color: '#6366f1' }
+            ];
+
+            shapes.forEach(shape => {
+                const element = document.querySelector(`.${shape.class}`);
+                if (!element) {
+                    const div = document.createElement('div');
+                    div.classList.add(shape.class, 'home-shape');
+                    div.style.position = 'absolute';
+                    div.style.width = shape.size;
+                    div.style.height = shape.size;
+                    div.style.borderRadius = '50%';
+                    div.style.background = `radial-gradient(circle, ${shape.color} 0%, transparent 70%)`;
+                    div.style.filter = 'blur(50px)';
+                    div.style.top = `${Math.random() * 100}%`;
+                    div.style.left = `${Math.random() * 100}%`;
+                    div.style.transform = 'translate(-50%, -50%)';
+                    div.style.zIndex = '-1';
+                    
+                    document.querySelector('.home-section').appendChild(div);
+                }
+            });
+        }
+
+        createBackgroundShapes();
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // Adjust for header height
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

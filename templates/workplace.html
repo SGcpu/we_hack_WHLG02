@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workplace Laws in India</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.2), 0 8px 10px -6px rgba(99, 102, 241, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4338ca;
+        }
+
+        .content-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="navbar px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="font-extrabold text-indigo-300 animated-border">Home</a>
+                <a href="legalguides.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search legal topics..." 
+                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>   
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden home-section">
+        <div class="absolute inset-0 bg-indigo-900 opacity-10 z-0"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="flex flex-col items-center text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Know Your <span class="gradient-text">Workplace Laws</span> 💼
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
+                    Comprehensive guide to understand your employee rights, legal protections, and ensure a fair and secure working environment.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Rights Cards Section -->
+    <section id="key-rights" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                Key <span class="text-indigo-500">Employee Rights</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Industrial Disputes Act</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Protects workers by providing mechanisms for fair investigation and settlement of industrial disputes between employers and employees.
+                    </p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Factories Act</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Ensures adequate safety measures, health provisions, and welfare facilities for workers in factory settings to maintain safe working conditions.
+                    </p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Shops & Establishments Act</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Regulates working conditions, working hours, rest intervals, holidays, and leaves for employees in commercial establishments and shops.
+                    </p>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Maternity Benefits</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Women employees are entitled to paid maternity leave, nursing breaks, and protection against dismissal during pregnancy and post-delivery period.
+                    </p>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 15.879A10 10 0 1111.938 19M9 15h10l-4-4 4 4-4 4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Equal Pay Laws</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Mandates equal remuneration for men and women performing the same or similar work, prohibiting gender-based discrimination in compensation.
+                    </p>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="card bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Workplace Safety</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Comprehensive regulations requiring employers to maintain safe working conditions, provide necessary safety equipment, and conduct regular inspections.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Information Section -->
+    <section id="detailed-info" class="py-16 md:py-24 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Detailed</span> Information
+            </h2>
+            
+            <div class="max-w-4xl mx-auto content-section">
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Maternity Benefits in Detail</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Maternity Benefit Act provides female employees with paid maternity leave for up to 26 weeks, with at least 8 weeks before expected delivery. This benefit is available for the first two children, while for the third child, the entitlement is 12 weeks.
+                    </p>
+                    <p class="text-gray-300">
+                        Additional provisions include work from home options (where possible), crèche facilities in establishments with 50 or more employees, and nursing breaks for mothers until the child reaches 15 months of age.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Equal Pay Provisions</h3>
+                    <p class="text-gray-300 mb-4">
+                        Under the Equal Remuneration Act, employers must provide equal pay for equal work regardless of gender. This covers all aspects of remuneration including basic salary, allowances, bonuses, and other incentives.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Discrimination in recruitment, promotions, and training opportunities based on gender is prohibited, ensuring a level playing field for career advancement.
+                    </p>
+                    <p class="text-gray-300">
+                        Employers violating these provisions can face penalties including fines and imprisonment, with labor authorities empowered to investigate complaints of unequal pay.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Workplace Safety Regulations</h3>
+                    <p class="text-gray-300 mb-4">
+                        Employers must conduct regular safety audits and risk assessments to identify and mitigate potential hazards in the workplace, ensuring compliance with safety standards.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Required safety measures include provision of personal protective equipment, emergency response procedures, fire safety installations, and proper ventilation and lighting.
+                    </p>
+                    <p class="text-gray-300">
+                        Workers have the right to refuse unsafe work without fear of retaliation, and to report safety concerns to regulatory authorities without facing adverse consequences from employers.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900 rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">Filing Complaints Process</h3>
+                    <p class="text-gray-300 mb-4">
+                        The first step in addressing workplace violations is documenting all incidents, including dates, times, and witnesses. Maintain copies of relevant communications and evidence supporting your case.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Begin with internal resolution through your company's grievance redressal mechanism, formally submitting your complaint to HR or the designated authority.
+                    </p>
+                    <p class="text-gray-300">
+                        If internal resolution fails, escalate to the appropriate government labor authority. Different violations may require filing with different agencies, such as the Labor Commissioner or specific regulatory bodies.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Laws Section -->
+    <section id="laws" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 content-section">
+                <span class="text-indigo-500">Important</span> Labor Laws
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Law 1 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">The Payment of Wages Act, 1936</h3>
+                    <p class="text-gray-300">
+                        Regulates the payment of wages to certain classes of employed persons. It ensures timely payment of wages without unauthorized deductions, protecting workers from exploitation.
+                    </p>
+                </div>
+                
+                <!-- Law 2 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">The Minimum Wages Act, 1948</h3>
+                    <p class="text-gray-300">
+                        Ensures that workers receive minimum wages as fixed by the government. It prevents exploitation by mandating minimum remuneration for all categories of employment.
+                    </p>
+                </div>
+                
+                <!-- Law 3 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">The Employees' State Insurance Act, 1948</h3>
+                    <p class="text-gray-300">
+                        Provides medical, disability, maternity, and unemployment benefits to employees and their dependents through a self-financing social security framework.
+                    </p>
+                </div>
+                
+                <!-- Law 4 -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 content-section">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">The Sexual Harassment of Women at Workplace Act, 2013</h3>
+                    <p class="text-gray-300">
+                        Protects women from sexual harassment at the workplace and provides mechanisms for redressal of complaints of sexual harassment through Internal Complaints Committees.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-r from-indigo-900 to-purple-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 content-section">Ready to Assert Your Workplace Rights?</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10 content-section">
+                Stay informed, document everything, and take action against unfair treatment in your professional journey.
+            </p>
+            <div class="content-section">
+                <button class="bg-white text-indigo-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                    <a href="legalguides.html">Get Legal Advice</a>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-10 border-t border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-white">WorkplaceLaws</span>
+                </div>
+                <div class="text-gray-400 text-center md:text-right">
+                    <p>© 2025 WorkplaceLaws. All rights reserved.</p>
+                    <p class="text-sm mt-2">Information provided is for educational purposes only and not legal advice.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // GSAP Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Create background shapes
+            createBackgroundShapes();
+            
+            // Animate home shapes
+            gsap.to('.shape1', {
+                x: '30%',
+                y: '20%',
+                rotation: 360,
+                duration: 30,
+                repeat: -1,
+                ease: 'none',
+                opacity: 0.5
+            });
+            
+            gsap.to('.shape2', {
+                x: '-20%',
+                y: '15%',
+                rotation: -360,
+                duration: 25,
+                repeat: -1,
+                ease: 'none',
+                opacity: 0.3
+            });
+            
+            gsap.to('.shape3', {
+                x: '15%',
+                y: '-25%',
+                rotation: 240,
+                duration: 35,
+                repeat: -1,
+                ease: 'none',
+                opacity: 0.4
+            });
+            
+            // Stagger animation for content sections
+            const contentSections = document.querySelectorAll('.content-section');
+            contentSections.forEach(section => {
+                gsap.to(section, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+                // Ensure that the sections are visible on load
+                section.style.opacity = 1;
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+
+        // Create animated background shapes
+        function createBackgroundShapes() {
+            const shapes = [
+                { class: 'shape1', size: '400px', color: '#4f46e5' },
+                { class: 'shape2', size: '300px', color: '#8b5cf6' },
+                { class: 'shape3', size: '350px', color: '#6366f1' }
+            ];
+
+            shapes.forEach(shape => {
+                const element = document.querySelector(`.${shape.class}`);
+                if (!element) {
+                    const div = document.createElement('div');
+                    div.classList.add(shape.class, 'home-shape');
+                    div.style.position = 'absolute';
+                    div.style.width = shape.size;
+                    div.style.height = shape.size;
+                    div.style.borderRadius = '50%';
+                    div.style.background = `radial-gradient(circle, ${shape.color} 0%, transparent 70%)`;
+                    div.style.filter = 'blur(50px)';
+                    div.style.top = `${Math.random() * 100}%`;
+                    div.style.left = `${Math.random() * 100}%`;
+                    div.style.transform = 'translate(-50%, -50%)';
+                    div.style.zIndex = '-1';
+                    
+                    document.querySelector('.home-section').appendChild(div);
+                }
+            });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // Adjust for header height
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
