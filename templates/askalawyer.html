@@ -76,27 +76,7 @@
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
         }
         
-        .hero-text-animation {
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        
-        .hero-container {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        }
-        
-        .hero-glow {
-            position: absolute;
-            top: -150px;
-            right: -150px;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(15, 23, 42, 0) 70%);
-            border-radius: 50%;
-            z-index: 0;
-        }
+       
         
         .chatbot-bubble {
             position: fixed;
@@ -352,23 +332,9 @@
             width: 100%;
         }
 
-        .hero-shape {
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
-            position: relative;
-            overflow: hidden;
-        }
+      
 
-        .hero-shape::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle, var(--primary-transparent) 0%, transparent 60%);
-            animation: pulse 15s infinite alternate;
-        }
+       
 
         @keyframes pulse {
             0% { transform: rotate(0deg) scale(1); opacity: 0.3; }
@@ -735,17 +701,6 @@
             100% { box-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary-light); }
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .hero-shape {
-                clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-            }
-            
-            .chatbot-container {
-                width: calc(100% - 50px);
-                max-width: 350px;
-            }
-        }
     </style>
 </head>
 <body class="dark">
@@ -809,7 +764,7 @@
                 <div class="relative">
                     <div class="absolute -left-6 -top-6 w-32 h-32 bg-indigo-500 rounded-full opacity-10 bubble-animation"></div>
                     <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-indigo-500 rounded-full opacity-10" style="animation: float 4s ease-in-out infinite alternate-reverse;"></div>
-                    <img src="/api/placeholder/500/400" alt="Lawyer helping a client" class="rounded-2xl shadow-2xl z-10 relative glass-card">
+                    <img src="" alt="Lawyer helping a client" class="rounded-2xl shadow-2xl z-10 relative glass-card">
                 </div>
             </div>
         </div>
@@ -855,7 +810,7 @@
     </section>
 
     <!-- Question Submission Form -->
-    <section id="questionForm" class="py-16 px-6 bg-gray-900 ">
+    <section id="questionForm" class="py-16 px-6 bg-gray-900">
         <div class="container mx-auto max-w-4xl">
             <div class="form-card rounded-xl overflow-hidden bg-slate-400">
                 <div class="p-8">
@@ -863,8 +818,8 @@
                     
                     <form class="space-y-6">
                         <div>
-                            <label for="category" class="block text-gray-300 font-medium mb-2 bg-slate-400">Legal Category</label>
-                            <select id="category" class="custom-select w-full px-4 py-3 rounded-lg border focus:outline-none bg">
+                            <label for="category" class="block text-gray-300 font-medium mb-2">Legal Category</label>
+                            <select id="category" class="custom-select w-full px-4 py-3 rounded-lg border focus:outline-none" required>
                                 <option class="text-black" value="">Select a category...</option>
                                 <option class="text-black" value="employment">Employment Law</option>
                                 <option class="text-black" value="housing">Housing & Property</option>
@@ -876,50 +831,52 @@
                                 <option class="text-black" value="other">Other</option>
                             </select>
                         </div>
-                        
-                        <div class="bg-slate-300">
-                            <label for="title" class="block text-gray-300 bg-slate-400 font-medium mb-2">Question Title</label>
-                            <input type="text" id="title" placeholder="E.g., Can my landlord increase rent without notice?" class="custom-input w-full px-4 py-3 text-gray-800 rounded-lg border focus:outline-none">
-                        </div>
-                        
+    
                         <div>
-                            <label for="details" class="block text-gray-300 font-medium mb-2">Question Details</label>
-                            <textarea id="details" rows="5" placeholder="Provide context and specific details about your situation..." 
-                                      class="custom-textarea w-full bg-slate-400 px-4 py-3 rounded-lg border focus:outline-none"></textarea>
+                            <label for="questiontitle" class="block text-gray-300 font-medium mb-2">Question Title</label>
+                            <input type="text" id="questiontitle" placeholder="E.g., Can my landlord increase rent without notice?" 
+                                   class="custom-input w-full px-4 py-3 text-gray-800 rounded-lg border focus:outline-none" required>
                         </div>
-                        
+    
                         <div>
-                            <label for="attachment" class="block text-gray-300 font-medium mb-2">Attachments (Optional)</label>
-                            <div class="upload-area rounded-lg p-8 text-center">
-                                <input type="file" id="attachment" class="hidden">
-                                <label for="attachment" class="cursor-pointer">
+                            <label for="questiondetails" class="block text-gray-300 font-medium mb-2">Question Details</label>
+                            <textarea id="questiondetails" rows="5" placeholder="Provide context and specific details..." 
+                                      class="custom-textarea w-full px-4 py-3 bg-slate-400 rounded-lg border focus:outline-none" required></textarea>
+                        </div>
+    
+                        <div>
+                            <label for="questionattachment" class="block text-gray-300 font-medium mb-2">Attachments (Optional)</label>
+                            <div class="upload-area rounded-lg p-8 text-center cursor-pointer">
+                                <label for="questionattachment">
+                                    <input type="file" id="questionattachment" class="hidden">
                                     <i class="fas fa-upload text-indigo-400 text-2xl mb-3"></i>
                                     <p class="text-gray-300">Drop files here or click to upload</p>
                                     <p class="text-xs text-gray-600 mt-2">You can upload contracts, documents, or images (PDF, DOC, JPG)</p>
                                 </label>
                             </div>
                         </div>
-                        
+    
                         <div class="flex items-center">
                             <input type="checkbox" id="anonymous" class="mr-3 h-5 w-5 rounded border-gray-600 text-indigo-500 focus:ring-indigo-500 focus:ring-opacity-25">
                             <label for="anonymous" class="text-gray-200">Post as Anonymous</label>
                         </div>
-                        
+    
                         <div>
                             <label for="email" class="block text-gray-300 font-medium mb-2">Email for Follow-up (Optional)</label>
                             <input type="email" id="email" placeholder="Your email to receive notifications" 
                                    class="custom-input w-full px-4 py-3 rounded-lg border focus:outline-none">
                             <p class="text-xs text-gray-600 mt-1">We'll notify you when your question is answered.</p>
                         </div>
-                        
+    
                         <div class="pt-4">
-                            <button type="submit" class="gradient-button w-full font-medium py-3 px-6 rounded-lg shadow-lg">
+                            <button type="submit" id="submit" class="gradient-button w-full font-medium py-3 px-6 rounded-lg shadow-lg">
                                 📩 Submit Question
                             </button>
                         </div>
-                        
+    
                         <p class="text-xs text-gray-400 text-center">
-                            By submitting, you agree to our <a href="#" class="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors">Terms of Service</a> and 
+                            By submitting, you agree to our 
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors">Terms of Service</a> and 
                             <a href="#" class="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors">Privacy Policy</a>.
                         </p>
                     </form>
@@ -927,150 +884,9 @@
             </div>
         </div>
     </section>
+    
 
-     <!-- Featured Legal Questions -->
-    <section class="py-16 px-6 bg-gray-900">
-        <div class="container mx-auto">
-            <div class="flex  justify-between items-center mb-12">
-                <div class="mx-auto">
-                    <h1 class="text-5xl p-10 text-center font-bold">Featured Legal Questions</h1>
-                    <!-- Question 1 -->
-                    <div class="question-card space-y-8 rounded-xl overflow-hidden">
-                        <div class="py-10">
-                            <div class="flex justify-between items-start ml-8">
-                                <div>
-                                    <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Employment Law</span>
-                                    <h3 class="text-xl font-semibold text-white mb-3">Can I get fired without a warning?</h3>
-                                </div>
-                                <div class="flex space-x-4 text-sm text-gray-400">
-                                    <span><i class="fas fa-eye mr-1"></i> 156</span>
-                                    <span><i class="fas fa-comment mr-1"></i> 8</span>
-                                    <span><i class="fas fa-star mr-1"></i> 12</span>
-                                </div>
-                            </div>
-                            
-                            <p class="text-gray-300 mb-4 ml-8">I've been at my current job for 8 months. Yesterday, my manager called me into his office and informed me I was being terminated due to "performance issues." However, I've never received any formal warnings or negative performance reviews. Is this legal? What are my options?</p>
-                            
-                            <div class="p-4 rounded-lg bg-gray-800 py-8">
-                                <div class="flex items-center mb-3">
-                                    <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
-                                    <div>
-                                        <h4 class="font-medium text-white">Sarah Johnson, Esq.</h4>
-                                        <p class="text-xs text-gray-400">Employment Law Specialist • 2 days ago</p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-300">In most states, employment is considered "at-will," meaning employers can terminate employees for any reason (except illegal discrimination) without notice. However, if you have an employment contract or if company policy requires progressive discipline, you may have a case. I recommend checking your employee handbook and gathering documentation of your work performance. You could also file for unemployment benefits while you seek new employment.</p>
-                            </div>
-                            
-                            <div class="flex justify-between items-center">
-                                <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors ml-8">Read all 8 answers <i class="fas fa-arrow-right ml-1"></i></a>
-                                
-                                <div class="flex space-x-2">
-                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
-                                        <i class="fas fa-thumbs-up mr-1"></i> Helpful (24)
-                                    </button>
-                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
-                                        <i class="fas fa-share-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Question 2 -->
-                    <div class="question-card rounded-xl overflow-hidden">
-                        <div class="p-6">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Housing Law</span>
-                                    <h3 class="text-xl font-semibold text-white mb-3">Landlord entered without notice</h3>
-                                </div>
-                                <div class="flex space-x-4 text-sm text-gray-400">
-                                    <span><i class="fas fa-eye mr-1"></i> 243</span>
-                                    <span><i class="fas fa-comment mr-1"></i> 12</span>
-                                    <span><i class="fas fa-star mr-1"></i> 18</span>
-                                </div>
-                            </div>
-                            
-                            <p class="text-gray-300 mb-4">I came home from work yesterday to find that my landlord had been in my apartment to "check the plumbing." He didn't give any advance notice. I feel like my privacy was violated. Is this legal? What rights do I have as a tenant?</p>
-                            
-                            <div class="p-4 rounded-lg bg-gray-800 mb-4">
-                                <div class="flex items-center mb-3">
-                                    <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
-                                    <div>
-                                        <h4 class="font-medium text-white">Michael Chen, Esq.</h4>
-                                        <p class="text-xs text-gray-400">Real Estate Attorney • 1 day ago</p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-300">Most states require landlords to provide at least 24-48 hours notice before entering a tenant's unit, except in genuine emergencies (like an active water leak). If there was no emergency, your landlord likely violated your right to quiet enjoyment. I recommend: 1) Document the incident in writing, 2) Send a formal letter reminding your landlord of notice requirements, 3) Check your lease and local tenant laws for specific protections. If this is a recurring issue, you may have grounds for legal action.</p>
-                            </div>
-                            
-                            <div class="flex justify-between items-center">
-                                <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 12 answers <i class="fas fa-arrow-right ml-1"></i></a>
-                                
-                                <div class="flex space-x-2">
-                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
-                                        <i class="fas fa-thumbs-up mr-1"></i> Helpful (31)
-                                    </button>
-                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
-                                        <i class="fas fa-share-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Question 3 -->
-                    <div class="question-card rounded-xl overflow-hidden">
-                        <div class="p-6">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <span class="inline-block bg-indigo-900 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full mb-3">Family Law</span>
-                                    <h3 class="text-xl font-semibold text-white mb-3">Child custody after relocation</h3>
-                                </div>
-                                <div class="flex space-x-4 text-sm text-gray-400">
-                                    <span><i class="fas fa-eye mr-1"></i> 187</span>
-                                    <span><i class="fas fa-comment mr-1"></i> 6</span>
-                                    <span><i class="fas fa-star mr-1"></i> 9</span>
-                                </div>
-                            </div>
-                            
-                            <p class="text-gray-300 mb-4">I have primary custody of my children and need to relocate for a job opportunity that's about 200 miles away. My ex-spouse is threatening to take me to court to prevent this move. What do I need to know about relocating with children after divorce?</p>
-                            
-                            <div class="p-4 rounded-lg bg-gray-800 mb-4">
-                                <div class="flex items-center mb-3">
-                                    <img src="/api/placeholder/50/50" alt="Lawyer avatar" class="rounded-full mr-3">
-                                    <div>
-                                        <h4 class="font-medium text-white">Rebecca Martinez, Esq.</h4>
-                                        <p class="text-xs text-gray-400">Family Law Attorney • 3 days ago</p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-300">Relocation cases can be complex. Courts typically consider whether the move is in the child's best interest. You'll need to demonstrate: 1) Legitimate reason for the move (better job, education, family support), 2) How you'll maintain the relationship between the children and the other parent, 3) How the move benefits the children. I recommend filing a petition for relocation before moving and proposing a modified visitation schedule. Each state has different notification requirements, so check your local laws. Consider mediation before court proceedings to reach an agreement.</p>
-                            </div>
-                            
-                            <div class="flex justify-between items-center">
-                                <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors">Read all 6 answers <i class="fas fa-arrow-right ml-1"></i></a>
-                                
-                                <div class="flex space-x-2">
-                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all flex items-center">
-                                        <i class="fas fa-thumbs-up mr-1"></i> Helpful (17)
-                                    </button>
-                                    <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-lg text-sm transition-all">
-                                        <i class="fas fa-share-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="text-center pt-6">
-                        <a href="#" class="outline-button inline-block py-3 px-8 rounded-lg">
-                            View More Questions <i class="fas fa-angle-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-        </div>
-    </section>
+     
 
     <!-- How It Works -->
     <section class="py-16 px-6 bg-gradient-to-b from-slate-800 to-slate-900">
@@ -1126,7 +942,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-16 px-6 bg-gray-900">
+    <section id="featuredQuestions" class="py-16 px-6 bg-gray-900">
         <div class="container mx-auto ">
             <h1 class="text-3xl font-bold text-white text-center mb-12">Frequently Asked Questions</h1>
             
@@ -1206,9 +1022,8 @@
                     </div>
                     <p class="text-gray-300 mb-4">"I was dealing with a difficult landlord situation and wasn't sure about my rights. The attorneys here gave me clear, actionable advice that helped me resolve the issue without going to court. So grateful!"</p>
                     <div class="flex items-center">
-                        <img src="/api/placeholder/40/40" alt="User avatar" class="rounded-full mr-3">
                         <div>
-                            <h4 class="font-medium text-white">Alex R.</h4>
+                            <h4 class="font-medium text-white">Sunny Pandey</h4>
                             <p class="text-xs text-gray-400">Housing Law Question</p>
                         </div>
                     </div>
@@ -1225,9 +1040,8 @@
                     </div>
                     <p class="text-gray-300 mb-4">"The responses I received were detailed and helpful. An attorney even pointed out considerations I hadn't thought of. I ended up hiring one of the responding lawyers for my divorce case after seeing their expertise."</p>
                     <div class="flex items-center">
-                        <img src="/api/placeholder/40/40" alt="User avatar" class="rounded-full mr-3">
                         <div>
-                            <h4 class="font-medium text-white">Jamie T.</h4>
+                            <h4 class="font-medium text-white">Sunita Sharma</h4>
                             <p class="text-xs text-gray-400">Family Law Question</p>
                         </div>
                     </div>
@@ -1244,9 +1058,8 @@
                     </div>
                     <p class="text-gray-300 mb-4">"As a small business owner, I had questions about contractor agreements. I received multiple perspectives from different attorneys, which gave me a comprehensive understanding of my options. Excellent service!"</p>
                     <div class="flex items-center">
-                        <img src="/api/placeholder/40/40" alt="User avatar" class="rounded-full mr-3">
                         <div>
-                            <h4 class="font-medium text-white">Morgan W.</h4>
+                            <h4 class="font-medium text-white">Ethan Fernandes</h4>
                             <p class="text-xs text-gray-400">Business Law Question</p>
                         </div>
                     </div>
@@ -1255,25 +1068,7 @@
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="py-12 px-6 bg-gray-800 border-t border-b border-gray-700">
-        <div class="container mx-auto max-w-6xl">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="md:w-2/3 mb-8 md:mb-0">
-                    <h2 class="text-2xl font-bold text-white mb-3">Need Personalized Legal Advice?</h2>
-                    <p class="text-gray-300">Submit your question now or browse our extensive library of answered legal queries.</p>
-                </div>
-                <div class="md:w-1/3 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#questionForm" class="gradient-button text-white font-medium py-3 px-8 rounded-lg shadow-lg text-center">
-                        Ask a Question
-                    </a>
-                    <a href="#" class="outline-button py-3 px-8 rounded-lg text-center">
-                        Browse Topics
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- AI Legal Assistant Chatbot -->
     <div class="chatbot-bubble w-16 h-16 rounded-full flex items-center justify-center" id="chatbotButton">
@@ -1343,7 +1138,7 @@
                     <ul class="space-y-2">
                         <li><a href="index.html" class="text-gray-400 hover:text-indigo-400 transition-colors">Home</a></li>
                         <li><a href="legalguides.html" class="text-gray-400 hover:text-indigo-400 transition-colors">Legal Guides</a></li>
-                        <li><a href="QT" class="text-gray-400 hover:text-indigo-400 transition-colors">Quizzes & Tests</a></li>
+                        <li><a href="QT.html" class="text-gray-400 hover:text-indigo-400 transition-colors">Quizzes & Tests</a></li>
                         <li><a href="askalawyer.html" class="text-gray-400 hover:text-indigo-400 transition-colors">Ask a Lawyer</a></li>
                         <li><a href="emergencycontacts.html" class="text-gray-400 hover:text-indigo-400 transition-colors">Emergency Contacts</a></li>
                         <li><a href="aboutus.html" class="text-gray-400 hover:text-indigo-400 transition-colors">About Us</a></li>
@@ -1393,7 +1188,7 @@
             </div>
         </div>
     </footer>
-
+    <script type="module" src="ask.js"></script>
     <script>
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
@@ -1468,21 +1263,6 @@
         // GSAP Animation Initialization
         document.addEventListener('DOMContentLoaded', function() {
             // Hero section animations
-            gsap.from("#heroText", {
-                duration: 1,
-                x: -50,
-                opacity: 0,
-                ease: "power3.out",
-                delay: 0.2
-            });
-            
-            gsap.from("#heroImage", {
-                duration: 1,
-                scale: 0.9,
-                opacity: 0,
-                ease: "power3.out",
-                delay: 0.5
-            });
             
             // Scroll trigger animations
             gsap.registerPlugin(ScrollTrigger);

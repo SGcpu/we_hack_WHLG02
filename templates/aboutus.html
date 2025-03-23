@@ -3,912 +3,679 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LegalEase - About Us</title>
+    <title>About Us - Legal Awareness for Citizens</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <link rel="stylesheet" href="search.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --primary: #4F46E5;
-            --primary-dark: #4338CA;
-            --primary-light: #818CF8;
-            --secondary: #10B981;
-            --dark-bg: #0F172A;
-            --card-bg: #1E293B;
-            --card-hover: #2c3d5b;
-            --text-primary: #F1F5F9;
-            --text-secondary: #94A3B8;
-            --text-accent: #CBD5E1;
-            --border: #334155;
-        }
-
         body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
+            background-color: #121212;
+            color: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #6366F1, #8B5CF6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card {
+            background-color: #1e1e1e;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+        }
+        
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: #6366F1;
+            left: 14px;
+            top: 25px;
+        }
+        
+        .timeline-item:last-child::before {
+            height: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(90deg, #6366F1, #8B5CF6);
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .stat-card {
+            background-color: #1e1e1e;
+            border-left: 4px solid #6366F1;
+        }
+        
+        .breadcrumb-item:not(:last-child)::after {
+            content: '>';
+            margin: 0 0.5rem;
+            color: #6366F1;
+        }
+        
+        .glowing-border {
+            position: relative;
+        }
+        
+        .glowing-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #6366F1, transparent, #8B5CF6, transparent);
+            border-radius: 0.5rem;
+            z-index: -1;
+            animation: border-glow 3s ease infinite;
+        }
+        
+        @keyframes border-glow {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .accordion-content.show {
+            max-height: 500px;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--card-bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-light);
-        }
-
+        /* Navbar */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 100;
-            transition: all 0.4s ease;
             background-color: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
 
         .navbar.scrolled {
-            background-color: rgba(15, 23, 42, 0.95);
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-link {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-        }
-
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
-            background: rgba(44, 61, 91, 0.7);
-        }
-
-        .team-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid var(--border);
-        }
-
-        .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-            border-color: var(--primary-light);
-        }
-
-        .team-card .overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
-            transition: opacity 0.3s ease;
-        }
-        
-        .service-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
-            border-color: var(--primary-light);
-        }
-
-        .service-icon {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border-radius: 12px;
-            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            transition: all 0.4s ease;
-            border: 1px solid var(--border);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-8px) scale(1.05);
-            border-color: var(--secondary);
-            box-shadow: 0 15px 30px -10px rgba(16, 185, 129, 0.3);
-        }
-
-        .stat-number {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-            
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-        }
-
-        .gradient-bg {
-            background: linear-gradient(135deg, #3C1053 0%, #4F46E5 100%);
-        }
-
-        .timeline-item {
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 19px;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary) 0%, var(--secondary) 100%);
-        }
-
-        .timeline-item:last-child::before {
-            height: 50%;
-        }
-
-        .timeline-item:first-child::before {
-            top: 50%;
-            height: 50%;
-        }
-
-        .timeline-dot {
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:hover .timeline-dot {
-            transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(79, 70, 229, 0.6);
-        }
-
-        .accordion-header {
-            transition: all 0.3s ease;
-            border-radius: 12px;
-        }
-
-        .accordion-header:hover {
-            background-color: var(--card-hover);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-        }
-
-        .accordion-content.active {
-            max-height: 1000px;
-            transition: max-height 0.5s cubic-bezier(0.5, 0, 1, 0);
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 15px -3px rgba(79, 70, 229, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 20px -5px rgba(79, 70, 229, 0.6);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(79, 70, 229, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .chatbot-bubble {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 99;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .chatbot-bubble:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        .chatbot-bubble .pulse {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: var(--primary);
-            opacity: 0.6;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.6;
-            }
-            70% {
-                transform: scale(1.3);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1.3);
-                opacity: 0;
-            }
-        }
-
-        .badge {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 9999px;
-            padding: 0.25rem 0.75rem;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .section-title {
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-        }
-
-        .testimonial-slider {
-            overflow: hidden;
-            position: relative;
-        }
-
-        .social-link {
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px);
-        }
-
-        .focus-ring {
-            transition: all 0.3s ease;
-        }
-
-        .focus-ring:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5);
-        }
-
-        /* Animated background */
-        .animated-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        .animated-bg .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: var(--primary);
-            opacity: 0.1;
-            animation: float 15s infinite;
-        }
-
-        .animated-bg .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: -150px;
-            right: -50px;
-            animation-delay: 0s;
-            animation-duration: 25s;
-            background: var(--primary-light);
-        }
-
-        .animated-bg .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: 150px;
-            left: -100px;
-            animation-delay: 2s;
-            animation-duration: 20s;
-            background: var(--secondary);
-        }
-
-        .animated-bg .shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            bottom: -75px;
-            right: 10%;
-            animation-delay: 5s;
-            animation-duration: 17s;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(10%, 10%) rotate(90deg);
-            }
-            50% {
-                transform: translate(5%, -5%) rotate(180deg);
-            }
-            75% {
-                transform: translate(-10%, 5%) rotate(270deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg);
-            }
-        }
-
-        /* Glowing effects */
-        @keyframes glow {
-            0% {
-                box-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(79, 70, 229, 0.8);
-            }
-            100% {
-                box-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
-            }
-        }
-
-        .glow-effect {
-            animation: glow 3s infinite;
         }
     </style>
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar px-6 py-4">
+    <nav class="navbar px-4 sm:px-6 py-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">LegalPathshala</h1>
+                <h1 class="text-xl sm:text-2xl font-bold gradient-text">Legal Pathshala</h1>
             </div>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="index.html" class="nav-link font-extrabold text-gray-300 hover:text-white">Home</a>
-                <a href="legalguides.html" class="nav-link font-extrabold text-gray-300 hover:text-white">Legal Guides</a>
-                <a href="QT.html" class="nav-link font-extrabold text-gray-300 hover:text-white">Quizzes & Tests</a>
-                <a href="askalawyer.html" class="nav-link font-extrabold text-gray-300 hover:text-white">Ask a Lawyer</a>
-                <a href="emergencycontacts.html" class="nav-link font-extrabold text-gray-300 hover:text-white">Emergency Contacts</a>
-                <a href="aboutus.html" class="nav-link active font-extrabold text-white">About Us</a>
+
+            <div class="hidden md:flex space-x-3 lg:space-x-6">
+                <a href="index.html" class="font-extrabold text-gray-400 animated-border">Home</a>
+                <a href="legalguides.html"
+                    class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes &
+                    Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask
+                    a Lawyer</a>
+                <a href="emergencycontacts.html"
+                    class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-indigo-300 hover:text-indigo-300 animated-border">About
+                    Us</a>
             </div>
-            
-            <div class="flex items-center space-x-6">
+
+            <div class="flex items-center space-x-4">
                 <div class="relative hidden md:block">
-                    <input type="text" placeholder="Search legal topics..." 
-                           class="px-1 py-2 rounded-full bg-gray-800 border-x-2 border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-48">
-                    <button class="absolute right-3 top-2 text-gray-400">
+                    <input type="text" placeholder="Search legal topics..."
+                        class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-                
-                
+                <button class="md:hidden" id="openMobileMenu">
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
+                </button>
             </div>
         </div>
     </nav>
 
+    <!-- Chatbot Bubble -->
+    <div>
+        <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>
+    </div>
+
     <!-- Hero Section -->
-    <section class="py-20 px-6 relative overflow-hidden" id="heroSection">
-        <div class="animated-bg">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-        
-        <div class="container mx-auto max-w-6xl relative z-10">
+    <section class="relative min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 flex items-center justify-center py-20">
+        <div class="container mx-auto px-6 relative z-10">
             <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
-                    <div class="inline-block mb-4">
-                        <span class="badge">About Us</span>
-                    </div>
-                    <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight" id="heroTitle">
-                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">Empowering Citizens</span> 
-                        <span>Through Legal Awareness</span>
+                <div class="lg:w-1/2 mb-10 lg:mb-0" id="hero-content">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 p-12">
+                        <span class="gradient-text">Empowering Citizens</span>
+                        <span class="block">Through Legal Awareness</span>
                     </h1>
-                    <p class="text-xl text-gray-300 mb-10 leading-relaxed" id="heroDescription">
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed p-10">
                         We believe that legal knowledge should be accessible to everyone. Our mission is to educate, inform, and support citizens in understanding their rights.
                     </p>
-                    <div class="flex flex-wrap gap-4">
-                        <button class="btn-primary px-8 py-4 rounded-lg text-white font-medium" id="learnMoreBtn">
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 ml-8">
+                        <button class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center" id="learn-more-btn">
                             <i class="fas fa-scroll mr-2"></i> Learn More About Our Work
                         </button>
-                        <a href="contact.html" class="btn-secondary px-8 py-4 rounded-lg font-medium">
+                        <button class="border border-indigo-500 text-indigo-400 hover:bg-indigo-800 hover:text-white px-6 py-3 rounded-lg transition flex items-center justify-center">
                             <i class="fas fa-envelope mr-2"></i> Contact Us
-                        </a>
+                        </button>
                     </div>
                 </div>
-                <div class="lg:w-1/2 transform hover:rotate-2 transition-all duration-500">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-indigo-600 rounded-2xl rotate-3 scale-105 opacity-20 blur-xl"></div>
-                        <img src="/api/placeholder/600/400" alt="Legal awareness team" class="rounded-2xl shadow-2xl w-full h-auto relative z-10" id="heroImage">
-                    </div>
+                <div class="lg:w-1/2 flex justify-center" id="hero-image">
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMSEhUSExIWFhUXFxgYFxcYFx0dHxcXFxgYFxgYFxgbHSggHRolHR4WITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lHyUrLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIALcBEwMBIgACEQEDEQH/xAAcAAABBAMBAAAAAAAAAAAAAAAHAAUGCAIDBAH/xABWEAACAQMBBAcDBQkKCgsBAAABAgMABBEhBQcSMQYTIkFRYYFxkbEIFDJyoRUjQoKSsrPB0SQlM0RSYnODosI0NUNTVJO00tPwFhcmNmNkZXR1pOHD/8QAGQEAAwEBAQAAAAAAAAAAAAAAAQIDAAQF/8QALREAAgIBAwIFAwMFAAAAAAAAAAECEQMSITEiMhNBUWGBBCNxweHwM0OhsdH/2gAMAwEAAhEDEQA/AHxrvxWs4p1PhXY+ys8ga1nZ2NCDXfaPLpjR0ytYnsLhiil1iYq2BkEd4NNWwugtnPaW8jRkO8SMzKzDJKgk4BxTn0xtuGxuTr/BNXf0HgY2VthsfeY8fkijdIom9JHZ90sLfQuJE+sFYfAH7a5Ru12lBra32ngHkj+wFhRVjgYDXnXVayEaMvupdbGTYJlfpLbfgmZR4iJ/9162LvRv4P8AC9ncuZ4ZIvzgwoyQlT41tMCmkeReaKAI6VbyLe+igQQyRtHcRStkqy8KE8WCDknXwqf2u83Zb6fOeA/z4pF+3hx9tcu9rZUAjtPvMeXvYEJ4BkqxPEpOM4PhT1d7sNlyc7RV+o7p9isBWcoUjKJ2WXSuwl0S9tifDrUB9xOaerco2qsreakH4VAbzcrs5/otcR/VkBH9tWpon3FIDxQX7oRyLRAn3oy0nQ/MbSF4LWjaa/eZf6N/zTQm/wCrXbMOtvtYnHc0syD3ZcVhdWPSiBG+/JOnCeIBoT2cantorcvOhoV7SQz4JnuhH702/tm/TyVMsUB+he39uQ2US2lik1uC/AxQknMjl/oyqfpcQ5d1Ph3ibaj/AITYzH6sUw+0BqM8bcmaOyQXMUOulW9+ys5upRWuGU4cxkcKa4YBj9JgM6DTIxkVHNs73rxYJA+zHhZkKrIzSAIzDAbDRDOCc4yKB7Ek5Op78+NNjw33DFwOjvSO22hAZraQOuoYHRkOOTrzB+w91R3c/wD4HN/7uf8Au0DN2PScbPvVldn6llZJVTB4gVPDlSQDhsHx5+NEjd7vDsbOCWOd5FZriWRcRs3YfhxkrnXQ6VpYmk0vYR9yDJXlQcb3dlf59x/Uyf7tZjexsj/SmH9RN/w6lol6BJoRXPfL97f6jfA1GE3pbJP8cHrFKPjHWyTeNsplYC9j1BGoYcx5rW0y9AVYz7k9bS48rt/0UNEShBup6W2Vrb3CT3KRlrlnUHOqmKIcQwOWQR6VMH3mbKH8dX0SQ/BKfJFub2Ex7QX4JdXlQpt62yf9LP8AqZv+HWpt7Oyv9IY/1Mv+5S+HL0GsnNDLdI/7o2iPBrf82QV3ne5sv/OyH2Qv+sVAuhPT+1sZ7yWQSssxi6vgUZ7HWZzxMMfSFUjB6Wq9BHepB0etDUM7jfhafg2059pjHwY1zHe9K/8AA7LlYePGx+xYj8aKxy9A0wpkVzTJQzbeHtZ/4LZDD60cx+3CitZ6QdIpPo2KL/V4/Plo6GK0EvFKhc03SY69Uo8v3P8ArelTafdC6QmWs61uujyIFcmz7cinf5uSuKR7MC3REOnzZ2bdaf5I/qpx6CwL8wsz3/N4ff1a03bx7dhs268BGfdkU69C7YixtP8A28P6NaL7RlwPwT1rfHCPCvIIq6AtRkx0jxYQKz4KypVOyiSB9veXsbP/APkLf+9RAxUB3uns7OH/AKjb/E0QKeXajJbs8pV7XDtzakdrby3Mp7ESFj545KPMnAHmaQJ3Vovv4OT6jfmmq8W2+3aKzmRhE8RP8Bw4Cr4LIO1nzOfZRx2D0hiv7H51FkKyPlTzRlBDKfYe/vGDTyxyjyF8DRuc/wAUW3tm/Ty1NKhm50fvTb/Wn/2iWpnQydz/ACZcEb3kWBuNmXcaqXbqiyqBkloyJBgd5yulVKc61dmqnbz9lC22pdRKuFMnGoA0xIok08gWI9Kv9PLlBOrdJsNrvaMQCK0cR62XiGRwDA4SCMEkkDHt8KLe7To3ZTQ3JltLeQreTIpeJGIUBCFBI0UZOnnQ23N9LbbZ0tybnjAkjXhKqW1Qk8OB4558uzrT70D3qW9n10UsMvBLcPKJF4SVDhFwyZ7uHJwTz5U2RTd17CPuQWG6D7NP8Qtv9Sg+ArU3QHZh/iEHogHwp/s7lJY0ljYMjqGVhyZWGQR6V5fXaQxvLIwVEUs7HuVRkmuXUxiNvu32Uf4jF6cQ+Brmn3XbJIP7jA0PKSQfB6g02/odcQtlmDOATJhyv8rGCoP83PrRY2LtiK8t0uIG4o5FJGeYOoKsO5gcg+yqPXHkVgv3ZdCLC6juTcW4kMdxwIS7jCdVG2NGGdSffU3XdrsofxKP1LH4tTHucH3u8H/mF/QRUQmo5JS1PcSL6UR4bvdlj+Iw+7/9rIdA9mD+IW/+rFPbVhml39TahrHQjZo/iFt/qU/ZUB3V7LgN7tFDDGVTquAFFIXtTA8ORpyHLwFFRTrQx3Y6bR2kPqfZJMKpG9L+BG+pfP6BMS3iT6KIPYoHwFJpRWt60tS0Fs3GUVraQVrNaJCaNCtm/iB1pVzrnFKjQLODZ7SKeWnsqS2b5HLFR7ZnS3Z8uAl5ASe4yKD+SxBqTW7qwypBHiDn4Us2NGNEZ3o/4qvP6I/EU59FI8WVoP8Ay8P6Nabd6mmybz+j/vLTz0bwLW2XIyIItO/+DXupL6fkrQ4gVlikBXtIMkKlUD3i7y4dllYRGZrhl4uDPCqKTgF2wdTrgAd2uNMt+73e1HfzC2niEMrZ6shso5GvDrqrYzjmDjuOAW0Sq6GO3e0ufub/API2/wBpNT+oFvW57MH/AKjb/nVPaMu1CrliqCb7OL7kzBV4gXi4z/JQSK3F56hR657qndc203jWGRpioiCMZC3Lg4TxZ8sZpYunYxTBxqaPe4c/vXdqM561zy07UKAYPjp9ooBGrb9DNirabNigXhJ6ridl/Dd1yzZ7/DPgBXXnlSoD4OHdD/im3+tP/tEtSTa+14LWMyXEqRprqxxnhUsQo5s2ATgZOlD/AKKdKIdm7BguZgzDjmRUXGXdp5iAMnA0BJPgDz5UI94W8CXajplOqijB4Iw3FqScuxwMtjA5aYOOZqKxuc36WBcBa29vqs41ItY5J31AJHVp3dolu0R5Be48tDQN27tuS6mkuZm4pZDk45AcgoHcoAAA8qaZJS3P3VhmumGOMeDVfJt62umGKuGu6xckcOMnuHjnTHv+NUEyKlsWa3Py8WyLXPd1q+izSAfYBTbv22h1Wy2QHWaWOLTwyZD6djHrUs6IbK+aWVvbkANHEofHLrCOKQ+rlj60PflGN+4rcf8AmM+6N/21wR3yfJRFfzR1+TntQtDdWpP0HWVfZICrAeWVU/jUCzrRD3E7UEG01RjgTxvF5cWjr69nA+tXVmVxZmE/dDoL0f8Ajp9sEdEA1Ad00favh4TRfoEogdXXLN9TJJOkc7rWIFdJhr0RUNRtLNCLrQ13bD99NpDyH2TzCilwUMugcXDtfaI8VJ/+zLTxdxYrXUvkITCtTCt0i41PLxpltuktlLIIY7uB5GyAiyKSSOYGDz8qyMOLVokroauaU0UKzKPlSrGM6UqICJXm57Zr/RSSPzSUn9IGpqO5RUPFbX00TeJUH7UZKKtqBjnXSFpXlkvMsrYAen3Rzaez7JzLtJp7d2WNkZnJPEcjR+LTTuahYt5IHEokcSDk4Y8QwMDDZzy0qzO+tEOyJ+M4OYynm/WLge7NVi4DnGNfDzq+J6o2x0HHov0+201tHINni6ixwiVQ4Z+Dsktgtlsg5IUU6LvYuE/wjY9zH5gt8HjX4097ubN9mbHU3eUMYlmkU6lF4mbAx34GceLVG039WuDxWk4PcAyHTzORj3Goum3UbDQKt5XSJdoXz3CRsilEUK+M9lcHOCRzzTN0dlVLu3dm4FWaJmb+SFdSW08Br6U/byOmv3VnWQRCJI14UGcsQTklz7eQHLzpz3LdHLe8viLjtCOMusRGkh0XtHwXiBx36eBq/bDdGCRvA6UWVydndTdQycO0Ld2w47KBtWYdyjTU0R4NpwP9CaNvqup+BoXbxeg1hE1j1VuI+uvoIZOF27Ubk8QwWwOXMU73G5nZbcllT2SD+8prmahpW7ArtjTvQ3qzWF181tUhcqitI8nE2GbJCgKw/B4Tk5+lyoV9It4+0L1DFNMOqJBMaIqg4ORkgcRGe4nGlRq/CCWQRkmPjbgJ5lMnhJ0GuMdwrQK6YYoqhjZxAtnGlFPoXvka2gS1uYOsjReBJIzh1QDCqVbRsDTOV0AoV8B591YU04qSpgSQStq2/wA+2FbyW8nEbGSc3EXLhWeRnR8HRsDHLP0m8DQ3dCOdSbd/d3PXPaWwjY3cbQukn0WHCW55GGwGwc99Sq+6KbQsrGZZrC0aLHbuGCvKvEeEMjdb2SM4HCvf60qel0K3pBcBSKEU4XCgEAe2uV6sCM7NGKIe5Xo/852gjsuY7cdc3hxA4jX28WG/ENQHg5UTt0nSxrGO4VbKW5LsjExDJUAMAG0OnMj1qeS9LoZtFhZHCgsSAACSTyAGpJPhQD3z9PrO9jjtrUtIY5OIy4wmOFlKpnVjnGuMaaZzo8dN95kktjcRfc66gMidX1kgwqhyFbJx3qSPWgXXPixtO2NszrlYcPEOZAFc8MzIwZGKsNQykgg+RGorEtpjwryukEVQcvk6bQdzeo7FtYX4mOTkh1OSdeQX3UaKrPui6YQ7Na4eWOZ+sEaqIgpxwlyS3Ew8Rjn30Shvltjys7w/iJ/xK5MmOTk2kBtI59+XTaWzSO0tnKSzKXkdThkjzwgKe4sQ3a5jh056CboX04ubK7jlaeR4uICVGdmDRk9rQn6Q1IPiPM1lvM26b2+e46uSNGRFRZBggINeRI+lxHn31EqvDGtFMKLsKwIBGoOoPlQ26GjG274eMTH/AO1LTb0d3myRWlvE2zbyRkhjQuF0cqoHENOR51H9i9NJY9p3Fymz55GkiZepGeNQZy/E2EJxrw8udRjjkkycnuiQ/KB2zJFbQ2yZCzlzIw71j4MJ7CWyfq0AlJByCQRqCOYI7xRb3ibUvNqQKG2TcQCHifrDxkBcdviBiXTABznTFCm3bhdWZQwDAkHkQDkg+Rq+KNRoaLLV9HL43FpbzkEGSJGOeeSoyfU6+td5hoUQ7wtpvGrQ2+z1jI7OZ4xhRpjha4UjHLBAxXds3bm37lOshjsWTJXiR0YZHMZWZhnl76lpZJxCSIqVQDHSU6/uMeWlKtp9zUFRYRXD0jujBaXMwJzHBK4xzBVGORqNdPGnOuDb9h84tZ7fOOthkjz4caFc/bXPfqWSRT+52rPIpSSeV1J4irSMwLeJBOM+daFl1z3j/nnSuIGjdo3Uq6sVZTzVlOCD5g1rr0FtwNQVekO9r53strMxOtwyojyZBVlUgs3iGbHLB+kdaFVZL31jQjFRWxhV27H2rLazJPA5SRDlWH2gg6EEZBB7jXFSpjBhj3httOTZsMsQSaO/t3LJ9B14sZAOqtry1Hn3UU95W2habNuZS3CzRtHH49ZICq48xq3sU1W/oNKFvrNmOFF1AM+HaGtGff8AbKuJ7OHqY2kWObikVASRlSqtwjUgZIPhxVy5YpSS8hY+ZXSsnPd3VJ5d3t/HayXk0PUwxqG++HDNxMFAEerA5I+kBUWrpUk+BhA0qVKiYdeiW0Pm97bT5wI5o2b6oYcX9nNWG33XSrs0oXALyx4XOrhTxEAd+ND6VWaXGTjlU/3h9Jpr2YxvLmKIoFXGAHVAsjY5k8fGMnuqUoXNMSckokMlbOD7T9unwrUBW19TpyxgViqZNXJp0jzyoz/JyiYfPj3feBnxI64/Aj30FX5+tHT5Oz5hux/4kZ96sP1Co5+xjx5O75Q0xXZsajk1ygPpHKw+0D3VXWri9J+j8N/bvbTg8D4OVIDKynIZSQcH05Ejvqs283ozDs28FtBI8g6pGYvjIdi2nZAGOEKfxqlgkq0lCJ15WRFeV0GLCbi7JYPncaksCtnJk95lgMh5d2SQPZRPvbxIY2lkcIiAszE4AAGTQv3F3aym5KnIENgp8mjheNh71NQbfj0q+dXnzZHzDbdnQ6NMfptocHh+h5YbxrkcNWShY8DB096dXG05cueGFWYwxADsA6ZZuZYjGdceGKi0b4IOAcEHBGQceIPMeVY0q6lFJUhiwG6LePc7QuJLa5EekZkjKLw44WVShGcEYYEew1zbR6TQbN2xcXM/EVNs6KqAFmf5ySAMkDkCck91NHyc9khp7m6OfvaLEo7iZTxE58QEA/Gpg33H98Md4VvtleoqK1uKEkraOrpfvfubxWghiWGF+y2vE7rnUFtAARoQB3nWhxK5JJ86wWvKtGKithqR5Rk+TnM5ku48nq+GN+HuD5IyPAke/A8KDlHf5OmymWG5umBCyskaac+rDFmHiMsB7VNJlfSaXAXQopVnSrjsQyzWM0qopdiAqglieQAGST5AVkKaOl2xmvbOa1WUxGVOHjAzjUHBHepxg+RNAZFV+me3fn17PdcIUSN2QByRQFTPi3CBk+NMtd+3tkS2dxJbTACSM4bByDkAgg+BBB9e6uCvQVVsMZJ3+ysayiOo/wCedY0xvMVepzGeWa8pCsY6pJCqpwnBByCO4jGDVxdjbQW4t4p0OVljRx+MoPvqnF1yX1/VirKbj9oibZMS5y0LyRN+UXX+y6+6uf6hbWLDg935S8Ox5hj6Twr7Pvit+r7arFR++UbfBbS2h4tXmL48VjQg+mXWgDRwLpGFWXDpnPpWNeq2OXhirmCbuk3bG9Zbu5XFqpyq/wCfZTgjyQEHJ7+Q78ad+ckSbUKwoikRIZcD6UjZbJGcZ4ODu9uaLm5ds7Gtf639PJQB3mys21b0uQT1zDT+SvZQe0KFHpXPFt5H7Aq+SPNcse+tZc+JrypRtToLcwbPg2iRmKXVhjWMMcRs2uquMEHTHEAedWckuQ0kRejH8nLagWa6tTzdElU/0ZKsP7an0NBypdum2l1G1bVuIhXfqm8xKCgB8uIqfSlyK4sxayqlby73rtq3j+EzJ6RYiH2LVtap/wBN4Fj2hdohJVbiUZbmSHOc4A7891QwdxkMtKlSrqCEPd9POuytsm3JDhLY5HMR8UvWkeGE49fbQ8xRq+TYdb8eVv8A/wBqmm9a0toNkXeIkQMExwRrrIXUKSMY/G5gE41qHiVNquQFYa9jXJA5ZIGvn415SroMWx3b9F12dYxw4PWOBJNkg/fWVeIAjThXAUezPfQA3vk/de6B5Bl4fZwKdPUtRp3J9IGu9nKsn0rdup4uLJZVAZCRjTCkL354CaiXTnZNtJtK4kuIjIsVncTcIZl4niKcAJXXHaPv8q5MbcZuwN7oCZkP2YrGs4QDnPhWJrrMeVZzcztVJ9lwqoVWh4onUaag8QbHiwIJPeSarHRK3C7c6i/Nux7NynCP6SPLp9nGPawqWWNxNJbFi6VIUq4yZD4N6+yH0+eAfWilH2lMU4w9PtmNyv7f1cL+dits+ydmyfTgs29scR+IrX/0H2Y2osbfB71jAyPxabo9x79CsfTe+E+0LuVWDK08nCwOQUDEIQRzHCBTJTp0qtBDe3UQXhVJ5VUeCrIwUDyximuu2PCGEDXXtWyMMpQsG0Rgy8isiLIp/JYad1clPPSHo/PaCEzgDr4kljw2ewQAA3gRppRvcwzUqVKiY7pgpVsg8QwVPlrnI93uNGf5N13mK8h/kvG/5asp/MFBONWc4UEkjGACSeWgAor7ouiW0Tbtd2t6tsszcJVog5dYyQG7QIGpYaeFSzVppiR2R3fKShXFk+DxHrlznThHVnl45PP/APKCNFrfVsy/jht3vLuO4XrHVOGJUKkqCckDUHA91CWti7R0KlUm6TbBltbOweQR8M6SSoVB4zxdWfvjHnoUxjlrTDs22aWaOJBlndEUHvZmCgH1NOne5izG5OArsiDJzxNKfZ99dcfZn1qu3TF87QvD43U598r0ZegF/thLCJbWztpIQ0vCzyFT/DScQxxcg3EB5AUFek7Oby5MiqshnmLqpyFcyNxKp7wDkZqONdbYIvY4rO2aWRIk1Z2VF+sxCj7TVx22VE1t81ZQYuq6or4pw8GPdVWt3FhcS30cltbC4eD791ZcIOyQFJZjjRip9KOh6TbbHPYin2XcdDMm2GyvHSjYr2V3NavzicgH+Up1RvVSp9a4bG6MUscq80dXHtUhh8KIe+GK9maO8udnG00EJbrlkDntMmeHkQOPXv08KGtWi7iYuyjAgEciMj1qqG9G0MW1rxT3yl/SUCQfY1GnYvTTaTW8LJsV3QxIVcXKAOOEYYAppnnihPvgluJbxbi4s2tTJEAEZw/F1ZILZAHcVGPKufFFxkBMgtKlSrqGDJ8m7PXXnh1cX5z4/XU+31yEbHucLnJiB8h10evvwPWhTuT21PbNddRZSXRYRZEbAcGDJjOR35PuqbdO9tX17YT27bGuIwyhuMyIeHq2WTJGNR2eVcsovxLBZX2lXle11BCr8njabJfS2+vBLCWPk0RBUnwGGceorp3yX7Q3UoXnLDJET4AvC7e8KR+NUa3Pz3MV401taNdMkTAoJAnCHKjiLEHwOn7KdOnlrfbTvRH8xaKbhduq6xW7IEeTxdkadn31FL7jbJye6BlSpEY0pVYcVdeyJJlnia3DGZXVowgJYupyMKNTy5Vx0eOiOwtr2MK/NbDZ4YqOKV2ZpHzr2mDjA/mjQUk5UjNhY2dK0kUcjoY2ZFZkbmjEAlT5g6elKoKbvpL/AJjZ3vk/4le1yafdCbDkLfEnCdFcdbnwUKS32kj0qTbHk4oIm8UU+8A0x3C8ca459uM/Vdc/EVJLaIKiqOSqAPYBimyPYniW7Ksb3IODa92Mc3Vvy40f9dRCiVv/ALTg2oH0++QRt7i8ev5IqMbH6IS3FjdXyuAlvjKEHL5xxEHkAAc+ldMH0JsuRui1v8i4Ts8Y1FuV/J4P/wBoedFuj020LgW0HDxkFu02BhRk64PwqffKIuM38Efclsp9Wkk/UBQfekYFYpV6teVUxL92a/uy2bwu7Ye/rT+qrRpdAnA8cfD9tVp3bW/btpMfS2lap+SkpP51WC2exMrqOQZfd2ifgB61zZkmybbTId8oOyL7NSQDPVTozHwVldPzmSq41anfCf3nu9M9mP8ATR6+nP0qrMMRdgijLMQoHiScAe+jgfSygV9+UHV2+yYxoq27KB4YSAfsqKbpbPrdq2wIyFLyHy6uN3U/lBanHyjY+H7njOoSYe7qaj24kD7oyeItZivtyg+Ga0X9szDJujP71Q/XuP8AaJaq/tO7aaaWVxhpJHdh4M7Fjp7TVoN0zAbKiJ0Ae5PoLiWqtXThnZhnBYkZ54JyM+dbF3yMuA4/Jx2WRFdXRGjskSH6gLPjy7Sfk0ZaHe4X/FK/00vxFESufI7kzDB072B8/sZ7b8JlzH5SJ2k17gSAD5E1UeeFkZkYFWUlWB5gg4IPmDV16qdvPiC7TucKFBZDgD8IxRsx9pJJPmat9O+UYM+4XbpuNnmBiOO2fgHj1b9pCR7eNfxPbXD8oXYTS2kV2v8AF2IcY/Am4RxZ8mVB+OfChluf26bTacOT2Jj1D/1hHAfRwmvhmrFdOIQ+zrxW5fNpvQiNiD6EA0sloyWYqh0etEmureGTPBJNEjcJweF3VTg4OuDXT002ULW/ubdRhI5XCAnOEJymp1PZK60uhcqptCzZxlRcwk/6xdfTn6URPlD7BEdxDeqMdcpST68YHCx8yhx/V10OVTSMdPybf4S9+pD8ZKObAEYPI86AHydL9Vu7iE85IQyn+jbUe3DZ/FNWArlzd7MU66V7JNpeXFsRgRysq570zlD6qVPrTVRb+UNsEx3MV6q9mZOrc4/ykfLJ8SmAP6M0JK6scrimEOHybbbs3sviYUHoJGPxX3VKSf8AtDH/AEE/5sBpj+Tio+aXR7+vUe5B+008t/3iT+in/R25rnl3SElygH7y9k/Ndp3UQ+iZDIun4MoEgA8hxY9KjNF75RmzOG5trkcpImjPtibiGfMh/wCzQkihZs8IzwjiPkBjJ+0V0Y3cUxjKztjLIka/SdlQe1iAPjV0OWg7tKp90WvY4Ly2mlBMcc0bvjnhWDZx34xnFXB4qjn5QsjzJ8KVZcdKoifJCtk7YR5Rb4OWkCa9zBetOfxQ1TqhhsK4SK+tlbA6xHYk97KrgH24JFTy823FEcMw5E8+R00IqmWO+xPBPpbkV0333xl2vMp5RLHEvs4BIf7TtU86HQrF0dujp27OZvUiZfjihfvQuBJtW6deTOpHs6tKJWxIj9zzas4HFbSW+e7jcHgx/WY1/nGrOP20ik5pOJA9y1wU2xbAcm61T7DE5+IFOW/8/vp/UR/F6bNy8JbbFrj8HrWPsEMn68Vv34Xok2tKB/k0jj9eAOftYj0rf3fgqQ3ZduJJAp5AOx8+BGfHrjHrXJThsH+GX6sg98bCm6rAvcJu70AW9j4nbER9Oqx8c0dbVwk8vmyj8rOKAXRW56qGxY8kvYZD5j76ffii+nSBGvAnCR1oUjloYyW+2oZIO2czyx/z+w2b/LsrssqMYeeJD36APJ6aqNarzsi3Mk8MYYqXkRQw5rxMBkeYzR538OW2eVxok8bZ8cq6j4mgx0Gtet2jZoDjNxEfyXDfqrYlUGdKdonnyi7xje28OezHb8Y8eKSRw2fREpbgbMM95KVB6uONc944y5OD4djUeQri+UFj7qDBz+548+R4pNPdg+tPe6GNU2VdT41N1Gp8wioQPe599Bf00gTdRbJP0LuzH0elk4T2Yr1sgjuec95zVcaMFhtaSLYMwDkIUnQrzz1s7JgDu+l7s0K9j2wlnhiIJDyIpxzwzAHHpmnhHS2wQlaLLbprJ7XZsEbxt2k63IHfKS+CM5GFKc/Opn85H8l/yDTRdbXjVEV4yEbhA4WGFxwlQdc4zgaCumwvUkkKBWBj0OSMHOo5HJrlcW92gKaurOz50D3SD+rb/doB9PNim6+6c0akvbTwOeyf4I2yrIT4Y4Vb2KasEg+J+ND7olGHvNsoRo0kKn1hwaMHVsbzK1wTFGV1OGUhgfAg5H21bjb1wlzs+cI4PXWsnDrz6yJsY99VL2ja9TLJEWDGN2QsOTcDFcjyOKs7ulvhc7IgB4uwjQHI0PASoK+I4eEZ8j4VXNwpDMrFs8kSxlefGuPbxDFWL3+7PMmy+sH+Rmjc/VbiiP2uvuoF9C7AvtO1hI1+cxhh5I4LfYDVr9ubMW6t5rd/oyxsh8uIEA+0HB9K2aVSTMVo3MS8O2LXXQ9ap88wyY+3FWkqq27O1ePbVtEww6TMrDwKK4YfYatOzgcyKTP3GB5v5sBJsppM4MMsbjQa8TdVjlp9POmOVVqq1u9NEk2TeAkaR57vpIyuB7cgVVKqYOGYNnybbhv3bHns/eWA8CesBPqAvuFSc/8AeNP6Kb9Db1FPk2oeO9ONOGEZ88yf8+6pXKf+0cf9FN+hgpJd0vwLLlGn5QFh1mzFkHOGdGP1XDRke9l91BrdtarNfLA3KaK4i9peCQL/AGuH1AqxO8q1E2y7xDg/eWcDzixIMeq1WjoVedTtC0l/kzxZ+qXAb7CabFvBoZDJVyOjtys1pbyqMCSGJwPAMinFVJ6SQ8F3coBjhnlXHhwyMMVaPdxNxbMsv/bxj8leH9VbNukwMkeBXtKlXMKV56dXxWeDhYgrEDoeXGScad+CPfTIu2pWzl2ye/J1HnXFtjbcMp4wxySTgqdByAz36fCuS1v4ycM2M6ABSc+VeqtjzHhlJW4sbdqHM7e0fYBRWe4/cKuNMSRnPgePnQjvHzI5/nHy79NKm9z0mtzYm3V2DnH4J7iTz91KdObG2open/Dl3b3vzfaRdSBgSKvfzYLgemabN4RP3SvOLOTO518Ccj7MVwdHLwQ3MTtnhDDiwMnHkPGnPp5cpcXctzEsgRiA3GnCQ4GMEewL76Wt7OhWp78UcvQyAvdxjGcCRj7Fjcmm/a9l1M0kX8ltPqnVT7iKfeg+1ra1aWScPxNEUj4VBxx5DE5YY5KPU0zbeulluJJFzwsQRkYOMDmMmsFXr9qJHsm6HU27DklzHkeao+lTzZLKLyFVLHgB4ie+Rkyw9mMj0oU7D2iE4I3HZEySnXBwoYMuSQNQdMkcvOppZ9M7eK5SYpIQC/GE6tiSwYBgBJz1pmzhy4JalS2v9Se74oes2TI/ephJ/FkCf3waDO7lc7TtcnhAkyx8FUFmPuBqZ9Lt4Yewe1EMvHPoWlUKFQMCWVQxOSQoGdNDzof9FNqi1u4p2TjVCeJP5SsrIw9uCajGLSaO6HaPG9qcvte7J7nCj2KiqPhRT3fbMC7EEanDPmdvNuIEf2AgoL9Mtqi7vri4UECRywB5gYAwfdU9t96MEVmI4rdxP1apjIMYKqI85zxY4QDjHl51tL0pGyW1SIjtraMiWcECthJBKzrgZOLh8HPMDs/Gmzorx/O4ShwQ2c+QBLc/LI9abp5y5yT7PLJJwPAZJPrTj0bv+plJwSGQqQoBPc2gPmB6ZqtAknGDrkMF5tJSq4DKfw8nRuWQDnn391SHoHIpun6sMFKAji1wMLxDIJ1J1HkDQpbpUCArRTsByBjUY5a89eXfT10W3hrZyFjbXDoVxwhANRoDnPcMj1pZx6WkcWOE9abX+g8S8ZVgrKGzocchnvHjioD0MbF9tnmcSw+o6ps+tNf/AF0xa/vdc689R3cu6otsHeSIbi/lNnK4unjbhB1j4FYYJ4dc5+yuaOOVPY7m0R/e/YdXtOc8HCHEcinOjZRQxTlpxZGNfomiX8n+5c7PuF/BSYlD5tGjMB5Z1/Goc7yOk8d+YXS1kgMaspDtnjUkEY0HI5yfMVzdAunj7NiuohGXEydjtAdXIFZQ50ORqMjT6IqsoN46GTtDDabVaK7+cBjxdY7cSnB7XECVI5c80dd1dy9zLLJK7O0YTgDOzYyDliSNWwBj2mq/2tqWUsY5GGVUFRpxFhkE4OuDgDxIopbD6eiyZ5Y9kzjs6kyMAAM8/vWMAfCnmri0iGSD1xa8uRlkvRB0mMi4wL4qfAdY5Rz/AGmNWLuGYD6Ktk8j5nTmaqRs+9eS+W4aNpnM/XNGg1c8fWMAMHnr3Gijdbw7gRkSbKuOrU8Z4x2VK6hjmHAI558qlPG3RWboJfTOxD2F4FVGY28wAVdeIRnAXGdeWgqppomXW9fsydVZqkjqRx8SHBxgE4iGcaaZ7qGmmPOnxwcdmGF+aDZ8nmxbqbuZSBxOkYJPLgUs2nP8Nafm4j0ijxgN1c2ddMdRbih50F6S3NvarHbWEsgEjM8iOcO5GCCOrOMLwDn3Dxry56XXZ2iLj5lKJQrjqsni7caKSW4MnRQeXfQ8NttiSfV+4YumN5KlvcQntu9vOECgnOY2HcPErVZNgBTdW4chVM0XEW5BeNck+QFEWXetcRsyvbsj4AYPMQeWQCOrz359aFyjJ5czyHwHOjGDSobHe9j509snh2jdo6cJM8rAeKO7MhHkVINWL6DQj5laRxOsipEqmWORWAfgJbiHgGOOEa5x4VWvpRcvLcySyRvGz4JR2LEaAcyAcaaVMOiXSS9t7VIrW0maPLN1iO4DsTqeyuPAY/m0JY20kab6Uw7W815wjJjPgeAjIz2Se2NcY7qVCBemG1f9CuP9ZJ+ylS+E/Yjf8sxt+j9irLxzhR5iL9aGnh9j7IZSrXikEYPCkAPoywZB8wa6rScAjLN7Mn9VPXzWFx2lB9o/bVZP1OaL9AC7VihgmmihdZIuLAYgE8IYMMHGh7jiixDNYRQK7JGp6sa9RntcPf2D30PemljFHcuI1HCTnTlrUksmhktwJJFPZ1DkHuxyJp2rDkyWkyPdG5Iby7tba5AeFBwIscWGfwDFFDMdBkk93trs3vbHitp40hQRRBMLGPwiGbifHPvxk+HlXN0HkSO+ViVXHFwtywSCNCNRpketbd4spkuS2SRjAOSdNToSOWST60K6iqypSSHHdk6Pazq8EMgiYMSR2xxqfHQr2T559tQzpUqi7lwnCOL6IxgaA8uVebKlKE88Hnj9daLskuT501DKX3X+Bz2Fb2s0idcJCWdQQqBVwTj8DAHuog3XRiyEbW8SOhkGFZY+NvpA44gOLXHLNRXojLhkH84d9Fi2mBkHZI9R+2lnsRWVyk/Zgb6QdCltk4hNK5HNWtZY/wC0y8P2019DrXN9bZ0AmjY5Hcrhv1UZd5kmbRxwY5akjx8qEnRVuG7hPPDitHeJXxnTPOm+yBDezqpypkZgT4MeL9dKz6GSyQdeJEA/knOf2U77x/8ACmOmTg6HyqR9EZ2+ZAAjv04T8eKj5CPPPTz6g2ubIJHwGIdZnPW8Z5eAX6P66eN2UA+6MOSR9PVeYzGw0yCO/vpx2tbcUZbh8f8AnnTH0ckK3MZB4Txc6Lj5Ax/UynB2WKFoMD75J/Y19vYrrtIwGzhj5Hhx9gpislYqCXY+wKP1U52q6jtN7/2VzNDpjq4GD2fh+yoT0ZThu77C83XOo8D5VJpUyDq35bftqB7OOLi5wTzHMt4e2mgtmJkl1R/nkM2/eTJtFxyWbmfExeGPChvsXo7PckiJRpqSeQqTbwpQ06jnhT8fOpFu1tPvUjHv0Gg8PZVUtMRvGelUMHR/pC8Vp8xAXC3UUqnGuVlRzk9+qj0o27RnRoJO0pLRsMNyOVIwQDyqvNv/AIVwj/O/3qOzTN1X4v6qScUBTk3uBHoCfm21ITgHDsh56cashIwc51qwl4I5I2jfVWUqwKtqp0IoA7KONpKeeJs/bR4F8eHuHpWyLcZZHLn0RA+lfRGwhgeWOHgdBlSqtow1BxnxoM3BLsWbJYnUnmaO/TjaGbaUZH0SOVAwgE8qeHG42OXUw4bnbTGz1BEWHd3xxrxa4XtjmD2e/XGK1SWy/dsIUQ5R+/s6Ro2px4Hw5g0x7qLvgR1wcZzoP2U6m649phVUlypwhU5IADHQ+WD60ul2/wAEZzTa28ySbf6HQXCsTBBxspAYgnhONNeHSq5w8IcZ5AjvGOfj4UdumMNz1EmLZiOBix0wqgHJPpQRs1++DGpJAAHeSdAPOjj45KwlzsO+8JFF9IvEjcIUHqx2VOM8PIZI7yNM0Wt3WyEksIHRI2BU64GQ3EeJWyM5znyoLX5Jmbj0YEhgdCCDggg65HLFFPotLMtvH1SMFIz2QdfPORn0oyWwsppJJpk3/wCjreC/2f8Adr2ou11dZ/y/oaVT0S9SfiR9GcmzLJYhbGXLH5yEkyxIZe0Dp4d/pRR/6PWn+YT3UqVTzyexT6eK3+Cuu+GIQ7UmjiAROGIhQMAZjXOntyalW7UpNazzOiuYLSRsEDBdeIKfch99KlVLfh2XyQj07ef6Mge7q6P3TtAxyGmRWB7wx4dffUk3725hv14OyjwqwA8QzKTju5ClSrNvxEU0RvggOxstPGpOhYA1yNMx1JNKlVLDpVk46FANCsh1Zb20TP8ANeQ8Q9RgUSOi9vxzzx5JKyDhOToM8ufLQ15SpZN0ziyRWuP5Z175YDHsqUgg5eLXvHbGgHh60Adi3jR3ELg6rIh9zA6+VKlU8TelnZGKoIO/9OC/hCgKptlOmmW62UEnz0Hurs3L7QBt7yKQA8LQMhYcWA7MjDHovvpUqy7ECaWjgeOjOzRcbFvAxyyi6K9kZyhYrlyM6EDlignZ3rRyJIDkoytg8jwkHBB0xSpU0W7aNjiq4La2VtHJGkis/BIiuv0V7LgMNAo7jXSNmp4v+Ww+BFKlXNbFcUYNaIP5R9sj/wC9Q72DZdZfbWGcBHhPPkmJ+IDn3AHl+CK9pU6bSYulN0Ai9v3lkaRjqzM2ByHEScAdwqyG67ZscGyoHZFMjo0zNjJPESy6nwTgHpXlKqZXsiskkiuuxtoGK4hmYk9XLHIfPhcMfhVqul+2VtLO4uAozHGxXT8M9lPTiK0qVbKraNLlFb92pZtq2mpJ60E5PPAJOftqzvzgfyR7q9pUMvcJk2IhvVuuHZV0yqMlUX0eVFP2E1WjNKlT4+B8fAXPk+zYkvDz7EXP6z0/LJ/2kJwNI3/2eGlSoeciWTvX88mOe9nahTZc4Ghfgj9GcFv7II9aDO7K349p22RkI5lPshVpP7te0qC7WUx9pHLy5MsjyNzdmc+1iSfjVnOh9zwWFohGot4fzFNKlTTWyBldJDuL0eFKlSqdIhZ//9k=" alt="Legal Awareness Team" class="rounded-lg shadow-2xl">
                 </div>
             </div>
         </div>
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="scroll-indicator text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
     </section>
 
-    <!-- Mission & Vision Section -->
-    <section class="py-20 px-6 bg-gray-900" id="missionSection">
-        <div class="container mx-auto ">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 ">Our Mission & Vision</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="glass-card p-10">
-                    
-                    <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-                    <p class="text-gray-300 text-lg ">
+    <!-- Mission & Vision -->
+    <section class="py-20 bg-gray-900" id="mission">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 pr-0 lg:pr-10">
+                    <h2 class="text-3xl font-bold mb-2">
+                        <i class="fas fa-globe text-indigo-500 mr-2"></i> Our Mission
+                    </h2>
+                    <div class="w-20 h-1 bg-indigo-500 mb-6"></div>
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed mission-text">
                         We aim to bridge the gap between complex legal systems and everyday citizens by providing simplified legal information, interactive resources, and accessible legal assistance.
                     </p>
+                    <p class="text-gray-400 mission-text">
+                        Legal knowledge shouldn't be confined to courtrooms and law offices. By breaking down complex legal concepts into understandable language, we're creating a society where everyone can navigate legal challenges with confidence.
+                    </p>
                 </div>
-                
-                <div class="glass-card p-10">
-                    <div class="text-5xl mb-6 text-indigo-400">🚀</div>
-                    <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
-                    <p class="text-gray-300 text-lg">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-bold mb-2">
+                        <i class="fas fa-rocket text-indigo-500 mr-2"></i> Our Vision
+                    </h2>
+                    <div class="w-20 h-1 bg-indigo-500 mb-6"></div>
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed vision-text">
                         A world where every individual, regardless of background, has access to the legal knowledge they need to protect their rights and make informed decisions.
                     </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
- <!-- Chatbot Bubble -->
-    <div >
-        <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>    
-    </div>
-    
-    
-
-    
-
-    <!-- Our Values Section -->
-    <section class="py-20 px-6" id="valuesSection">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 section-title">Our Core Values</h2>
-                <p class="text-gray-300 text-lg  mx-auto mt-6">Principles that guide everything we do</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i class="fas fa-balance-scale text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Accessibility</h3>
-                    <p class="text-gray-400">
-                        We believe legal information should be understandable and accessible to everyone, regardless of background or education.
-                    </p>
-                </div>
-                
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i class="fas fa-check-circle text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Accuracy</h3>
-                    <p class="text-gray-400">
-                        All information is thoroughly researched and reviewed by legal professionals to ensure its accuracy and reliability.
-                    </p>
-                </div>
-                
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i class="fas fa-hands-helping text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Empowerment</h3>
-                    <p class="text-gray-400">
-                        We aim to empower individuals with knowledge that helps them make informed decisions and effectively navigate legal challenges.
-                    </p>
-                </div>
-                
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i class="fas fa-globe text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Inclusivity</h3>
-                    <p class="text-gray-400">
-                        We strive to make our resources inclusive and representative of diverse communities and legal needs.
-                    </p>
-                </div>
-                
-                <div class="service-card p-8 ">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i class="fas fa-lock text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Privacy</h3>
-                    <p class="text-gray-400">
-                        We respect user privacy and handle all information with the highest standards of confidentiality and security.
-                    </p>
-                </div>
-                
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i class="fas fa-heart text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Community</h3>
-                    <p class="text-gray-400">
-                        We foster a supportive community where people can share experiences and support each other through legal challenges.
+                    <p class="text-gray-400 vision-text">
+                        We envision a future where legal literacy is as fundamental as reading and writing. Where citizens are empowered to understand the laws that affect their daily lives, and where justice is truly accessible to all.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    
-
-    <!-- FAQ Section -->
-    <section class="py-20 px-6" id="faqSection">
-        <div class="container mx-auto max-w-5xl">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 section-title">Frequently Asked Questions</h2>
-            </div>
-            
-            <div class="space-y-6">
-                <div class="accordion-item">
-                    <div class="accordion-header bg-gray-800 p-5 rounded-lg cursor-pointer flex justify-between items-center">
-                        <h3 class="text-lg font-medium">How is LegalEase funded?</h3>
-                        <i class="fas fa-plus text-indigo-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="accordion-content px-5 pt-0">
-                        <div class="py-5 text-gray-400">
-                            LegalEase is primarily funded through grants from legal foundations, donations from supporters, and partnerships with law schools and legal aid organizations. We maintain strict editorial independence in all our content.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <div class="accordion-header bg-gray-800 p-5 rounded-lg cursor-pointer flex justify-between items-center">
-                        <h3 class="text-lg font-medium">Can I volunteer with LegalEase?</h3>
-                        <i class="fas fa-plus text-indigo-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="accordion-content px-5 pt-0">
-                        <div class="py-5 text-gray-400">
-                            Yes! We welcome lawyers, law students, and other professionals with legal knowledge to volunteer. Visit our "Get Involved" page to learn more about volunteer opportunities or contact our Volunteer Coordinator.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <div class="accordion-header bg-gray-800 p-5 rounded-lg cursor-pointer flex justify-between items-center">
-                        <h3 class="text-lg font-medium">Is the legal information on your site legally binding?</h3>
-                        <i class="fas fa-plus text-indigo-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="accordion-content px-5 pt-0">
-                        <div class="py-5 text-gray-400">
-                            No, the information provided on LegalEase is for educational purposes only and does not constitute legal advice. While we strive for accuracy, we always recommend consulting with a qualified attorney for specific legal matters.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <div class="accordion-header bg-gray-800 p-5 rounded-lg cursor-pointer flex justify-between items-center">
-                        <h3 class="text-lg font-medium">How can I support LegalEase's mission?</h3>
-                        <i class="fas fa-plus text-indigo-400 transition-transform duration-300"></i>
-                    </div>
-                    <div class="accordion-content px-5 pt-0">
-                        <div class="py-5 text-gray-400">
-                            You can support us by spreading the word about our resources, making a donation, volunteering your expertise, or partnering with us if you represent an organization with aligned goals. Visit our "Support Us" page to learn more.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 px-6 bg-gradient-bg relative overflow-hidden" id="ctaSection">
-        <div class="animated-bg">
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-        
-        <div class="container mx-auto max-w-4xl relative z-10 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to Get Involved?</h2>
-            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
-                Join our community today and help us make legal knowledge accessible to everyone.
+    <!-- What We Do -->
+    <section class="py-20 bg-gray-800" id="services">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-2 text-center">
+                <i class="fas fa-briefcase text-indigo-500 mr-2"></i> What We Do
+            </h2>
+            <div class="w-20 h-1 bg-indigo-500 mx-auto mb-8"></div>
+            <p class="text-center text-gray-300 max-w-3xl mx-auto mb-16">
+                Our platform offers a comprehensive suite of resources designed to make legal knowledge accessible and actionable for every citizen.
             </p>
-            <div class="flex flex-wrap justify-center gap-6">
-                <a href="volunteer.html" class="btn-primary px-8 py-4 rounded-lg text-white font-medium">
-                    <i class="fas fa-user-plus mr-2"></i> Become a Volunteer
-                </a>
-                <a href="donate.html" class="btn-secondary px-8 py-4 rounded-lg font-medium">
-                    <i class="fas fa-heart mr-2"></i> Support Our Mission
-                </a>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card rounded-lg p-6 shadow-lg service-card">
+                    <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-book text-2xl text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Legal Guides</h3>
+                    <p class="text-gray-400 text-center">
+                        Easy-to-understand explanations of complex laws, with practical examples and step-by-step guidance.
+                    </p>
+                </div>
+                
+                <div class="card rounded-lg p-6 shadow-lg service-card">
+                    <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-check-circle text-2xl text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Quizzes & Tests</h3>
+                    <p class="text-gray-400 text-center">
+                        Interactive quizzes to test your legal knowledge and reinforce understanding of key concepts.
+                    </p>
+                </div>
+                
+                <div class="card rounded-lg p-6 shadow-lg service-card">
+                    <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-gavel text-2xl text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Ask a Lawyer</h3>
+                    <p class="text-gray-400 text-center">
+                        Get answers from qualified legal professionals to your specific questions and concerns.
+                    </p>
+                </div>
+                
+                <div class="card rounded-lg p-6 shadow-lg service-card">
+                    <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-phone-alt text-2xl text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Emergency Contacts</h3>
+                    <p class="text-gray-400 text-center">
+                        Quick access to legal aid services, helplines, and resources for urgent legal situations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+
+    <!-- Get Involved -->
+    <section class="py-20 bg-indigo-900 bg-opacity-30" id="get-involved">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-2 text-center">
+                <i class="fas fa-hands-helping text-indigo-500 mr-2"></i> How You Can Get Involved
+            </h2>
+            <div class="w-20 h-1 bg-indigo-500 mx-auto mb-8"></div>
+            <p class="text-center text-gray-300 max-w-3xl mx-auto mb-16">
+                Join our mission to make legal knowledge accessible to everyone. There are multiple ways you can contribute to this important cause.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card rounded-lg p-8 shadow-lg relative overflow-hidden glowing-border involvement-card">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-handshake text-4xl text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Partner with Us</h3>
+                    <p class="text-gray-400 text-center mb-6">
+                        Law firms, legal aid organizations, and NGOs can join our network to expand our reach and impact.
+                    </p>
+                    <div class="text-center">
+                        <button class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card rounded-lg p-8 shadow-lg relative overflow-hidden glowing-border involvement-card">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-lightbulb text-4xl text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Contribute as a Volunteer</h3>
+                    <p class="text-gray-400 text-center mb-6">
+                        Legal professionals and experts can contribute content, answer questions, or conduct workshops.
+                    </p>
+                    <div class="text-center">
+                        <button class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition">
+                            Volunteer Now
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card rounded-lg p-8 shadow-lg relative overflow-hidden glowing-border involvement-card">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-bullhorn text-4xl text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Share & Spread Awareness</h3>
+                    <p class="text-gray-400 text-center mb-6">
+                        Help us reach more citizens by sharing our resources and spreading awareness about legal rights.
+                    </p>
+                    <div class="text-center">
+                        <button class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition">
+                            Share Resources
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 pt-20 pb-10 px-6">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-                <div>
-                    <div class="flex items-center mb-6">
-                        <h2 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">LegalEase</h2>
-                        <span class="text-sm ml-2">⚖️</span>
-                    </div>
-                    <p class="text-gray-400 mb-6">Empowering citizens through legal awareness and education.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+    <!-- FAQs -->
+    <section class="py-20 bg-gray-800" id="faqs">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-2 text-center">
+                <i class="fas fa-question-circle text-indigo-500 mr-2"></i> Frequently Asked Questions
+            </h2>
+            <div class="w-20 h-1 bg-indigo-500 mx-auto mb-16"></div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-6 faq-item">
+                    <button class="flex justify-between items-center w-full bg-gray-900 p-4 rounded-t-lg text-left focus:outline-none">
+                        <span class="text-lg font-medium">Is this platform free to use?</span>
+                        <i class="fas fa-chevron-down text-indigo-400 transform transition-transform"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-900  rounded-b-lg px-4 pb-4">
+                        <p class="text-gray-300 pt-4">
+                            Yes, all resources on our platform are freely accessible to everyone. We believe that legal knowledge should be available to all citizens regardless of their financial situation.
+                        </p>
                     </div>
                 </div>
                 
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
-                    <ul class="space-y-3">
-                        <li><a href="index.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">Home</a></li>
-                        <li><a href="legalguides.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">Legal Guides</a></li>
-                        <li><a href="QT.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">Quizzes & Tests</a></li>
-                        <li><a href="askalawyer.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">Ask a Lawyer</a></li>
-                        <li><a href="emergencycontacts.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">Emergency Contacts</a></li>
-                        <li><a href="aboutus.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">About Us</a></li>
-                    </ul>
-                </div>
+                <div class="mb-8 faq-item ">
+                    <button class="flex justify-between items-center w-full bg-gray-900 p-4 rounded-t-lg text-left focus:outline-none">
+                        <span class="text-lg font-medium">Can I get direct legal representation here?</span>
+                        <i class="fas fa-chevron-down text-indigo-400 transform transition-transform"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-900  rounded-b-lg px-4 pb-4">
+                        <p class="text-gray-300 pt-4">
+                            No, we don't provide direct legal representation. However, we do provide contact information for legal aid services and pro bono attorneys who may be able to represent you based on your situation and eligibility.
+                        </p>
+                    </div>
                 
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Resources</h3>
-                    <ul class="space-y-3">
-                        <li><a href="blog.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">Blog</a></li>
-                        <li><a href="faq.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">FAQ</a></li>
-                        <li><a href="testimonials.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">Testimonials</a></li>
-                        <li><a href="press.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">Press</a></li>
-                        <li><a href="careers.html" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">Careers</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Contact Us</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-indigo-400 mt-1 mr-3"></i>
-                            <span class="text-gray-400">123 Legal Street, Suite 789<br>New York, NY 10001</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone text-indigo-400 mr-3"></i>
-                            <span class="text-gray-400">(555) 123-4567</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope text-indigo-400 mr-3"></i>
-                            <span class="text-gray-400">info@legalease.org</span>
-                        </li>
-                    </ul>
+                    <div class="mt-6 mb-6 faq-item">
+                        <button class="flex justify-between items-center w-full bg-gray-900 p-4 rounded-t-lg text-left focus:outline-none">
+                            <span class="text-lg font-medium">How accurate is the legal information provided?</span>
+                            <i class="fas fa-chevron-down text-indigo-400 transform transition-transform"></i>
+                        </button>
+                        <div class="accordion-content bg-gray-900  rounded-b-lg px-4 pb-4">
+                            <p class="text-gray-300 pt-4">
+                                All information on our platform is reviewed by qualified legal professionals. However, legal interpretations can vary, and laws change frequently. The information should be treated as educational and not as specific legal advice for your situation.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6 faq-item">
+                        <button class="flex justify-between items-center w-full bg-gray-900 p-4 rounded-t-lg text-left focus:outline-none">
+                            <span class="text-lg font-medium">Can I volunteer if I'm not a legal professional?</span>
+                            <i class="fas fa-chevron-down text-indigo-400 transform transition-transform"></i>
+                        </button>
+                        <div class="accordion-content bg-gray-900  rounded-b-lg px-4 pb-4">
+                            <p class="text-gray-300 pt-4">
+                                Absolutely! We need volunteers with diverse skills including content writing, translation, community outreach, graphic design, and more. Everyone can contribute to making legal knowledge more accessible.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <hr class="border-gray-800 my-10">
-            
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LegalEase. All rights reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="privacy.html" class="text-gray-500 text-sm hover:text-indigo-400 transition-colors duration-300">Privacy Policy</a>
-                    <a href="terms.html" class="text-gray-500 text-sm hover:text-indigo-400 transition-colors duration-300">Terms of Service</a>
-                    <a href="disclaimer.html" class="text-gray-500 text-sm hover:text-indigo-400 transition-colors duration-300">Legal Disclaimer</a>
+        </section>
+    
+        <!-- Contact Us -->
+        <section class="py-20 bg-gray-900" id="contact">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-2 text-center">
+                    <i class="fas fa-envelope text-indigo-500 mr-2"></i> Contact Us
+                </h2>
+                <div class="w-20 h-1 bg-indigo-500 mx-auto mb-8"></div>
+                <p class="text-center text-gray-300 max-w-3xl mx-auto mb-16">
+                    Have questions or want to get involved? Reach out to our team and we'll get back to you as soon as possible.
+                </p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div>
+                        <form class="space-y-6">
+                            <div>
+                                <label class="block text-gray-300 mb-2">Name</label>
+                                <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-gray-300 focus:outline-none focus:border-indigo-500 transition">
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 mb-2">Email</label>
+                                <input type="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-gray-300 focus:outline-none focus:border-indigo-500 transition">
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 mb-2">Subject</label>
+                                <select class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-gray-300 focus:outline-none focus:border-indigo-500 transition">
+                                    <option>General Inquiry</option>
+                                    <option>Partnership Opportunity</option>
+                                    <option>Volunteer Application</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 mb-2">Message</label>
+                                <textarea rows="5" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-gray-300 focus:outline-none focus:border-indigo-500 transition"></textarea>
+                            </div>
+                            <div>
+                                <button class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">
+                                <i class="fas fa-map-marker-alt text-indigo-400 mr-2"></i> Our Office
+                            </h3>
+                            <p class="text-gray-300">
+                                Shop No. 6, Dreamland Building,<br>
+                                Shanti Park, Andheri(W), Mumbai-400053<br>
+                                Maharashtra,India.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">
+                                <i class="fas fa-phone-alt text-indigo-400 mr-2"></i> Phone
+                            </h3>
+                            <p class="text-gray-300">
+                                Main Office: +91 8850123688<br>
+                                Helpline: +91 22 78929403
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">
+                                <i class="fas fa-envelope text-indigo-400 mr-2"></i> Email
+                            </h3>
+                            <p class="text-gray-300">
+                                General Inquiries: legal_pathshala_1@gmail.com<br>
+                                Support: help@legalpathshala.org
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">
+                                <i class="fas fa-share-alt text-indigo-400 mr-2"></i> Follow Us
+                            </h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-indigo-900 rounded-full flex items-center justify-center text-white hover:bg-indigo-700 transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-indigo-900 rounded-full flex items-center justify-center text-white hover:bg-indigo-700 transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-indigo-900 rounded-full flex items-center justify-center text-white hover:bg-indigo-700 transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-indigo-900 rounded-full flex items-center justify-center text-white hover:bg-indigo-700 transition">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
-
-    <!-- Chatbot Bubble -->
-    <div class="chatbot-bubble w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg glow-effect">
-        <div class="pulse"></div>
-        <i class="fas fa-comment-dots text-2xl"></i>
-    </div>
-
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-        
-        // Accordion functionality
-        document.querySelectorAll('.accordion-header').forEach(item => {
-            item.addEventListener('click', event => {
-                const content = item.nextElementSibling;
-                const icon = item.querySelector('i');
+        </section>
+    
+        <!-- Newsletter -->
+        <section class="py-16 bg-indigo-800 bg-opacity-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-2xl font-bold mb-6">
+                        <i class="fas fa-paper-plane text-indigo-400 mr-2"></i> Subscribe to Our Newsletter
+                    </h2>
+                    <p class="text-gray-300 mb-8">
+                        Stay updated with the latest legal resources, guides, and events. We never spam and you can unsubscribe at any time.
+                    </p>
+                    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                        <input type="email" placeholder="Enter your email address" class="flex-grow bg-gray-900 border border-gray-700 rounded-lg py-3 px-4 text-gray-300 focus:outline-none focus:border-indigo-500 transition">
+                        <button class="bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Footer -->
+        <footer class="bg-gray-900 py-12">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-white">About Us</h3>
+                        <p class="text-gray-400 mb-4">
+                            We are dedicated to making legal knowledge accessible to everyone, empowering citizens to understand and exercise their rights.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-white">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="text-gray-400 hover:text-indigo-400 transition">Home</a></li>
+                            <li><a href="aboutus.html" class="text-gray-400 hover:text-indigo-400 transition">About Us</a></li>
+                            <li><a href="emergencycontacts.html" class="text-gray-400 hover:text-indigo-400 transition">Emergency Contacts</a></li>
+                            <li><a href="QT.html" class="text-gray-400 hover:text-indigo-400 transition">Quizzes</a></li>
+                            <li><a href="legalguides.html" class="text-gray-400 hover:text-indigo-400 transition">Legal Guides</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-white">Legal Topics</h3>
+                        <ul class="space-y-2">
+                            <li><a href="tenant.html" class="text-gray-400 hover:text-indigo-400 transition">Tenant Rights</a></li>
+                            <li><a href="workplace.html" class="text-gray-400 hover:text-indigo-400 transition">Employment Law</a></li>
+                            <li><a href="consumer.html" class="text-gray-400 hover:text-indigo-400 transition">Consumer Protection</a></li>
+                            <li><a href="fam.html" class="text-gray-400 hover:text-indigo-400 transition">Family Law</a></li>
+                            <li><a href="citizenrights.html" class="text-gray-400 hover:text-indigo-400 transition">Citizen rights</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-white">Contact</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-indigo-400 mt-1 mr-2"></i>
+                                <span class="text-gray-400">Shop No. 6, Dreamland Building,<br>Shanti Park, Andheri(W), Mumbai-400053.
+                                </span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-phone-alt text-indigo-400 mt-1 mr-2"></i>
+                                <span class="text-gray-400">+91 8850123688</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-envelope text-indigo-400 mt-1 mr-2"></i>
+                                <span class="text-gray-400">legal_pathshala_1@gmail.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 
-                content.classList.toggle('active');
-                
-                if (content.classList.contains('active')) {
-                    icon.classList.remove('fa-plus');
-                    icon.classList.add('fa-minus');
-                    icon.style.transform = 'rotate(180deg)';
-                } else {
-                    icon.classList.remove('fa-minus');
-                    icon.classList.add('fa-plus');
-                    icon.style.transform = 'rotate(0deg)';
-                }
-            });
-        });
-        
-        // GSAP animations
-        document.addEventListener('DOMContentLoaded', () => {
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Hero animations
-            gsap.from('#heroTitle', { 
-                opacity: 0, 
-                y: 50, 
-                duration: 1, 
-                delay: 0.2 
-            });
-            
-            gsap.from('#heroDescription', { 
-                opacity: 0, 
-                y: 50, 
-                duration: 1, 
-                delay: 0.4 
-            });
-            
-            gsap.from('#learnMoreBtn', { 
-                opacity: 0, 
-                y: 50, 
-                duration: 1, 
-                delay: 0.6 
-            });
-            
-            gsap.from('#heroImage', { 
-                opacity: 0, 
-                x: 50, 
-                duration: 1, 
-                delay: 0.8 
-            });
-            
-            // Section animations
-            const sections = ['#missionSection', '#storySection', '#teamSection', '#valuesSection', '#statsSection', '#faqSection', '#ctaSection'];
-            
-            sections.forEach(section => {
-                gsap.from(`${section} .section-title`, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top 80%'
-                    },
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.8
+                <div class="border-t border-gray-800 pt-8">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <p class="text-gray-400 mb-4 md:mb-0">
+                            &copy; 2025 Legal Awareness for Citizens. All rights reserved.
+                        </p>
+                        <div class="flex space-x-6">
+                            <a href="#" class="text-gray-400 hover:text-indigo-400 transition">Privacy Policy</a>
+                            <a href="#" class="text-gray-400 hover:text-indigo-400 transition">Terms of Service</a>
+                            <a href="#" class="text-gray-400 hover:text-indigo-400 transition">Disclaimer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    
+        <!-- JavaScript (for interactive elements) -->
+        <script>
+            // FAQ Accordion
+            document.querySelectorAll('.faq-item button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('i');
+                    
+                    // Toggle content
+                    content.classList.toggle('show');
+                    
+                    // Rotate icon
+                    if (content.classList.contains('show')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0)';
+                    }
                 });
-                
-                gsap.from(`${section} p`, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top 75%'
-                    },
-                    opacity: 0,
-                    y: 20,
-                    duration: 0.8,
-                    delay: 0.2
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
             
-            // Card animations
-            gsap.from('.glass-card', {
-                scrollTrigger: {
-                    trigger: '#missionSection',
-                    start: 'top 70%'
-                },
-                opacity: 0,
-                y: 50,
-                stagger: 0.2,
-                duration: 0.8
+            // Learn More button scroll
+            document.getElementById('learn-more-btn').addEventListener('click', () => {
+                const missionSection = document.getElementById('mission');
+                window.scrollTo({
+                    top: missionSection.offsetTop - 100,
+                    behavior: 'smooth'
+                });
             });
-            
-            gsap.from('.team-card', {
-                scrollTrigger: {
-                    trigger: '#teamSection',
-                    start: 'top 70%'
-                },
-                opacity: 0,
-                y: 50,
-                stagger: 0.1,
-                duration: 0.8
-            });
-            
-            gsap.from('.service-card', {
-                scrollTrigger: {
-                    trigger: '#valuesSection',
-                    start: 'top 70%'
-                },
-                opacity: 0,
-                y: 30,
-                stagger: 0.1,
-                duration: 0.6
-            });
-            
-            gsap.from('.stat-card', {
-                scrollTrigger: {
-                    trigger: '#statsSection',
-                    start: 'top 70%'
-                },
-                opacity: 0,
-                y: 30,
-                stagger: 0.1,
-                duration: 0.6
-            });
-            
-            // Timeline animations
-            gsap.from('.timeline-item', {
-                scrollTrigger: {
-                    trigger: '#storySection',
-                    start: 'top 70%'
-                },
-                opacity: 0,
-                x: -50,
-                stagger: 0.3,
-                duration: 0.8
-            });
-        });
-    </script>
-<script src="search.js"></script>
-</body>
-</html>
+        </script>
+    </body>
+    </html>

@@ -75,20 +75,7 @@
             z-index: 0;
         }
         
-        .chatbot-bubble {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 25px rgba(99, 102, 241, 0.5);
-        }
         
-        .chatbot-bubble:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 35px rgba(99, 102, 241, 0.7);
-        }
         
         .feature-card {
             background: var(--card-bg);
@@ -330,20 +317,7 @@
             z-index: 0;
         }
         
-        .chatbot-bubble {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 25px rgba(99, 102, 241, 0.5);
-        }
         
-        .chatbot-bubble:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 35px rgba(99, 102, 241, 0.7);
-        }
         
         .feature-card {
             background: var(--card-bg);
@@ -720,28 +694,7 @@
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
         }
         
-        /* Chatbot Bubble */
-        .chatbot-bubble {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            transition: transform 0.3s ease;
-        }
         
-        .chatbot-bubble button {
-            background: linear-gradient(135deg, var(--primary), #4F46E5);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .chatbot-bubble:hover {
-            transform: scale(1.1) translateY(-5px);
-        }
-        
-        .chatbot-bubble button:hover {
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(109, 40, 217, 0.5);
-        }
         
         /* Scrollbar */
         ::-webkit-scrollbar {
@@ -853,13 +806,11 @@
                 <h1 class="text-4xl md:text-5xl font-bold mb-4 mt-5 py-5">Test Your Legal Knowledge: Quizzes & Interactive Tests</h1>
                 <p class="text-xl mb-8 text-gray-200">Do you know your rights? Take our interactive legal quizzes to learn about the laws that protect you. Each quiz provides instant feedback, explanations, and useful resources.</p>
                 
-                <div class="flex flex-wrap gap-4">
-                    <a href="#quiz-categories" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
-                        🏆 Start a Quiz Now!
-                    </a>
-                    <a href="legalguides.html" class="bg-transparent border border-white text-white hover:bg-gray-800 hover:border-purple-400 hover:text-purple-400 font-medium py-3 px-6 rounded-lg transition duration-300">
+                <div class="flex flex-wrap gap-4 ml-10">
+                    <a href="legalguides.html" class="btn-primary hover-glow font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
                         📜 Learn Before You Test
                     </a>
+                    
                 </div>
             </div>
             
@@ -961,16 +912,16 @@
                 <p class="text-gray-400 text-lg ">Test your knowledge of Indian laws across different categories</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="quizList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Tenant Rights Quiz Card -->
-                <div class="quiz-card bg-white rounded-lg shadow-lg overflow-hidden">
+                <div id="quizContainer" class="quiz-card bg-white rounded-lg shadow-lg overflow-hidden">
                     <div class="h-24 bg-yellow-500 flex items-center justify-center">
                         <span class="text-5xl">🏠</span>
                     </div>
                     <div class="p-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-2">Tenant Rights Quiz</h2>
-                        <p class="text-gray-400 mb-4">Test your knowledge about rental laws, eviction process, and tenant protections in India.</p>
-                        <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200" data-category="tenant">Start Quiz</button>
+                        <h2  id="quizTitle"class="text-xl font-bold text-gray-800 mb-2">Tenant Rights Quiz</h2>
+                        <p id="quizForm" class="text-gray-300 mb-4">Test your knowledge about rental laws, eviction process, and tenant protections in India.</p>
+                        <button id="quizSubmit" class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200" data-category="tenant">Start Quiz</button>
                     </div>
                 </div>
                 
@@ -981,7 +932,7 @@
                     </div>
                     <div class="p-6">
                         <h2 class="text-xl font-bold text-gray-800 mb-2">Workplace Laws Quiz</h2>
-                        <p class="text-gray-400 mb-4">Test your knowledge on employee rights, working hours, and labor laws in India.</p>
+                        <p class="text-gray-300 mb-4">Test your knowledge on employee rights, working hours, and labor laws in India.</p>
                         <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200 mt-6" data-category="workplace">Start Quiz</button>
                     </div>
                 </div>
@@ -993,7 +944,7 @@
                     </div>
                     <div class="p-6">
                         <h2 class="text-xl font-bold text-gray-800 py-0">Consumer Protection Quiz</h2>
-                        <p class="text-gray-400">Test your knowledge about consumer rights, complaint processes, and protections under Indian law.</p>
+                        <p class="text-gray-300">Test your knowledge about consumer rights, complaint processes, and protections under Indian law.</p>
                         <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200" data-category="consumer">Start Quiz</button>
                     </div>
                 </div>
@@ -1005,7 +956,7 @@
                     </div>
                     <div class="p-6">
                         <h2 class="text-xl font-bold text-gray-800 mb-2">Cybersecurity & Privacy Quiz</h2>
-                        <p class="text-gray-600 mb-4">Test your knowledge about data protection, cybercrimes, and digital privacy laws in India.</p>
+                        <p class="text-gray-300 mb-4">Test your knowledge about data protection, cybercrimes, and digital privacy laws in India.</p>
                         <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200 " data-category="cyber">Start Quiz</button>
                     </div>
                 </div>
@@ -1017,19 +968,19 @@
                     </div>
                     <div class="p-6">
                         <h2 class="text-xl font-bold text-gray-800 mb-2">Criminal Law Quiz</h2>
-                        <p class="text-gray-600 mb-12">Test your knowledge about legal rights, offenses, and court procedures in Indian criminal law.</p>
+                        <p class="text-gray-300 mb-12">Test your knowledge about legal rights, offenses, and court procedures in Indian criminal law.</p>
                         <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200 " data-category="criminal">Start Quiz</button>
                     </div>
                 </div>
                 
                 <!-- Human Rights Quiz Card -->
                 <div class="quiz-card bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="h-24 bg-orange-500 flex items-center justify-center">
+                    <div class="h-24 bg-yellow-500 flex items-center justify-center">
                         <span class="text-5xl">👥</span>
                     </div>
                     <div class="p-6">
                         <h2 class="text-xl font-bold text-gray-800 mb-2">Human Rights Quiz</h2>
-                        <p class="text-gray-600 mb-9">Test your knowledge about fundamental rights, equality laws, and human rights protections in India.</p>
+                        <p class="text-gray-300 mb-9">Test your knowledge about fundamental rights, equality laws, and human rights protections in India.</p>
                         <button class="start-quiz-btn w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200 mt-4" data-category="human">Start Quiz</button>
                     </div>
                 </div>
@@ -1331,6 +1282,7 @@
          // Quiz Data
          const quizData = {
             tenant: {
+                quizId: "rental_rights",
                 title: "Tenant Rights Quiz",
                 questions: [
                     {

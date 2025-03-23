@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumbai Lawyer Finder - Legal Pathshala</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f0f1a;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .gradient-bg {
+            background: linear-gradient(-45deg, #0f0f1a, #1a1a2e, #16213e, #1f2e47);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #6366f1;
+            border-radius: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #818cf8;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(30, 32, 69, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Neon glow effect */
+        .neon-glow {
+            text-shadow: 0 0 5px rgba(99, 102, 241, 0.3),
+                        0 0 10px rgba(99, 102, 241, 0.2),
+                        0 0 15px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Button hover effect */
+        .btn-hover-effect {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.5s ease;
+        }
+
+        .btn-hover-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+
+        .btn-hover-effect:hover::before {
+            left: 100%;
+        }
+
+        /* Card hover effect */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px -20px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Animated underline */
+        .animated-underline {
+            position: relative;
+        }
+
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: #6366f1;
+            transition: width 0.3s ease;
+        }
+
+        .animated-underline:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 glass py-4 px-6 transition-all duration-300" id="navbar">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                    Legal Pathshala
+                </h1>
+            </div>
+
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="font-semibold text-indigo-300 animated-underline">Home</a>
+                <a href="legalguides.html" class="font-semibold text-gray-400 hover:text-indigo-300 animated-underline">Legal Guides</a>
+                <a href="QT.html" class="font-semibold text-gray-400 hover:text-indigo-300 animated-underline">Quizzes & Tests</a>
+                <a href="askalawyer.html" class="font-semibold text-gray-400 hover:text-indigo-300 animated-underline">Ask a Lawyer</a>
+                <a href="emergencycontacts.html" class="font-semibold text-gray-400 hover:text-indigo-300 animated-underline">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-semibold text-gray-400 hover:text-indigo-300 animated-underline">About Us</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search legal topics..." 
+                        class="px-4 py-2 rounded-full bg-gray-800/50 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 w-64">
+                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="md:hidden" id="openMobileMenu">
+                    <i class="fas fa-bars text-gray-400 text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 pt-32 pb-16">
+        <div class="mb-12 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 neon-glow bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400" id="mainTitle">
+                Mumbai Lawyer Finder
+            </h1>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg" id="mainSubtitle">
+                Find legal professionals in your area with just a pincode
+            </p>
+        </div>
+        
+        <!-- Search Container -->
+        <div class="max-w-2xl mx-auto glass rounded-2xl p-8 border border-indigo-900/30 shadow-xl shadow-indigo-900/10 mb-16 opacity-0" id="searchContainer">
+            <h2 class="text-2xl font-bold mb-6 text-center text-white">Find Lawyers by Pincode</h2>
+            <form class="space-y-6" id="searchForm">
+                <div class="space-y-2">
+                    <label for="pincode" class="block text-indigo-300 font-medium">Enter Mumbai Pincode</label>
+                    <div class="relative">
+                        <input type="text" id="pincode" name="pincode" placeholder="e.g. 400052" required
+                            class="w-full px-5 py-4 rounded-xl bg-gray-900/50 border border-indigo-900/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-100 text-lg shadow-inner">
+                        <div class="absolute right-4 top-4 text-indigo-400">
+                            <i class="fas fa-map-pin"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" 
+                    class="w-full py-4 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all duration-300 btn-hover-effect">
+                    <i class="fas fa-search mr-2"></i> Find Lawyers
+                </button>
+                
+                <div class="text-red-500 text-center hidden" id="errorMessage"></div>
+            </form>
+        </div>
+        
+        <!-- Results Container -->
+        <div class="max-w-6xl mx-auto glass rounded-2xl p-8 border border-indigo-900/30 shadow-xl shadow-indigo-900/10 hidden opacity-0" id="resultsContainer">
+            <h2 class="text-2xl font-bold mb-8 text-center text-white" id="resultsTitle">Lawyers in your area</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="lawyerCards">
+                <!-- Lawyer cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Bubble -->
+    <div>
+        <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>
+    </div>
+
+    <script>
+        // Lawyer data stored as JavaScript object
+        const lawyerData = [
+            {
+                name: "Solomon & Co.",
+                number: "+ 91-20-4860-1659",
+                place: "Bandra",
+                pincode: "400052",
+                specialization: "All"
+            },
+            {
+                name: "Solomon & Co.",
+                number: "+91 2266273900/+91 2222816192",
+                place: "Fort",
+                pincode: "400023",
+                specialization: "All"
+            },
+            {
+                name: "Siddhartha Shah & Associates",
+                number: "09322286663",
+                place: "Fort",
+                pincode: "400023",
+                specialization: "All"
+            },
+            {
+                name: "Chirag Shah & Co. Advocates & Solicitors",
+                number: "08898050051",
+                place: "Andheri West",
+                pincode: "400058",
+                specialization: "All"
+            },
+            {
+                name: "Khan Deshmukh & Associates",
+                number: "09004520272",
+                place: "Andheri East",
+                pincode: "400069",
+                specialization: "All"
+            },
+            {
+                name: "The Law Suits",
+                number: "09833638888",
+                place: "Andheri",
+                pincode: "400053",
+                specialization: "All"
+            },
+            {
+                name: "Pulastya Legal Services LLP",
+                number: "09871739191",
+                place: "Andheri West",
+                pincode: "400053",
+                specialization: "All"
+            },
+            {
+                name: "S. K Legal Associates LLP, Advocates & Solicitors",
+                number: "02240023089",
+                place: "Churchgate",
+                pincode: "400001",
+                specialization: "All"
+            },
+            {
+                name: "Vis Legis Law Practice",
+                number: "02222885551",
+                place: "Nariman Point",
+                pincode: "400021",
+                specialization: "All"
+            },
+            {
+                name: "K.S Legal",
+                number: "022-26031173 / 74",
+                place: "Fort",
+                pincode: "400021",
+                specialization: "All"
+            }
+        ];
+
+        // DOM elements
+        const searchForm = document.getElementById('searchForm');
+        const pincodeInput = document.getElementById('pincode');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const lawyerCards = document.getElementById('lawyerCards');
+        const errorMessage = document.getElementById('errorMessage');
+        const navbar = document.getElementById('navbar');
+
+        // GSAP Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial animations
+            gsap.to('#mainTitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power3.out',
+                from: { opacity: 0, y: -50 }
+            });
+            
+            gsap.to('#mainSubtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.2,
+                ease: 'power3.out',
+                from: { opacity: 0, y: -30 }
+            });
+            
+            gsap.to('#searchContainer', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.4,
+                ease: 'power3.out',
+                from: { opacity: 0, y: 50 }
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('py-2', 'shadow-lg', 'shadow-indigo-900/20');
+                    navbar.classList.remove('py-4');
+                } else {
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-2', 'shadow-lg', 'shadow-indigo-900/20');
+                }
+            });
+        });
+
+        // Add submit event listener to the form
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Clear previous error messages
+            errorMessage.classList.add('hidden');
+            
+            // Get the pincode value
+            const pincode = pincodeInput.value.trim();
+            
+            // Validate pincode format (Mumbai pincodes should be 6 digits and generally start with 4)
+            const pincodeRegex = /^4\d{5}$/;
+            if (!pincodeRegex.test(pincode)) {
+                errorMessage.textContent = 'Please enter a valid Mumbai pincode (6 digits starting with 4)';
+                errorMessage.classList.remove('hidden');
+                
+                // Shake animation for error
+                gsap.to('#pincode', {
+                    x: [-10, 10, -8, 8, -5, 5, 0],
+                    duration: 0.6,
+                    ease: 'power1.inOut'
+                });
+                
+                return;
+            }
+            
+            // Filter lawyers by pincode
+            const filteredLawyers = lawyerData.filter(lawyer => lawyer.pincode === pincode);
+            
+            // Display results
+            displayResults(filteredLawyers, pincode);
+        });
+
+        // Function to display the search results
+        function displayResults(lawyers, pincode) {
+            // Clear previous results
+            lawyerCards.innerHTML = '';
+            
+            // Show results container
+            resultsContainer.classList.remove('hidden');
+            
+            // Update results title
+            document.getElementById('resultsTitle').textContent = `Lawyers in ${pincode} area`;
+            
+            // If no lawyers found
+            if (lawyers.length === 0) {
+                lawyerCards.innerHTML = `
+                    <div class="col-span-full text-center py-16">
+                        <div class="text-indigo-400 text-6xl mb-4">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-200 mb-2">No lawyers found</h3>
+                        <p class="text-gray-400 mb-4">We couldn't find any lawyers in the ${pincode} area.</p>
+                        <p class="text-indigo-300">Try another pincode or contact us for assistance.</p>
+                    </div>
+                `;
+            } else {
+                // Create and append lawyer cards
+                lawyers.forEach((lawyer, index) => {
+                    const lawyerCard = document.createElement('div');
+                    lawyerCard.className = 'glass rounded-xl p-6 border border-indigo-900/20 shadow-lg shadow-indigo-900/10 card-hover';
+                    lawyerCard.innerHTML = `
+                        <div class="bg-gradient-to-r from-indigo-600/20 to-purple-600/20 inline-block px-3 py-1 rounded-lg text-xs font-semibold text-indigo-300 mb-4">
+                            ${lawyer.specialization}
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">${lawyer.name}</h3>
+                        <div class="space-y-3 text-gray-300">
+                            <p class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-indigo-400 mr-3 mt-1"></i>
+                                <span>${lawyer.place}</span>
+                            </p>
+                            <p class="flex items-start">
+                                <i class="fas fa-phone text-indigo-400 mr-3 mt-1"></i>
+                                <span>${lawyer.number}</span>
+                            </p>
+                            <p class="flex items-start">
+                                <i class="fas fa-location-dot text-indigo-400 mr-3 mt-1"></i>
+                                <span>${lawyer.pincode}</span>
+                            </p>
+                        </div>
+                        <button class="mt-4 w-full py-2 px-4 bg-indigo-600/20 hover:bg-indigo-600/40 text-indigo-300 rounded-lg transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-envelope mr-2"></i> Contact
+                        </button>
+                    `;
+                    lawyerCards.appendChild(lawyerCard);
+                    
+                    // Staggered animation for cards
+                    gsap.from(lawyerCard, {
+                        opacity: 0,
+                        y: 30,
+                        scale: 0.95,
+                        duration: 0.6,
+                        delay: 0.1 * index,
+                        ease: 'power3.out'
+                    });
+                });
+            }
+            
+            // Scroll to results
+            gsap.to(resultsContainer, {
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power2.out',
+                onStart: () => {
+                    setTimeout(() => {
+                        resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 300);
+                }
+            });
+        }
+        
+        // Add ScrollTrigger animations for elements
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Parallax effect for the background
+        gsap.to('.gradient-bg', {
+            backgroundPosition: '100% 50%',
+            scrollTrigger: {
+                trigger: 'body',
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1
+            }
+        });
+    </script>
+</body>
+</html>

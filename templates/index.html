@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,21 +10,11 @@
     <link rel="stylesheet" href="search.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script>
-        window.botpressWebChat.init({
-          "composerPlaceholder": "Ask me a legal question...",
-          "botId": "32b67275-5d1d-45f8-9af9-d1ddfbbac220",
-          "host": "https://cdn.botpress.cloud/webchat/v0",
-          "messagingUrl": "https://messaging.botpress.cloud",
-          "clientId": "32b67275-5d1d-45f8-9af9-d1ddfbbac220",
-          "webhookId": "8bb9553b-f9af-4893-ab34-5d48978ee8e7",
-          "showPoweredBy": false
-        });
-      </script>
-      
+
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap');
-        
+
         :root {
             --primary: #6366f1;
             --primary-dark: #4f46e5;
@@ -37,7 +28,7 @@
             --text-muted: #94a3b8;
             --accent: #f59e0b;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--dark-bg);
@@ -45,25 +36,25 @@
             transition: all 0.3s ease;
             overflow-x: hidden;
         }
-        
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: #1e293b;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: #4f46e5;
             border-radius: 10px;
         }
-        
+
         ::-webkit-scrollbar-thumb:hover {
             background: #818cf8;
         }
-        
+
         /* Glassmorphism */
         .glass {
             background: rgba(30, 41, 59, 0.7);
@@ -71,7 +62,8 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
+        /* Navbar */
         .navbar {
             position: fixed;
             top: 0;
@@ -83,22 +75,23 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
-        
+
         .navbar.scrolled {
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
         }
-        
+
+        /* Hero Section */
         .hero-text-animation {
             overflow: hidden;
             white-space: nowrap;
         }
-        
+
         .hero-container {
             position: relative;
             overflow: hidden;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         }
-        
+
         .hero-glow {
             position: absolute;
             top: -150px;
@@ -109,33 +102,32 @@
             border-radius: 50%;
             z-index: 0;
         }
-        
-        
-        
-        
-        
+
+        /* Feature Card */
         .feature-card {
             background: var(--card-bg);
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
             background: var(--card-hover);
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
         }
-        
+
+        /* Topic Icon */
         .topic-icon {
             transition: all 0.3s ease;
             color: var(--primary);
         }
-        
+
         .topic-link:hover .topic-icon {
             transform: scale(1.2);
             color: var(--primary-light);
         }
-        
+
+        /* News Ticker */
         .news-ticker {
             overflow: hidden;
             position: relative;
@@ -143,14 +135,27 @@
             background: rgba(79, 70, 229, 0.2);
             border-radius: 10px;
         }
-        
+
+        /* Fix ticker movement */
         .ticker-content {
             position: absolute;
+            left: 100%;
             white-space: nowrap;
             will-change: transform;
+            animation: ticker-move 15s linear infinite;
         }
-        
-        /* Neon effect for primary buttons */
+
+        @keyframes ticker-move {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Neon Effect for Primary Buttons */
         .btn-neon {
             position: relative;
             overflow: hidden;
@@ -158,45 +163,46 @@
             z-index: 1;
             box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
         }
-        
+
         .btn-neon:hover {
             box-shadow: 0 0 30px rgba(99, 102, 241, 0.8);
         }
-        
+
         .btn-neon:before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: -150%;
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: all 0.5s;
             z-index: -1;
         }
-        
+
         .btn-neon:hover:before {
             left: 100%;
         }
-        
-        /* Card hover effects */
+
+        /* Card Hover Effects */
         .hover-lift {
             transition: all 0.3s ease;
         }
-        
+
         .hover-lift:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
         }
-        
-        /* Gradient text */
+
+        /* Gradient Text */
         .gradient-text {
             background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
+
+
         /* Particle background for sections */
         .particles {
             position: absolute;
@@ -206,28 +212,42 @@
             height: 100%;
             z-index: 0;
         }
-        
+
         .particle {
             position: absolute;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             animation: float 15s infinite;
         }
-        
+
         @keyframes float {
-            0% { transform: translateY(0) translateX(0); }
-            25% { transform: translateY(-20px) translateX(10px); }
-            50% { transform: translateY(0) translateX(20px); }
-            75% { transform: translateY(20px) translateX(10px); }
-            100% { transform: translateY(0) translateX(0); }
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+
+            50% {
+                transform: translateY(0) translateX(20px);
+            }
+
+            75% {
+                transform: translateY(20px) translateX(10px);
+            }
+
+            100% {
+                transform: translateY(0) translateX(0);
+            }
         }
-        
+
         /* Animated borders */
         .animated-border {
             position: relative;
             overflow: hidden;
         }
-        
+
         .animated-border:after {
             content: '';
             position: absolute;
@@ -238,11 +258,11 @@
             background: var(--primary);
             transition: width 0.3s ease;
         }
-        
+
         .animated-border:hover:after {
             width: 100%;
         }
-        
+
         /* Custom switch */
         .switch {
             position: relative;
@@ -250,13 +270,13 @@
             width: 60px;
             height: 30px;
         }
-        
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -268,14 +288,18 @@
             transition: .4s;
             border-radius: 34px;
         }
-        .center-vertical {
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    height: 45px/* adjust as needed*/
-}
 
-        
+        .center-vertical {
+            display: flex;
+            justify-content: center;
+            /* Centers horizontally */
+            align-items: center;
+            /* Centers vertically */
+            height: 45px
+                /* adjust as needed*/
+        }
+
+
         .slider:before {
             position: absolute;
             content: "";
@@ -287,20 +311,23 @@
             transition: .4s;
             border-radius: 50%;
         }
-        
-        input:checked + .slider {
+
+        input:checked+.slider {
             background-color: var(--primary);
         }
-        
-        input:checked + .slider:before {
+
+        input:checked+.slider:before {
             transform: translateX(30px);
         }
 
         .center-vertical {
             display: flex;
-            justify-content: center; /* Centers horizontally */
-            align-items: center; /* Centers vertically */
-            height: 33px; /* Adjust as needed */
+            justify-content: center;
+            /* Centers horizontally */
+            align-items: center;
+            /* Centers vertically */
+            height: 33px;
+            /* Adjust as needed */
         }
 
         /* Mobile menu */
@@ -326,46 +353,49 @@
                 white-space: normal;
                 text-align: center;
             }
-            
+
             .news-ticker {
                 height: auto;
                 min-height: 60px;
             }
         }
+        .center-vertical {
+    display: grid;
+    place-items: center;
+    height: 45px;
+}
 
     </style>
 </head>
+
 <body>
     <!-- Mobile Menu -->
-    <nav class="navbar px-6 py-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
-            </div>
-            
-            <div class="hidden md:flex space-x-6">
-                <a href="index.html" class="font-extrabold text-gray-400 animated-border">Home</a>
-                <a href="legalguides.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
-                <a href="QT.html" class="font-extrabold text-indigo-300 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
-                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
-                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
-                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
-            </div>
-            
-            <div class="flex items-center space-x-4">
-                <div class="relative hidden md:block">
-                    <input type="text" placeholder="Search legal topics..." 
-                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
-                    <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>   
-                <button class="md:hidden">
-                    <i class="fas fa-bars text-gray-400 text-xl"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
+    <!-- Add this right after your opening <body> tag -->
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-bold gradient-text">Legal Pathshala</h1>
+        <button id="closeMobileMenu" class="text-gray-400 hover:text-indigo-300">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+    </div>
+    <div class="flex flex-col space-y-6">
+        <a href="index.html" class="text-lg font-bold text-indigo-300">Home</a>
+        <a href="legalguides.html" class="text-lg font-bold text-gray-400 hover:text-indigo-300">Legal Guides</a>
+        <a href="QT.html" class="text-lg font-bold text-gray-400 hover:text-indigo-300">Quizzes & Tests</a>
+        <a href="askalawyer.html" class="text-lg font-bold text-gray-400 hover:text-indigo-300">Ask a Lawyer</a>
+        <a href="emergencycontacts.html" class="text-lg font-bold text-gray-400 hover:text-indigo-300">Emergency Contacts</a>
+        <a href="aboutus.html" class="text-lg font-bold text-gray-400 hover:text-indigo-300">About Us</a>
+    </div>
+    <div class="mt-8">
+        <input type="text" placeholder="Search legal topics..." class="w-full px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+    </div>
+</div>
+
+<!-- Then fix your navbar mobile button (replace the current button with this) -->
+<button id="openMobileMenu" class="md:hidden text-gray-400 hover:text-indigo-300">
+    <i class="fas fa-bars text-xl"></i>
+</button>
 
     <!-- Navigation Bar -->
     <nav class="navbar px-4 sm:px-6 py-4">
@@ -373,24 +403,29 @@
             <div class="flex items-center">
                 <h1 class="text-xl sm:text-2xl font-bold gradient-text">Legal Pathshala</h1>
             </div>
-            
+
             <div class="hidden md:flex space-x-3 lg:space-x-6">
                 <a href="index.html" class="font-extrabold text-indigo-300 animated-border">Home</a>
-                <a href="legalguides.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
-                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes & Tests</a>
-                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask a Lawyer</a>
-                <a href="emergencycontacts.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
-                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About Us</a>
+                <a href="legalguides.html"
+                    class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Legal Guides</a>
+                <a href="QT.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Quizzes &
+                    Tests</a>
+                <a href="askalawyer.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Ask
+                    a Lawyer</a>
+                <a href="emergencycontacts.html"
+                    class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">Emergency Contacts</a>
+                <a href="aboutus.html" class="font-extrabold text-gray-400 hover:text-indigo-300 animated-border">About
+                    Us</a>
             </div>
-            
+
             <div class="flex items-center space-x-4">
                 <div class="relative hidden md:block">
-                    <input type="text" placeholder="Search legal topics..." 
-                           class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
+                    <input type="text" placeholder="Search legal topics..."
+                        class="px-4 py-2 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-300 text-base">
                     <button class="absolute right-3 top-2 text-gray-400 hover:text-indigo-300">
                         <i class="fas fa-search"></i>
                     </button>
-                </div>   
+                </div>
                 <button class="md:hidden" id="openMobileMenu">
                     <i class="fas fa-bars text-gray-400 text-xl"></i>
                 </button>
@@ -399,9 +434,9 @@
     </nav>
 
     <!-- Chatbot Bubble -->
-    <div >
+    <div>
         <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>    
+        <script src="https://files.bpcontent.cloud/2025/03/22/08/20250322080737-G5DOL7UT.js"></script>
     </div>
 
     <!-- Hero Section -->
@@ -420,30 +455,39 @@
                     <span class="gradient-text">Know Your Rights.</span><br>
                     <span>Empower Yourself.</span>
                 </h1>
-                <p class="text-lg sm:text-xl text-gray-300 mb-8">Legal knowledge should be accessible to everyone. Learn about your rights, test your knowledge, and find help when you need it.</p>
-                
+                <p class="text-lg sm:text-xl text-gray-300 mb-8">Legal knowledge should be accessible to everyone. Learn
+                    about your rights, test your knowledge, and find help when you need it.</p>
+
                 <div class="hero-text-animation text-indigo-400 text-lg mb-8 px-4 md:px-0" id="textAnimation">
                     Labor Laws • Consumer Rights • Cyber Laws • Family Law • Tenant Rights • Human Rights
                 </div>
-                
+
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group">
+                    <a href="legalguides.html"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon group inline-block">
                         <span class="flex items-center">
                             <i class="fas fa-book-open mr-2 group-hover:animate-pulse"></i>
-                            <a href="legalguides.html">Explore Legal Guides</a> 
+                            Explore Legal Guides
                         </span>
-                    </button>
+                    </a>
 
-                    <button class="border border-indigo-500 text-indigo-400 hover:bg-indigo-900/30 font-medium py-3 px-8 rounded-lg transition duration-300 hover:border-indigo-400 cursor-pointer">
-                        <i class="fas fa-check-circle mr-2"></i>
-                        <a href="QT.html">Take a Legal Quiz</a> 
-                    </button>
+                    <a href="QT.html"
+                        class="border border-indigo-500 text-indigo-400 hover:bg-indigo-900/30 font-medium py-3 px-8 rounded-lg transition duration-300 hover:border-indigo-400 cursor-pointer inline-block">
+                        <span class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Take a Legal Quiz
+                        </span>
+                    </a>
                 </div>
             </div>
-            
+
             <div class="md:w-1/2 flex justify-center relative">
-                <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-30 animate-pulse"></div>
-                <img src="https://thelawbrigade.com/wp-content/uploads/2024/05/Expert-Personal-Injury-Attorney-in-Brampton-Your-Guide-to-Seeking-Legal-Help.jpg" alt="People seeking legal help" class="rounded-xl shadow-2xl max-w-full h-auto relative z-10" id="heroImage">
+                <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-30 animate-pulse">
+                </div>
+                <img src="https://thelawbrigade.com/wp-content/uploads/2024/05/Expert-Personal-Injury-Attorney-in-Brampton-Your-Guide-to-Seeking-Legal-Help.jpg"
+                    alt="People seeking legal help" class="rounded-xl shadow-2xl max-w-full h-auto relative z-10"
+                    id="heroImage">
             </div>
         </div>
     </section>
@@ -451,48 +495,69 @@
     <!-- Key Features Section -->
     <section class="py-16 sm:py-20 bg-gradient-to-b from-gray-900 to-slate-900 relative">
         <div class="container mx-auto px-4 sm:px-6 relative z-10">
-            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4">How We Can <span class="gradient-text">Help You</span></h2>
-            <p class="text-center text-gray-400 mb-12 sm:mb-16 max-w-2xl mx-auto">Access legal resources designed to empower you with knowledge and practical guidance when you need it most.</p>
-            
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4">How We Can <span class="gradient-text">Help
+                    You</span></h2>
+            <p class="text-center text-gray-400 mb-12 sm:mb-16 max-w-2xl mx-auto">Access legal resources designed to
+                empower you with knowledge and practical guidance when you need it most.</p>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
                 <div class="feature-card rounded-xl p-6 sm:p-8 text-center shadow-lg relative group">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-300"></div>
+                    <div
+                        class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-300">
+                    </div>
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-900 mb-6 text-indigo-400 text-2xl group-hover:text-indigo-300 transition duration-300">
+                        <div
+                            class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-900 mb-6 text-indigo-400 text-2xl group-hover:text-indigo-300 transition duration-300">
                             <i class="fas fa-book"></i>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-white">Legal Guides</h3>
-                        <p class="text-gray-400 mb-6">Easily understand laws that affect your daily life with our plain-language explanations.</p>
-                        <button class="text-indigo-400 font-medium group-hover:text-indigo-300 flex items-center mx-auto">
-                            <a href="legalguides.html">Learn More</a> <i class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        <p class="text-gray-400 mb-6">Easily understand laws that affect your daily life with our
+                            plain-language explanations.</p>
+                        <button
+                            class="text-indigo-400 font-medium group-hover:text-indigo-300 flex items-center mx-auto">
+                            <a href="legalguides.html">Learn More</a> <i
+                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="feature-card rounded-xl p-6 sm:p-8 text-center shadow-lg relative group">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-300"></div>
+                    <div
+                        class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-300">
+                    </div>
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-900 mb-6 text-indigo-400 text-2xl group-hover:text-indigo-300 transition duration-300">
+                        <div
+                            class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-900 mb-6 text-indigo-400 text-2xl group-hover:text-indigo-300 transition duration-300">
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-white">Quizzes & Tests</h3>
-                        <p class="text-gray-400 mb-6">Check your legal knowledge in an interactive way with our engaging quizzes.</p>
-                        <button class="text-indigo-400 font-medium group-hover:text-indigo-300 flex items-center mx-auto">
-                            <a href="QT.html">Learn More</a> <i class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        <p class="text-gray-400 mb-6">Check your legal knowledge in an interactive way with our engaging
+                            quizzes.</p>
+                        <button
+                            class="text-indigo-400 font-medium group-hover:text-indigo-300 flex items-center mx-auto">
+                            <a href="QT.html">Learn More</a> <i
+                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
                         </button>
                     </div>
                 </div>
-                
-                <div class="feature-card rounded-xl p-6 sm:p-8 text-center shadow-lg relative group sm:col-span-2 md:col-span-1 mx-auto sm:max-w-md md:max-w-full">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-300"></div>
+
+                <div
+                    class="feature-card rounded-xl p-6 sm:p-8 text-center shadow-lg relative group sm:col-span-2 md:col-span-1 mx-auto sm:max-w-md md:max-w-full">
+                    <div
+                        class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-300">
+                    </div>
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-900 mb-6 text-indigo-400 text-2xl group-hover:text-indigo-300 transition duration-300">
+                        <div
+                            class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-900 mb-6 text-indigo-400 text-2xl group-hover:text-indigo-300 transition duration-300">
                             <i class="fas fa-phone-alt"></i>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-white">Emergency Contacts</h3>
-                        <p class="text-gray-400 mb-6">Find free legal aid services near you when you need professional assistance.</p>
-                        <button class="text-indigo-400 font-medium group-hover:text-indigo-300 flex items-center mx-auto">
-                            <a href="emergencycontacts.html">Learn More</a><i class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        <p class="text-gray-400 mb-6">Find free legal aid services near you when you need professional
+                            assistance.</p>
+                        <button
+                            class="text-indigo-400 font-medium group-hover:text-indigo-300 flex items-center mx-auto">
+                            <a href="emergencycontacts.html">Learn More</a><i
+                                class="fas fa-arrow-right ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
                         </button>
                     </div>
                 </div>
@@ -503,58 +568,73 @@
     <!-- Search & Quick Access -->
     <section class="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-900 to-gray-900 relative">
         <div class="container mx-auto relative z-10">
-            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4">Find Legal Information <span class="gradient-text">Quickly</span></h2>
-            <p class="text-center text-gray-400 mb-10 sm:mb-12 max-w-2xl mx-auto">Search our comprehensive database or browse popular topics for immediate access to legal resources.</p>
-            
-            <div class="max-w-3xl mx-auto mb-12 sm:mb-16">
-                <div class="relative">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg blur opacity-30"></div>
-                    <input type="text" placeholder="Search for a legal topic..." 
-                           class="w-full px-4 py-4 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent placeholder-gray-500 relative z-10">
-                    <button class="absolute right-4 top-4 text-indigo-400 text-xl z-10 hover:text-indigo-300 transition duration-300">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-            
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4">Find Legal Information <span
+                    class="gradient-text">Quickly</span></h2>
+
+
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 text-center">
-                <a href="tenant.html" class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
+                <a href="tenant.html"
+                    class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
                     <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3 center-vertical">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" d="M22 22H2m0-11l8.126-6.5a3 3 0 0 1 3.748 0L22 11"/>
-                                <path stroke-linecap="round" d="M15.5 5.5v-2A.5.5 0 0 1 16 3h2.5a.5.5 0 0 1 .5.5v5" opacity="0.5"/>
-                                <path stroke-linecap="round" d="M4 22V9.5M20 22V9.5"/>
-                                <path d="M15 22v-5c0-1.414 0-2.121-.44-2.56C14.122 14 13.415 14 12 14s-2.121 0-2.56.44C9 14.878 9 15.585 9 17v5m5-12.5a2 2 0 1 1-4 0a2 2 0 0 1 4 0Z" opacity="0.5"/>
+                                <path stroke-linecap="round" d="M22 22H2m0-11l8.126-6.5a3 3 0 0 1 3.748 0L22 11" />
+                                <path stroke-linecap="round" d="M15.5 5.5v-2A.5.5 0 0 1 16 3h2.5a.5.5 0 0 1 .5.5v5"
+                                    opacity="0.5" />
+                                <path stroke-linecap="round" d="M4 22V9.5M20 22V9.5" />
+                                <path
+                                    d="M15 22v-5c0-1.414 0-2.121-.44-2.56C14.122 14 13.415 14 12 14s-2.121 0-2.56.44C9 14.878 9 15.585 9 17v5m5-12.5a2 2 0 1 1-4 0a2 2 0 0 1 4 0Z"
+                                    opacity="0.5" />
                             </g>
                         </svg>
                     </div>
                     <h3 class="font-medium text-white text-sm sm:text-base">Tenant Rights</h3>
                 </a>
-                
-                <a href="workplace.html" class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
-                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3 ">💼</div>
+
+                <a href="workplace.html"
+                    class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
+                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3 center-vertical ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path d="M4.03 4.5a2 2 0 1 0 0-4a2 2 0 0 0 0 4"/><path d="M5.716 10.524L5.344 13.5H2.727l-.5-4H.529V8a3.5 3.5 0 0 1 6.942-.634M7.295 9.97c0-.487.395-.882.882-.882h4.412c.487 0 .882.395.882.883v2.647a.88.88 0 0 1-.882.882H8.177a.88.88 0 0 1-.882-.882zm1.881-.882v-.65a1 1 0 0 1 1-1h.412a1 1 0 0 1 1 1v.65"/></g></svg>
+                    </div>
                     <h3 class="font-medium text-white text-sm sm:text-base">Workplace Laws</h3>
                 </a>
-                
-                <a href="consumer.html" class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
-                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3">💳</div>
+
+                <a href="consumer.html"
+                    class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
+                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3 center-vertical">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="currentColor" d="M3.193 3.726A1.89 1.89 0 0 1 5.085 2c.45 0 .866.156 1.193.417A2 2 0 0 1 7.5 2c.46 0 .884.155 1.222.417A1.9 1.9 0 0 1 9.915 2c.976 0 1.807.737 1.892 1.726c.084.975.193 2.483.193 3.774a4.5 4.5 0 0 1-2.176 3.854c-.222.134-.28.3-.274.386c.127 1.934.45 6.952.45 7.757a2.5 2.5 0 0 1-5 0c0-.805.323-5.823.45-7.757c.005-.087-.052-.252-.274-.386A4.5 4.5 0 0 1 3 7.5c0-1.29.109-2.799.193-3.774M9.5 7.25a.75.75 0 0 1-1.5 0V4a.5.5 0 0 0-1 0v3.25a.75.75 0 0 1-1.5 0V3.915a.415.415 0 0 0-.415-.415a.393.393 0 0 0-.398.355C4.604 4.82 4.5 6.275 4.5 7.5c0 1.09.58 2.044 1.452 2.57c.545.33 1.047.96.995 1.768c-.13 1.98-.447 6.918-.447 7.66a1 1 0 1 0 2 0c0-.742-.317-5.68-.447-7.66c-.052-.808.45-1.438.995-1.768A3 3 0 0 0 10.5 7.5c0-1.224-.104-2.68-.187-3.645a.393.393 0 0 0-.398-.355a.415.415 0 0 0-.415.415zm3.5.5A5.75 5.75 0 0 1 18.75 2a.75.75 0 0 1 .75.75v8.5c0 .318.106 1.895.225 3.642l.005.083c.13 1.908.27 3.983.27 4.522a2.5 2.5 0 0 1-5 0c0-.514.128-2.611.252-4.534c.062-.971.125-1.912.172-2.61l.023-.353h-.697A1.75 1.75 0 0 1 13 10.25zm3.998 3.552l-.021.314a798 798 0 0 0-.229 3.444c-.126 1.96-.248 3.986-.248 4.437a1 1 0 1 0 2 0c0-.48-.138-2.526-.272-4.504l-.007-.104C18.108 13.23 18 11.627 18 11.25V3.566a4.25 4.25 0 0 0-3.5 4.184v2.5c0 .138.112.25.25.25h1.5a.75.75 0 0 1 .748.802"/></svg>
+                    </div>
                     <h3 class="font-medium text-white text-sm sm:text-base">Consumer Protection</h3>
                 </a>
-                
-                <a href="cybersec.html" class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
-                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3">🔗</div>
+
+                <a href="cybersec.html"
+                    class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
+                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3 center-vertical">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><circle cx="24" cy="11" r="7"/><path d="M4 41c0-8.837 8.059-16 18-16m5 6h14v10H27zm10 0v-3a3 3 0 1 0-6 0v3"/></g></svg>
+                    </div>
                     <h3 class="font-medium text-white text-sm sm:text-base">Cybersecurity & Privacy</h3>
                 </a>
-                
-                <a href="criminallaw.html" class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
-                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3">🏛</div>
+
+                <a href="criminallaw.html"
+                    class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
+                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3 center-vertical">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M3 3v18M9 3v18m6-6v6m0-18v6m6-6v18M2 3h20m-1 6h-6c-.943 0-1.414 0-1.707.293S13 10.057 13 11v2c0 .943 0 1.414.293 1.707S14.057 15 15 15h6M2 21h20m-5-9h-1"
+                                color="currentColor" />
+                        </svg>
+                    </div>
                     <h3 class="font-medium text-white text-sm sm:text-base">Criminal Law</h3>
                 </a>
-                
-                <a href="hr.html" class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
-                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="m18.66 8.286l.368-.368c.342-.343.514-.514.617-.692a1.56 1.56 0 0 0 0-1.562c-.103-.178-.275-.35-.617-.692s-.514-.514-.692-.616a1.56 1.56 0 0 0-1.562 0c-.178.102-.35.274-.692.616l-.368.368m-4.419 10.31l-5.523 5.524c-.343.343-.514.514-.692.617a1.56 1.56 0 0 1-1.562 0c-.179-.103-.35-.274-.692-.617c-.343-.342-.514-.514-.617-.692a1.56 1.56 0 0 1 0-1.562c.103-.178.274-.35.617-.692l5.523-5.523m-.736-.737l4.419 4.42c1.735 1.735 2.603 2.603 3.682 2.603s1.946-.868 3.682-2.604S22 13.783 22 12.705c0-1.079-.868-1.947-2.604-3.682l-4.419-4.42C13.242 2.869 12.374 2 11.295 2s-1.946.868-3.682 2.604s-2.604 2.604-2.604 3.682c0 1.079.868 1.947 2.604 3.682Z"/></svg>
+
+                <a href="hr.html"
+                    class="topic-link glass rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition duration-300 hover-lift">
+                    <div class="topic-icon text-3xl sm:text-4xl mb-2 sm:mb-3 center-vertical">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-width="1.5"
+                                d="m18.66 8.286l.368-.368c.342-.343.514-.514.617-.692a1.56 1.56 0 0 0 0-1.562c-.103-.178-.275-.35-.617-.692s-.514-.514-.692-.616a1.56 1.56 0 0 0-1.562 0c-.178.102-.35.274-.692.616l-.368.368m-4.419 10.31l-5.523 5.524c-.343.343-.514.514-.692.617a1.56 1.56 0 0 1-1.562 0c-.179-.103-.35-.274-.692-.617c-.343-.342-.514-.514-.617-.692a1.56 1.56 0 0 1 0-1.562c.103-.178.274-.35.617-.692l5.523-5.523m-.736-.737l4.419 4.42c1.735 1.735 2.603 2.603 3.682 2.603s1.946-.868 3.682-2.604S22 13.783 22 12.705c0-1.079-.868-1.947-2.604-3.682l-4.419-4.42C13.242 2.869 12.374 2 11.295 2s-1.946.868-3.682 2.604s-2.604 2.604-2.604 3.682c0 1.079.868 1.947 2.604 3.682Z" />
+                        </svg>
                     </div>
                     <h3 class="font-medium text-white text-sm sm:text-base">Human Rights</h3>
                 </a>
@@ -563,482 +643,515 @@
     </section>
 
     <!-- Ask a Lawyer Section (continuing from where it cut off) -->
-<section class="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-r from-gray-900 to-slate-900 relative">
-    <div class="container mx-auto relative z-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div class="order-2 md:order-1">
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4">Need <span class="gradient-text">Legal Advice?</span></h2>
-                <p class="text-gray-400 mb-6">Our network of volunteer lawyers can answer your questions and provide initial guidance for your legal concerns.</p>
-                
-                <div class="bg-gray-800 rounded-lg p-6 mb-6">
-                    <h3 class="text-lg font-semibold mb-3 text-white">How it works:</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-indigo-400 mt-1 mr-2"></i>
-                            <span>Submit your question through our secure form</span>
+    <section class="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-r from-gray-900 to-slate-900 relative">
+        <div class="container mx-auto relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-4">Need <span class="gradient-text">Legal
+                            Advice?</span></h2>
+                    <p class="text-gray-400 mb-6">Our network of volunteer lawyers can answer your questions and provide
+                        initial guidance for your legal concerns.</p>
+
+                    <div class="bg-gray-800 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold mb-3 text-white">How it works:</h3>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-400 mt-1 mr-2"></i>
+                                <span>Submit your question through our secure form</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-400 mt-1 mr-2"></i>
+                                <span>Receive a response from a qualified lawyer within 48 hours</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-400 mt-1 mr-2"></i>
+                                <span>No obligation to hire and completely confidential</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon">
+                        <i class="fas fa-gavel mr-2"></i>
+                        <a href="askalawyer.html">Ask Your Question</a>
+                    </button>
+                </div>
+
+                <div class="order-1 md:order-2 relative">
+                    <div
+                        class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-20">
+                    </div>
+                    <img src="https://media.istockphoto.com/id/1007651732/photo/you-ask-and-ill-answer.jpg?s=612x612&w=0&k=20&c=UAh3zMtHLVNaMxo0EzXaTQA1OqGUb5Ry1R1WdCNhSu4=" alt="Lawyer consultation"
+                        class="rounded-xl shadow-2xl max-w-full h-auto relative z-10 mx-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Updates Section -->
+    <section class="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-900 to-gray-900 relative">
+        <div class="container mx-auto relative z-10">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4">Latest <span class="gradient-text">Legal
+                    Updates</span></h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Stay informed about recent changes in laws and
+                important legal news that might affect you.</p>
+
+            <div class="news-ticker mb-12 px-4">
+                <div class="ticker-content py-2" id="ticker">
+                    <span class="inline-block px-4">📢 New consumer protection regulations coming into effect next
+                        month</span>
+                    <span class="inline-block px-4">📢 Supreme Court ruling on tenant rights case changes eviction
+                        procedures</span>
+                    <span class="inline-block px-4">📢 Important updates to workplace harassment laws - Know your
+                        rights</span>
+                    <span class="inline-block px-4">📢 New online privacy law enacted to protect consumer data</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="glass rounded-xl overflow-hidden shadow-lg hover-lift">
+                    <img src="https://www.financialexpress.com/wp-content/uploads/2022/04/rent-out.jpg" alt="Legal update" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-indigo-900 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full">New
+                                Law</span>
+                            <span class="text-gray-400 text-sm ml-auto">March 15, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-white">Changes to Rental Agreement Laws</h3>
+                        <p class="text-gray-400 mb-4">New legislation provides additional protections for tenants
+                            regarding security deposits and maintenance responsibilities.</p>
+                        <a href="#" class="text-indigo-400 font-medium hover:text-indigo-300 flex items-center">Read
+                            More <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl overflow-hidden shadow-lg hover-lift">
+                    <img src="https://www.burnhamdouglass.com/wp-content/uploads/2024/09/discrimination.png" alt="Legal update" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span
+                                class="bg-indigo-900 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full">Court
+                                Ruling</span>
+                            <span class="text-gray-400 text-sm ml-auto">March 10, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-white">Important Workplace Discrimination Case</h3>
+                        <p class="text-gray-400 mb-4">Recent Supreme Court ruling expands definition of workplace
+                            discrimination and employer responsibilities.</p>
+                        <a href="#" class="text-indigo-400 font-medium hover:text-indigo-300 flex items-center">Read
+                            More <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl overflow-hidden shadow-lg hover-lift">
+                    <img src="https://media.istockphoto.com/id/1402450534/photo/padlock-with-keyhole-in-data-security-on-circuit-modern-safety-digital-concept.jpg?s=612x612&w=0&k=20&c=vBzRPNY53FvkckEBjRxZBm-3QTQd3bttgglFRPgYOqc=" alt="Legal update" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span
+                                class="bg-indigo-900 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full">Digital
+                                Rights</span>
+                            <span class="text-gray-400 text-sm ml-auto">March 5, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-white">New Data Privacy Legislation</h3>
+                        <p class="text-gray-400 mb-4">Updated regulations give consumers more control over their
+                            personal data and strengthen requirements for businesses.</p>
+                        <a href="#" class="text-indigo-400 font-medium hover:text-indigo-300 flex items-center">Read
+                            More <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-900 to-slate-900 relative">
+        <div class="container mx-auto relative z-10">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4">Hear From Our <span
+                    class="gradient-text">Users</span></h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">See how Legal Pathshala has helped people
+                understand their rights and navigate legal challenges.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="glass rounded-xl p-6 relative hover-lift">
+                    <div class="absolute top-6 right-6 text-indigo-400 text-4xl opacity-30">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <div class="mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6">"The tenant rights guide helped me understand my options when my
+                        landlord refused to make repairs. I was able to cite the correct laws and resolve the issue
+                        without going to court."</p>
+                    <div class="flex items-center">
+                        <div
+                            class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl mr-3">
+                            RS
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Rahul Singh</h4>
+                            <p class="text-sm text-gray-400">Delhi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl p-6 relative hover-lift">
+                    <div class="absolute top-6 right-6 text-indigo-400 text-4xl opacity-30">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <div class="mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6">"When I faced workplace harassment, I didn't know where to turn. The
+                        resources here helped me understand my rights and take appropriate action with confidence."</p>
+                    <div class="flex items-center">
+                        <div
+                            class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl mr-3">
+                            PM
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Priya Mehra</h4>
+                            <p class="text-sm text-gray-400">Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl p-6 relative hover-lift">
+                    <div class="absolute top-6 right-6 text-indigo-400 text-4xl opacity-30">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <div class="mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6">"The legal quiz section made learning about my consumer rights fun and
+                        engaging. I now feel more confident when making purchases and know what to do if issues arise."
+                    </p>
+                    <div class="flex items-center">
+                        <div
+                            class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl mr-3">
+                            AK
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Arjun Kumar</h4>
+                            <p class="text-sm text-gray-400">Bangalore</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-900 to-gray-900 relative">
+        <div class="container mx-auto relative z-10">
+            <div class="max-w-4xl mx-auto glass rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-indigo-600/20 to-purple-600/20">
+                </div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Ready to <span
+                            class="gradient-text">Empower Yourself</span> with Legal Knowledge?</h2>
+                    <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Start exploring our resources today and take the
+                        first step towards understanding your rights and responsibilities.</p>
+
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon">
+                            <span class="flex items-center">
+                                <i class="fas fa-book-open mr-2"></i>
+                                <a href="legalguides.html">Explore Legal Guides</a>
+                            </span>
+                        </button>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-4 sm:px-6 relative">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-1">
+                    <h1 class="text-2xl font-bold gradient-text mb-4">Legal Pathshala</h1>
+                    <p class="text-gray-400 mb-6">Making legal knowledge accessible to everyone, empowering citizens
+                        with awareness of their rights and responsibilities.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="index.html" class="hover:text-indigo-400 transition duration-300">Home</a></li>
+                        <li><a href="legalguides.html" class="hover:text-indigo-400 transition duration-300">Legal
+                                Guides</a></li>
+                        <li><a href="QT.html" class="hover:text-indigo-400 transition duration-300">Quizzes & Tests</a>
                         </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-indigo-400 mt-1 mr-2"></i>
-                            <span>Receive a response from a qualified lawyer within 48 hours</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-indigo-400 mt-1 mr-2"></i>
-                            <span>No obligation to hire and completely confidential</span>
-                        </li>
+                        <li><a href="askalawyer.html" class="hover:text-indigo-400 transition duration-300">Ask a
+                                Lawyer</a></li>
+                        <li><a href="emergencycontacts.html"
+                                class="hover:text-indigo-400 transition duration-300">Emergency Contacts</a></li>
                     </ul>
                 </div>
-                
-                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon">
-                    <i class="fas fa-gavel mr-2"></i>
-                    <a href="askalawyer.html">Ask Your Question</a>
-                </button>
-            </div>
-            
-            <div class="order-1 md:order-2 relative">
-                <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-20"></div>
-                <img src="/api/placeholder/400/320" alt="Lawyer consultation" class="rounded-xl shadow-2xl max-w-full h-auto relative z-10 mx-auto">
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Latest Updates Section -->
-<section class="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-900 to-gray-900 relative">
-    <div class="container mx-auto relative z-10">
-        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4">Latest <span class="gradient-text">Legal Updates</span></h2>
-        <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Stay informed about recent changes in laws and important legal news that might affect you.</p>
-        
-        <div class="news-ticker mb-12 px-4">
-            <div class="ticker-content py-2" id="ticker">
-                <span class="inline-block px-4">📢 New consumer protection regulations coming into effect next month</span>
-                <span class="inline-block px-4">📢 Supreme Court ruling on tenant rights case changes eviction procedures</span>
-                <span class="inline-block px-4">📢 Important updates to workplace harassment laws - Know your rights</span>
-                <span class="inline-block px-4">📢 New online privacy law enacted to protect consumer data</span>
-            </div>
-        </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div class="glass rounded-xl overflow-hidden shadow-lg hover-lift">
-                <img src="/api/placeholder/400/200" alt="Legal update" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <div class="flex items-center mb-3">
-                        <span class="bg-indigo-900 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full">New Law</span>
-                        <span class="text-gray-400 text-sm ml-auto">March 15, 2025</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">Changes to Rental Agreement Laws</h3>
-                    <p class="text-gray-400 mb-4">New legislation provides additional protections for tenants regarding security deposits and maintenance responsibilities.</p>
-                    <a href="#" class="text-indigo-400 font-medium hover:text-indigo-300 flex items-center">Read More <i class="fas fa-arrow-right ml-2"></i></a>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Legal Topics</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="tenant.html" class="hover:text-indigo-400 transition duration-300">Tenant
+                                Rights</a></li>
+                        <li><a href="workplace.html" class="hover:text-indigo-400 transition duration-300">Workplace
+                                Laws</a></li>
+                        <li><a href="consumer.html" class="hover:text-indigo-400 transition duration-300">Consumer
+                                Protection</a></li>
+                        <li><a href="cybersec.html" class="hover:text-indigo-400 transition duration-300">Cybersecurity
+                                & Privacy</a></li>
+                        <li><a href="fam.html" class="hover:text-indigo-400 transition duration-300">Family
+                                Law</a></li>
+                    </ul>
                 </div>
-            </div>
-            
-            <div class="glass rounded-xl overflow-hidden shadow-lg hover-lift">
-                <img src="/api/placeholder/400/200" alt="Legal update" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <div class="flex items-center mb-3">
-                        <span class="bg-indigo-900 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full">Court Ruling</span>
-                        <span class="text-gray-400 text-sm ml-auto">March 10, 2025</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">Important Workplace Discrimination Case</h3>
-                    <p class="text-gray-400 mb-4">Recent Supreme Court ruling expands definition of workplace discrimination and employer responsibilities.</p>
-                    <a href="#" class="text-indigo-400 font-medium hover:text-indigo-300 flex items-center">Read More <i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
-            </div>
-            
-            <div class="glass rounded-xl overflow-hidden shadow-lg hover-lift">
-                <img src="/api/placeholder/400/200" alt="Legal update" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <div class="flex items-center mb-3">
-                        <span class="bg-indigo-900 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full">Digital Rights</span>
-                        <span class="text-gray-400 text-sm ml-auto">March 5, 2025</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">New Data Privacy Legislation</h3>
-                    <p class="text-gray-400 mb-4">Updated regulations give consumers more control over their personal data and strengthen requirements for businesses.</p>
-                    <a href="#" class="text-indigo-400 font-medium hover:text-indigo-300 flex items-center">Read More <i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Testimonials Section -->
-<section class="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-900 to-slate-900 relative">
-    <div class="container mx-auto relative z-10">
-        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4">Hear From Our <span class="gradient-text">Users</span></h2>
-        <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">See how Legal Pathshala has helped people understand their rights and navigate legal challenges.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div class="glass rounded-xl p-6 relative hover-lift">
-                <div class="absolute top-6 right-6 text-indigo-400 text-4xl opacity-30">
-                    <i class="fas fa-quote-right"></i>
-                </div>
-                <div class="mb-4 text-yellow-400">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p class="text-gray-300 mb-6">"The tenant rights guide helped me understand my options when my landlord refused to make repairs. I was able to cite the correct laws and resolve the issue without going to court."</p>
-                <div class="flex items-center">
-                    <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl mr-3">
-                        RS
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-white">Rahul Singh</h4>
-                        <p class="text-sm text-gray-400">Delhi</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="glass rounded-xl p-6 relative hover-lift">
-                <div class="absolute top-6 right-6 text-indigo-400 text-4xl opacity-30">
-                    <i class="fas fa-quote-right"></i>
-                </div>
-                <div class="mb-4 text-yellow-400">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p class="text-gray-300 mb-6">"When I faced workplace harassment, I didn't know where to turn. The resources here helped me understand my rights and take appropriate action with confidence."</p>
-                <div class="flex items-center">
-                    <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl mr-3">
-                        PM
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-white">Priya Mehra</h4>
-                        <p class="text-sm text-gray-400">Mumbai</p>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-indigo-400"></i>
+                            <span>legal_pathshala_1@gmail.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2 text-indigo-400"></i>
+                            <span>+91 8850123688</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-indigo-400"></i>
+                            <span>Shop No. 6, Dreamland Building,<br>
+                                Shanti Park, Andheri(W), Mumbai-400053</span>
+                        </li>
+                    </ul>
+
+                    <div class="mt-6">
+                        <h4 class="text-sm font-semibold text-white mb-2">Subscribe to our newsletter</h4>
+                        <div class="flex">
+                            <input type="email" id="email" placeholder="your email"
+                                class="px-4 py-2 rounded-l-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent placeholder-gray-500">
+                            <button type="submit" id="subscribeBtn"
+                                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded-r-lg transition duration-300">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="glass rounded-xl p-6 relative hover-lift">
-                <div class="absolute top-6 right-6 text-indigo-400 text-4xl opacity-30">
-                    <i class="fas fa-quote-right"></i>
-                </div>
-                <div class="mb-4 text-yellow-400">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <p class="text-gray-300 mb-6">"The legal quiz section made learning about my consumer rights fun and engaging. I now feel more confident when making purchases and know what to do if issues arise."</p>
-                <div class="flex items-center">
-                    <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl mr-3">
-                        AK
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-white">Arjun Kumar</h4>
-                        <p class="text-sm text-gray-400">Bangalore</p>
-                    </div>
-                </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-500 text-sm">© 2025 Legal Pathshala. All rights reserved. | <a href="#"
+                        class="hover:text-indigo-400 transition duration-300">Privacy Policy</a> | <a href="#"
+                        class="hover:text-indigo-400 transition duration-300">Terms of Service</a></p>
             </div>
         </div>
-    </div>
-</section>
+    </footer>
 
-<!-- Call to Action Section -->
-<section class="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-900 to-gray-900 relative">
-    <div class="container mx-auto relative z-10">
-        <div class="max-w-4xl mx-auto glass rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-indigo-600/20 to-purple-600/20"></div>
-            <div class="relative z-10">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Ready to <span class="gradient-text">Empower Yourself</span> with Legal Knowledge?</h2>
-                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Start exploring our resources today and take the first step towards understanding your rights and responsibilities.</p>
-                
-                <div class="flex flex-wrap justify-center gap-4">
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 btn-neon">
-                        <span class="flex items-center">
-                            <i class="fas fa-book-open mr-2"></i>
-                            <a href="legalguides.html">Explore Legal Guides</a>
-                        </span>
-                    </button>
-                    
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    <script type="module" src="app.js"></script>
+    <script>
+        // Add this script at the end of your body tag
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('openMobileMenu');
+            const closeMobileMenuButton = document.getElementById('closeMobileMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
 
-<!-- Footer -->
-<footer class="bg-gray-900 py-12 px-4 sm:px-6 relative">
-    <div class="container mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="md:col-span-1">
-                <h1 class="text-2xl font-bold gradient-text mb-4">Legal Pathshala</h1>
-                <p class="text-gray-400 mb-6">Making legal knowledge accessible to everyone, empowering citizens with awareness of their rights and responsibilities.</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-300">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
-                <ul class="space-y-2 text-gray-400">
-                    <li><a href="index.html" class="hover:text-indigo-400 transition duration-300">Home</a></li>
-                    <li><a href="legalguides.html" class="hover:text-indigo-400 transition duration-300">Legal Guides</a></li>
-                    <li><a href="QT.html" class="hover:text-indigo-400 transition duration-300">Quizzes & Tests</a></li>
-                    <li><a href="askalawyer.html" class="hover:text-indigo-400 transition duration-300">Ask a Lawyer</a></li>
-                    <li><a href="emergencycontacts.html" class="hover:text-indigo-400 transition duration-300">Emergency Contacts</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold text-white mb-4">Legal Topics</h3>
-                <ul class="space-y-2 text-gray-400">
-                    <li><a href="tenant.html" class="hover:text-indigo-400 transition duration-300">Tenant Rights</a></li>
-                    <li><a href="workplace.html" class="hover:text-indigo-400 transition duration-300">Workplace Laws</a></li>
-                    <li><a href="consumer.html" class="hover:text-indigo-400 transition duration-300">Consumer Protection</a></li>
-                    <li><a href="cybersec.html" class="hover:text-indigo-400 transition duration-300">Cybersecurity & Privacy</a></li>
-                    <li><a href="familylaw.html" class="hover:text-indigo-400 transition duration-300">Family Law</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
-                <ul class="space-y-2 text-gray-400">
-                    <li class="flex items-start">
-                        <i class="fas fa-envelope mt-1 mr-2 text-indigo-400"></i>
-                        <span>contact@legalpathshala.org</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-phone-alt mt-1 mr-2 text-indigo-400"></i>
-                        <span>+91 123-456-7890</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-map-marker-alt mt-1 mr-2 text-indigo-400"></i>
-                        <span>123 Legal Center, New Delhi, India</span>
-                    </li>
-                </ul>
-                
-                <div class="mt-6">
-                    <h4 class="text-sm font-semibold text-white mb-2">Subscribe to our newsletter</h4>
-                    <div class="flex">
-                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent placeholder-gray-500">
-                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded-r-lg transition duration-300">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="border-t border-gray-800 mt-12 pt-8 text-center">
-            <p class="text-gray-500 text-sm">© 2025 Legal Pathshala. All rights reserved. | <a href="#" class="hover:text-indigo-400 transition duration-300">Privacy Policy</a> | <a href="#" class="hover:text-indigo-400 transition duration-300">Terms of Service</a></p>
-        </div>
-    </div>
-</footer>
-
-
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyB27XAakIGwqLuUwhQ3B2uUUz0gfn_JaLg",
-      authDomain: "legalpathshala-d0ece.firebaseapp.com",
-      projectId: "legalpathshala-d0ece",
-      storageBucket: "legalpathshala-d0ece.firebasestorage.app",
-      messagingSenderId: "16024881233",
-      appId: "1:16024881233:web:290d1bd4f12704cd2bd070",
-      measurementId: "G-MF57ZHCRMG"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
-<!-- JavaScript -->
-<script>
-    // Mobile Menu Toggle
-    const mobileMenuButton = document.getElementById('openMobileMenu');
-    const closeMobileMenuButton = document.getElementById('closeMobileMenu');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    if (mobileMenuButton) {
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-        });
-    }
-    
-    if (closeMobileMenuButton) {
-        closeMobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-        });
-    }
-    
-    // Navbar Scroll Effect
-    window.addEventListener('scroll', () => {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 10) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-    
-    // News Ticker Animation
-    const ticker = document.getElementById('ticker');
-    if (ticker) {
-        let tickerWidth = ticker.offsetWidth;
-        let windowWidth = window.innerWidth;
-        
-        function animateTicker() {
-            if (windowWidth < tickerWidth) {
-                gsap.to(ticker, {
-                    x: -tickerWidth,
-                    duration: 20,
-                    ease: "linear",
-                    repeat: -1,
-                    onRepeat: () => {
-                        gsap.set(ticker, { x: windowWidth });
-                    }
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.add('active');
                 });
             }
-        }
-        
-        // Run animation on window resize
-        window.addEventListener('resize', () => {
-            tickerWidth = ticker.offsetWidth;
-            windowWidth = window.innerWidth;
-            gsap.killTweensOf(ticker);
-            animateTicker();
-        });
-        
-        // Initial animation
-        window.addEventListener('load', animateTicker);
-    }
-    
-    // GSAP Animations
-    document.addEventListener('DOMContentLoaded', () => {
-        // Hero section animations
-        gsap.from("#heroText h1", { 
-            y: 50, 
-            opacity: 0, 
-            duration: 1, 
-            ease: "power3.out" 
-        });
-        
-        gsap.from("#heroText p", { 
-            y: 30, 
-            opacity: 0, 
-            duration: 1, 
-            delay: 0.3, 
-            ease: "power3.out" 
-        });
-        
-        gsap.from("#textAnimation", { 
-            y: 20, 
-            opacity: 0, 
-            duration: 1, 
-            delay: 0.6, 
-            ease: "power3.out",
-            onComplete: function() {
-                animateTextCycle();
+
+            if (closeMobileMenuButton) {
+                closeMobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                });
             }
         });
-        
-        gsap.from("#heroText button", { 
-            y: 20, 
-            opacity: 0, 
-            duration: 1, 
-            delay: 0.9, 
-            ease: "power3.out",
-            stagger: 0.2
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         });
-        
-        gsap.from("#heroImage", { 
-            x: 50, 
-            opacity: 0, 
-            duration: 1.2, 
-            ease: "power3.out" 
-        });
-        
-        // Scroll animations for sections
-        gsap.registerPlugin(ScrollTrigger);
-        
-        gsap.utils.toArray('.feature-card').forEach((card, i) => {
-            gsap.from(card, {
+
+        // News Ticker Animation
+        const ticker = document.getElementById('ticker');
+        if (ticker) {
+            let tickerWidth = ticker.offsetWidth;
+            let windowWidth = window.innerWidth;
+
+            function animateTicker() {
+                if (windowWidth < tickerWidth) {
+                    gsap.to(ticker, {
+                        x: -tickerWidth,
+                        duration: 20,
+                        ease: "linear",
+                        repeat: -1,
+                        onRepeat: () => {
+                            gsap.set(ticker, { x: windowWidth });
+                        }
+                    });
+                }
+            }
+
+            // Run animation on window resize
+            window.addEventListener('resize', () => {
+                tickerWidth = ticker.offsetWidth;
+                windowWidth = window.innerWidth;
+                gsap.killTweensOf(ticker);
+                animateTicker();
+            });
+
+            // Initial animation
+            window.addEventListener('load', animateTicker);
+        }
+
+        // GSAP Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hero section animations
+            gsap.from("#heroText h1", {
                 y: 50,
                 opacity: 0,
-                duration: 0.8,
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 80%",
-                    toggleActions: "play none none none"
-                },
-                delay: i * 0.2
+                duration: 1,
+                ease: "power3.out"
             });
-        });
-        
-        // Animation for text cycling in hero
-        function animateTextCycle() {
-            const textElement = document.getElementById('textAnimation');
-            if (!textElement) return;
-            
-            const texts = [
-                "Labor Laws • Consumer Rights • Cyber Laws • Family Law",
-                "Tenant Rights • Human Rights • Criminal Law • Privacy Laws",
-                "Business Regulations • Intellectual Property • Immigration"
-            ];
-            
-            let currentIndex = 0;
-            
-            setInterval(() => {
-                gsap.to(textElement, {
+
+            gsap.from("#heroText p", {
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                delay: 0.3,
+                ease: "power3.out"
+            });
+
+            gsap.from("#textAnimation", {
+                y: 20,
+                opacity: 0,
+                duration: 1,
+                delay: 0.6,
+                ease: "power3.out",
+                onComplete: function () {
+                    animateTextCycle();
+                }
+            });
+
+            gsap.from("#heroText button", {
+                y: 20,
+                opacity: 0,
+                duration: 1,
+                delay: 0.9,
+                ease: "power3.out",
+                stagger: 0.2
+            });
+
+            gsap.from("#heroImage", {
+                x: 50,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+
+            // Scroll animations for sections
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.utils.toArray('.feature-card').forEach((card, i) => {
+                gsap.from(card, {
+                    y: 50,
                     opacity: 0,
-                    y: -10,
-                    duration: 0.5,
-                    onComplete: function() {
-                        currentIndex = (currentIndex + 1) % texts.length;
-                        textElement.textContent = texts[currentIndex];
-                        gsap.to(textElement, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.5
-                        });
-                    }
+                    duration: 0.8,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    delay: i * 0.2
                 });
-            }, 5000);
+            });
+
+            // Animation for text cycling in hero
+            function animateTextCycle() {
+                const textElement = document.getElementById('textAnimation');
+                if (!textElement) return;
+
+                const texts = [
+                    "Labor Laws • Consumer Rights • Cyber Laws • Family Law",
+                    "Tenant Rights • Human Rights • Criminal Law • Privacy Laws",
+                    "Business Regulations • Intellectual Property • Immigration"
+                ];
+
+                let currentIndex = 0;
+
+                setInterval(() => {
+                    gsap.to(textElement, {
+                        opacity: 0,
+                        y: -10,
+                        duration: 0.5,
+                        onComplete: function () {
+                            currentIndex = (currentIndex + 1) % texts.length;
+                            textElement.textContent = texts[currentIndex];
+                            gsap.to(textElement, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.5
+                            });
+                        }
+                    });
+                }, 5000);
+            }
+        });
+
+        // Chatbot Toggle
+        const chatBubble = document.getElementById('chatBubble');
+        const openChatbotButton = document.getElementById('openChatbot');
+
+        if (chatBubble) {
+            chatBubble.addEventListener('click', () => {
+                window.botpressWebChat.sendEvent({ type: 'show' });
+            });
         }
-    });
-    
-    // Chatbot Toggle
-    const chatBubble = document.getElementById('chatBubble');
-    const openChatbotButton = document.getElementById('openChatbot');
-    
-    if (chatBubble) {
-        chatBubble.addEventListener('click', () => {
-            window.botpressWebChat.sendEvent({ type: 'show' });
-        });
-    }
-    
-    if (openChatbotButton) {
-        openChatbotButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.botpressWebChat.sendEvent({ type: 'show' });
-        });
-    }
-</script>
-<script src="search.js"></script>
+
+        if (openChatbotButton) {
+            openChatbotButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.botpressWebChat.sendEvent({ type: 'show' });
+            });
+        }
+
+
+    </script>
+    <script src="search.js"></script>
 </body>
+
 </html>
