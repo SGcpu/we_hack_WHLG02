@@ -1,19 +1,21 @@
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 
 // Firebase Config (Replace with your own credentials)
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyB27XAakIGwqLuUwhQ3B2uUUz0gfn_JaLg",
     authDomain: "legalpathshala-d0ece.firebaseapp.com",
     projectId: "legalpathshala-d0ece",
-    storageBucket: "legalpathshala-d0ece.appspot.com",
+    storageBucket: "legalpathshala-d0ece.firebasestorage.app",
     messagingSenderId: "16024881233",
     appId: "1:16024881233:web:290d1bd4f12704cd2bd070",
     measurementId: "G-MF57ZHCRMG"
-};
-
+  };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
